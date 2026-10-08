@@ -1,0 +1,82 @@
+@font-face{
+  font-family:"MS Note Script";
+  font-style:normal;
+  font-weight:400;
+  font-display:swap;
+  src:url("/uc/yellowtail-latin-400-normal.BfFX3xIh.woff2") format("woff2"),
+      url("/uc/yellowtail-latin-400-normal.qKkxeRph.woff") format("woff");
+}
+.ms-uc{
+  position:fixed;
+  z-index:10000;
+  top:118px;
+  right:22px;
+  width:min(500px, calc(100vw - 20px));
+  aspect-ratio:1 / 1;
+  height:auto;
+  container-type:inline-size;
+  filter:drop-shadow(12px 18px 10px rgba(62,42,12,.38));
+  pointer-events:none;
+}
+.ms-uc-sheet{
+  position:relative;
+  width:100%;
+  height:100%;
+  transform:rotate(-3.2deg);
+  transform-origin:55% 40%;
+}
+.ms-uc-svg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  overflow:visible;
+}
+.ms-uc-copy{
+  position:absolute;
+  left:10%;
+  right:16%;
+  top:18%;
+  bottom:16%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#2c261c;
+}
+.ms-uc-kicker,
+.ms-uc-main,
+.ms-uc-soon{
+  font-family:"MS Note Script", Yellowtail, "Segoe Script", cursive;
+  font-weight:400;
+  letter-spacing:0;
+  text-transform:none;
+  margin:0;
+  padding:0;
+}
+.ms-uc-kicker{
+  font-size:8.6cqw;
+  line-height:1;
+  color:#7a2e22;
+  margin-bottom:0.12em;
+}
+.ms-uc-main{
+  font-size:15.2cqw;
+  line-height:0.92;
+  color:#241f18;
+}
+.ms-uc-soon{
+  margin-top:0.28em;
+  font-size:7.6cqw;
+  line-height:1.08;
+  color:#5c5346;
+}
+@media (max-width:720px){
+  .ms-uc{
+    top:76px;
+    right:10px;
+    width:min(500px, calc(100vw - 16px));
+  }
+}
