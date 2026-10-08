@@ -71,7 +71,9 @@ if (showcase) {
     syncControls();
 
     const [live, spare] = layers;
-    const alt = `${stateName(slug)} state-name sticker, ${STYLES[style].toLowerCase()} style: each letter frames a ${stateName(slug)} landscape`;
+    const name = stateName(slug);
+    const article = /^[aeiou]/i.test(name) ? 'an' : 'a';
+    const alt = `${name} state-name sticker, ${STYLES[style].toLowerCase()} style: each letter frames ${article} ${name} landscape`;
 
     spare.sizes = '(max-width: 900px) 92vw, min(1100px, 88vw)';
     spare.srcset = srcsetFor(slug, style);
@@ -139,6 +141,14 @@ if (showcase) {
 
   syncControls();
 }
+
+/* —— Touch: tap a state card to flip to the photo version —— */
+const touchOnly = window.matchMedia('(hover: none)');
+document.querySelectorAll('.state-card:not(.is-more)').forEach((card) => {
+  card.addEventListener('click', () => {
+    if (touchOnly.matches) card.classList.toggle('is-flipped');
+  });
+});
 
 /* ——————————————————————————————————————————————
    2. Header theme while the dark hero is on screen
