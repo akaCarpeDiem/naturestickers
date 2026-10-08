@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nature Stickers — Nature-Inspired Vinyl Stickers</title>
   <meta name="description" content="Premium die-cut vinyl stickers inspired by mountain ridgelines, coastlines, wildflowers and America's wild landmarks. First drop coming soon." />
-  <meta name="theme-color" content="#1F3A2E" />
+  <meta name="theme-color" content="#0C1510" />
   <link rel="canonical" href="https://naturestickers.shop/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Nature Stickers" />
@@ -28,6 +28,7 @@
   <link rel="preload" href="/fonts/instrument-sans-var.woff2" as="font" type="font/woff2" crossorigin />
   <script>document.documentElement.classList.add("js")</script>
   <link rel="stylesheet" href="/src/style.css" />
+  <link rel="stylesheet" href="/src/home.css" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -51,151 +52,75 @@
   <header class="site-header">
     <div class="wrap header-inner">
       <a class="brand" href="/" aria-label="Nature Stickers home">
-        <img src="/logo.svg" alt="Nature Stickers" width="397" height="64" />
+        <img class="logo-on-light" src="/logo.svg" alt="Nature Stickers" width="397" height="64" />
+        <img class="logo-on-dark" src="/logo-light.svg" alt="" width="298" height="48" aria-hidden="true" />
       </a>
       <nav class="nav" aria-label="Primary">
-        <a href="#first-drop">First drop</a>
+        <a href="#first-states">The states</a>
+        <a href="#styles">Two styles</a>
         <a href="#craft">The craft</a>
-        <a href="#contact">Contact</a>
         <a class="nav-cta" href="#follow">Follow along</a>
       </nav>
     </div>
   </header>
 
   <main id="main">
-    <section class="hero">
-      <div class="wrap hero-grid">
+
+    <!-- ——————————————————————— HERO ——————————————————————— -->
+    <section class="hero on-night">
+      <div class="hero-glow" aria-hidden="true"></div>
+
+      <div class="wrap">
         <div class="hero-copy reveal">
           <p class="eyebrow"><span class="dot" aria-hidden="true"></span>First drop coming soon</p>
-          <h1>Explore the natural wonders, <span class="accent">of all 50 states!</span></h1>
-          <p class="lede">Every scene on every sticker is a real place in our <strong class="lede-highlight">national parks, national monuments &amp; protected lands</strong>. Die-cut vinyl, made for water bottles, laptops and every bit of gear that actually goes outside.</p>
+          <h1>Every letter is a <span class="accent">window into a wilder place.</span></h1>
+          <p class="lede">State-name stickers where each letter frames a real view from that state&rsquo;s <strong class="lede-highlight">national parks, monuments &amp; protected lands</strong>. Die-cut vinyl, built for water bottles, laptops and gear that actually goes outside.</p>
           <div class="hero-ctas">
-            <a class="btn btn-primary" href="#first-drop">See the first drop</a>
+            <a class="btn btn-primary" href="#first-states">See the first five states</a>
             <a class="btn btn-ghost" href="#follow">Follow along</a>
           </div>
         </div>
+      </div>
 
-        <div class="hero-art" data-hero-cycle>
-          <div class="hero-stage">
-            <div class="hero-backdrop" aria-hidden="true"></div>
-            <div class="hero-slides">
-            <figure class="hero-slide is-active" data-caption="Alabama · Stained glass">
-              <img
-                src="/stickers/states/alabama-stained-glass.webp"
-                srcset="/stickers/states/alabama-stained-glass-700.webp 700w, /stickers/states/alabama-stained-glass.webp 1400w"
-                sizes="(max-width: 640px) 92vw, (max-width: 900px) 80vw, min(560px, 42vw)"
-                width="1400"
-                height="466"
-                alt="Alabama natural wonders stained-glass sticker"
-                fetchpriority="high" decoding="async"
-              />
-            </figure>
-            <figure class="hero-slide" data-caption="Alabama · Photo">
-              <img
-                src="/stickers/states/alabama-photo.webp"
-                srcset="/stickers/states/alabama-photo-700.webp 700w, /stickers/states/alabama-photo.webp 1400w"
-                sizes="(max-width: 640px) 92vw, (max-width: 900px) 80vw, min(560px, 42vw)"
-                width="1400"
-                height="466"
-                alt="Alabama natural wonders photo sticker"
-                loading="lazy" decoding="async"
-              />
-            </figure>
-            <figure class="hero-slide" data-caption="Alaska · Stained glass">
-              <img
-                src="/stickers/states/alaska-stained-glass.webp"
-                srcset="/stickers/states/alaska-stained-glass-700.webp 700w, /stickers/states/alaska-stained-glass.webp 1400w"
-                sizes="(max-width: 640px) 92vw, (max-width: 900px) 80vw, min(560px, 42vw)"
-                width="1400"
-                height="466"
-                alt="Alaska natural wonders stained-glass sticker"
-                loading="lazy" decoding="async"
-              />
-            </figure>
-            <figure class="hero-slide" data-caption="Alaska · Photo">
-              <img
-                src="/stickers/states/alaska-photo.webp"
-                srcset="/stickers/states/alaska-photo-700.webp 700w, /stickers/states/alaska-photo.webp 1400w"
-                sizes="(max-width: 640px) 92vw, (max-width: 900px) 80vw, min(560px, 42vw)"
-                width="1400"
-                height="466"
-                alt="Alaska natural wonders photo sticker"
-                loading="lazy" decoding="async"
-              />
-            </figure>
-            <figure class="hero-slide" data-caption="Arizona · Stained glass">
-              <img
-                src="/stickers/states/arizona-stained-glass.webp"
-                srcset="/stickers/states/arizona-stained-glass-700.webp 700w, /stickers/states/arizona-stained-glass.webp 1400w"
-                sizes="(max-width: 640px) 92vw, (max-width: 900px) 80vw, min(560px, 42vw)"
-                width="1400"
-                height="466"
-                alt="Arizona natural wonders stained-glass sticker"
-                loading="lazy" decoding="async"
-              />
-            </figure>
-            <figure class="hero-slide" data-caption="Arizona · Photo">
-              <img
-                src="/stickers/states/arizona-photo.webp"
-                srcset="/stickers/states/arizona-photo-700.webp 700w, /stickers/states/arizona-photo.webp 1400w"
-                sizes="(max-width: 640px) 92vw, (max-width: 900px) 80vw, min(560px, 42vw)"
-                width="1400"
-                height="466"
-                alt="Arizona natural wonders photo sticker"
-                loading="lazy" decoding="async"
-              />
-            </figure>
-            <figure class="hero-slide" data-caption="Arkansas · Stained glass">
-              <img
-                src="/stickers/states/arkansas-stained-glass.webp"
-                srcset="/stickers/states/arkansas-stained-glass-700.webp 700w, /stickers/states/arkansas-stained-glass.webp 1400w"
-                sizes="(max-width: 640px) 92vw, (max-width: 900px) 80vw, min(560px, 42vw)"
-                width="1400"
-                height="466"
-                alt="Arkansas natural wonders stained-glass sticker"
-                loading="lazy" decoding="async"
-              />
-            </figure>
-            <figure class="hero-slide" data-caption="Arkansas · Photo">
-              <img
-                src="/stickers/states/arkansas-photo.webp"
-                srcset="/stickers/states/arkansas-photo-700.webp 700w, /stickers/states/arkansas-photo.webp 1400w"
-                sizes="(max-width: 640px) 92vw, (max-width: 900px) 80vw, min(560px, 42vw)"
-                width="1400"
-                height="466"
-                alt="Arkansas natural wonders photo sticker"
-                loading="lazy" decoding="async"
-              />
-            </figure>
-            <figure class="hero-slide" data-caption="California · Stained glass">
-              <img
-                src="/stickers/states/california-stained-glass.webp"
-                srcset="/stickers/states/california-stained-glass-700.webp 700w, /stickers/states/california-stained-glass.webp 1400w"
-                sizes="(max-width: 640px) 92vw, (max-width: 900px) 80vw, min(560px, 42vw)"
-                width="1400"
-                height="466"
-                alt="California natural wonders stained-glass sticker"
-                loading="lazy" decoding="async"
-              />
-            </figure>
-            <figure class="hero-slide" data-caption="California · Photo">
-              <img
-                src="/stickers/states/california-photo.webp"
-                srcset="/stickers/states/california-photo-700.webp 700w, /stickers/states/california-photo.webp 1400w"
-                sizes="(max-width: 640px) 92vw, (max-width: 900px) 80vw, min(560px, 42vw)"
-                width="1400"
-                height="466"
-                alt="California natural wonders photo sticker"
-                loading="lazy" decoding="async"
-              />
-            </figure>
-            </div>
+      <!-- Interactive showcase: pick a state, flip between the two art styles -->
+      <div class="wrap showcase" data-showcase>
+        <div class="showcase-stage">
+          <div class="showcase-plate is-floating" data-plate>
+            <img
+              class="showcase-layer is-on"
+              data-layer="a"
+              src="/stickers/states/california-stained-glass.webp"
+              srcset="/stickers/states/california-stained-glass-700.webp 700w, /stickers/states/california-stained-glass.webp 1400w"
+              sizes="(max-width: 900px) 92vw, min(1100px, 88vw)"
+              width="1400" height="466"
+              alt="California state-name sticker, stained-glass style: each letter frames a California landscape"
+              fetchpriority="high" decoding="async"
+            />
+            <img class="showcase-layer" data-layer="b" alt="" aria-hidden="true" width="1400" height="466" decoding="async" />
           </div>
-          <p class="hero-caption" data-hero-caption aria-live="polite">Alabama · Stained glass</p>
+        </div>
+
+        <div class="showcase-controls">
+          <div class="showcase-left">
+            <div class="seg" role="radiogroup" aria-label="Artwork style">
+              <button type="button" class="seg-btn" role="radio" aria-checked="true" data-style="stained-glass">Stained glass</button>
+              <button type="button" class="seg-btn" role="radio" aria-checked="false" data-style="photo">Photo</button>
+            </div>
+            <p class="showcase-caption" data-caption aria-live="polite">California &middot; Stained glass</p>
+          </div>
+
+          <ul class="chips" aria-label="Choose a state">
+            <li><button type="button" class="chip" data-state="alabama" aria-pressed="false">Alabama</button></li>
+            <li><button type="button" class="chip" data-state="alaska" aria-pressed="false">Alaska</button></li>
+            <li><button type="button" class="chip" data-state="arizona" aria-pressed="false">Arizona</button></li>
+            <li><button type="button" class="chip" data-state="arkansas" aria-pressed="false">Arkansas</button></li>
+            <li><button type="button" class="chip" data-state="california" aria-pressed="true">California</button></li>
+          </ul>
         </div>
       </div>
     </section>
 
+    <!-- ——————————————————————— VALUES ——————————————————————— -->
     <section class="values" aria-label="What makes our stickers different">
       <ul class="wrap values-row">
         <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3 4 6 7.2 6 11a6 6 0 0 1-12 0c0-3.8 3-7 6-11z"/></svg>Weather-ready vinyl</li>
@@ -205,79 +130,156 @@
       </ul>
     </section>
 
-    <section class="section drop" id="first-drop">
+    <!-- ——————————————————————— THE FIRST FIVE ——————————————————————— -->
+    <section class="section states" id="first-states">
       <div class="wrap">
-        <div class="section-head reveal">
-          <p class="eyebrow">The Landmark Series</p>
-          <h2>First drop: three states, three wild places.</h2>
-          <p class="section-lede">Our first collection is still in the studio. Each sticker is illustrated in-house from a real landscape and cut to the shape of the art.</p>
+        <div class="states-head">
+          <div class="section-head reveal">
+            <p class="eyebrow">The Landmark Series</p>
+            <h2>The first five states.</h2>
+            <p class="section-lede">Each sticker is built letter by letter from real views inside that state. Five are finished; the rest of the country is on the drawing board.</p>
+          </div>
+          <p class="states-hint reveal">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg>
+            Hover a card to see the photo version
+          </p>
         </div>
 
-        <div class="drop-grid">
-          <article class="slot reveal">
-            <div class="slot-art slot-arch"><div class="frame"><img src="/stickers/halfdome.svg" alt="Sneak peek of the California Yosemite Valley sticker" width="220" height="260" loading="lazy" /></div></div>
-            <div class="slot-body">
-              <p class="slot-state">California</p>
-              <h3>Yosemite Valley</h3>
-              <p>Granite, pines and a long golden-hour glow.</p>
-              <span class="pill">First drop · Coming soon</span>
+        <div class="states-grid">
+          <article class="state-card reveal">
+            <div class="state-art">
+              <img class="art-glass" src="/stickers/states/alabama-stained-glass-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="Alabama state-name sticker in stained-glass style" />
+              <img class="art-photo" src="/stickers/states/alabama-photo-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+            </div>
+            <div class="state-body">
+              <div>
+                <p class="state-name">Alabama</p>
+                <p class="state-meta">Waterfalls, hardwood ridges &amp; slow rivers</p>
+              </div>
+              <span class="state-badge">Two styles</span>
             </div>
           </article>
-          <article class="slot reveal">
-            <div class="slot-art slot-round"><div class="frame"><img src="/stickers/everglades.svg" alt="Sneak peek of the Florida Everglades sticker" width="220" height="220" loading="lazy" /></div></div>
-            <div class="slot-body">
-              <p class="slot-state">Florida</p>
-              <h3>Everglades Sunset</h3>
-              <p>Sawgrass, slow water and a sinking sun.</p>
-              <span class="pill">First drop · Coming soon</span>
+
+          <article class="state-card reveal">
+            <div class="state-art">
+              <img class="art-glass" src="/stickers/states/california-stained-glass-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="California state-name sticker in stained-glass style" />
+              <img class="art-photo" src="/stickers/states/california-photo-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+            </div>
+            <div class="state-body">
+              <div>
+                <p class="state-name">California</p>
+                <p class="state-meta">Granite domes, redwoods &amp; desert bloom</p>
+              </div>
+              <span class="state-badge">Two styles</span>
             </div>
           </article>
-          <article class="slot reveal">
-            <div class="slot-art slot-rect"><div class="frame"><img src="/stickers/adirondack.svg" alt="Sneak peek of the New York Adirondacks sticker" width="260" height="200" loading="lazy" /></div></div>
-            <div class="slot-body">
-              <p class="slot-state">New York</p>
-              <h3>Adirondack Lake</h3>
-              <p>Still water under a ridgeline of pines.</p>
-              <span class="pill">First drop · Coming soon</span>
+
+          <article class="state-card reveal">
+            <div class="state-art">
+              <img class="art-glass" src="/stickers/states/alaska-stained-glass-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="Alaska state-name sticker in stained-glass style" />
+              <img class="art-photo" src="/stickers/states/alaska-photo-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+            </div>
+            <div class="state-body">
+              <div>
+                <p class="state-name">Alaska</p>
+                <p class="state-meta">Glaciers, tundra &amp; braided rivers</p>
+              </div>
+              <span class="state-badge">Two styles</span>
             </div>
           </article>
-          <article class="slot slot-next reveal">
-            <div class="slot-art slot-sketch">
-              <svg viewBox="0 0 200 200" aria-hidden="true"><path d="M30 150 C60 150 60 110 92 110 S130 70 170 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="2 9" stroke-linecap="round"/><circle cx="30" cy="150" r="7" fill="currentColor"/><path d="M170 46 c-9 0-15 7-15 15 0 11 15 25 15 25s15-14 15-25c0-8-6-15-15-15z" fill="currentColor"/><circle cx="170" cy="61" r="5" fill="#F6F1E6"/></svg>
+
+          <article class="state-card reveal">
+            <div class="state-art">
+              <img class="art-glass" src="/stickers/states/arizona-stained-glass-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="Arizona state-name sticker in stained-glass style" />
+              <img class="art-photo" src="/stickers/states/arizona-photo-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="" aria-hidden="true" />
             </div>
-            <div class="slot-body">
-              <p class="slot-state">Next on the trail</p>
-              <h3>More places in the sketchbook</h3>
-              <p>Colorado peaks, Pacific Northwest rain forests, desert blooms and island coastlines.</p>
-              <span class="pill pill-quiet">In the studio</span>
+            <div class="state-body">
+              <div>
+                <p class="state-name">Arizona</p>
+                <p class="state-meta">Canyon country &amp; red rock</p>
+              </div>
+              <span class="state-badge">Two styles</span>
+            </div>
+          </article>
+
+          <article class="state-card reveal">
+            <div class="state-art">
+              <img class="art-glass" src="/stickers/states/arkansas-stained-glass-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="Arkansas state-name sticker in stained-glass style" />
+              <img class="art-photo" src="/stickers/states/arkansas-photo-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="" aria-hidden="true" />
+            </div>
+            <div class="state-body">
+              <div>
+                <p class="state-name">Arkansas</p>
+                <p class="state-meta">Ozark hills, bluffs &amp; clear creeks</p>
+              </div>
+              <span class="state-badge">Two styles</span>
+            </div>
+          </article>
+
+          <article class="state-card is-more reveal">
+            <div class="more-copy">
+              <h3>Forty-five more in the sketchbook.</h3>
+              <p>We are working through the country one state at a time, in both styles. Follow along and you will see each one as it is finished.</p>
+            </div>
+            <div class="atlas" aria-hidden="true" data-atlas></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ——————————————————————— TWO STYLES ——————————————————————— -->
+    <section class="section styles on-night" id="styles">
+      <div class="wrap">
+        <div class="section-head center reveal">
+          <p class="eyebrow">Two ways to see a place</p>
+          <h2>The same state, told two ways.</h2>
+          <p class="section-lede">Every state is drawn twice. Pick the one that matches your gear &mdash; or collect both.</p>
+        </div>
+
+        <div class="styles-grid">
+          <article class="style-panel reveal">
+            <span class="style-tag">Stained glass</span>
+            <img src="/stickers/states/alabama-stained-glass-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="Alabama sticker, stained-glass style: saturated illustrated panels with leaded outlines" />
+            <div>
+              <h3>Illustrated, lit from behind.</h3>
+              <p>Hand-illustrated panels with leaded outlines and saturated colour, so the letters read like a cathedral window. Bold on dark bottles and powder-coated gear.</p>
+            </div>
+          </article>
+
+          <article class="style-panel reveal">
+            <span class="style-tag">Photo</span>
+            <img src="/stickers/states/alabama-photo-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="Alabama sticker, photo style: real photographs of Alabama landscapes inside each letter" />
+            <div>
+              <h3>Real photographs, real light.</h3>
+              <p>The same letterforms filled with actual photographs of the place. Quieter, more documentary &mdash; it looks like a postcard you cut into a word.</p>
             </div>
           </article>
         </div>
       </div>
     </section>
 
+    <!-- ——————————————————————— CRAFT ——————————————————————— -->
     <section class="section craft" id="craft">
       <div class="wrap craft-grid">
-        <div class="craft-art reveal" aria-hidden="true">
-          <div class="craft-card">
-            <img class="craft-main" src="/stickers/mountain.svg" alt="" width="220" height="220" loading="lazy" />
-            <img class="craft-mini m1" src="/stickers/pine.svg" alt="" width="200" height="220" loading="lazy" />
-            <img class="craft-mini m2" src="/stickers/poppy.svg" alt="" width="200" height="230" loading="lazy" />
-          </div>
-        </div>
+        <figure class="craft-art reveal">
+          <img src="/stickers/states/california-stained-glass.webp" width="1400" height="466" loading="lazy" decoding="async" alt="Close detail of the California sticker showing the die-cut outline and the illustration inside each letter" />
+          <figcaption>Detail &mdash; California, stained glass. One continuous die-cut outline around the whole word.</figcaption>
+        </figure>
+
         <div class="craft-copy reveal">
           <p class="eyebrow">The craft</p>
           <h2>Made for gear that sees real weather.</h2>
-          <p class="section-lede">We design every sticker the way you remember a place: a few honest shapes, warm light and colors pulled straight from the landscape.</p>
+          <p class="section-lede">We design every sticker the way you remember a place: a few honest shapes, warm light and colours pulled straight from the landscape.</p>
           <dl class="craft-list">
             <div><dt>Durable vinyl</dt><dd>Made for bottles, coolers, packs and boards that actually go places.</dd></div>
-            <div><dt>Cut to the art</dt><dd>Each design is die-cut to its own silhouette with a crisp border, so only the place shows.</dd></div>
+            <div><dt>Cut to the word</dt><dd>One clean die-cut line follows the whole state name, so the letters stay crisp and only the place shows.</dd></div>
             <div><dt>Printed to order</dt><dd>Stickers are printed when you order them, which means less waste and nothing sitting in a warehouse.</dd></div>
           </dl>
         </div>
       </div>
     </section>
 
+    <!-- ——————————————————————— FOLLOW ——————————————————————— -->
     <section class="section follow" id="follow">
       <div class="wrap">
         <div class="section-head center reveal">
@@ -290,33 +292,34 @@
             <a class="follow-card" href="https://www.etsy.com/shop/NatureStickersShop" target="_blank" rel="noopener">
               <span class="follow-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1.2 11a1.6 1.6 0 0 1-1.6 1.4H7.8a1.6 1.6 0 0 1-1.6-1.4z"/><path d="M9 10V7a3 3 0 0 1 6 0v3"/></svg></span>
               <span class="follow-text"><b>Etsy</b><span>shop/NatureStickersShop</span></span>
-              <span class="follow-arrow" aria-hidden="true">↗</span>
+              <span class="follow-arrow" aria-hidden="true">&#8599;</span>
             </a>
           </li>
           <li>
             <a class="follow-card" href="https://www.pinterest.com/NatureStickersShop/" target="_blank" rel="noopener">
               <span class="follow-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M11 8.5c3-1 5.5.6 5 3.4-.4 2.4-2.6 3.6-4.4 2.6M11.6 10.5 9 20"/></svg></span>
               <span class="follow-text"><b>Pinterest</b><span>@NatureStickersShop</span></span>
-              <span class="follow-arrow" aria-hidden="true">↗</span>
+              <span class="follow-arrow" aria-hidden="true">&#8599;</span>
             </a>
           </li>
           <li>
             <a class="follow-card" href="https://www.instagram.com/naturestickersshop/" target="_blank" rel="noopener">
               <span class="follow-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg></span>
               <span class="follow-text"><b>Instagram</b><span>@NatureStickersShop</span></span>
-              <span class="follow-arrow" aria-hidden="true">↗</span>
+              <span class="follow-arrow" aria-hidden="true">&#8599;</span>
             </a>
           </li>
         </ul>
       </div>
     </section>
 
+    <!-- ——————————————————————— CONTACT ——————————————————————— -->
     <section class="section contact" id="contact">
       <div class="wrap">
         <div class="contact-card reveal">
           <p class="eyebrow">Contact</p>
-          <h2>Questions? We’re here.</h2>
-          <p class="section-lede">Questions about an order, a custom size or wholesale? Email us at <a href="mailto:support@naturestickers.shop">support@naturestickers.shop</a> and we’ll get back to you within 1–2 business days.</p>
+          <h2>Questions? We&rsquo;re here.</h2>
+          <p class="section-lede">Questions about an order, a custom size or wholesale? Email us at <a href="mailto:support@naturestickers.shop">support@naturestickers.shop</a> and we&rsquo;ll get back to you within 1&ndash;2 business days.</p>
           <div class="hero-ctas" style="margin-top:28px;justify-content:center">
             <a class="btn btn-primary" href="mailto:support@naturestickers.shop">Email support</a>
             <a class="btn btn-ghost" href="/contact">More contact info</a>
@@ -335,7 +338,8 @@
       </div>
       <nav class="footer-col" aria-label="Explore">
         <h2>Explore</h2>
-        <a href="/#first-drop">First drop</a>
+        <a href="/#first-states">The states</a>
+        <a href="/#styles">Two styles</a>
         <a href="/#craft">The craft</a>
         <a href="/#follow">Follow along</a>
       </nav>
@@ -348,12 +352,12 @@
       </nav>
     </div>
     <div class="wrap footer-fine">
-      <p>© <span data-year>2026</span> Nature Stickers · naturestickers.shop</p>
+      <p>&copy; <span data-year>2026</span> Nature Stickers &middot; naturestickers.shop</p>
       <p>Made with care for wild places.</p>
     </div>
   </footer>
 
-  <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/home.js"></script>
 
 <link rel="stylesheet" href="/uc/uc-note.css?v=20261007uc1">
 <div class="ms-uc" role="note" aria-label="Under construction. Nature Stickers is not yet operational. Coming soon.">
@@ -394,7 +398,7 @@
     </svg>
     <div class="ms-uc-copy">
       <p class="ms-uc-kicker">Under construction</p>
-      <p class="ms-uc-main">Not yet<br>operational</p>
+      <p class="ms-uc-main">Not yet<br> operational</p>
       <p class="ms-uc-soon">Nature Stickers<br>coming soon</p>
     </div>
   </div>
