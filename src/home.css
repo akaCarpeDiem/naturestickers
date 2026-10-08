@@ -1,0 +1,405 @@
+/* Nature Stickers — homepage sections.
+   Loaded only by index.html. Shared tokens/components live in style.css. */
+
+/* ——————————————————————————————————————————————
+   HERO — dark stage so the artwork glows
+   —————————————————————————————————————————————— */
+.hero {
+  position: relative;
+  /* Sit underneath the sticky header so the dark field runs to the top edge. */
+  margin-top: calc(-1 * var(--header-h));
+  padding: calc(var(--header-h) + clamp(28px, 4.5vw, 64px)) 0 clamp(40px, 5vw, 72px);
+  background:
+    radial-gradient(120% 90% at 50% -10%, var(--night-3) 0%, transparent 62%),
+    linear-gradient(176deg, var(--night-2) 0%, var(--night) 72%);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Soft topographic texture, very low contrast */
+.hero::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; opacity: .5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 900' preserveAspectRatio='xMidYMid slice'%3E%3Cg fill='none' stroke='%23A9C19C' stroke-opacity='.1' stroke-width='1.1'%3E%3Cpath d='M-40 700c160-70 300 40 480-30s300-110 480-40 340 20 560-60'/%3E%3Cpath d='M-40 760c160-70 300 40 480-30s300-110 480-40 340 20 560-60'/%3E%3Cpath d='M-40 820c160-70 300 40 480-30s300-110 480-40 340 20 560-60'/%3E%3Cpath d='M-40 180c160-70 300 40 480-30s300-110 480-40 340 20 560-60'/%3E%3Cpath d='M-40 240c160-70 300 40 480-30s300-110 480-40 340 20 560-60'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: cover;
+}
+
+/* Warm light pooling behind the sticker */
+.hero-glow {
+  position: absolute; z-index: -1; pointer-events: none;
+  left: 50%; top: 52%; transform: translate(-50%, -50%);
+  width: min(1100px, 92vw); aspect-ratio: 16 / 9;
+  background: radial-gradient(closest-side, rgba(169, 193, 156, .2), rgba(127, 169, 184, .1) 48%, transparent 72%);
+}
+
+.hero-copy { max-width: 46rem; }
+.hero h1 {
+  font-size: clamp(2.1rem, 1.25rem + 3.55vw, 4.05rem);
+  line-height: 1.02;
+  margin: 20px 0 20px;
+  letter-spacing: -0.028em;
+}
+.hero h1 .accent { color: var(--sage); }
+.hero .lede {
+  font-size: var(--step-1); line-height: 1.55;
+  color: var(--on-night-muted); max-width: 33em;
+}
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+/* ——— Showcase: the big interactive wordmark ——— */
+.showcase { margin-top: clamp(28px, 3.5vw, 52px); }
+
+.showcase-stage {
+  position: relative;
+  display: grid; place-items: center;
+  padding: clamp(8px, 1.2vw, 16px) clamp(14px, 3vw, 44px);
+  border-radius: var(--r-xl);
+  background:
+    radial-gradient(90% 120% at 50% 0%, rgba(238, 244, 235, .09), transparent 70%),
+    linear-gradient(170deg, rgba(238, 244, 235, .07), rgba(238, 244, 235, .02));
+  box-shadow:
+    inset 0 0 0 1px var(--line-night),
+    inset 0 1px 0 rgba(255, 255, 255, .07),
+    0 50px 80px -50px rgba(0, 0, 0, .9);
+}
+
+.showcase-plate {
+  position: relative; width: 100%;
+  aspect-ratio: 1400 / 466;
+}
+.showcase-layer {
+  position: absolute; inset: 0; margin: 0;
+  width: 100%; height: 100%; object-fit: contain;
+  opacity: 0; transition: opacity .62s var(--ease);
+  filter: drop-shadow(0 26px 30px rgba(0, 0, 0, .55)) drop-shadow(0 4px 8px rgba(0, 0, 0, .4));
+}
+.showcase-layer.is-on { opacity: 1; }
+.showcase-plate.is-floating .showcase-layer.is-on { animation: plateFloat 7s ease-in-out infinite; }
+
+@keyframes plateFloat {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, -9px, 0) scale(1.012); }
+}
+
+/* Loading shimmer while a new state decodes */
+.showcase-plate::after {
+  content: ""; position: absolute; inset: 0; border-radius: var(--r-md);
+  background: linear-gradient(100deg, transparent 30%, rgba(238, 244, 235, .07) 50%, transparent 70%);
+  background-size: 220% 100%;
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s;
+}
+.showcase-plate.is-busy::after { opacity: 1; animation: plateShimmer 1.1s linear infinite; }
+@keyframes plateShimmer {
+  from { background-position: 180% 0; }
+  to { background-position: -80% 0; }
+}
+
+/* ——— Controls ——— */
+.showcase-controls {
+  margin-top: clamp(20px, 3vw, 30px);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 18px;
+}
+
+.showcase-left { display: flex; flex-direction: column; gap: 14px; }
+
+.showcase-caption {
+  font-size: var(--step--1); font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--sage);
+  min-height: 1.4em; margin: 0;
+}
+
+/* The controls only do something with JS, so hide them otherwise.
+   The hero still renders a full sticker without them. */
+.showcase-controls { display: none; }
+.js .showcase-controls { display: flex; }
+
+/* Segmented style switch */
+.seg {
+  display: inline-flex; padding: 4px; gap: 2px;
+  border-radius: var(--r-pill);
+  background: rgba(12, 21, 16, .5);
+  box-shadow: inset 0 0 0 1px var(--line-night);
+}
+.seg-btn {
+  appearance: none; border: 0; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; padding: 0 20px; border-radius: var(--r-pill);
+  font: 600 var(--step--1)/1 var(--sans); letter-spacing: .01em;
+  color: var(--on-night-muted); background: transparent;
+  transition: background-color .3s var(--ease), color .3s var(--ease);
+}
+.seg-btn:hover { color: var(--on-night); }
+.seg-btn[aria-checked="true"] {
+  background: var(--paper); color: var(--forest);
+  box-shadow: 0 6px 16px -8px rgba(0, 0, 0, .8);
+}
+
+/* State chips */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.chip {
+  appearance: none; cursor: pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 44px; padding: 0 17px; border-radius: var(--r-pill);
+  font: 500 var(--step--1)/1 var(--sans);
+  color: var(--on-night-muted);
+  background: rgba(238, 244, 235, .06);
+  border: 1px solid var(--line-night);
+  transition: background-color .3s var(--ease), color .3s var(--ease), border-color .3s var(--ease), transform .3s var(--ease);
+}
+.chip:hover { background: rgba(238, 244, 235, .14); color: var(--on-night); transform: translateY(-1px); }
+.chip[aria-pressed="true"] {
+  background: var(--sage); color: #14261B; border-color: var(--sage);
+  font-weight: 600;
+}
+
+/* ——————————————————————————————————————————————
+   THE FIRST FIVE — real artwork gallery
+   —————————————————————————————————————————————— */
+.states { background: var(--paper); }
+.states-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 32px; margin-bottom: clamp(32px, 4vw, 56px);
+}
+.states-head .section-head { margin-bottom: 0; }
+.states-hint {
+  flex: none; font-size: var(--step--1); color: var(--muted);
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 11px 16px; border-radius: var(--r-pill);
+  background: var(--paper-2); box-shadow: inset 0 0 0 1px var(--line);
+}
+.states-hint svg { width: 17px; height: 17px; flex: none; fill: none; stroke: var(--moss); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+
+.states-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 18px; }
+/* First two cards run wide so the 3:1 art reads at a decent size */
+.state-card:nth-child(1), .state-card:nth-child(2) { grid-column: span 3; }
+.state-card:nth-child(3), .state-card:nth-child(4), .state-card:nth-child(5) { grid-column: span 2; }
+.state-card.is-more { grid-column: span 6; }
+
+.state-card {
+  position: relative; display: flex; flex-direction: column; gap: 0;
+  border-radius: var(--r-lg); overflow: hidden;
+  background: linear-gradient(168deg, var(--night-3) 0%, var(--night) 78%);
+  box-shadow: inset 0 0 0 1px rgba(238, 244, 235, .1), var(--sh-md);
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease);
+}
+.state-card:hover, .state-card:focus-within {
+  transform: translateY(-4px);
+  box-shadow: inset 0 0 0 1px rgba(238, 244, 235, .16), var(--sh-lg);
+}
+
+.state-art {
+  position: relative; display: grid; place-items: center;
+  padding: clamp(18px, 2.6vw, 32px);
+  aspect-ratio: 1400 / 560;
+}
+/* Narrower cards get relatively taller art so the wordmark stays readable */
+.state-card:nth-child(n+3) .state-art { aspect-ratio: 1400 / 640; }
+.state-art img {
+  position: absolute; inset: clamp(18px, 2.6vw, 32px);
+  width: auto; height: auto; max-width: calc(100% - 2 * clamp(18px, 2.6vw, 32px));
+  margin: auto; object-fit: contain;
+  filter: drop-shadow(0 16px 20px rgba(0, 0, 0, .5));
+  transition: opacity .55s var(--ease);
+}
+.state-art .art-photo { opacity: 0; }
+.state-card:hover .art-photo, .state-card:focus-within .art-photo { opacity: 1; }
+.state-card:hover .art-glass, .state-card:focus-within .art-glass { opacity: 0; }
+
+.state-body {
+  display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 16px 20px 18px;
+  border-top: 1px solid var(--line-night);
+}
+.state-name { font-family: var(--serif); font-size: var(--step-2); color: var(--on-night); line-height: 1.15; }
+.state-meta { font-size: var(--step--1); color: var(--on-night-muted); margin-top: 2px; }
+.state-badge {
+  flex: none; font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+  padding: 7px 12px; border-radius: var(--r-pill);
+  color: var(--sage); background: rgba(169, 193, 156, .14);
+  box-shadow: inset 0 0 0 1px rgba(169, 193, 156, .28);
+}
+
+/* "45 more states" panel */
+.state-card.is-more {
+  background: var(--paper-2);
+  box-shadow: inset 0 0 0 1px var(--line);
+  flex-direction: row; align-items: center; justify-content: space-between;
+  gap: 28px; padding: clamp(24px, 3vw, 36px);
+}
+.state-card.is-more:hover { transform: none; box-shadow: inset 0 0 0 1px var(--line), var(--sh-md); }
+.more-copy h3 { font-size: var(--step-2); margin-bottom: 6px; }
+.more-copy p { color: var(--muted); font-size: var(--step--1); max-width: 44em; }
+
+/* ——— 50-state atlas ——— */
+.atlas { display: flex; flex-wrap: wrap; gap: 5px; max-width: 520px; }
+.atlas span {
+  display: grid; place-items: center;
+  width: 32px; height: 28px; border-radius: 6px;
+  font-size: 11px; font-weight: 600; letter-spacing: .04em;
+  color: var(--muted); background: rgba(28, 58, 44, .055);
+  box-shadow: inset 0 0 0 1px rgba(28, 58, 44, .07);
+}
+.atlas span.is-live {
+  color: var(--paper); background: var(--forest);
+  box-shadow: 0 4px 10px -5px rgba(28, 58, 44, .7);
+}
+
+/* ——————————————————————————————————————————————
+   TWO STYLES — the real differentiator
+   —————————————————————————————————————————————— */
+.styles { background: var(--night); position: relative; overflow: hidden; }
+.styles::before {
+  content: ""; position: absolute; inset: 0;
+  background: radial-gradient(90% 70% at 50% 0%, rgba(169, 193, 156, .1), transparent 65%);
+  pointer-events: none;
+}
+.styles .wrap { position: relative; }
+.styles-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(20px, 3vw, 36px); }
+.style-panel {
+  display: flex; flex-direction: column; gap: 22px;
+  padding: clamp(24px, 3vw, 40px);
+  border-radius: var(--r-xl);
+  background: linear-gradient(170deg, rgba(238, 244, 235, .07), rgba(238, 244, 235, .02));
+  box-shadow: inset 0 0 0 1px var(--line-night);
+}
+.style-panel img {
+  width: 100%; height: auto;
+  filter: drop-shadow(0 20px 26px rgba(0, 0, 0, .5));
+}
+.style-panel h3 { font-size: var(--step-2); }
+.style-panel p { color: var(--on-night-muted); font-size: var(--step--1); }
+.style-tag {
+  align-self: flex-start;
+  font-size: 12px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase;
+  padding: 7px 13px; border-radius: var(--r-pill);
+  color: var(--night); background: var(--sage);
+}
+
+/* ——————————————————————————————————————————————
+   CRAFT
+   —————————————————————————————————————————————— */
+.craft { background: var(--sand); }
+.craft-grid { display: grid; grid-template-columns: 1fr 1.08fr; gap: clamp(36px, 6vw, 88px); align-items: center; }
+
+/* Macro crop of real artwork — shows the die-cut edge and detail */
+.craft-art {
+  position: relative; border-radius: var(--r-xl); overflow: hidden;
+  background: linear-gradient(168deg, var(--night-3), var(--night));
+  aspect-ratio: 5 / 4.2;
+  box-shadow: inset 0 0 0 1px rgba(238, 244, 235, .1), var(--sh-lg);
+}
+.craft-art img {
+  position: absolute; left: 50%; top: 50%;
+  width: 280%; max-width: none;
+  transform: translate(-56%, -56%);
+  filter: drop-shadow(0 18px 24px rgba(0, 0, 0, .5));
+}
+.craft-art figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 52px 24px 20px;
+  font-size: var(--step--1); color: rgba(238, 244, 235, .82);
+  background: linear-gradient(to top,
+    rgba(12, 21, 16, .97) 0%,
+    rgba(12, 21, 16, .92) 48%,
+    rgba(12, 21, 16, .6) 78%,
+    transparent 100%);
+}
+
+.craft-list { margin: 34px 0 0; display: grid; gap: 0; }
+.craft-list div {
+  padding: 22px 0; border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: 180px 1fr; gap: 20px;
+}
+.craft-list div:last-child { border-bottom: 1px solid var(--line); }
+.craft-list dt { font-family: var(--serif); font-size: var(--step-1); color: var(--forest); }
+.craft-list dd { margin: 0; color: var(--muted); font-size: var(--step--1); }
+
+/* ——————————————————————————————————————————————
+   Under-construction note
+   Parked in the empty top-right of the hero. Switched from fixed to
+   absolute so it scrolls away instead of sitting on top of the artwork
+   for the whole page. Delete this block to restore the fixed behaviour.
+   —————————————————————————————————————————————— */
+.ms-uc {
+  position: absolute !important;
+  top: calc(var(--header-h) + 10px) !important;
+  right: 20px !important;
+  width: min(300px, 34vw) !important;
+}
+
+/* ——————————————————————————————————————————————
+   Responsive
+   —————————————————————————————————————————————— */
+@media (max-width: 1100px) {
+  .states-grid { grid-template-columns: repeat(4, 1fr); }
+  .state-card:nth-child(1), .state-card:nth-child(2) { grid-column: span 2; }
+  .state-card:nth-child(3), .state-card:nth-child(4), .state-card:nth-child(5) { grid-column: span 2; }
+  .state-card.is-more { grid-column: span 4; }
+}
+
+@media (max-width: 900px) {
+  .craft-grid { grid-template-columns: 1fr; }
+  .craft-art { max-width: 620px; width: 100%; aspect-ratio: 16 / 11; }
+  .styles-grid { grid-template-columns: 1fr; }
+  .states-head { flex-direction: column; align-items: flex-start; gap: 20px; }
+  .state-card.is-more { flex-direction: column; align-items: flex-start; gap: 22px; }
+}
+
+@media (max-width: 720px) {
+  .states-grid { grid-template-columns: 1fr; }
+  .state-card:nth-child(n) { grid-column: 1 / -1; }
+  .showcase-controls { flex-direction: column; align-items: stretch; }
+  .seg { align-self: flex-start; }
+}
+
+@media (max-width: 640px) {
+  /* Keep the header offset — only trim the extra breathing room. */
+  .hero { padding-top: calc(var(--header-h) + 22px); }
+  .hero h1 { margin: 18px 0; }
+  .hero-ctas .btn { flex: 1 1 auto; }
+  .showcase-stage { padding: 12px; border-radius: var(--r-lg); }
+  .chips { gap: 6px; }
+  .chip { padding: 0 14px; }
+  .craft-list div { grid-template-columns: 1fr; gap: 4px; }
+  .atlas span { width: 28px; height: 25px; font-size: 10px; }
+}
+
+/* On phones the sticky note is too big to float over the hero, so it
+   becomes a slim ribbon pinned to the bottom of the viewport.
+   Remove this block to go back to the floating paper note. */
+@media (max-width: 720px) {
+  .ms-uc {
+    position: fixed !important;
+    top: auto !important; bottom: 10px !important;
+    left: 10px !important; right: 10px !important;
+    width: auto !important; aspect-ratio: auto !important;
+    filter: none !important;
+  }
+  .ms-uc-sheet { transform: none !important; height: auto !important; }
+  .ms-uc-svg { display: none !important; }
+  .ms-uc-copy {
+    position: static !important; inset: auto !important;
+    flex-direction: row !important; flex-wrap: wrap;
+    align-items: baseline !important; justify-content: center !important;
+    gap: 4px 10px; padding: 11px 18px;
+    border-radius: var(--r-pill);
+    background: #FFE56A;
+    box-shadow: 0 12px 26px -12px rgba(62, 42, 12, .65), inset 0 0 0 1px rgba(122, 79, 20, .28);
+  }
+  .ms-uc-kicker { font-size: 13px !important; margin: 0 !important; white-space: nowrap; }
+  .ms-uc-main { font-size: 16px !important; line-height: 1.1 !important; white-space: nowrap; }
+  /* index.html has "Not yet<br> operational" — the space after the break
+     means hiding the <br> still leaves a word space. */
+  .ms-uc-main br { display: none; }
+  .ms-uc-soon { display: none !important; }
+  /* Let the page scroll clear of the ribbon. */
+  body { padding-bottom: 58px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-plate.is-floating .showcase-layer.is-on { animation: none; }
+  .showcase-plate.is-busy::after { animation: none; opacity: 0; }
+  .showcase-layer { transition: none; }
+  .state-art img { transition: none; }
+}
