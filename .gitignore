@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.wrangler/
+.publish/
+.staging/
+.env
+.env.*
+.dev.vars
+*.pem
+.DS_Store
+*.log
+_rejected_stickers/
