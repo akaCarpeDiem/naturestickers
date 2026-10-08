@@ -43,7 +43,6 @@
   font-size: var(--step-1); line-height: 1.55;
   color: var(--on-night-muted); max-width: 33em;
 }
-.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 
 /* ——— Showcase: the big interactive wordmark ——— */
 .showcase { margin-top: clamp(28px, 3.5vw, 52px); }
@@ -203,8 +202,22 @@
   transition: opacity .55s var(--ease);
 }
 .state-art .art-photo { opacity: 0; }
-.state-card:hover .art-photo, .state-card:focus-within .art-photo { opacity: 1; }
-.state-card:hover .art-glass, .state-card:focus-within .art-glass { opacity: 0; }
+/* Hover swaps to the photo version on mouse devices; touch devices toggle
+   .is-flipped on tap (home.js) so a sticky :hover can't trap the card. */
+@media (hover: hover) {
+  .state-card:hover .art-photo { opacity: 1; }
+  .state-card:hover .art-glass { opacity: 0; }
+}
+.state-card:focus-within .art-photo, .state-card.is-flipped .art-photo { opacity: 1; }
+.state-card:focus-within .art-glass, .state-card.is-flipped .art-glass { opacity: 0; }
+.state-card:not(.is-more) { cursor: default; }
+@media (hover: none) { .state-card:not(.is-more) { cursor: pointer; -webkit-tap-highlight-color: transparent; } }
+
+.states-hint .hint-touch { display: none; }
+@media (hover: none) {
+  .states-hint .hint-hover { display: none; }
+  .states-hint .hint-touch { display: inline; }
+}
 
 .state-body {
   display: flex; align-items: center; justify-content: space-between; gap: 14px;
@@ -284,7 +297,7 @@
 
 /* Macro crop of real artwork — shows the die-cut edge and detail */
 .craft-art {
-  position: relative; border-radius: var(--r-xl); overflow: hidden;
+  position: relative; margin: 0; border-radius: var(--r-xl); overflow: hidden;
   background: linear-gradient(168deg, var(--night-3), var(--night));
   aspect-ratio: 5 / 4.2;
   box-shadow: inset 0 0 0 1px rgba(238, 244, 235, .1), var(--sh-lg);
@@ -321,11 +334,15 @@
    absolute so it scrolls away instead of sitting on top of the artwork
    for the whole page. Delete this block to restore the fixed behaviour.
    —————————————————————————————————————————————— */
-.ms-uc {
-  position: absolute !important;
-  top: calc(var(--header-h) + 10px) !important;
-  right: 20px !important;
-  width: min(300px, 34vw) !important;
+@media (min-width: 721px) {
+  .ms-uc {
+    position: absolute !important;
+    top: calc(var(--header-h) + 10px) !important;
+    right: 20px !important;
+    width: min(300px, 34vw) !important;
+  }
+  /* Keep the hero copy clear of the note on tablet / small-laptop widths. */
+  .hero-copy { max-width: min(46rem, calc(100vw - var(--gutter) - 20px - min(300px, 34vw) - 28px)); }
 }
 
 /* ——————————————————————————————————————————————
@@ -363,38 +380,6 @@
   .chip { padding: 0 14px; }
   .craft-list div { grid-template-columns: 1fr; gap: 4px; }
   .atlas span { width: 28px; height: 25px; font-size: 10px; }
-}
-
-/* On phones the sticky note is too big to float over the hero, so it
-   becomes a slim ribbon pinned to the bottom of the viewport.
-   Remove this block to go back to the floating paper note. */
-@media (max-width: 720px) {
-  .ms-uc {
-    position: fixed !important;
-    top: auto !important; bottom: 10px !important;
-    left: 10px !important; right: 10px !important;
-    width: auto !important; aspect-ratio: auto !important;
-    filter: none !important;
-  }
-  .ms-uc-sheet { transform: none !important; height: auto !important; }
-  .ms-uc-svg { display: none !important; }
-  .ms-uc-copy {
-    position: static !important; inset: auto !important;
-    flex-direction: row !important; flex-wrap: wrap;
-    align-items: baseline !important; justify-content: center !important;
-    gap: 4px 10px; padding: 11px 18px;
-    border-radius: var(--r-pill);
-    background: #FFE56A;
-    box-shadow: 0 12px 26px -12px rgba(62, 42, 12, .65), inset 0 0 0 1px rgba(122, 79, 20, .28);
-  }
-  .ms-uc-kicker { font-size: 13px !important; margin: 0 !important; white-space: nowrap; }
-  .ms-uc-main { font-size: 16px !important; line-height: 1.1 !important; white-space: nowrap; }
-  /* index.html has "Not yet<br> operational" — the space after the break
-     means hiding the <br> still leaves a word space. */
-  .ms-uc-main br { display: none; }
-  .ms-uc-soon { display: none !important; }
-  /* Let the page scroll clear of the ribbon. */
-  body { padding-bottom: 58px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
