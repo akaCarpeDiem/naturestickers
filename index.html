@@ -56,7 +56,7 @@
         <img class="logo-on-dark" src="/logo-light.svg" alt="" width="298" height="48" aria-hidden="true" />
       </a>
       <nav class="nav" aria-label="Primary">
-        <a href="#first-states">The states</a>
+        <a href="/shop">The states</a>
         <a href="#styles">Two styles</a>
         <a href="#craft">The craft</a>
         <a href="/shop">Shop</a>
@@ -72,161 +72,64 @@
     <section class="hero on-night">
       <div class="hero-glow" aria-hidden="true"></div>
 
-      <div class="wrap">
+      <div class="wrap hero-split">
         <div class="hero-copy reveal">
           <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Now available</p>
           <h1>Every letter is a <span class="accent">window into a wilder place.</span></h1>
           <p class="lede">State-name stickers where each letter frames a real view from that state&rsquo;s <strong class="lede-highlight">national parks, monuments &amp; protected lands</strong>. Die-cut vinyl, built for water bottles, laptops and gear that actually goes outside.</p>
           <div class="hero-ctas">
-            <a class="btn btn-primary" href="#first-states">See the first five states</a>
+            <a class="btn btn-primary" href="/shop">Shop the states</a>
             <a class="btn btn-ghost" href="#follow">Follow along</a>
           </div>
         </div>
-      </div>
 
-      <!-- Interactive showcase: pick a state, flip between the two art styles -->
-      <div class="wrap showcase" data-showcase>
-        <div class="showcase-stage">
-          <div class="showcase-plate is-floating" data-plate>
-            <img
-              class="showcase-layer is-on"
-              data-layer="a"
-              src="/stickers/states/california-stained-glass.webp"
-              srcset="/stickers/states/california-stained-glass-700.webp 700w, /stickers/states/california-stained-glass.webp 1400w"
-              sizes="(max-width: 900px) 92vw, min(1100px, 88vw)"
-              width="1400" height="466"
-              alt="California state-name sticker, stained-glass style: each letter frames a California landscape"
-              fetchpriority="high" decoding="async"
-            />
-            <img class="showcase-layer" data-layer="b" alt="" aria-hidden="true" width="1400" height="466" decoding="async" />
-          </div>
-        </div>
-
-        <div class="showcase-controls">
-          <div class="showcase-left">
-            <div class="seg" role="radiogroup" aria-label="Artwork style">
-              <button type="button" class="seg-btn" role="radio" aria-checked="true" data-style="stained-glass">Stained glass</button>
-              <button type="button" class="seg-btn" role="radio" aria-checked="false" data-style="photo">Photo</button>
+        <!-- Interactive showcase: pick a state, flip between the two art styles -->
+        <div class="showcase" data-showcase>
+          <div class="showcase-stage">
+            <div class="showcase-plate is-floating" data-plate>
+              <img
+                class="showcase-layer is-on"
+                data-layer="a"
+                src="/stickers/states/california-stained-glass.webp"
+                srcset="/stickers/states/california-stained-glass-700.webp 700w, /stickers/states/california-stained-glass.webp 1400w"
+                sizes="(max-width: 900px) 92vw, min(720px, 52vw)"
+                width="1400" height="466"
+                alt="California state-name sticker, stained-glass style: each letter frames a California landscape"
+                fetchpriority="high" decoding="async"
+              />
+              <img class="showcase-layer" data-layer="b" alt="" aria-hidden="true" width="1400" height="466" decoding="async" />
             </div>
-            <p class="showcase-caption" data-caption aria-live="polite">California &middot; Stained glass</p>
           </div>
 
-          <ul class="chips" aria-label="Choose a state">
-            <li><button type="button" class="chip" data-state="alabama" aria-pressed="false">Alabama</button></li>
-            <li><button type="button" class="chip" data-state="alaska" aria-pressed="false">Alaska</button></li>
-            <li><button type="button" class="chip" data-state="arizona" aria-pressed="false">Arizona</button></li>
-            <li><button type="button" class="chip" data-state="arkansas" aria-pressed="false">Arkansas</button></li>
-            <li><button type="button" class="chip" data-state="california" aria-pressed="true">California</button></li>
-          </ul>
+          <div class="showcase-controls">
+            <div class="showcase-left">
+              <div class="seg" role="radiogroup" aria-label="Artwork style">
+                <button type="button" class="seg-btn" role="radio" aria-checked="true" data-style="stained-glass">Stained glass</button>
+                <button type="button" class="seg-btn" role="radio" aria-checked="false" data-style="photo">Photo</button>
+              </div>
+              <p class="showcase-caption" data-caption aria-live="polite">California &middot; Stained glass</p>
+            </div>
+
+            <ul class="chips" aria-label="Choose a state">
+              <li><button type="button" class="chip" data-state="alabama" aria-pressed="false">Alabama</button></li>
+              <li><button type="button" class="chip" data-state="alaska" aria-pressed="false">Alaska</button></li>
+              <li><button type="button" class="chip" data-state="arizona" aria-pressed="false">Arizona</button></li>
+              <li><button type="button" class="chip" data-state="arkansas" aria-pressed="false">Arkansas</button></li>
+              <li><button type="button" class="chip" data-state="california" aria-pressed="true">California</button></li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ——————————————————————— VALUES ——————————————————————— -->
-    <section class="values" aria-label="What makes our stickers different">
+    <section class="values values-night" aria-label="What makes our stickers different">
       <ul class="wrap values-row">
         <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c3 4 6 7.2 6 11a6 6 0 0 1-12 0c0-3.8 3-7 6-11z"/></svg>Weather-ready vinyl</li>
         <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19c0-8 5-14 14-14-1 9-6 14-14 14z"/><path d="M5 19l7-7"/></svg>From real places</li>
         <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8" stroke-dasharray="3 2.4"/><path d="M9 12.5l2 2 4-4.5"/></svg>Clean die-cut edges</li>
         <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8l8-4 8 4-8 4z"/><path d="M4 12l8 4 8-4"/><path d="M4 16l8 4 8-4"/></svg>Printed to order</li>
       </ul>
-    </section>
-
-    <!-- ——————————————————————— THE FIRST FIVE ——————————————————————— -->
-    <section class="section states" id="first-states">
-      <div class="wrap">
-        <div class="states-head">
-          <div class="section-head reveal">
-            <p class="eyebrow">The Landmark Series</p>
-            <h2>The first five states.</h2>
-            <p class="section-lede">Each sticker is built letter by letter from real views inside that state. Five are finished; the rest of the country is on the drawing board.</p>
-          </div>
-          <p class="states-hint reveal">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6.5 10-6.5S22 12 22 12s-3.6 6.5-10 6.5S2 12 2 12z"/><circle cx="12" cy="12" r="2.6"/></svg>
-            <span class="hint-hover">Hover a card to see the photo version</span><span class="hint-touch">Tap a card to see the photo version</span>
-          </p>
-        </div>
-
-        <div class="states-grid">
-          <article class="state-card reveal">
-            <div class="state-art">
-              <img class="art-glass" src="/stickers/states/alabama-stained-glass-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="Alabama state-name sticker in stained-glass style" />
-              <img class="art-photo" src="/stickers/states/alabama-photo-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="" aria-hidden="true" />
-            </div>
-            <div class="state-body">
-              <div>
-                <p class="state-name">Alabama</p>
-                <p class="state-meta">Waterfalls, hardwood ridges &amp; slow rivers</p>
-              </div>
-              <span class="state-badge">Two styles</span>
-            </div>
-          </article>
-
-          <article class="state-card reveal">
-            <div class="state-art">
-              <img class="art-glass" src="/stickers/states/california-stained-glass-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="California state-name sticker in stained-glass style" />
-              <img class="art-photo" src="/stickers/states/california-photo-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="" aria-hidden="true" />
-            </div>
-            <div class="state-body">
-              <div>
-                <p class="state-name">California</p>
-                <p class="state-meta">Granite domes, redwoods &amp; desert bloom</p>
-              </div>
-              <span class="state-badge">Two styles</span>
-            </div>
-          </article>
-
-          <article class="state-card reveal">
-            <div class="state-art">
-              <img class="art-glass" src="/stickers/states/alaska-stained-glass-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="Alaska state-name sticker in stained-glass style" />
-              <img class="art-photo" src="/stickers/states/alaska-photo-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="" aria-hidden="true" />
-            </div>
-            <div class="state-body">
-              <div>
-                <p class="state-name">Alaska</p>
-                <p class="state-meta">Glaciers, tundra &amp; braided rivers</p>
-              </div>
-              <span class="state-badge">Two styles</span>
-            </div>
-          </article>
-
-          <article class="state-card reveal">
-            <div class="state-art">
-              <img class="art-glass" src="/stickers/states/arizona-stained-glass-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="Arizona state-name sticker in stained-glass style" />
-              <img class="art-photo" src="/stickers/states/arizona-photo-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="" aria-hidden="true" />
-            </div>
-            <div class="state-body">
-              <div>
-                <p class="state-name">Arizona</p>
-                <p class="state-meta">Canyon country &amp; red rock</p>
-              </div>
-              <span class="state-badge">Two styles</span>
-            </div>
-          </article>
-
-          <article class="state-card reveal">
-            <div class="state-art">
-              <img class="art-glass" src="/stickers/states/arkansas-stained-glass-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="Arkansas state-name sticker in stained-glass style" />
-              <img class="art-photo" src="/stickers/states/arkansas-photo-700.webp" width="700" height="233" loading="lazy" decoding="async" alt="" aria-hidden="true" />
-            </div>
-            <div class="state-body">
-              <div>
-                <p class="state-name">Arkansas</p>
-                <p class="state-meta">Ozark hills, bluffs &amp; clear creeks</p>
-              </div>
-              <span class="state-badge">Two styles</span>
-            </div>
-          </article>
-
-          <article class="state-card is-more reveal">
-            <div class="more-copy">
-              <h3>Forty-five more in the sketchbook.</h3>
-              <p>We are working through the country one state at a time, in both styles. Follow along and you will see each one as it is finished.</p>
-            </div>
-            <div class="atlas" aria-hidden="true" data-atlas></div>
-          </article>
-        </div>
-      </div>
     </section>
 
     <!-- ——————————————————————— TWO STYLES ——————————————————————— -->
@@ -340,7 +243,7 @@
       </div>
       <nav class="footer-col" aria-label="Explore">
         <h2>Explore</h2>
-        <a href="/#first-states">The states</a>
+        <a href="/shop">The states</a>
         <a href="/#styles">Two styles</a>
         <a href="/#craft">The craft</a>
         <a href="/#follow">Follow along</a>

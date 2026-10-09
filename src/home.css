@@ -371,3 +371,41 @@
   .showcase-layer { transition: none; }
   .state-art img { transition: none; }
 }
+
+/* ——————————————————————————————————————————————
+   Hero split: copy left, showcase right; hero + values bar ≈ one viewport
+   —————————————————————————————————————————————— */
+.hero:has(.hero-split) {
+  display: flex; flex-direction: column; justify-content: center;
+  min-height: calc(100svh - var(--values-h, 74px));
+  padding-top: calc(var(--header-h) + clamp(20px, 3vw, 40px));
+  padding-bottom: clamp(28px, 4vw, 48px);
+}
+.hero-split {
+  display: grid; align-items: center;
+  grid-template-columns: minmax(0, 33rem) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+}
+.hero-split .hero-copy { max-width: 33rem; }
+.hero-split .showcase { margin-top: 0; min-width: 0; }
+.hero-split .showcase-stage { padding: clamp(18px, 2.4vw, 34px) clamp(14px, 2vw, 28px); }
+.hero-split .showcase-controls { margin-top: 18px; gap: 14px; }
+.hero-split .chips { justify-content: flex-start; }
+
+/* Values bar, dark, at the foot of the first screen */
+.values.values-night {
+  background: linear-gradient(180deg, rgba(12, 21, 16, .55), rgba(12, 21, 16, .8)), var(--night);
+  border-block: 1px solid var(--line-night);
+}
+.values-night .values-row { padding: 22px 0; }
+.values-night .values-row li { color: var(--on-night-muted); }
+.values-night .values-row svg { stroke: var(--sage); }
+
+@media (max-width: 1100px) {
+  .hero-split { grid-template-columns: minmax(0, 28rem) minmax(0, 1fr); }
+}
+@media (max-width: 900px) {
+  .hero:has(.hero-split) { min-height: 0; display: block; }
+  .hero-split { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .hero-split .hero-copy { max-width: 40rem; }
+}
