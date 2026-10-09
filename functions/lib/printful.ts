@@ -49,56 +49,65 @@ export type CatalogProduct = {
   variants: CatalogVariant[];
 };
 
-/** List sync products with variant retail prices. Empty store → []. */
-export async function listCatalog(env: Env): Promise<{ ok: boolean; status: number; products: CatalogProduct[]; error?: string }> {
-  const list = await printful(env, "/store/products?limit=100");
-  if (!list.ok) {
-    return {
-      ok: false,
-      status: list.status,
-      products: [],
-      error: list.data?.error?.message || list.data?.result || "Printful error",
-    };
-  }
-  const summaries = Array.isArray(list.data?.result) ? list.data.result : [];
-  const products: CatalogProduct[] = [];
-
-  for (const summary of summaries) {
-    const detail = await printful(env, `/store/products/${summary.id}`);
-    if (!detail.ok) continue;
-    const sp = detail.data?.result?.sync_product || summary;
-    const variantsRaw = detail.data?.result?.sync_variants || [];
-    const variants: CatalogVariant[] = [];
-    for (const v of variantsRaw) {
-      if (v?.is_ignored) continue;
-      const retail = v?.retail_price != null ? String(v.retail_price) : "";
-      if (!retail || Number(retail) <= 0) continue; // skip unsellable without retail
-      variants.push({
-        sync_variant_id: Number(v.id),
-        sync_product_id: Number(sp.id),
-        name: String(sp.name || v.name || "Product"),
-        variant_name: String(v.name || sp.name || "Variant"),
-        size: v.size ?? null,
-        color: v.color ?? null,
-        thumbnail:
-          (v.files || []).find((f: any) => f.type === "preview")?.preview_url ||
-          (v.files || []).find((f: any) => f.preview_url)?.preview_url ||
-          sp.thumbnail_url ||
-          null,
-        retail_price: retail,
-        currency: String(v.currency || "USD"),
-      });
-    }
-    if (variants.length === 0) continue;
-    products.push({
-      id: Number(sp.id),
-      name: String(sp.name || "Product"),
-      thumbnail: sp.thumbnail_url || variants[0]?.thumbnail || null,
-      variants,
+/** Shape one /store/products/{id} detail into the shop's CatalogProduct (null = nothing sellable). */
+export function toCatalogProduct(result: any, summary: any = {}): CatalogProduct | null {
+  const sp = result?.sync_product || summary;
+  const variantsRaw = result?.sync_variants || [];
+  const variants: CatalogVariant[] = [];
+  for (const v of variantsRaw) {
+    if (v?.is_ignored) continue;
+    const retail = v?.retail_price != null ? String(v.retail_price) : "";
+    if (!retail || Number(retail) <= 0) continue; // skip unsellable without retail
+    variants.push({
+      sync_variant_id: Number(v.id),
+      sync_product_id: Number(sp.id),
+      name: String(sp.name || v.name || "Product"),
+      variant_name: String(v.name || sp.name || "Variant"),
+      size: v.size ?? null,
+      color: v.color ?? null,
+      thumbnail:
+        (v.files || []).find((f: any) => f.type === "preview")?.preview_url ||
+        (v.files || []).find((f: any) => f.preview_url)?.preview_url ||
+        sp.thumbnail_url ||
+        null,
+      retail_price: retail,
+      currency: String(v.currency || "USD"),
     });
   }
+  if (variants.length === 0) return null;
+  return {
+    id: Number(sp.id),
+    name: String(sp.name || "Product"),
+    thumbnail: sp.thumbnail_url || variants[0]?.thumbnail || null,
+    variants,
+  };
+}
 
-  return { ok: true, status: 200, products };
+/** Every sync product summary, paginated 100 at a time. Each page costs one subrequest. */
+export async function listAllSummaries(
+  env: Env,
+  maxPages: number,
+): Promise<{ ok: boolean; status: number; summaries: any[]; pages: number; error?: string }> {
+  const summaries: any[] = [];
+  let pages = 0;
+  for (let offset = 0; pages < maxPages; offset += 100) {
+    const res = await printful(env, `/store/products?limit=100&offset=${offset}`);
+    pages++;
+    if (!res.ok) {
+      return {
+        ok: false,
+        status: res.status,
+        summaries,
+        pages,
+        error: res.data?.error?.message || res.data?.result || "Printful error",
+      };
+    }
+    const batch = Array.isArray(res.data?.result) ? res.data.result : [];
+    summaries.push(...batch);
+    const total = Number(res.data?.paging?.total ?? summaries.length);
+    if (batch.length < 100 || summaries.length >= total) break;
+  }
+  return { ok: true, status: 200, summaries, pages };
 }
 
 /** Look up a single sync variant's retail price (server-side reprice). */

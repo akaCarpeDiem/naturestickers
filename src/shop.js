@@ -87,13 +87,15 @@ function renderProducts(products) {
     .join('');
 }
 
-async function loadProducts() {
+async function loadProducts(attempt = 0) {
   try {
-    const res = await fetch('/api/products');
+    const res = await fetch('/api/products', attempt ? { cache: 'no-store' } : undefined);
     const data = await res.json();
     renderProducts(Array.isArray(data.products) ? data.products : []);
+    // A large store's catalog fills in over a few requests; poll briefly until complete.
+    if (data.partial && attempt < 5) setTimeout(() => loadProducts(attempt + 1), 1500);
   } catch {
-    renderProducts([]);
+    if (!attempt) renderProducts([]);
   }
 }
 
