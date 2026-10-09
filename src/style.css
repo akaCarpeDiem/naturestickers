@@ -210,6 +210,8 @@ h1, h2, h3 {
   transition: background-color .25s, transform .3s var(--ease);
 }
 .nav-cta:hover { background: var(--forest-2); transform: translateY(-1px); }
+/* Phones only see the header button: it becomes "Shop" there (desktop keeps "Follow along"). */
+.nav .nav-cta-sm { display: none; }
 
 /* Transparent header while the dark hero is on screen (homepage) */
 .site-header.over-dark {
@@ -473,6 +475,8 @@ h1, h2, h3 {
   :root { --header-h: 66px; }
   .brand img { height: 30px; }
   .nav a:not(.nav-cta) { display: none; }
+  .nav .nav-cta-sm { display: inline-flex; }
+  .nav .nav-cta-lg { display: none; }
   .nav-cta { padding: 10px 16px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-brand { grid-column: 1 / -1; }

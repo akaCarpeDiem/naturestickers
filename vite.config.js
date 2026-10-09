@@ -13,7 +13,6 @@ export default defineConfig({
         terms: resolve(__dirname, 'terms.html'),
         privacy: resolve(__dirname, 'privacy.html'),
         shop: resolve(__dirname, 'shop.html'),
-        states: resolve(__dirname, 'states.html'),
         thanks: resolve(__dirname, 'thanks.html'),
         contact: resolve(__dirname, 'contact.html'),
         support: resolve(__dirname, 'support.html'),

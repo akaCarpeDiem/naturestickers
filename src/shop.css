@@ -1,0 +1,95 @@
+/* /shop — state sticker catalog in the homepage's dark design language.
+   Reuses home.css (.hero, .hero-glow, .seg/.seg-btn, .state-badge) and night.css. */
+.shop-top { padding-bottom: clamp(28px, 4vw, 48px); }
+.shop-top .hero-copy h1 { font-size: clamp(2rem, 1.2rem + 3vw, 3.5rem); }
+
+.sx-controls {
+  margin-top: clamp(24px, 3.5vw, 40px);
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 18px 28px;
+}
+.sx-controls[hidden] { display: none; }
+.sx-filter { display: grid; gap: 10px; }
+.sx-label { font-size: var(--step--1); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--sage); }
+.seg-btn[aria-pressed="true"] { background: var(--paper); color: var(--forest); box-shadow: 0 6px 16px -8px rgba(0, 0, 0, .8); }
+.seg-btn:focus-visible, .sx-input:focus-visible, .sx-add:focus-visible { outline: 3px solid var(--sage); outline-offset: 2px; }
+.sx-search { min-width: min(320px, 100%); }
+.sx-input {
+  appearance: none; width: 100%; min-height: 52px; padding: 0 20px;
+  border-radius: var(--r-pill); border: 0;
+  background: rgba(12, 21, 16, .5); box-shadow: inset 0 0 0 1px var(--line-night);
+  font: 500 var(--step-0)/1 var(--sans); color: var(--on-night);
+}
+.sx-input::placeholder { color: var(--on-night-muted); }
+.sx-input::-webkit-search-cancel-button { filter: invert(1) opacity(.6); }
+
+/* Catalog */
+.sx-catalog { background: var(--night); padding-top: clamp(20px, 3vw, 36px); }
+.sx-count { font-size: var(--step--1); color: var(--on-night-muted); margin: 0 0 18px; }
+.sx-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.sx-grid[hidden] { display: none; }
+
+/* Same surface as the homepage's "first five states" cards */
+.sx-card {
+  display: flex; flex-direction: column;
+  border-radius: var(--r-lg); overflow: hidden;
+  background: linear-gradient(168deg, var(--night-3) 0%, var(--night) 78%);
+  box-shadow: inset 0 0 0 1px rgba(238, 244, 235, .1), var(--sh-md);
+  transition: transform .5s var(--ease), box-shadow .5s var(--ease);
+}
+.sx-card:hover, .sx-card:focus-within { transform: translateY(-4px); box-shadow: inset 0 0 0 1px rgba(238, 244, 235, .16), var(--sh-lg); }
+.sx-art { display: grid; place-items: center; aspect-ratio: 16 / 8.5; padding: clamp(16px, 2.2vw, 26px); }
+.sx-art img {
+  width: 100%; height: 100%; object-fit: contain;
+  filter: drop-shadow(0 16px 20px rgba(0, 0, 0, .5));
+}
+/* Printful mockup fallback (opaque white): show it on a deliberate light plate */
+.sx-art.is-mockup { padding: 14px; }
+.sx-art.is-mockup img { border-radius: var(--r-md); background: #fff; object-fit: cover; filter: none; box-shadow: 0 16px 28px -18px rgba(0, 0, 0, .8); }
+.sx-body {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 14px;
+  padding: 16px 20px 6px; border-top: 1px solid var(--line-night);
+}
+.sx-name { font-family: var(--serif); font-weight: 400; font-size: var(--step-2); color: var(--on-night); line-height: 1.15; }
+.sx-style { font-size: var(--step--1); color: var(--on-night-muted); margin: 2px 0 0; }
+.sx-price { font-family: var(--serif); font-size: var(--step-1); color: var(--on-night); white-space: nowrap; }
+.sx-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 20px 20px; }
+.sx-add { min-height: 44px; padding: 0 20px; font-size: var(--step--1); }
+.sx-add.is-added { background: var(--sage); color: var(--night); }
+
+.sx-empty {
+  max-width: 520px; margin: 8px auto 24px; text-align: center; padding: clamp(28px, 4vw, 44px);
+  border-radius: var(--r-xl);
+  background: linear-gradient(170deg, rgba(238, 244, 235, .07), rgba(238, 244, 235, .02));
+  box-shadow: inset 0 0 0 1px var(--line-night);
+}
+.sx-empty[hidden] { display: none; }
+.sx-empty h3 { font-size: var(--step-2); margin-bottom: 6px; }
+.sx-empty .btn { margin-top: 18px; }
+
+/* Cart on dark */
+.sx-cart { background: var(--night-2); }
+.sx-cart .cart-panel { background: rgba(238, 244, 235, .04); box-shadow: inset 0 0 0 1px var(--line-night); }
+.sx-cart .cart-empty { color: var(--on-night-muted); }
+.sx-cart .cart-row { border-bottom-color: var(--line-night); }
+.sx-cart .cart-row-main strong { color: var(--on-night); }
+.sx-cart .cart-price { color: var(--on-night-muted); }
+.sx-cart .cart-qty span { color: var(--on-night); }
+.sx-cart .qty-btn { background: transparent; color: var(--on-night); border-color: var(--line-night); }
+.sx-cart .qty-btn:hover { border-color: var(--sage); background: rgba(238, 244, 235, .06); }
+.sx-cart .qty-remove { color: var(--on-night-muted); }
+.sx-cart .cart-aside {
+  background: linear-gradient(170deg, rgba(238, 244, 235, .07), rgba(238, 244, 235, .02));
+  box-shadow: inset 0 0 0 1px var(--line-night);
+}
+.sx-cart .cart-note { color: var(--on-night-muted); }
+.sx-cart .cart-note a { color: var(--sage); }
+.sx-cart .cart-status { color: var(--sage); }
+
+@media (max-width: 1000px) { .sx-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) {
+  .sx-grid { grid-template-columns: 1fr; gap: 14px; }
+  .sx-filter, .sx-search { width: 100%; }
+  .sx-seg { display: flex; }
+  .sx-seg .seg-btn { flex: 1 1 auto; padding: 0 12px; }
+  .sx-art { aspect-ratio: 16 / 7; }
+}
