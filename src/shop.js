@@ -84,7 +84,7 @@ function card(it) {
   return `
     <article class="sx-card">
       <div class="sx-art">
-        <img src="/stickers/all/${artKey(it)}.webp" data-fallback="${escapeHtml(it.thumb)}" alt="${alt}" width="800" height="270" loading="lazy" decoding="async" />
+        <img src="/stickers/all/${artKey(it)}.webp" srcset="/stickers/all/${artKey(it)}.webp 800w, /stickers/all/${artKey(it)}-1400.webp 1400w" sizes="(max-width: 600px) calc(100vw - 60px), (max-width: 1280px) calc(50vw - 60px), 580px" data-fallback="${escapeHtml(it.thumb)}" alt="${alt}" width="800" height="270" loading="lazy" decoding="async" />
       </div>
       <div class="sx-body">
         <div class="sx-title">
@@ -106,6 +106,8 @@ grid?.addEventListener('error', (e) => {
   if (!(img instanceof HTMLImageElement) || !img.dataset.fallback || img.dataset.fellBack) return;
   img.dataset.fellBack = '1';
   img.closest('.sx-art')?.classList.add('is-mockup');
+  img.removeAttribute('srcset');
+  img.removeAttribute('sizes');
   img.src = img.dataset.fallback;
 }, true);
 
