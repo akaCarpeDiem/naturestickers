@@ -83,40 +83,35 @@
           </div>
         </div>
 
-        <!-- Interactive showcase: pick a state, flip between the two art styles -->
+        <!-- Rotating showcase: popular states auto-advance; the style toggle applies to every state -->
         <div class="showcase" data-showcase>
           <div class="showcase-stage">
-            <div class="showcase-plate is-floating" data-plate>
-              <img
-                class="showcase-layer is-on"
-                data-layer="a"
-                src="/stickers/states/california-stained-glass.webp"
-                srcset="/stickers/states/california-stained-glass-700.webp 700w, /stickers/states/california-stained-glass.webp 1400w"
-                sizes="(max-width: 900px) 92vw, min(720px, 52vw)"
-                width="1400" height="466"
-                alt="California state-name sticker, stained-glass style: each letter frames a California landscape"
-                fetchpriority="high" decoding="async"
-              />
-              <img class="showcase-layer" data-layer="b" alt="" aria-hidden="true" width="1400" height="466" decoding="async" />
-            </div>
+            <a class="showcase-link" href="/shop#california-stained-glass" data-link aria-label="Shop the California sticker, stained glass">
+              <span class="showcase-plate is-floating" data-plate>
+                <img
+                  class="showcase-layer is-on"
+                  src="/stickers/all/california-stained-glass.webp"
+                  srcset="/stickers/all/california-stained-glass.webp 800w, /stickers/all/california-stained-glass-1400.webp 1400w"
+                  sizes="(max-width: 900px) 88vw, min(640px, 46vw)"
+                  width="800" height="172"
+                  alt="California state-name sticker, stained-glass style: each letter frames a California landscape"
+                  fetchpriority="high" decoding="async"
+                />
+                <img class="showcase-layer" alt="" aria-hidden="true" width="800" height="172" decoding="async" />
+              </span>
+            </a>
           </div>
 
           <div class="showcase-controls">
-            <div class="showcase-left">
-              <div class="seg" role="radiogroup" aria-label="Artwork style">
-                <button type="button" class="seg-btn" role="radio" aria-checked="true" data-style="stained-glass">Stained glass</button>
-                <button type="button" class="seg-btn" role="radio" aria-checked="false" data-style="photo">Photo</button>
-              </div>
-              <p class="showcase-caption" data-caption aria-live="polite">California &middot; Stained glass</p>
+            <div class="seg" role="radiogroup" aria-label="Artwork style">
+              <button type="button" class="seg-btn" role="radio" aria-checked="true" data-style="stained-glass">Stained glass</button>
+              <button type="button" class="seg-btn" role="radio" aria-checked="false" data-style="photo">Photo</button>
             </div>
-
-            <ul class="chips" aria-label="Choose a state">
-              <li><button type="button" class="chip" data-state="alabama" aria-pressed="false">Alabama</button></li>
-              <li><button type="button" class="chip" data-state="alaska" aria-pressed="false">Alaska</button></li>
-              <li><button type="button" class="chip" data-state="arizona" aria-pressed="false">Arizona</button></li>
-              <li><button type="button" class="chip" data-state="arkansas" aria-pressed="false">Arkansas</button></li>
-              <li><button type="button" class="chip" data-state="california" aria-pressed="true">California</button></li>
-            </ul>
+            <p class="showcase-caption" data-caption>California &middot; Stained glass</p>
+            <button type="button" class="showcase-pause" data-pause aria-pressed="false" aria-label="Pause the state slideshow">
+              <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12"/></svg>
+              <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg>
+            </button>
           </div>
         </div>
       </div>
