@@ -45,7 +45,7 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
           <p class="sx-d-blurb" id="sx-d-blurb"></p>
           <section class="sx-d-letters" aria-labelledby="sx-d-letters-h" hidden>
             <h3 id="sx-d-letters-h" class="sx-label">In every letter</h3>
-            <ol class="sx-d-letter-list"></ol>
+            <div class="sx-d-cols"></div>
             <details class="sx-d-credits" hidden>
               <summary>Photo credits</summary>
               <ol class="sx-d-credit-list"></ol>
@@ -68,7 +68,7 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
   const seg = root.querySelector('.sx-d-seg');
   const blurbEl = root.querySelector('.sx-d-blurb');
   const lettersSec = root.querySelector('.sx-d-letters');
-  const lettersList = root.querySelector('.sx-d-letter-list');
+  const lettersCols = root.querySelector('.sx-d-cols');
   const creditsEl = root.querySelector('.sx-d-credits');
   const creditList = root.querySelector('.sx-d-credit-list');
 
@@ -120,15 +120,23 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
     blurbEl.hidden = !data.blurb;
     const letters = Array.isArray(data.letters) ? data.letters.filter((l) => l && l.letter && l.place) : [];
     lettersSec.hidden = letters.length === 0;
-    lettersList.innerHTML = letters
-      .map((l) => `
-        <li>
+    // One column per word of the state name (North Carolina → NORTH | CAROLINA); one-word states stay one column.
+    const words = it.state.toUpperCase().split(/\s+/).map((w) => w.replace(/[^A-Z]/g, '')).filter(Boolean);
+    const groups = [];
+    let at = 0;
+    for (const w of words) { groups.push(letters.slice(at, at + w.length)); at += w.length; }
+    if (at !== letters.length || groups.length > 2) groups.splice(0, groups.length, letters); // unexpected shape: one list
+    lettersCols.classList.toggle('is-two', groups.length === 2);
+    const line = (l) => {
+      const full = `${l.letter}: ${l.place}${l.area ? ` — ${l.area}` : ''}`;
+      return `
+        <li title="${escapeHtml(full)}">
           <span class="sx-d-letter" aria-hidden="true">${escapeHtml(l.letter)}</span>
-          <span class="sx-d-place">
-            <span class="sr-only">${escapeHtml(l.letter)}: </span><strong>${escapeHtml(l.place)}</strong>
-            ${l.area ? `<span class="sx-d-area">${escapeHtml(l.area)}</span>` : ''}
-          </span>
-        </li>`)
+          <span class="sx-d-line"><span class="sr-only">${escapeHtml(l.letter)}: </span><span class="sx-d-place">${escapeHtml(l.place)}</span>${l.area ? `<span class="sx-d-area"><span aria-hidden="true"> · </span><span class="sr-only">, </span>${escapeHtml(l.area)}</span>` : ''}</span>
+        </li>`;
+    };
+    lettersCols.innerHTML = groups
+      .map((g, i) => `<ol class="sx-d-list"${groups.length === 2 ? ` aria-label="${escapeHtml(words[i])}"` : ''}>${g.map(line).join('')}</ol>`)
       .join('');
     const credited = letters.filter((l) => l.credit);
     creditsEl.hidden = credited.length === 0;
