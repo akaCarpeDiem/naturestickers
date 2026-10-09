@@ -46,10 +46,6 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
           <section class="sx-d-letters" aria-labelledby="sx-d-letters-h" hidden>
             <h3 id="sx-d-letters-h" class="sx-label">In every letter</h3>
             <div class="sx-d-cols"></div>
-            <details class="sx-d-credits" hidden>
-              <summary>Photo credits</summary>
-              <ol class="sx-d-credit-list"></ol>
-            </details>
           </section>
         </div>
       </div>
@@ -69,8 +65,6 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
   const blurbEl = root.querySelector('.sx-d-blurb');
   const lettersSec = root.querySelector('.sx-d-letters');
   const lettersCols = root.querySelector('.sx-d-cols');
-  const creditsEl = root.querySelector('.sx-d-credits');
-  const creditList = root.querySelector('.sx-d-credit-list');
 
   let current = null; // item shown
   let opener = null; // element to return focus to
@@ -137,12 +131,6 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
     };
     lettersCols.innerHTML = groups
       .map((g, i) => `<ol class="sx-d-list"${groups.length === 2 ? ` aria-label="${escapeHtml(words[i])}"` : ''}>${g.map(line).join('')}</ol>`)
-      .join('');
-    const credited = letters.filter((l) => l.credit);
-    creditsEl.hidden = credited.length === 0;
-    creditsEl.open = false;
-    creditList.innerHTML = credited
-      .map((l) => `<li><span class="sx-d-credit-letter">${escapeHtml(l.letter)}</span> ${escapeHtml(l.place)}: ${escapeHtml(l.credit)}</li>`)
       .join('');
   }
 
