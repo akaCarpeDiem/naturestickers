@@ -30,8 +30,18 @@
 .states-count { color: var(--muted); font-size: var(--step--1); margin: 0 0 18px; }
 .state-grid { grid-template-columns: repeat(4, 1fr); }
 .state-grid[hidden] { display: none; }
-.state-grid .product-art { padding: 10px; }
-.state-grid .product-art img { max-width: 100%; max-height: 100%; filter: none; }
+/* Printful mockups are square with lots of empty space above/below the wordmark:
+   a 4:3 frame with object-fit: cover trims that space (even the tall stacked art fits).
+   White matches the hand-made product's opaque mockup background. */
+.state-grid .product-art {
+  aspect-ratio: 4 / 3; padding: 0; overflow: hidden;
+  background: #fff; box-shadow: inset 0 -1px 0 var(--line);
+}
+.state-grid .product-art img {
+  display: block; width: 100%; height: 100%; max-width: none; max-height: none;
+  object-fit: cover; filter: none; transition: transform .5s var(--ease);
+}
+.state-grid .product-card:hover .product-art img { transform: scale(1.04); }
 .state-grid .product-body { padding: 18px 18px 20px; gap: 12px; }
 .state-card-head h3 { font-size: var(--step-1); line-height: 1.2; }
 .state-style { color: var(--moss); font-size: var(--step--1); font-weight: 600; margin-top: 4px; }

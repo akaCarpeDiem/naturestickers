@@ -52,7 +52,12 @@ function writeUrl() {
 }
 
 function normalizeSelection() {
-  for (const k of [...selected]) if (!styles.some((s) => s.key === k)) selected.delete(k); // unknown key in URL
+  for (const k of [...selected]) {
+    if (styles.some((s) => s.key === k)) continue;
+    selected.delete(k); // unknown key in URL: accept a short alias such as ?style=photo
+    const alias = styles.find((s) => s.key.split('-').includes(k));
+    if (alias) selected.add(alias.key);
+  }
   if (selected.size === styles.length) selected.clear(); // every style = All
 }
 
