@@ -62,4 +62,5 @@
   .state-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .state-grid .product-body { padding: 14px; gap: 10px; }
   .state-meta { flex-wrap: wrap; gap: 6px; }
+  .state-grid .add-btn { padding-inline: 10px; font-size: var(--step--1); white-space: nowrap; min-height: 44px; }
 }
