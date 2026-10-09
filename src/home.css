@@ -409,3 +409,10 @@
   .hero-split { grid-template-columns: minmax(0, 1fr); gap: 28px; }
   .hero-split .hero-copy { max-width: 40rem; }
 }
+
+/* Craft section: real-world photo instead of the macro art crop */
+.craft-art.is-photo img {
+  left: 0; top: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 40%;
+  transform: none; filter: none;
+}
