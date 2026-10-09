@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Shop — Nature Stickers</title>
-  <meta name="description" content="Shop nature-inspired die-cut vinyl stickers from Nature Stickers." />
+  <title>State Stickers — Nature Stickers</title>
+  <meta name="description" content="State-name die-cut vinyl stickers filled with real views from each state’s national parks, monuments and protected lands. Real Photo or Prismatic Stained Glass, 6″×6″, $8." />
   <meta name="theme-color" content="#1F3A2E" />
-  <meta name="robots" content="noindex" />
-  <link rel="canonical" href="https://naturestickers.shop/shop" />
+  <link rel="canonical" href="https://naturestickers.shop/states" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Nature Stickers" />
-  <meta property="og:url" content="https://naturestickers.shop/shop" />
-  <meta property="og:title" content="Shop — Nature Stickers" />
-  <meta property="og:description" content="Nature-inspired die-cut vinyl stickers." />
+  <meta property="og:url" content="https://naturestickers.shop/states" />
+  <meta property="og:title" content="State Stickers — Nature Stickers" />
+  <meta property="og:description" content="Every state name, filled with its wild places. 6″×6″ die-cut vinyl, $8." />
   <meta property="og:image" content="https://naturestickers.shop/og-v2.png" />
   <link rel="icon" href="/favicon.ico" sizes="32x32" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -22,6 +21,7 @@
   <link rel="preload" href="/fonts/instrument-sans-var.woff2" as="font" type="font/woff2" crossorigin />
   <script>document.documentElement.classList.add("js")</script>
   <link rel="stylesheet" href="/src/style.css" />
+  <link rel="stylesheet" href="/src/states.css" />
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
@@ -45,23 +45,34 @@
     <section class="section shop-hero">
       <div class="wrap">
         <div class="section-head reveal">
-          <p class="eyebrow"><span class="dot" aria-hidden="true"></span>Shop</p>
-          <h1>Little pieces of the wild.</h1>
-          <p class="section-lede">Die-cut vinyl stickers printed to order. Weather-ready for bottles, packs and boards that actually go outside.</p>
+          <p class="eyebrow"><span class="dot" aria-hidden="true"></span>The Landmark Series</p>
+          <h1>Every state, filled with its wild places.</h1>
+          <p class="section-lede">Each letter frames a real view from that state’s national parks, monuments and protected lands. Pick a style — 6″×6″ die-cut vinyl, printed to order, $8 each.</p>
         </div>
       </div>
     </section>
 
-    <section class="section shop-grid-section" aria-label="Products">
+    <section class="section shop-grid-section states-shop" aria-labelledby="states-heading">
       <div class="wrap">
-        <div id="shop-empty" class="shop-empty reveal">
+        <h2 id="states-heading" class="sr-only">State stickers</h2>
+        <div class="states-tools" id="states-tools" hidden>
+          <div class="filter-group">
+            <span class="filter-label" id="style-filter-label">Style</span>
+            <div class="filter-chips" id="style-chips" role="group" aria-labelledby="style-filter-label"></div>
+          </div>
+          <div class="filter-group search-group">
+            <label class="filter-label" for="state-search">Find a state</label>
+            <input type="search" id="state-search" class="state-search" placeholder="Type a state name" autocomplete="off" spellcheck="false" />
+          </div>
+        </div>
+        <p class="states-count" id="states-count" role="status" aria-live="polite">Loading stickers…</p>
+        <div id="state-grid" class="product-grid state-grid"></div>
+        <div id="states-empty" class="shop-empty" hidden>
           <div class="shop-empty-card">
-            <p class="eyebrow">The Landmark Series</p>
-            <h2>State stickers, now available</h2>
-            <p>Every state name, filled with real views from its national parks, monuments and protected lands. Pick Real Photo or Prismatic Stained Glass — 6″×6″ die-cut vinyl, $8 each.</p>
-            <div class="hero-ctas" style="margin-top:28px">
-              <a class="btn btn-primary" href="/states">Shop the states</a>
-              <a class="btn btn-ghost" href="/">Back home</a>
+            <h2>No stickers match</h2>
+            <p>Try another state name or style.</p>
+            <div class="hero-ctas" style="margin-top:22px;justify-content:center">
+              <button type="button" class="btn btn-ghost" id="clear-filters">Clear filters</button>
             </div>
           </div>
         </div>
@@ -109,6 +120,6 @@
     </div>
   </footer>
 
-  <script type="module" src="/src/shop.js"></script>
+  <script type="module" src="/src/states.js"></script>
 </body>
 </html>

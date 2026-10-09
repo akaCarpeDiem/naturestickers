@@ -483,37 +483,6 @@ h1, h2, h3 {
   .support-card .follow-icon { width: 46px; height: 46px; }
   .support-card .follow-arrow { display: none; }
 }
-/* —— Under-construction note on phones (every page) ——
-   The full paper note covers most of a phone screen, so below 720px it
-   becomes a slim ribbon pinned to the bottom of the viewport. */
-@media (max-width: 720px) {
-  .ms-uc {
-    position: fixed !important;
-    top: auto !important; bottom: 10px !important;
-    left: 10px !important; right: 10px !important;
-    width: auto !important; aspect-ratio: auto !important;
-    filter: none !important;
-  }
-  .ms-uc-sheet { transform: none !important; height: auto !important; }
-  .ms-uc-svg { display: none !important; }
-  .ms-uc-copy {
-    position: static !important; inset: auto !important;
-    flex-direction: row !important; flex-wrap: wrap;
-    align-items: baseline !important; justify-content: center !important;
-    gap: 4px 10px; padding: 11px 18px;
-    border-radius: var(--r-pill);
-    background: #FFE56A;
-    box-shadow: 0 12px 26px -12px rgba(62, 42, 12, .65), inset 0 0 0 1px rgba(122, 79, 20, .28);
-  }
-  .ms-uc-kicker { font-size: 13px !important; margin: 0 !important; white-space: nowrap; }
-  .ms-uc-main { font-size: 16px !important; line-height: 1.1 !important; white-space: nowrap; }
-  /* Markup is "Not yet<br> operational": the space keeps a word gap once the <br> is hidden. */
-  .ms-uc-main br { display: none; }
-  .ms-uc-soon { display: none !important; }
-  /* Let the page scroll clear of the ribbon. */
-  body { padding-bottom: 58px; }
-}
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; transition: none; }

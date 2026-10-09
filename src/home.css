@@ -329,23 +329,6 @@
 .craft-list dd { margin: 0; color: var(--muted); font-size: var(--step--1); }
 
 /* ——————————————————————————————————————————————
-   Under-construction note
-   Parked in the empty top-right of the hero. Switched from fixed to
-   absolute so it scrolls away instead of sitting on top of the artwork
-   for the whole page. Delete this block to restore the fixed behaviour.
-   —————————————————————————————————————————————— */
-@media (min-width: 721px) {
-  .ms-uc {
-    position: absolute !important;
-    top: calc(var(--header-h) + 10px) !important;
-    right: 20px !important;
-    width: min(300px, 34vw) !important;
-  }
-  /* Keep the hero copy clear of the note on tablet / small-laptop widths. */
-  .hero-copy { max-width: min(46rem, calc(100vw - var(--gutter) - 20px - min(300px, 34vw) - 28px)); }
-}
-
-/* ——————————————————————————————————————————————
    Responsive
    —————————————————————————————————————————————— */
 @media (max-width: 1100px) {
