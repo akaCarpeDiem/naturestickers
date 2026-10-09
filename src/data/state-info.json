@@ -2,201 +2,2268 @@
   "alabama": {
     "name": "Alabama",
     "blurb": "Waterfalls, hardwood ridges and slow rivers. Alabama runs from the last foothills of the Appalachians down to white-sand Gulf beaches, with canyons, mossy creeks and quiet bayous in between. It's a place that rewards anyone who takes the long way.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "A",
+        "place": "Little River Falls",
+        "area": "Little River Canyon National Preserve",
+        "credit": "NPS / Matt Switzer"
+      },
+      {
+        "letter": "L",
+        "place": "Sipsey Fork",
+        "area": "William B. Bankhead National Forest",
+        "credit": "USDA Forest Service / Tim Palmer"
+      },
+      {
+        "letter": "A",
+        "place": "Bon Secour National Wildlife Refuge",
+        "area": "Perdue Unit dunes",
+        "credit": "USFWS"
+      },
+      {
+        "letter": "B",
+        "place": "Cahaba River National Wildlife Refuge",
+        "area": "",
+        "credit": "USFWS / Amelia Plemons"
+      },
+      {
+        "letter": "A",
+        "place": "Talladega Scenic Drive",
+        "area": "Talladega National Forest",
+        "credit": "FHWA America's Byways"
+      },
+      {
+        "letter": "M",
+        "place": "Mountain Longleaf National Wildlife Refuge",
+        "area": "",
+        "credit": "USFWS / George Gentry"
+      },
+      {
+        "letter": "A",
+        "place": "Beaverdam Creek Swamp",
+        "area": "Wheeler National Wildlife Refuge",
+        "credit": "USFWS / Drew Wirwa"
+      }
+    ]
   },
   "alaska": {
     "name": "Alaska",
     "blurb": "Glaciers, tundra and braided rivers on a scale that's hard to believe. Alaska is home to North America's tallest peak, endless coastline and summer days that barely end. Every view feels like the edge of the map.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "A",
+        "place": "Mount McKinley, viewed near Stony Dome",
+        "area": "Denali National Park and Preserve",
+        "credit": "NPS / Tim Rains"
+      },
+      {
+        "letter": "L",
+        "place": "Aialik Glacier",
+        "area": "Kenai Fjords National Park",
+        "credit": "NPS / Jim Pfeiffenberger"
+      },
+      {
+        "letter": "A",
+        "place": "Brooks Falls brown bears",
+        "area": "Katmai National Park and Preserve",
+        "credit": "NPS / Michael Fitz"
+      },
+      {
+        "letter": "S",
+        "place": "Killik River Valley",
+        "area": "Gates of the Arctic National Park and Preserve",
+        "credit": "NPS / Christopher Houlette"
+      },
+      {
+        "letter": "K",
+        "place": "Great Kobuk Sand Dunes",
+        "area": "Kobuk Valley National Park",
+        "credit": "NPS"
+      },
+      {
+        "letter": "A",
+        "place": "Kontrashibuna Lake headwaters",
+        "area": "Lake Clark National Park and Preserve",
+        "credit": "Shay Hurd"
+      }
+    ]
   },
   "arizona": {
     "name": "Arizona",
     "blurb": "Canyon country and red rock. Arizona holds the Grand Canyon, forests of saguaro cactus and sandstone glowing orange at sunset. The desert here is anything but empty. It's layered, sculpted and full of light.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "A",
+        "place": "Moran Point, Grand Canyon",
+        "area": "Grand Canyon National Park",
+        "credit": "NPS"
+      },
+      {
+        "letter": "R",
+        "place": "Saguaro cactus forest",
+        "area": "Saguaro National Park",
+        "credit": "NPS"
+      },
+      {
+        "letter": "I",
+        "place": "Havasu Falls",
+        "area": "Havasupai Nation",
+        "credit": "USGS / Fred D. Tillman"
+      },
+      {
+        "letter": "Z",
+        "place": "Blue Mesa",
+        "area": "Petrified Forest National Park",
+        "credit": "NPS"
+      },
+      {
+        "letter": "O",
+        "place": "Horseshoe Bend",
+        "area": "Glen Canyon National Recreation Area",
+        "credit": "NPS / Brent & Dawn Davis"
+      },
+      {
+        "letter": "N",
+        "place": "Spider Rock",
+        "area": "Canyon de Chelly National Monument",
+        "credit": "NPS"
+      },
+      {
+        "letter": "A",
+        "place": "Lake Powell, Arizona shoreline",
+        "area": "Glen Canyon National Recreation Area",
+        "credit": "Brigitte Werner"
+      }
+    ]
   },
   "arkansas": {
     "name": "Arkansas",
     "blurb": "Ozark hills, bluffs and clear creeks. Arkansas is a green, rolling state of tall limestone cliffs, spring-fed rivers and steaming hot springs. It's made for slow float trips and long porch evenings.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "A",
+        "place": "Buffalo National River",
+        "area": "Roark Bluff / Steel Creek",
+        "credit": "NPS"
+      },
+      {
+        "letter": "R",
+        "place": "Cedar Falls",
+        "area": "Petit Jean State Park",
+        "credit": "ErgoSum88"
+      },
+      {
+        "letter": "K",
+        "place": "Hot Water Cascade",
+        "area": "Hot Springs National Park",
+        "credit": "Calvin Smith / NPS"
+      },
+      {
+        "letter": "A",
+        "place": "Hemmed-in-Hollow Falls",
+        "area": "Buffalo National River",
+        "credit": "NPS"
+      },
+      {
+        "letter": "N",
+        "place": "Pinnacle Mountain",
+        "area": "Pinnacle Mountain State Park",
+        "credit": "Kmerckx"
+      },
+      {
+        "letter": "S",
+        "place": "Mount Magazine",
+        "area": "Arkansas State Parks / Ozark National Forest",
+        "credit": "Yinan Chen (Good Free Photos)"
+      },
+      {
+        "letter": "A",
+        "place": "Mammoth Spring",
+        "area": "Mammoth Spring State Park, National Natural Landmark",
+        "credit": "Drowzy"
+      },
+      {
+        "letter": "S",
+        "place": "Cache River National Wildlife Refuge",
+        "area": "Flooded bottomland hardwoods",
+        "credit": "Steven Seibert / USFWS"
+      }
+    ]
   },
   "california": {
     "name": "California",
     "blurb": "Granite domes, redwoods and desert bloom. California packs towering forests, high Sierra peaks, wild coastline and wide desert valleys into one sprawling state. Few places hold this many landscapes within a day's drive.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "C",
+        "place": "Yosemite National Park",
+        "area": "Half Dome, close daylight view",
+        "credit": "Christoffer G. Thomsen"
+      },
+      {
+        "letter": "A",
+        "place": "Redwood National and State Parks",
+        "area": "Coast redwood trunks and sword ferns",
+        "credit": "NPS"
+      },
+      {
+        "letter": "L",
+        "place": "Devils Postpile National Monument",
+        "area": "Rainbow Falls, wider view of the drop, cliff and plunge pool",
+        "credit": "NPS"
+      },
+      {
+        "letter": "I",
+        "place": "Joshua Tree National Park",
+        "area": "Joshua tree (Yucca brevifolia)",
+        "credit": "Ciar"
+      },
+      {
+        "letter": "F",
+        "place": "Death Valley National Park",
+        "area": "Mesquite Flat Sand Dunes",
+        "credit": "NPS / Kurt Moses"
+      },
+      {
+        "letter": "O",
+        "place": "Emerald Bay State Park",
+        "area": "Emerald Bay and Fannette Island, Lake Tahoe",
+        "credit": "DimiTalen"
+      },
+      {
+        "letter": "R",
+        "place": "Julia Pfeiffer Burns State Park",
+        "area": "McWay Falls, Big Sur",
+        "credit": "Joe Caione"
+      },
+      {
+        "letter": "N",
+        "place": "Mount Shasta Wilderness, Shasta-Trinity National Forest",
+        "area": "Snow-covered Mount Shasta peak",
+        "credit": "Caia Cupito / Ore-Cal RC&D"
+      },
+      {
+        "letter": "I",
+        "place": "Channel Islands National Park",
+        "area": "Frenchy’s Cove, Anacapa Island",
+        "credit": "Derek Lohuis"
+      },
+      {
+        "letter": "A",
+        "place": "Kings Canyon National Park",
+        "area": "Kings Canyon from Lookout Peak",
+        "credit": "NPS / Rick Cain"
+      }
+    ]
   },
   "colorado": {
     "name": "Colorado",
     "blurb": "High peaks, alpine lakes and golden aspen. Colorado sits on the spine of the Rockies, with dozens of summits over 14,000 feet, sand dunes at the foot of the mountains and canyons carved deep into dark rock. The air is thin and the views are huge.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "C",
+        "place": "Maroon Bells–Snowmass Wilderness",
+        "area": "Maroon Bells and Maroon Lake, White River National Forest",
+        "credit": "Chris Abney"
+      },
+      {
+        "letter": "O",
+        "place": "Rocky Mountain National Park",
+        "area": "Snowy Longs Peak above the Mills Lake area",
+        "credit": "NPS / John Marino"
+      },
+      {
+        "letter": "L",
+        "place": "Curecanti National Recreation Area",
+        "area": "Chipeta Falls beside Morrow Point Reservoir",
+        "credit": "NPS"
+      },
+      {
+        "letter": "O",
+        "place": "Great Sand Dunes National Park and Preserve",
+        "area": "Mount Herard above the dune ridges",
+        "credit": "NPS / Patrick Myers"
+      },
+      {
+        "letter": "R",
+        "place": "Garden of the Gods",
+        "area": "Red-rock formations, National Natural Landmark",
+        "credit": "Mauzymob"
+      },
+      {
+        "letter": "A",
+        "place": "Black Canyon of the Gunnison National Park",
+        "area": "Painted Wall and Gunnison River",
+        "credit": "NPS"
+      },
+      {
+        "letter": "D",
+        "place": "Colorado National Monument",
+        "area": "Monument Canyon from Monument Mesa",
+        "credit": "NPS / N Scarborough"
+      },
+      {
+        "letter": "O",
+        "place": "Curecanti National Recreation Area",
+        "area": "Blue Mesa Reservoir",
+        "credit": "NPS / Kat Connelly"
+      }
+    ]
   },
   "connecticut": {
     "name": "Connecticut",
     "blurb": "Rocky shoreline, rolling hills and old stone walls. Connecticut tucks quiet forests, river valleys and Long Island Sound beaches into a small corner of New England. In autumn, the whole state catches fire with color.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "C",
+        "place": "Squantz Pond State Park, New Fairfield",
+        "area": "Squantz Pond autumn morning",
+        "credit": "Juliancolton"
+      },
+      {
+        "letter": "O",
+        "place": "Devil’s Hopyard State Park, East Haddam",
+        "area": "Chapman Falls",
+        "credit": "Good Free Photos"
+      },
+      {
+        "letter": "N",
+        "place": "Sleeping Giant State Park, Hamden",
+        "area": "Sleeping Giant rocky outcrop and wooded trail",
+        "credit": "Jane Little"
+      },
+      {
+        "letter": "N",
+        "place": "Bigelow Hollow State Park, Union",
+        "area": "Bigelow Pond forest reflection",
+        "credit": "Jesse Goodier (Jhgkak)"
+      },
+      {
+        "letter": "E",
+        "place": "Pine Mountain Preserve, Norfolk",
+        "area": "Woodland stream",
+        "credit": "Tricia Andriski / USFWS"
+      },
+      {
+        "letter": "C",
+        "place": "Talcott Mountain State Park",
+        "area": "Talcott Mountain ridge",
+        "credit": "Mentzelia"
+      },
+      {
+        "letter": "T",
+        "place": "Kent Falls State Park, Kent",
+        "area": "Kent Falls cascade",
+        "credit": "Tiziana Shea / Connecticut Department of Public Health"
+      },
+      {
+        "letter": "I",
+        "place": "Bennett’s Pond State Park, Ridgefield",
+        "area": "Winter stream from the pond",
+        "credit": "Brianegge"
+      },
+      {
+        "letter": "C",
+        "place": "Windsor Locks Canal Trail State Park",
+        "area": "Connecticut River",
+        "credit": "Daderot"
+      },
+      {
+        "letter": "U",
+        "place": "Stewart B. McKinney National Wildlife Refuge",
+        "area": "Milford Point marsh and estuary aerial",
+        "credit": "Greg Thompson / USFWS"
+      },
+      {
+        "letter": "T",
+        "place": "Meigs Point, Hammonasset Beach State Park, Madison",
+        "area": "Hammonasset shoreline at Meigs Point",
+        "credit": "Janet Radway Stone, USGS"
+      }
+    ]
   },
   "delaware": {
     "name": "Delaware",
     "blurb": "Marsh grass, sandy beaches and big Atlantic skies. Delaware's small coastline is full of dunes, tidal wetlands and migrating shorebirds. It's a gentle, salt-air kind of beautiful.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "D",
+        "place": "Hagley Museum and Library grounds, Brandywine Creek",
+        "area": "Woodland mill race and reflection",
+        "credit": "Hagley Museum and Library"
+      },
+      {
+        "letter": "E",
+        "place": "Cape Henlopen",
+        "area": "Sand dune and beach grasses",
+        "credit": "Cynthia L. Cunningham / USGS"
+      },
+      {
+        "letter": "L",
+        "place": "Prime Hook National Wildlife Refuge",
+        "area": "Back-barrier salt marsh",
+        "credit": "USFWS Northeast Region"
+      },
+      {
+        "letter": "A",
+        "place": "Cape Henlopen, near Lewes",
+        "area": "Harbor of Refuge lighthouse and Delaware Bay",
+        "credit": "Smallbones"
+      },
+      {
+        "letter": "W",
+        "place": "Bombay Hook National Wildlife Refuge",
+        "area": "Green wetlands and open water",
+        "credit": "Eileen Hornbaker / USFWS"
+      },
+      {
+        "letter": "A",
+        "place": "Brandywine Creek State Park",
+        "area": "Autumn woodland and meadow",
+        "credit": "Jim Klein"
+      },
+      {
+        "letter": "R",
+        "place": "Prime Hook National Wildlife Refuge",
+        "area": "Beach, tidal channel and shore",
+        "credit": "Greg Thompson / USFWS"
+      },
+      {
+        "letter": "E",
+        "place": "Bombay Hook National Wildlife Refuge",
+        "area": "Sunrise and wetland reflection",
+        "credit": "USFWS"
+      }
+    ]
   },
   "florida": {
     "name": "Florida",
     "blurb": "Sawgrass, mangroves and turquoise water. Florida stretches from the Everglades' river of grass to coral reefs, crystal springs and long white beaches. Wildlife is everywhere, from herons to manatees.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "F",
+        "place": "Boca Grande beach, Key West National Wildlife Refuge",
+        "area": "White-sand island shoreline and bright turquoise shallows",
+        "credit": "Key West NWR / USFWS"
+      },
+      {
+        "letter": "L",
+        "place": "Big Cypress National Preserve",
+        "area": "Cypress swamp and water reflections",
+        "credit": "NPS / USGS"
+      },
+      {
+        "letter": "O",
+        "place": "Manatee Springs State Park near Chiefland",
+        "area": "Blue spring pool and wooded shoreline",
+        "credit": "Stewart Tomlinson / USGS"
+      },
+      {
+        "letter": "R",
+        "place": "Florida Keys National Marine Sanctuary",
+        "area": "Looe Key Reef, underwater staghorn coral",
+        "credit": "Lauren Toth / USGS"
+      },
+      {
+        "letter": "I",
+        "place": "Pine Island, St. Marks National Wildlife Refuge",
+        "area": "Pine Island in coastal salt marsh",
+        "credit": "David Moynahan / USFWS"
+      },
+      {
+        "letter": "D",
+        "place": "Everglades National Park",
+        "area": "Mangrove, wet prairie and sunset rays",
+        "credit": "Luis Garcia Falcon / NPS"
+      },
+      {
+        "letter": "A",
+        "place": "Biscayne Bay near University Dock, Biscayne National Park",
+        "area": "Biscayne mangrove shoreline and clear shallows",
+        "credit": "Matt Johnson / NPS"
+      }
+    ]
   },
   "georgia": {
     "name": "Georgia",
     "blurb": "Blue Ridge mountains, live oaks and salt marsh. Georgia climbs from barrier islands and Spanish moss up to waterfalls and misty ridgelines in the north. It's a state of warm evenings and winding back roads.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "G",
+        "place": "Okefenokee National Wildlife Refuge",
+        "area": "Cypress and blackwater on the Suwannee Canal",
+        "credit": "Larry A. Woodward / USFWS"
+      },
+      {
+        "letter": "E",
+        "place": "Cumberland Island National Seashore",
+        "area": "Atlantic beach, dunes, and sea oats",
+        "credit": "NPS"
+      },
+      {
+        "letter": "O",
+        "place": "Tallulah Gorge State Park",
+        "area": "Cliff walls and the Tallulah River",
+        "credit": "Thomson200"
+      },
+      {
+        "letter": "R",
+        "place": "Amicalola Falls State Park",
+        "area": "Tall rocky cascade",
+        "credit": "Thomsonmg2000"
+      },
+      {
+        "letter": "G",
+        "place": "Brasstown Bald, Chattahoochee National Forest",
+        "area": "View of the mountain from Hogpen Gap",
+        "credit": "Thomson200"
+      },
+      {
+        "letter": "I",
+        "place": "Providence Canyon State Park",
+        "area": "Pink, orange, and pale gullies",
+        "credit": "Dsdugan"
+      },
+      {
+        "letter": "A",
+        "place": "Cloudland Canyon State Park",
+        "area": "Autumn sandstone cliffs and canyon on Lookout Mountain",
+        "credit": "Thomson200"
+      }
+    ]
   },
   "hawaii": {
     "name": "Hawaii",
     "blurb": "Volcanoes, waterfalls and impossibly blue water. Hawaii's islands rise from the Pacific with black-sand beaches, sea cliffs and rainforest valleys. The land here is still being made.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "H",
+        "place": "Hawaiʻi Volcanoes National Park",
+        "area": "Kīlauea / Halemaʻumaʻu",
+        "credit": "NPS / J.Wei"
+      },
+      {
+        "letter": "A",
+        "place": "Haleakalā National Park",
+        "area": "Summit crater and cinder cones",
+        "credit": "NPS"
+      },
+      {
+        "letter": "W",
+        "place": "Nā Pali Coast State Wilderness Park",
+        "area": "Fluted cliffs, Kauaʻi",
+        "credit": "JAFactsDude"
+      },
+      {
+        "letter": "A",
+        "place": "Waimea Canyon State Park",
+        "area": "Red gorge, Kauaʻi",
+        "credit": "USGS"
+      },
+      {
+        "letter": "I",
+        "place": "Waiʻānapanapa State Park",
+        "area": "Pāʻiloa / Honokalani black-sand beach, Maui",
+        "credit": "kdvandeventer"
+      },
+      {
+        "letter": "I",
+        "place": "ʻAkaka Falls State Park",
+        "area": "Rainforest waterfall, Hawaiʻi Island",
+        "credit": "Dr. Donald B. MacGowan"
+      }
+    ]
   },
   "idaho": {
     "name": "Idaho",
     "blurb": "Jagged peaks, wild rivers and wide open sky. Idaho is a backcountry state of whitewater canyons, alpine lakes and huge stretches of protected wilderness. It's rugged country for anyone who loves to wander.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "I",
+        "place": "Sawtooth National Recreation Area",
+        "area": "Redfish Lake and Sawtooth peaks",
+        "credit": "J. Crane"
+      },
+      {
+        "letter": "D",
+        "place": "Craters of the Moon National Monument and Preserve",
+        "area": "Lava folds and Big Cinder Butte",
+        "credit": "NPS / Kensie Stallings"
+      },
+      {
+        "letter": "A",
+        "place": "Hells Canyon National Recreation Area",
+        "area": "Snake River and gorge walls",
+        "credit": "USDA Forest Service, Pacific Northwest Region"
+      },
+      {
+        "letter": "H",
+        "place": "Caribou-Targhee National Forest",
+        "area": "Upper Mesa Falls",
+        "credit": "USDA Forest Service, Intermountain Region"
+      },
+      {
+        "letter": "O",
+        "place": "City of Rocks National Reserve",
+        "area": "Twin Sisters granite spires",
+        "credit": "NPS"
+      }
+    ]
   },
   "illinois": {
     "name": "Illinois",
     "blurb": "Prairie, sandstone canyons and the shores of a great lake. Beyond its famous skyline, Illinois hides wooded bluffs, river valleys and tallgrass prairie. Its quiet corners surprise people who only know the flatlands.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "I",
+        "place": "Garden of the Gods, Shawnee National Forest",
+        "area": "Sandstone towers",
+        "credit": "user ChiSci"
+      },
+      {
+        "letter": "L",
+        "place": "Starved Rock State Park",
+        "area": "Canyon waterfall",
+        "credit": "Yinan Chen"
+      },
+      {
+        "letter": "L",
+        "place": "Cypress Creek National Wildlife Refuge",
+        "area": "Bald cypress and reflective blackwater",
+        "credit": "Jason Goldberg / USFWS"
+      },
+      {
+        "letter": "I",
+        "place": "Mississippi Palisades State Park",
+        "area": "Limestone/dolomite rock towers above the Mississippi River",
+        "credit": "Public Lands Institute"
+      },
+      {
+        "letter": "N",
+        "place": "Upper Mississippi River National Wildlife and Fish Refuge, Savanna District",
+        "area": "Spring Lake, Pool 13, Carroll County",
+        "credit": "U.S. Army Corps of Engineers, Rock Island District"
+      },
+      {
+        "letter": "O",
+        "place": "Illinois Beach State Park",
+        "area": "Lake Michigan shoreline and dune grasses",
+        "credit": "Yinan Chen"
+      },
+      {
+        "letter": "I",
+        "place": "Burden Falls, Shawnee National Forest",
+        "area": "Cliff and seasonal waterfall",
+        "credit": "USDA Forest Service / National Archives"
+      },
+      {
+        "letter": "S",
+        "place": "Giant City State Park",
+        "area": "Rock-shelter passage along the nature trail",
+        "credit": "Nyttend"
+      }
+    ]
   },
   "indiana": {
     "name": "Indiana",
     "blurb": "Dunes, hardwood forests and rolling limestone hills. Indiana meets Lake Michigan with towering sand dunes, then runs south through forests, creeks and caves. It's an easygoing, green kind of wild.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "I",
+        "place": "Indiana Dunes National Park",
+        "area": "Marram dune grass, sand and Lake Michigan",
+        "credit": "Jeff Manuszak / NPS"
+      },
+      {
+        "letter": "N",
+        "place": "Turkey Run State Park",
+        "area": "Sandstone canyon",
+        "credit": "MrGreenBean"
+      },
+      {
+        "letter": "D",
+        "place": "Brown County State Park",
+        "area": "Wooded autumn hills at Hesitation Point",
+        "credit": "MrGreenBean"
+      },
+      {
+        "letter": "I",
+        "place": "Clifty Falls State Park",
+        "area": "Waterfall over a layered rock ledge",
+        "credit": "Public Lands Institute"
+      },
+      {
+        "letter": "A",
+        "place": "Hemlock Cliffs, Hoosier National Forest",
+        "area": "Rock overhang and seasonal waterfall",
+        "credit": "usfs_Eastern_Region"
+      },
+      {
+        "letter": "N",
+        "place": "Falls of the Ohio State Park",
+        "area": "Exposed limestone fossil beds and Ohio River",
+        "credit": "Public Lands Institute"
+      },
+      {
+        "letter": "A",
+        "place": "Patoka River National Wildlife Refuge",
+        "area": "Maxey Marsh wooded wetland",
+        "credit": "USFWS Midwest"
+      }
+    ]
   },
   "iowa": {
     "name": "Iowa",
     "blurb": "Rolling hills, prairie and big river bluffs. Iowa sits between the Mississippi and Missouri rivers, with restored tallgrass prairie, wooded bluffs and wide skies. It's quieter than you'd expect, and lovelier too.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "I",
+        "place": "Loess Hills State Forest",
+        "area": "Windblown ridges and grass-covered hills",
+        "credit": "FHWA / National Archives"
+      },
+      {
+        "letter": "O",
+        "place": "Maquoketa Caves State Park",
+        "area": "Natural limestone arch and wooded ravine",
+        "credit": "Good Free Photos"
+      },
+      {
+        "letter": "W",
+        "place": "Pikes Peak State Park",
+        "area": "Mississippi River channels, islands and distant bluffs from the Iowa overlook",
+        "credit": "Archbob"
+      },
+      {
+        "letter": "A",
+        "place": "Neal Smith National Wildlife Refuge",
+        "area": "Tallgrass prairie with native wildflowers",
+        "credit": "Sara Hollerich / USFWS"
+      }
+    ]
   },
   "kansas": {
     "name": "Kansas",
     "blurb": "Tallgrass prairie and endless horizons. Kansas holds some of the last great tallgrass prairie in North America, along with chalk formations and wide, glowing sunsets. The sky is the main event here.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "K",
+        "place": "Tallgrass Prairie National Preserve",
+        "area": "Flint Hills",
+        "credit": "NPS"
+      },
+      {
+        "letter": "A",
+        "place": "Castle Rock",
+        "area": "",
+        "credit": "Glamafez"
+      },
+      {
+        "letter": "N",
+        "place": "Monument Rocks",
+        "area": "",
+        "credit": "Wistar92"
+      },
+      {
+        "letter": "S",
+        "place": "Quivira National Wildlife Refuge",
+        "area": "Little Salt Marsh",
+        "credit": "Ryan Moehring / USFWS"
+      },
+      {
+        "letter": "A",
+        "place": "Mushroom Rock / Pulpit Rock",
+        "area": "Ellsworth County",
+        "credit": "USGS"
+      },
+      {
+        "letter": "S",
+        "place": "Cimarron National Grassland",
+        "area": "",
+        "credit": "NPS National Trails Office"
+      }
+    ]
   },
   "kentucky": {
     "name": "Kentucky",
     "blurb": "Bluegrass, sandstone arches and deep caves. Kentucky is a state of horse country, rolling hills and the world's longest known cave system. Its forests and gorges glow in the fall.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "K",
+        "place": "Mammoth Cave National Park",
+        "area": "Green River Bluffs Overlook",
+        "credit": "NPS"
+      },
+      {
+        "letter": "E",
+        "place": "Red River Gorge",
+        "area": "Daniel Boone National Forest",
+        "credit": "Ben Childers / USDA Forest Service"
+      },
+      {
+        "letter": "N",
+        "place": "Natural Bridge State Resort Park",
+        "area": "",
+        "credit": "Ken Thomas"
+      },
+      {
+        "letter": "T",
+        "place": "Cumberland Falls State Resort Park",
+        "area": "",
+        "credit": "Chris Kuehl / ChrisKuehl"
+      },
+      {
+        "letter": "U",
+        "place": "Big South Fork National River and Recreation Area",
+        "area": "Yahoo Falls",
+        "credit": "NPS"
+      },
+      {
+        "letter": "C",
+        "place": "Cumberland Gap National Historical Park",
+        "area": "Pinnacle Overlook",
+        "credit": "Scott Teodorski / NPS"
+      },
+      {
+        "letter": "K",
+        "place": "Land Between the Lakes National Recreation Area",
+        "area": "Kentucky Lake and Lake Barkley",
+        "credit": "George Green / U.S. Army Corps of Engineers"
+      },
+      {
+        "letter": "Y",
+        "place": "Clarks River National Wildlife Refuge",
+        "area": "",
+        "credit": "Stacey Hayden / USFWS"
+      }
+    ]
   },
   "louisiana": {
     "name": "Louisiana",
     "blurb": "Bayous, cypress swamps and slow water. Louisiana is a watery world of Spanish moss, wetlands and wading birds where the Mississippi meets the Gulf. Its landscapes feel soft, green and alive.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "L",
+        "place": "Bayou Coquille",
+        "area": "Barataria Preserve, Jean Lafitte National Historical Park and Preserve",
+        "credit": "NPS"
+      },
+      {
+        "letter": "O",
+        "place": "Atchafalaya National Wildlife Refuge",
+        "area": "",
+        "credit": "USFWS"
+      },
+      {
+        "letter": "U",
+        "place": "Longleaf Vista",
+        "area": "Kisatchie National Forest",
+        "credit": "Erich Vallery / USDA Forest Service"
+      },
+      {
+        "letter": "I",
+        "place": "Sabine marsh",
+        "area": "Southwest Louisiana",
+        "credit": "Refuge Staff / USFWS"
+      },
+      {
+        "letter": "S",
+        "place": "Cameron Prairie National Wildlife Refuge",
+        "area": "",
+        "credit": "Steve Hillebrand / USFWS"
+      },
+      {
+        "letter": "I",
+        "place": "Delta National Wildlife Refuge",
+        "area": "",
+        "credit": "USFWS"
+      },
+      {
+        "letter": "A",
+        "place": "Chandeleur Islands",
+        "area": "Breton National Wildlife Refuge",
+        "credit": "USGS, St. Petersburg Coastal and Marine Science Center"
+      },
+      {
+        "letter": "N",
+        "place": "Breton National Wildlife Refuge beach",
+        "area": "",
+        "credit": "USFWS"
+      },
+      {
+        "letter": "A",
+        "place": "Kisatchie Falls",
+        "area": "Kisatchie Ranger District, Kisatchie National Forest",
+        "credit": "Erich Vallery / USDA Forest Service"
+      }
+    ]
   },
   "maine": {
     "name": "Maine",
     "blurb": "Rocky coast, lighthouses and deep north woods. Maine is pine forests, granite shorelines and quiet lakes, and its coast is one of the first places in the country to catch the sunrise. It's wild, salty and wonderfully remote.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "M",
+        "place": "Jordan Pond and the Bubbles",
+        "area": "Acadia National Park",
+        "credit": "NPS / Victoria Stauffenberg"
+      },
+      {
+        "letter": "A",
+        "place": "Mount Katahdin",
+        "area": "Baxter State Park landscape",
+        "credit": "Carol M. Highsmith"
+      },
+      {
+        "letter": "I",
+        "place": "Allagash Wilderness Waterway",
+        "area": "",
+        "credit": "NPS"
+      },
+      {
+        "letter": "N",
+        "place": "Quoddy Head State Park",
+        "area": "West Quoddy coastal cliffs",
+        "credit": "Crystal Hitchings"
+      },
+      {
+        "letter": "E",
+        "place": "Rachel Carson National Wildlife Refuge",
+        "area": "Salt marsh near Rachel Carson Trail",
+        "credit": "Susan Adamowicz, Ph.D. / USFWS"
+      }
+    ]
   },
   "maryland": {
     "name": "Maryland",
     "blurb": "Chesapeake shoreline, wild ponies and mountain ridges. Maryland spans bay marshes, barrier-island beaches and forested Appalachian hills in a surprisingly small space. It's a state built around water.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "M",
+        "place": "Assateague Island National Seashore",
+        "area": "Wild horse on the sandy beach in front of dunes",
+        "credit": "NPS"
+      },
+      {
+        "letter": "A",
+        "place": "Blackwater National Wildlife Refuge",
+        "area": "Salt-marsh reeds and open water from Wildlife Drive",
+        "credit": "Staff / USFWS"
+      },
+      {
+        "letter": "R",
+        "place": "Great Falls of the Potomac",
+        "area": "Chesapeake and Ohio Canal National Historical Park",
+        "credit": "NPS / Steve Dean"
+      },
+      {
+        "letter": "Y",
+        "place": "Swallow Falls State Park",
+        "area": "Muddy Creek Falls",
+        "credit": "NPS / Monica Larcom"
+      },
+      {
+        "letter": "L",
+        "place": "Catoctin Mountain Park",
+        "area": "Hog Rock Overlook",
+        "credit": "Alicia Lafever / NPS"
+      },
+      {
+        "letter": "A",
+        "place": "Calvert Cliffs, western shore of Chesapeake Bay",
+        "area": "Stratified Bay bluff, forested cliff cap, sand and blue water",
+        "credit": "USGS"
+      },
+      {
+        "letter": "N",
+        "place": "Eastern Neck National Wildlife Refuge, Hail Cove",
+        "area": "Aerial view of tidal coves, marsh islands and wooded edges",
+        "credit": "Rick Bennett / USFWS"
+      },
+      {
+        "letter": "D",
+        "place": "Maryland Heights, Harpers Ferry National Historical Park",
+        "area": "Snow on the exposed rocky Maryland Heights cliff face",
+        "credit": "NPS / Amy Dozier"
+      }
+    ]
   },
   "massachusetts": {
     "name": "Massachusetts",
     "blurb": "Sandy capes, salt marshes and forested hills. Massachusetts reaches from the dunes of Cape Cod to the rolling Berkshires, with plenty of old New England charm in between. Every season looks good here.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "M",
+        "place": "Province Lands dunes",
+        "area": "Cape Cod National Seashore",
+        "credit": "NPS"
+      },
+      {
+        "letter": "A",
+        "place": "Marconi Beach outer bluff",
+        "area": "Cape Cod National Seashore",
+        "credit": "NPS / Brittni Connell"
+      },
+      {
+        "letter": "S",
+        "place": "Mount Greylock State Reservation",
+        "area": "Summit ridge view",
+        "credit": "Mike Linksvayer / mlinksva"
+      },
+      {
+        "letter": "S",
+        "place": "Bash Bish Falls State Park",
+        "area": "",
+        "credit": "Garyadam"
+      },
+      {
+        "letter": "A",
+        "place": "Fort River Division",
+        "area": "Silvio O. Conte National Fish and Wildlife Refuge",
+        "credit": "USFWS"
+      },
+      {
+        "letter": "C",
+        "place": "Parker River National Wildlife Refuge",
+        "area": "Plum Island",
+        "credit": "USFWS Northeast Region"
+      },
+      {
+        "letter": "H",
+        "place": "Halibut Point State Park",
+        "area": "Cape Ann",
+        "credit": "Ralph.Torello"
+      },
+      {
+        "letter": "U",
+        "place": "Great Meadows National Wildlife Refuge",
+        "area": "Concord unit",
+        "credit": "Daderot"
+      },
+      {
+        "letter": "S",
+        "place": "Monomoy National Wildlife Refuge",
+        "area": "Beach",
+        "credit": "Keith Shannon / USFWS"
+      },
+      {
+        "letter": "E",
+        "place": "Spectacle Island",
+        "area": "Boston Harbor Islands National Recreation Area",
+        "credit": "NPS / M. Bozio"
+      },
+      {
+        "letter": "T",
+        "place": "Natural Bridge State Park, North Adams",
+        "area": "Hudson Brook marble gorge",
+        "credit": "Mike Linksvayer / mlinksva"
+      },
+      {
+        "letter": "T",
+        "place": "Woods Pond, October Mountain",
+        "area": "Woodland",
+        "credit": "U.S. EPA"
+      },
+      {
+        "letter": "S",
+        "place": "Myles Standish State Forest",
+        "area": "Pitch-pine stand",
+        "credit": "Brighton Lee / meaningful_name"
+      }
+    ]
   },
   "michigan": {
     "name": "Michigan",
     "blurb": "Great Lakes shoreline, sand dunes and northern forests. Michigan is wrapped by fresh water, with colorful sandstone cliffs, waterfalls and thousands of inland lakes. It's a summer-cabin dream, all year long.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "M",
+        "place": "Miners Castle",
+        "area": "Pictured Rocks National Lakeshore",
+        "credit": "NPS"
+      },
+      {
+        "letter": "I",
+        "place": "Pierce Stocking Scenic Drive #9",
+        "area": "Sleeping Bear Dunes National Lakeshore",
+        "credit": "Kerry Kelly / Friends of Sleeping Bear Dunes"
+      },
+      {
+        "letter": "C",
+        "place": "Mount Franklin ridge view",
+        "area": "Isle Royale National Park",
+        "credit": "Wade Renando / Wade9801"
+      },
+      {
+        "letter": "H",
+        "place": "Lake of the Clouds",
+        "area": "Porcupine Mountains Wilderness State Park",
+        "credit": "Yinan Chen"
+      },
+      {
+        "letter": "I",
+        "place": "Upper Falls",
+        "area": "Tahquamenon Falls State Park",
+        "credit": "USGS"
+      },
+      {
+        "letter": "G",
+        "place": "Nordhouse Dunes Wilderness",
+        "area": "Huron-Manistee National Forests",
+        "credit": "Huron-Manistee National Forests"
+      },
+      {
+        "letter": "A",
+        "place": "Demonstration Pools",
+        "area": "Seney National Wildlife Refuge",
+        "credit": "Tina Shaw / USFWS"
+      },
+      {
+        "letter": "N",
+        "place": "Bond Falls Scenic Site",
+        "area": "Western Upper Peninsula",
+        "credit": "Mr.Z-man"
+      }
+    ]
   },
   "minnesota": {
     "name": "Minnesota",
     "blurb": "Ten thousand lakes, north woods and Lake Superior's rocky shore. Minnesota is a land of canoe country, loons and tall pines. Its waters glow at sunset and sparkle under the northern lights.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "M",
+        "place": "Gooseberry Falls State Park",
+        "area": "Waterfalls over basalt",
+        "credit": "Yinan Chen"
+      },
+      {
+        "letter": "I",
+        "place": "Boundary Waters Canoe Area Wilderness, Superior National Forest",
+        "area": "Seagull Lake",
+        "credit": "Superior National Forest"
+      },
+      {
+        "letter": "N",
+        "place": "Voyageurs National Park",
+        "area": "Aerial view of broad lake water and forested islands",
+        "credit": "NPS Digital Image Archives"
+      },
+      {
+        "letter": "N",
+        "place": "Temperance River State Park",
+        "area": "Narrow basalt gorge and whitewater",
+        "credit": "Rufus Sarsaparilla"
+      },
+      {
+        "letter": "E",
+        "place": "Itasca State Park",
+        "area": "Mississippi River headwaters",
+        "credit": "Johanna San Martin"
+      },
+      {
+        "letter": "S",
+        "place": "Interstate State Park",
+        "area": "Dalles of the St. Croix",
+        "credit": "123dieinafire"
+      },
+      {
+        "letter": "O",
+        "place": "Chippewa National Forest",
+        "area": "Red and white pine forest",
+        "credit": "usfs_Eastern_Region"
+      },
+      {
+        "letter": "T",
+        "place": "Agassiz National Wildlife Refuge",
+        "area": "Open marsh and water",
+        "credit": "Courtney Celley / USFWS"
+      },
+      {
+        "letter": "A",
+        "place": "Blue Mounds State Park",
+        "area": "Sioux quartzite cliffs and grass",
+        "credit": "Kirs10"
+      }
+    ]
   },
   "mississippi": {
     "name": "Mississippi",
     "blurb": "River bluffs, pine forests and barrier islands. Mississippi stretches from the great river it's named for down to the white sands of the Gulf Coast. It's a slow, green, lovely place.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "M",
+        "place": "Ship Island",
+        "area": "Gulf Islands National Seashore",
+        "credit": "NPS / Kiss"
+      },
+      {
+        "letter": "I",
+        "place": "Cooper Falls",
+        "area": "Tishomingo State Park",
+        "credit": "NPS"
+      },
+      {
+        "letter": "S",
+        "place": "Tishomingo State Park",
+        "area": "Sandstone gorge beside Cooper Falls",
+        "credit": "NPS"
+      },
+      {
+        "letter": "S",
+        "place": "Loakfoma Creek",
+        "area": "Sam D. Hamilton Noxubee National Wildlife Refuge",
+        "credit": "Andrea Dunstan / USFWS"
+      },
+      {
+        "letter": "I",
+        "place": "Mississippi Sandhill Crane National Wildlife Refuge",
+        "area": "",
+        "credit": "USFWS"
+      },
+      {
+        "letter": "S",
+        "place": "Sam D. Hamilton Noxubee National Wildlife Refuge",
+        "area": "Cypress wetland",
+        "credit": "Vicki Maples"
+      },
+      {
+        "letter": "S",
+        "place": "Dahomey National Wildlife Refuge",
+        "area": "",
+        "credit": "Amber Floyd / USFWS"
+      },
+      {
+        "letter": "I",
+        "place": "Grand Bay coastal marsh",
+        "area": "",
+        "credit": "Kathryn E. L. Smith / USGS"
+      },
+      {
+        "letter": "P",
+        "place": "Homochitto National Forest",
+        "area": "Near the Homochitto River",
+        "credit": "Jasin Wesberry / USDA Forest Service"
+      },
+      {
+        "letter": "P",
+        "place": "St. Catherine Creek National Wildlife Refuge",
+        "area": "",
+        "credit": "Skye Kreisler / USFWS"
+      },
+      {
+        "letter": "I",
+        "place": "Bienville Pines Scenic Area",
+        "area": "Bienville National Forest",
+        "credit": "NPS"
+      }
+    ]
   },
   "missouri": {
     "name": "Missouri",
     "blurb": "Ozark springs, clear rivers and limestone bluffs. Missouri is home to spring-fed rivers, rolling forests and caves tucked into its hills. It's made for paddling and wandering.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "M",
+        "place": "Ozark National Scenic Riverways",
+        "area": "Current River from Clubhouse Bluff",
+        "credit": "NPS"
+      },
+      {
+        "letter": "I",
+        "place": "Ozark National Scenic Riverways",
+        "area": "Big Spring",
+        "credit": "NPS / Patty Wheatley-Bishop"
+      },
+      {
+        "letter": "S",
+        "place": "Johnson’s Shut-Ins State Park",
+        "area": "Rhyolite gorge and flowing water",
+        "credit": "Missouri State Parks / mostateparks"
+      },
+      {
+        "letter": "S",
+        "place": "Elephant Rocks State Park",
+        "area": "Large rounded granite boulder",
+        "credit": "Missouri State Parks / mostateparks"
+      },
+      {
+        "letter": "O",
+        "place": "Ha Ha Tonka State Park",
+        "area": "Natural bridge and layered karst stone",
+        "credit": "Missouri State Parks / mostateparks"
+      },
+      {
+        "letter": "U",
+        "place": "Glade Top Trail",
+        "area": "Watershed Divide Overlook, Mark Twain National Forest",
+        "credit": "USDA Forest Service, Eastern Region"
+      },
+      {
+        "letter": "R",
+        "place": "Loess Bluffs National Wildlife Refuge",
+        "area": "Snow geese lifting off over the refuge’s wetland water",
+        "credit": "Robert L. Keyser III"
+      },
+      {
+        "letter": "I",
+        "place": "Taum Sauk Mountain State Park",
+        "area": "Mina Sauk Falls",
+        "credit": "Yinan Chen / GoodFreePhotos"
+      }
+    ]
   },
   "montana": {
     "name": "Montana",
     "blurb": "Big sky, glacier-carved peaks and wild rivers. Montana holds sweeping plains, high mountain lakes and some of the wildest country in the lower 48. Out here the horizon just keeps going.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "M",
+        "place": "Glacier National Park",
+        "area": "Lake McDonald",
+        "credit": "NPS / Jacob W. Frank"
+      },
+      {
+        "letter": "O",
+        "place": "Glacier National Park",
+        "area": "Going-to-the-Sun Road country near Logan Pass",
+        "credit": "NPS / Jacob W. Frank"
+      },
+      {
+        "letter": "N",
+        "place": "Bob Marshall Wilderness",
+        "area": "Pentagon Mountain, Flathead National Forest",
+        "credit": "USDA Forest Service / Your Forests Your Future"
+      },
+      {
+        "letter": "T",
+        "place": "Bighorn Canyon National Recreation Area",
+        "area": "Blue reservoir water between steep limestone canyon walls",
+        "credit": "NPS"
+      },
+      {
+        "letter": "A",
+        "place": "Upper Missouri River Breaks National Monument",
+        "area": "White Cliffs",
+        "credit": "BLM Montana/Dakotas"
+      },
+      {
+        "letter": "N",
+        "place": "Makoshika State Park",
+        "area": "Witches Hat, Hell Creek Formation",
+        "credit": "Joseph H. Hartman / Geoscience Digital Image Library (GeoDIL)"
+      },
+      {
+        "letter": "A",
+        "place": "Red Rock Lakes National Wildlife Refuge",
+        "area": "Lower Red Rock Lake, Centennial Valley",
+        "credit": "Cortez Rohr / USFWS"
+      }
+    ]
   },
   "nebraska": {
     "name": "Nebraska",
     "blurb": "Sandhills, prairie rivers and wide open skies. Nebraska is grass-covered dunes, towering rock landmarks and the spring sandhill crane migration along the Platte. Its beauty is quiet and enormous.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "N",
+        "place": "Scotts Bluff National Monument",
+        "area": "Saddle Rock",
+        "credit": "Eric Grunwald / NPS"
+      },
+      {
+        "letter": "E",
+        "place": "Chimney Rock National Historic Site",
+        "area": "",
+        "credit": "NPS"
+      },
+      {
+        "letter": "B",
+        "place": "Toadstool Geologic Park",
+        "area": "Oglala National Grassland",
+        "credit": "Brian Kell (Bkell)"
+      },
+      {
+        "letter": "R",
+        "place": "Niobrara National Scenic River",
+        "area": "A blue river bend below wooded, exposed bluffs",
+        "credit": "NPS"
+      },
+      {
+        "letter": "A",
+        "place": "Smith Falls State Park",
+        "area": "The tall waterfall and rock face",
+        "credit": "NPS / Megan McCann"
+      },
+      {
+        "letter": "S",
+        "place": "Nebraska National Forest",
+        "area": "Bessey Ranger District",
+        "credit": "Brian Kell (Bkell)"
+      },
+      {
+        "letter": "K",
+        "place": "Valentine National Wildlife Refuge",
+        "area": "Lost Lake",
+        "credit": "USFWS"
+      },
+      {
+        "letter": "A",
+        "place": "Agate Fossil Beds National Monument",
+        "area": "Carved bluffs and grassy hills",
+        "credit": "NPS"
+      }
+    ]
   },
   "nevada": {
     "name": "Nevada",
     "blurb": "Desert ranges, red rock and alpine lakes. Nevada is a land of mountain range after mountain range, with fiery sandstone valleys, ancient bristlecone pines and Lake Tahoe's clear water. The desert here is bigger and wilder than most people imagine.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "N",
+        "place": "Great Basin National Park",
+        "area": "Wheeler Peak and glacier cirque",
+        "credit": "NPS"
+      },
+      {
+        "letter": "E",
+        "place": "Valley of Fire State Park",
+        "area": "Elephant Rock",
+        "credit": "Ken Thomas"
+      },
+      {
+        "letter": "V",
+        "place": "Red Rock Canyon National Conservation Area",
+        "area": "Sandstone escarpment",
+        "credit": "Andrew King / U.S. Department of the Interior"
+      },
+      {
+        "letter": "A",
+        "place": "Lake Mead National Recreation Area",
+        "area": "Boulder Basin, from Boulder Beach on the Nevada shore",
+        "credit": "Andrew Cattoir / NPS"
+      },
+      {
+        "letter": "D",
+        "place": "Black Rock Desert",
+        "area": "Black Rock Desert–High Rock Canyon Emigrant Trails National Conservation Area",
+        "credit": "USGS, Nevada Water Science Center"
+      },
+      {
+        "letter": "A",
+        "place": "Ruby Mountains Wilderness",
+        "area": "Liberty Lake, Humboldt-Toiyabe National Forest",
+        "credit": "G. Thomas"
+      }
+    ]
   },
   "new-hampshire": {
     "name": "New Hampshire",
     "blurb": "Granite peaks, covered bridges and blazing autumn color. New Hampshire's White Mountains rise above clear lakes, rushing streams and deep forests. It's classic New England, rugged and bright.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "N",
+        "place": "Mount Washington",
+        "area": "",
+        "credit": "Albert E. Theberge / NOAA"
+      },
+      {
+        "letter": "E",
+        "place": "Echo Lake",
+        "area": "Franconia Notch",
+        "credit": "Bierstadt Brothers / New York Public Library"
+      },
+      {
+        "letter": "W",
+        "place": "Flume Gorge",
+        "area": "",
+        "credit": "VitaleBaby"
+      },
+      {
+        "letter": "H",
+        "place": "Arethusa Falls",
+        "area": "Tall waterfall over layered rock, snow, and conifers",
+        "credit": "Petersent"
+      },
+      {
+        "letter": "A",
+        "place": "Kancamagus Highway",
+        "area": "",
+        "credit": "Dennis Adams / FHWA / National Archives"
+      },
+      {
+        "letter": "M",
+        "place": "Glen Ellis Falls",
+        "area": "Vertical Glen Ellis waterfall, dark cliff, and plunge pool",
+        "credit": "Ken Gallager"
+      },
+      {
+        "letter": "P",
+        "place": "Sabbaday Falls",
+        "area": "",
+        "credit": "VitaleBaby"
+      },
+      {
+        "letter": "S",
+        "place": "Mount Chocorua",
+        "area": "",
+        "credit": "Jdahlem21"
+      },
+      {
+        "letter": "H",
+        "place": "Diana’s Baths",
+        "area": "",
+        "credit": "Hugh Manatee"
+      },
+      {
+        "letter": "I",
+        "place": "Umbagog Lake",
+        "area": "",
+        "credit": "Petersent"
+      },
+      {
+        "letter": "R",
+        "place": "Mount Monadnock",
+        "area": "",
+        "credit": "Shawn Swift (Sswift)"
+      },
+      {
+        "letter": "E",
+        "place": "Odiorne Point",
+        "area": "",
+        "credit": "VitaleBaby"
+      }
+    ]
   },
   "new-jersey": {
     "name": "New Jersey",
     "blurb": "Pine barrens, sandy shores and river gorges. New Jersey is greener than its reputation, with quiet pine forests, the Delaware Water Gap and long stretches of Atlantic beach. It's full of easy escapes.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "N",
+        "place": "Delaware Water Gap National Recreation Area",
+        "area": "",
+        "credit": "Michael L. Cuff / NPS"
+      },
+      {
+        "letter": "E",
+        "place": "Pinelands National Reserve",
+        "area": "Dark Pine Barrens river water, wooded banks, and green canopy",
+        "credit": "Michael Ciappi / USFWS"
+      },
+      {
+        "letter": "W",
+        "place": "Sandy Hook, Gateway National Recreation Area",
+        "area": "Sandy Hook dune face, coastal vegetation, sand, and blue sky",
+        "credit": "Tomwsulcer"
+      },
+      {
+        "letter": "J",
+        "place": "Palisades Interstate Park",
+        "area": "",
+        "credit": "Palisades Interstate Park Commission / FHWA"
+      },
+      {
+        "letter": "E",
+        "place": "High Point State Park",
+        "area": "",
+        "credit": "Jstuby"
+      },
+      {
+        "letter": "R",
+        "place": "Island Beach State Park",
+        "area": "",
+        "credit": "Historic American Buildings Survey / Library of Congress"
+      },
+      {
+        "letter": "S",
+        "place": "Edwin B. Forsythe National Wildlife Refuge",
+        "area": "",
+        "credit": "USFWS"
+      },
+      {
+        "letter": "E",
+        "place": "Great Swamp National Wildlife Refuge",
+        "area": "",
+        "credit": "USFWS"
+      },
+      {
+        "letter": "Y",
+        "place": "Sunfish Pond",
+        "area": "Worthington State Forest",
+        "credit": "Richard and MaryEllen Cramer / NPS"
+      }
+    ]
   },
   "new-mexico": {
     "name": "New Mexico",
     "blurb": "Red mesas, white sands and endless desert light. New Mexico is high desert, gypsum dunes, deep caverns and mountains glowing pink at sunset. Its skies are some of the clearest anywhere.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "N",
+        "place": "White Sands National Park",
+        "area": "White gypsum dunes, a swept dune crest, and blue sky",
+        "credit": "Anchor Lee"
+      },
+      {
+        "letter": "E",
+        "place": "Carlsbad Caverns National Park",
+        "area": "Well-lit massive cave column and stalagmites in the Big Room",
+        "credit": "NPS / Peter Jones"
+      },
+      {
+        "letter": "W",
+        "place": "Kasha-Katuwe Tent Rocks National Monument",
+        "area": "",
+        "credit": "Bob Wick / BLM"
+      },
+      {
+        "letter": "M",
+        "place": "Bisti/De-Na-Zin Wilderness",
+        "area": "",
+        "credit": "Bob Wick / BLM"
+      },
+      {
+        "letter": "E",
+        "place": "Organ Mountains–Desert Peaks National Monument",
+        "area": "",
+        "credit": "Neomexicanus lc"
+      },
+      {
+        "letter": "X",
+        "place": "El Malpais National Monument",
+        "area": "",
+        "credit": "Patrick Alexander"
+      },
+      {
+        "letter": "I",
+        "place": "Rio Grande del Norte National Monument",
+        "area": "",
+        "credit": "BLM"
+      },
+      {
+        "letter": "C",
+        "place": "Valles Caldera National Preserve",
+        "area": "",
+        "credit": "NPS"
+      },
+      {
+        "letter": "O",
+        "place": "Wheeler Peak area, Carson National Forest",
+        "area": "Alpine tundra, rock, and lingering snow in the Wheeler Peak area",
+        "credit": "Patrick Alexander"
+      }
+    ]
   },
   "new-york": {
     "name": "New York",
     "blurb": "Mountain lakes, waterfalls and old-growth forest. New York reaches far beyond its famous city, into the Adirondacks, the Catskills, deep gorges and the thunder of Niagara Falls. It's a state with a wild heart.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "N",
+        "place": "Niagara Falls State Park",
+        "area": "American Falls",
+        "credit": "Dr-Lechuza"
+      },
+      {
+        "letter": "E",
+        "place": "Adirondack Park",
+        "area": "Lower Ausable Lake and High Peaks",
+        "credit": "Sammetsfan"
+      },
+      {
+        "letter": "W",
+        "place": "Letchworth State Park",
+        "area": "Upper Falls",
+        "credit": "S. MacMillen"
+      },
+      {
+        "letter": "Y",
+        "place": "Watkins Glen State Park",
+        "area": "A close cascade between stratified gorge walls and a small pool",
+        "credit": "Lamar Gore / USFWS"
+      },
+      {
+        "letter": "O",
+        "place": "Fire Island National Seashore",
+        "area": "Atlantic surf, sandy beach, and vegetated barrier-island dunes",
+        "credit": "Owen Brenner / USGS"
+      },
+      {
+        "letter": "R",
+        "place": "Minnewaska State Park",
+        "area": "Battlement Terrace",
+        "credit": "Anthony22"
+      },
+      {
+        "letter": "K",
+        "place": "Kaaterskill Falls",
+        "area": "Catskill Park",
+        "credit": "USGS / Geology and Ecology of National Parks"
+      }
+    ]
   },
   "north-carolina": {
     "name": "North Carolina",
     "blurb": "Blue Ridge peaks and Outer Banks dunes. North Carolina runs from misty Appalachian summits to windswept barrier islands, with waterfalls and forests in between. It's mountains and sea in one.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "N",
+        "place": "Great Smoky Mountains National Park",
+        "area": "Forested Smoky Mountain ridges and a cove valley",
+        "credit": "NPS Digital Image Archives"
+      },
+      {
+        "letter": "O",
+        "place": "Cape Hatteras National Seashore",
+        "area": "Sea oats, rippled sand, dunes, and the Atlantic at dawn",
+        "credit": "NPS"
+      },
+      {
+        "letter": "R",
+        "place": "Cape Lookout National Seashore",
+        "area": "South Core Banks",
+        "credit": "USGS / St. Petersburg Coastal and Marine Science Center"
+      },
+      {
+        "letter": "T",
+        "place": "Mount Mitchell State Park",
+        "area": "",
+        "credit": "Thomson200"
+      },
+      {
+        "letter": "H",
+        "place": "Linville Gorge Wilderness",
+        "area": "Pisgah National Forest",
+        "credit": "Diogeninja"
+      },
+      {
+        "letter": "C",
+        "place": "Linville Falls",
+        "area": "",
+        "credit": "Ken Thomas"
+      },
+      {
+        "letter": "A",
+        "place": "Pilot Mountain State Park",
+        "area": "",
+        "credit": "Wahkeenah"
+      },
+      {
+        "letter": "R",
+        "place": "Chimney Rock State Park",
+        "area": "Chimney Rock’s sheer cliff and the wooded valley below",
+        "credit": "Jmturner"
+      },
+      {
+        "letter": "O",
+        "place": "Jockey’s Ridge State Park",
+        "area": "Nags Head",
+        "credit": "Doubleduhgirls"
+      },
+      {
+        "letter": "L",
+        "place": "Joyce Kilmer Memorial Forest",
+        "area": "Nantahala National Forest",
+        "credit": "Ken Thomas"
+      },
+      {
+        "letter": "I",
+        "place": "Whitewater Falls",
+        "area": "Nantahala National Forest",
+        "credit": "Wahkeenah"
+      },
+      {
+        "letter": "N",
+        "place": "Alligator River National Wildlife Refuge",
+        "area": "Still blackwater, wetland vegetation, and the distant tree line",
+        "credit": "ncwetlands.org"
+      },
+      {
+        "letter": "A",
+        "place": "Stone Mountain State Park",
+        "area": "Granite dome face",
+        "credit": "Forrest L. Smith, III / Filberthockey"
+      }
+    ]
   },
   "north-dakota": {
     "name": "North Dakota",
     "blurb": "Badlands, prairie and wide-open sky. North Dakota's painted buttes and grasslands are home to bison and wild horses. It's a quiet, sweeping landscape that stays with you.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "N",
+        "place": "Theodore Roosevelt National Park",
+        "area": "South Unit, Painted Canyon",
+        "credit": "Joseph H. Hartman / GeoDIL"
+      },
+      {
+        "letter": "O",
+        "place": "Theodore Roosevelt National Park",
+        "area": "South Unit, Little Missouri River at Ekblom Trail",
+        "credit": "NPS / Laura Thomas"
+      },
+      {
+        "letter": "R",
+        "place": "Theodore Roosevelt National Park",
+        "area": "North Unit, Little Missouri River and badland cliffs",
+        "credit": "NPS"
+      },
+      {
+        "letter": "T",
+        "place": "Theodore Roosevelt National Park",
+        "area": "Elkhorn Ranch Unit",
+        "credit": "NPS / Laura Thomas"
+      },
+      {
+        "letter": "H",
+        "place": "Little Missouri National Grassland",
+        "area": "",
+        "credit": "Cory Enger / Forest Service Northern Region"
+      },
+      {
+        "letter": "D",
+        "place": "Sheyenne National Grassland",
+        "area": "Hankinson Hills",
+        "credit": "Cory Enger / Forest Service Northern Region"
+      },
+      {
+        "letter": "A",
+        "place": "Lostwood National Wildlife Refuge",
+        "area": "Windmill Unit pothole",
+        "credit": "Kirsten Brennan / USFWS"
+      },
+      {
+        "letter": "K",
+        "place": "J. Clark Salyer National Wildlife Refuge",
+        "area": "Sunset over refuge water and marsh vegetation",
+        "credit": "Josephine Pickar / USFWS"
+      },
+      {
+        "letter": "O",
+        "place": "Chase Lake National Wildlife Refuge",
+        "area": "Open Chase Lake water with a distant prairie shoreline",
+        "credit": "USGS / Geosciences and Environmental Change Science Center"
+      },
+      {
+        "letter": "T",
+        "place": "Des Lacs National Wildlife Refuge",
+        "area": "",
+        "credit": "Joel M. Galloway / USGS"
+      },
+      {
+        "letter": "A",
+        "place": "Pembina Gorge",
+        "area": "Tetrault Woods State Forest lookout",
+        "credit": "Poppy Mills / North Dakota Department of Transportation"
+      }
+    ]
   },
   "ohio": {
     "name": "Ohio",
     "blurb": "Forested gorges, sandstone caves and Lake Erie shoreline. Ohio hides hemlock ravines, waterfalls and rolling river valleys beyond its farmland. It's full of shady trails and surprising corners.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "O",
+        "place": "Cuyahoga Valley National Park",
+        "area": "Brandywine Falls",
+        "credit": "Anna Cooke / USGS"
+      },
+      {
+        "letter": "H",
+        "place": "Hocking Hills State Park",
+        "area": "Ash Cave",
+        "credit": "Ramseybuckeye"
+      },
+      {
+        "letter": "I",
+        "place": "Clifton Gorge State Nature Preserve",
+        "area": "National Natural Landmark",
+        "credit": "NPS"
+      },
+      {
+        "letter": "O",
+        "place": "Ottawa National Wildlife Refuge",
+        "area": "Restored Lake Erie coastal wetland",
+        "credit": "Kurt Kowalski / USGS"
+      }
+    ]
   },
   "oklahoma": {
     "name": "Oklahoma",
     "blurb": "Red dirt, granite mountains and tallgrass prairie. Oklahoma mixes rolling plains, wooded hills and ancient worn-down peaks under huge skies. Its sunsets are something else.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "O",
+        "place": "Wichita Mountains Wildlife Refuge",
+        "area": "Granite ridge and boulders",
+        "credit": "Evan Monnett / USFWS"
+      },
+      {
+        "letter": "K",
+        "place": "Wichita Mountains Wildlife Refuge",
+        "area": "Bison meadow",
+        "credit": "Quinton Smith / USFWS"
+      },
+      {
+        "letter": "L",
+        "place": "Tallgrass Prairie Preserve",
+        "area": "Rolling prairie",
+        "credit": "DBinfo"
+      },
+      {
+        "letter": "A",
+        "place": "Chickasaw National Recreation Area",
+        "area": "Lower Little Niagara Falls",
+        "credit": "NPS"
+      },
+      {
+        "letter": "H",
+        "place": "Beavers Bend area",
+        "area": "Broken Bow Lake and wooded hills",
+        "credit": "Lance Cheung / USDA"
+      },
+      {
+        "letter": "O",
+        "place": "Gloss Mountain State Park",
+        "area": "Red buttes",
+        "credit": "Okiefromokla"
+      },
+      {
+        "letter": "M",
+        "place": "Wichita Mountains Wildlife Refuge",
+        "area": "Sunset wildflowers",
+        "credit": "USFWS"
+      },
+      {
+        "letter": "A",
+        "place": "Salt Plains National Wildlife Refuge",
+        "area": "White salt flats",
+        "credit": "Shujianyang"
+      }
+    ]
   },
   "oregon": {
     "name": "Oregon",
     "blurb": "Rugged coast, volcanic peaks and mossy forests. Oregon has the country's deepest lake, waterfalls by the dozen and high desert to the east. Few places feel this green and this wild.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "O",
+        "place": "Crater Lake National Park",
+        "area": "West Rim and Wizard Island",
+        "credit": "NPS"
+      },
+      {
+        "letter": "R",
+        "place": "Multnomah Falls",
+        "area": "Columbia River Gorge National Scenic Area",
+        "credit": "Jessicacu"
+      },
+      {
+        "letter": "E",
+        "place": "Painted Hills",
+        "area": "John Day Fossil Beds National Monument",
+        "credit": "NPS"
+      },
+      {
+        "letter": "G",
+        "place": "Mount Hood National Forest",
+        "area": "Mount Hood from Lost Lake",
+        "credit": "USGS / Cascades Volcano Observatory"
+      },
+      {
+        "letter": "O",
+        "place": "Valley of the Giants Outstanding Natural Area",
+        "area": "Old-growth forest",
+        "credit": "Heidi Christensen / BLM"
+      },
+      {
+        "letter": "N",
+        "place": "Oregon Dunes National Recreation Area",
+        "area": "Dunes near Coos Bay",
+        "credit": "Jelson25"
+      }
+    ]
   },
   "pennsylvania": {
     "name": "Pennsylvania",
     "blurb": "Rolling mountains, deep forests and waterfall glens. Pennsylvania's Appalachian ridges, river valleys and dark night skies hold more wild country than most expect. Fall here is unforgettable.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "P",
+        "place": "Pine Creek Gorge",
+        "area": "Leonard Harrison State Park",
+        "credit": "Mrmcdonnell"
+      },
+      {
+        "letter": "E",
+        "place": "Ricketts Glen State Park",
+        "area": "Ganoga Falls",
+        "credit": "Juliancolton"
+      },
+      {
+        "letter": "N",
+        "place": "Ohiopyle State Park",
+        "area": "Youghiogheny River",
+        "credit": "Jim Lillicotch / Public Domain Pictures"
+      },
+      {
+        "letter": "N",
+        "place": "Presque Isle State Park",
+        "area": "Gull Point and Lake Erie",
+        "credit": "Robert K. Grubbs"
+      },
+      {
+        "letter": "S",
+        "place": "Allegheny National Forest",
+        "area": "Forest stand in autumn",
+        "credit": "USDA Forest Service Eastern Region"
+      },
+      {
+        "letter": "Y",
+        "place": "Hickory Run State Park",
+        "area": "Boulder field",
+        "credit": "Jmpenzone"
+      },
+      {
+        "letter": "L",
+        "place": "Worlds End State Park",
+        "area": "Double Run Nature Trail stream",
+        "credit": "Nicolas Raymond / Stockvault"
+      },
+      {
+        "letter": "V",
+        "place": "Delaware Water Gap National Recreation Area",
+        "area": "Mount Tammany from Mount Minsi",
+        "credit": "NPS / M. Cuff"
+      },
+      {
+        "letter": "A",
+        "place": "Cherry Springs State Park",
+        "area": "Daytime meadow",
+        "credit": "Menefist / Stellarium contributed landscape"
+      },
+      {
+        "letter": "N",
+        "place": "John Heinz National Wildlife Refuge",
+        "area": "Marsh at Tinicum",
+        "credit": "USFWS"
+      },
+      {
+        "letter": "I",
+        "place": "Erie National Wildlife Refuge",
+        "area": "Inland wetland and autumn woods",
+        "credit": "USFWS"
+      },
+      {
+        "letter": "A",
+        "place": "Loyalsock State Forest",
+        "area": "Elk Knob summit outcrop",
+        "credit": "Nicholas A. Tonelli / Nicholas_T"
+      }
+    ]
   },
   "rhode-island": {
     "name": "Rhode Island",
     "blurb": "Ocean cliffs, salt ponds and sandy beaches. The smallest state has a long, lovely coastline, with rocky points, quiet islands and bay views at every turn. It's a little state with a lot of sea.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "R",
+        "place": "Beavertail State Park",
+        "area": "Atlantic surf and rocky shore",
+        "credit": "Dan Convey"
+      },
+      {
+        "letter": "H",
+        "place": "Mohegan Bluffs, Block Island",
+        "area": "Clay cliffs",
+        "credit": "Waz8"
+      },
+      {
+        "letter": "O",
+        "place": "Sachuest Point National Wildlife Refuge",
+        "area": "Rocky shore",
+        "credit": "Bill O’Brian / USFWS"
+      },
+      {
+        "letter": "D",
+        "place": "Brenton Point State Park",
+        "area": "Rocky Atlantic shore",
+        "credit": "Benjamin Peck"
+      },
+      {
+        "letter": "E",
+        "place": "Ninigret National Wildlife Refuge",
+        "area": "Barrier beach and pond",
+        "credit": "Greg Thompson / USFWS"
+      },
+      {
+        "letter": "I",
+        "place": "Trustom Pond National Wildlife Refuge",
+        "area": "Coastal pond",
+        "credit": "Ashley Spratt / USFWS"
+      },
+      {
+        "letter": "S",
+        "place": "Arcadia",
+        "area": "Snow-covered woods reflected in a watercourse",
+        "credit": "Genevieve Belcher / genniebee512"
+      },
+      {
+        "letter": "L",
+        "place": "Watchaug Pond, Burlingame State Park",
+        "area": "Lake and forest",
+        "credit": "Juliancolton"
+      },
+      {
+        "letter": "A",
+        "place": "John H. Chafee National Wildlife Refuge",
+        "area": "Narrow River salt marsh",
+        "credit": "USFWS"
+      },
+      {
+        "letter": "N",
+        "place": "Beavertail State Park",
+        "area": "Distant rocky point and water, lighthouse excluded",
+        "credit": "Juliancolton"
+      },
+      {
+        "letter": "D",
+        "place": "Block Island National Wildlife Refuge",
+        "area": "North Light dunes, lighthouse and sign excluded",
+        "credit": "USFWS"
+      }
+    ]
   },
   "south-carolina": {
     "name": "South Carolina",
     "blurb": "Salt marsh, live oaks and Blue Ridge foothills. South Carolina stretches from sea islands and old-growth swamp forest up to mountain waterfalls. Its light is warm and its pace is gentle.",
-    "letters": []
+    "letters": [
+      {
+        "letter": "S",
+        "place": "Congaree National Park",
+        "area": "Boardwalk and old-growth forest",
+        "credit": "NPS"
+      },
+      {
+        "letter": "O",
+        "place": "Table Rock State Park",
+        "area": "Granite face, viewed from SC Highway 11",
+        "credit": "Thomson200"
+      },
+      {
+        "letter": "U",
+        "place": "Caesars Head State Park",
+        "area": "Broad Blue Ridge overlook",
+        "credit": "Thomson200"
+      },
+      {
+        "letter": "T",
+        "place": "Rainbow Falls",
+        "area": "Jones Gap State Park",
+        "credit": "L R"
+      },
+      {
+        "letter": "H",
+        "place": "Chattooga Wild and Scenic River",
+        "area": "Rocky river and wooded bank",
+        "credit": "L R"
+      },
+      {
+        "letter": "C",
+        "place": "Jocassee Gorges",
+        "area": "Lake Jocassee and surrounding ridges",
+        "credit": "Clemson3564"
+      },
+      {
+        "letter": "A",
+        "place": "Hunting Island State Park",
+        "area": "Sandy dune and maritime palms",
+        "credit": "Dennis Derringer / longoaks"
+      },
+      {
+        "letter": "R",
+        "place": "Botany Bay Wildlife Management Area",
+        "area": "Boneyard beach",
+        "credit": "Angelique / adeclercq"
+      },
+      {
+        "letter": "O",
+        "place": "Cape Romain National Wildlife Refuge",
+        "area": "Wilderness salt marsh",
+        "credit": "Steve Hillebrand / USFWS"
+      },
+      {
+        "letter": "L",
+        "place": "Francis Marion National Forest",
+        "area": "Ephemeral wetland and longleaf pine",
+        "credit": "Melanie Olds / USFWS"
+      },
+      {
+        "letter": "I",
+        "place": "Edisto Beach",
+        "area": "Atlantic surf at the state park entrance",
+        "credit": "U.S. DOT / FHWA, National Scenic Byways Program"
+      },
+      {
+        "letter": "N",
+        "place": "ACE Basin National Wildlife Refuge",
+        "area": "Combahee Unit impoundment",
+        "credit": "Bryan Woodward"
+      },
+      {
+        "letter": "A",
+        "place": "Jones Gap trail",
+        "area": "Small waterfall",
+        "credit": "JohnFoxe"
+      }
+    ]
+  },
+  "new-york-stacked": {
+    "name": "New York (Stacked)",
+    "letters": [
+      {
+        "letter": "N",
+        "place": "Niagara Falls State Park",
+        "area": "American Falls",
+        "credit": "Dr-Lechuza"
+      },
+      {
+        "letter": "E",
+        "place": "Adirondack Park",
+        "area": "Lower Ausable Lake and High Peaks",
+        "credit": "Sammetsfan"
+      },
+      {
+        "letter": "W",
+        "place": "Letchworth State Park",
+        "area": "Upper Falls",
+        "credit": "S. MacMillen"
+      },
+      {
+        "letter": "Y",
+        "place": "Watkins Glen State Park",
+        "area": "A close cascade between stratified gorge walls and a small pool",
+        "credit": "Lamar Gore / USFWS"
+      },
+      {
+        "letter": "O",
+        "place": "Fire Island National Seashore",
+        "area": "Atlantic surf, sandy beach, and vegetated barrier-island dunes",
+        "credit": "Owen Brenner / USGS"
+      },
+      {
+        "letter": "R",
+        "place": "Minnewaska State Park",
+        "area": "Battlement Terrace",
+        "credit": "Anthony22"
+      },
+      {
+        "letter": "K",
+        "place": "Kaaterskill Falls",
+        "area": "Catskill Park",
+        "credit": "USGS / Geology and Ecology of National Parks"
+      }
+    ]
   }
 }
