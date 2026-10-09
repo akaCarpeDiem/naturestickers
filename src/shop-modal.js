@@ -46,6 +46,10 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
           <section class="sx-d-letters" aria-labelledby="sx-d-letters-h" hidden>
             <h3 id="sx-d-letters-h" class="sx-label">In every letter</h3>
             <ol class="sx-d-letter-list"></ol>
+            <details class="sx-d-credits" hidden>
+              <summary>Photo credits</summary>
+              <ol class="sx-d-credit-list"></ol>
+            </details>
           </section>
         </div>
       </div>
@@ -65,6 +69,8 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
   const blurbEl = root.querySelector('.sx-d-blurb');
   const lettersSec = root.querySelector('.sx-d-letters');
   const lettersList = root.querySelector('.sx-d-letter-list');
+  const creditsEl = root.querySelector('.sx-d-credits');
+  const creditList = root.querySelector('.sx-d-credit-list');
 
   let current = null; // item shown
   let opener = null; // element to return focus to
@@ -108,13 +114,27 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
     // Warm the other style's art so toggling is instant.
     sib.filter((s) => !same(s, it)).forEach((s) => { const i = new Image(); i.src = `/stickers/all/${artKey(s)}-1400.webp`; });
 
-    const data = info[slug(it.state)] || {};
+    // Edition-specific records (e.g. new-york-stacked) override the state's own entry; the blurb falls back to the state.
+    const data = { ...(info[slug(it.state)] || {}), ...(info[groupKey(it)] || {}) };
     blurbEl.textContent = data.blurb || '';
     blurbEl.hidden = !data.blurb;
     const letters = Array.isArray(data.letters) ? data.letters.filter((l) => l && l.letter && l.place) : [];
     lettersSec.hidden = letters.length === 0;
     lettersList.innerHTML = letters
-      .map((l) => `<li><span class="sx-d-letter" aria-hidden="true">${escapeHtml(l.letter)}</span><span><span class="sr-only">${escapeHtml(l.letter)}: </span>${escapeHtml(l.place)}</span></li>`)
+      .map((l) => `
+        <li>
+          <span class="sx-d-letter" aria-hidden="true">${escapeHtml(l.letter)}</span>
+          <span class="sx-d-place">
+            <span class="sr-only">${escapeHtml(l.letter)}: </span><strong>${escapeHtml(l.place)}</strong>
+            ${l.area ? `<span class="sx-d-area">${escapeHtml(l.area)}</span>` : ''}
+          </span>
+        </li>`)
+      .join('');
+    const credited = letters.filter((l) => l.credit);
+    creditsEl.hidden = credited.length === 0;
+    creditsEl.open = false;
+    creditList.innerHTML = credited
+      .map((l) => `<li><span class="sx-d-credit-letter">${escapeHtml(l.letter)}</span> ${escapeHtml(l.place)}: ${escapeHtml(l.credit)}</li>`)
       .join('');
   }
 
