@@ -1,2 +1,4 @@
 # Cloudflare Pages pretty URLs handle /terms, /privacy, /contact, /shop, /thanks
 https://www.naturestickers.shop/* https://naturestickers.shop/:splat 301
+/states /shop 301
+/states/ /shop 301
