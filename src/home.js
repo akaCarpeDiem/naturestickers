@@ -32,14 +32,13 @@ const STYLES = {
 };
 
 const DWELL = 4600; // ms each state stays on screen
-const SIZES = '(max-width: 900px) 88vw, min(640px, 46vw)';
+const SIZES = '(max-width: 900px) 88vw, min(680px, 48vw)';
 
 const showcase = document.querySelector('[data-showcase]');
 
 if (showcase) {
   const plate = showcase.querySelector('[data-plate]');
   const link = showcase.querySelector('[data-link]');
-  const caption = showcase.querySelector('[data-caption]');
   const pauseBtn = showcase.querySelector('[data-pause]');
   const styleBtns = Array.from(showcase.querySelectorAll('[data-style]'));
 
@@ -70,13 +69,6 @@ if (showcase) {
     if (link) {
       link.href = `/shop#${style === 'photo' ? slug : `${slug}-stained-glass`}`;
       link.setAttribute('aria-label', `Shop the ${name} sticker, ${STYLES[style].toLowerCase()}`);
-    }
-    if (caption) {
-      const text = `${name} \u00B7 ${STYLES[style]}`;
-      if (caption.textContent === text) return;
-      if (reduceMotion.matches) { caption.textContent = text; return; }
-      caption.classList.add('is-swapping');
-      setTimeout(() => { caption.textContent = text; caption.classList.remove('is-swapping'); }, 260);
     }
   };
 
