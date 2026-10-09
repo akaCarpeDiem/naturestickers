@@ -101,11 +101,6 @@
 
 .showcase-left { display: flex; flex-direction: column; gap: 14px; }
 
-.showcase-caption {
-  font-size: var(--step--1); font-weight: 600; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--sage);
-  min-height: 1.4em; margin: 0;
-}
 
 /* The controls only do something with JS, so hide them otherwise.
    The hero still renders a full sticker without them. */
@@ -360,13 +355,12 @@
 }
 .hero-split {
   display: grid; align-items: center;
-  grid-template-columns: minmax(0, 33rem) minmax(0, 1fr);
-  gap: clamp(28px, 4vw, 64px);
+  grid-template-columns: minmax(0, 30rem) minmax(0, 1fr);
+  gap: clamp(28px, 2.4vw, 40px);
 }
-.hero-split .hero-copy { max-width: 33rem; }
+.hero-split .hero-copy { max-width: 30rem; }
 .hero-split .showcase { margin-top: 0; min-width: 0; }
-.hero-split .showcase-stage { padding: clamp(18px, 2.4vw, 34px) clamp(14px, 2vw, 28px); }
-.hero-split .showcase-controls { margin-top: 18px; gap: 14px; }
+.hero-split .showcase-stage { padding: clamp(18px, 2.4vw, 34px) clamp(10px, 1vw, 14px); }
 
 /* Values bar, dark, at the foot of the first screen */
 .values.values-night {
@@ -431,9 +425,10 @@
 .showcase-plate.is-xfade .showcase-layer,
 .showcase-plate.is-xfade .showcase-layer.is-out { transform: none; filter: blur(0) var(--shadow); }
 
-.hero-split .showcase-controls { flex-wrap: wrap; justify-content: flex-start; align-items: center; }
-.hero-split .showcase-caption { flex: 1 1 auto; margin: 0; transition: opacity .3s var(--ease); }
-.showcase-caption.is-swapping { opacity: 0; }
+.hero-split .showcase-controls { position: relative; justify-content: center; align-items: center; margin-top: 18px; }
+/* Pause sits at the right edge so the style toggle stays truly centred under the box */
+.hero-split .showcase-pause { position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; opacity: .72; }
+.hero-split .showcase-pause:hover, .hero-split .showcase-pause:focus-visible { opacity: 1; }
 .showcase-pause {
   appearance: none; border: 0; cursor: pointer; flex: none;
   width: 44px; height: 44px; border-radius: 50%;
@@ -451,7 +446,6 @@
 
 @media (max-width: 720px) {
   .hero-split .showcase-controls { flex-direction: row; align-items: center; }
-  .hero-split .showcase-caption { order: 3; flex-basis: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
