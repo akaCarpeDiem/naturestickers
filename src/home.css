@@ -452,3 +452,13 @@
   .showcase-plate.is-floating { animation: none; }
   .showcase-layer, .showcase-layer.is-out { transform: none; filter: var(--shadow); transition: opacity .4s linear; }
 }
+
+/* The vertical bottle sticker runs nearly the full photo height, so the caption sits on top here */
+.craft-art.is-photo figcaption {
+  top: 0; bottom: auto;
+  padding: 18px 22px 44px;
+  background: linear-gradient(to bottom,
+    rgba(12, 21, 16, .9) 0%,
+    rgba(12, 21, 16, .7) 55%,
+    transparent 100%);
+}
