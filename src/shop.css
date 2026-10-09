@@ -25,7 +25,8 @@
 /* Catalog */
 .sx-catalog { background: var(--night); padding-top: clamp(20px, 3vw, 36px); }
 .sx-count { font-size: var(--step--1); color: var(--on-night-muted); margin: 0 0 18px; }
-.sx-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+/* Two columns: each row is one state, its two styles side by side (A–Z, styles adjacent). */
+.sx-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 2vw, 24px); }
 .sx-grid[hidden] { display: none; }
 
 /* Same surface as the homepage's "first five states" cards */
@@ -37,7 +38,8 @@
   transition: transform .5s var(--ease), box-shadow .5s var(--ease);
 }
 .sx-card:hover, .sx-card:focus-within { transform: translateY(-4px); box-shadow: inset 0 0 0 1px rgba(238, 244, 235, .16), var(--sh-lg); }
-.sx-art { display: grid; place-items: center; aspect-ratio: 16 / 8.5; padding: clamp(16px, 2.2vw, 26px); }
+/* Wordmarks are ~3:1, so a 2.5:1 frame with slim padding lets the art fill the card width. */
+.sx-art { display: grid; place-items: center; aspect-ratio: 5 / 2; padding: clamp(10px, 1.4vw, 18px); }
 .sx-art img {
   width: 100%; height: 100%; object-fit: contain;
   filter: drop-shadow(0 16px 20px rgba(0, 0, 0, .5));
@@ -85,11 +87,10 @@
 .sx-cart .cart-note a { color: var(--sage); }
 .sx-cart .cart-status { color: var(--sage); }
 
-@media (max-width: 1000px) { .sx-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 600px) {
   .sx-grid { grid-template-columns: 1fr; gap: 14px; }
   .sx-filter, .sx-search { width: 100%; }
   .sx-seg { display: flex; }
   .sx-seg .seg-btn { flex: 1 1 auto; padding: 0 12px; }
-  .sx-art { aspect-ratio: 16 / 7; }
+  .sx-art { aspect-ratio: 5 / 2; padding: 10px; }
 }
