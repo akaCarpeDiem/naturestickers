@@ -1,10 +1,12 @@
 /* Nature Stickers — dark "night" theme for subpages (shop, contact, legal, support, thanks).
    Same tokens and surfaces as the homepage hero / "Two styles" section. Content is unchanged. */
-body.page-night { background: var(--night); color: var(--on-night-muted); }
-.page-night main {
+/* The glow sits on <body> so the transparent header and the page share one continuous background. */
+body.page-night {
+  color: var(--on-night-muted);
   background:
-    radial-gradient(110% 55% at 50% -8%, var(--night-3) 0%, transparent 62%),
-    linear-gradient(176deg, var(--night-2) 0%, var(--night) 58%);
+    radial-gradient(110% 700px at 50% -120px, var(--night-3) 0%, transparent 70%) no-repeat,
+    linear-gradient(176deg, var(--night-2) 0, var(--night) 900px) no-repeat,
+    var(--night);
 }
 .page-night h1, .page-night h2, .page-night h3 { color: var(--on-night); }
 .page-night .eyebrow { color: var(--sage); }
