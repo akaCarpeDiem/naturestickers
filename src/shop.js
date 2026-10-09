@@ -2,6 +2,7 @@
 import './main.js';
 import { addToCart } from './cart.js';
 import { announce, escapeHtml, money } from './cart-ui.js';
+import { createModal } from './shop-modal.js';
 
 const grid = document.getElementById('state-grid');
 const tools = document.getElementById('states-tools');
@@ -82,7 +83,7 @@ function card(it) {
   const size = it.v?.size ? escapeHtml(it.v.size) : '';
   const alt = escapeHtml(`${title} sticker, ${it.style}`);
   return `
-    <article class="sx-card">
+    <article class="sx-card" data-id="${it.v.sync_variant_id}" tabindex="0" aria-haspopup="dialog" aria-label="${escapeHtml(`${title}, ${it.style}, ${money(it.v.retail_price)}. Open details`)}">
       <div class="sx-art">
         <img src="/stickers/all/${artKey(it)}.webp" srcset="/stickers/all/${artKey(it)}.webp 800w, /stickers/all/${artKey(it)}-1400.webp 1400w" sizes="(max-width: 600px) calc(100vw - 60px), (max-width: 1280px) calc(50vw - 60px), 580px" data-fallback="${escapeHtml(it.thumb)}" alt="${alt}" width="800" height="270" loading="lazy" decoding="async" />
       </div>
@@ -154,6 +155,7 @@ async function load(attempt = 0) {
       return;
     }
     setData(products);
+    if (!hashHandled && modal.fromHash()) { hashHandled = true; openFromHash(); }
     // A large catalog fills in over a few requests; poll briefly until complete.
     if (data.partial && attempt < 5) setTimeout(() => load(attempt + 1), 1500);
   } catch {
@@ -190,11 +192,7 @@ clearBtn?.addEventListener('click', () => {
   search?.focus();
 });
 
-grid?.addEventListener('click', (e) => {
-  const btn = e.target.closest('.add-btn');
-  if (!btn) return;
-  const it = items.find((x) => String(x.v.sync_variant_id) === btn.dataset.id);
-  if (!it) return;
+function addItem(it, btn) {
   addToCart({
     sync_variant_id: it.v.sync_variant_id,
     name: `${it.state}${it.edition ? ` (${it.edition})` : ''} — ${it.style} · ${it.v.size || ''}`.replace(/ · $/, ''),
@@ -205,7 +203,40 @@ grid?.addEventListener('click', (e) => {
   btn.classList.add('is-added');
   btn.firstChild.textContent = 'Added ✓';
   setTimeout(() => { btn.classList.remove('is-added'); btn.firstChild.textContent = 'Add to cart'; }, 1600);
+}
+
+const modal = createModal({ getItems: () => items, artKey, slug, onAdd: addItem });
+const byId = (id) => items.find((x) => String(x.v.sync_variant_id) === String(id));
+
+grid?.addEventListener('click', (e) => {
+  const btn = e.target.closest('.add-btn');
+  if (btn) {
+    const it = byId(btn.dataset.id);
+    if (it) addItem(it, btn);
+    return;
+  }
+  const tile = e.target.closest('.sx-card');
+  if (!tile || window.getSelection()?.toString()) return;
+  modal.open(byId(tile.dataset.id), { from: tile.querySelector('.sx-art'), trigger: tile });
 });
+
+grid?.addEventListener('keydown', (e) => {
+  if (e.key !== 'Enter' && e.key !== ' ') return;
+  const tile = e.target;
+  if (!(tile instanceof HTMLElement) || !tile.classList.contains('sx-card')) return; // the tile itself, not its Add button
+  e.preventDefault();
+  modal.open(byId(tile.dataset.id), { from: tile.querySelector('.sx-art'), trigger: tile });
+});
+
+// Shared links: /shop#alabama or /shop#alabama-stained-glass open that sticker once the catalog is in.
+let hashHandled = false;
+function openFromHash() {
+  const it = modal.fromHash();
+  if (!it) return;
+  const tile = grid.querySelector(`.sx-card[data-id="${CSS.escape(String(it.v.sync_variant_id))}"]`);
+  modal.open(it, { from: tile?.querySelector('.sx-art'), trigger: tile, updateHash: false });
+}
+window.addEventListener('hashchange', () => { if (modal.fromHash()) openFromHash(); else if (modal.isOpen() && !location.hash) modal.close(); });
 
 readUrl();
 load();

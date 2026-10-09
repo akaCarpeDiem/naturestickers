@@ -1,0 +1,202 @@
+{
+  "alabama": {
+    "name": "Alabama",
+    "blurb": "Waterfalls, hardwood ridges and slow rivers. Alabama runs from the last foothills of the Appalachians down to white-sand Gulf beaches, with canyons, mossy creeks and quiet bayous in between. It's a place that rewards anyone who takes the long way.",
+    "letters": []
+  },
+  "alaska": {
+    "name": "Alaska",
+    "blurb": "Glaciers, tundra and braided rivers on a scale that's hard to believe. Alaska is home to North America's tallest peak, endless coastline and summer days that barely end. Every view feels like the edge of the map.",
+    "letters": []
+  },
+  "arizona": {
+    "name": "Arizona",
+    "blurb": "Canyon country and red rock. Arizona holds the Grand Canyon, forests of saguaro cactus and sandstone glowing orange at sunset. The desert here is anything but empty. It's layered, sculpted and full of light.",
+    "letters": []
+  },
+  "arkansas": {
+    "name": "Arkansas",
+    "blurb": "Ozark hills, bluffs and clear creeks. Arkansas is a green, rolling state of tall limestone cliffs, spring-fed rivers and steaming hot springs. It's made for slow float trips and long porch evenings.",
+    "letters": []
+  },
+  "california": {
+    "name": "California",
+    "blurb": "Granite domes, redwoods and desert bloom. California packs towering forests, high Sierra peaks, wild coastline and wide desert valleys into one sprawling state. Few places hold this many landscapes within a day's drive.",
+    "letters": []
+  },
+  "colorado": {
+    "name": "Colorado",
+    "blurb": "High peaks, alpine lakes and golden aspen. Colorado sits on the spine of the Rockies, with dozens of summits over 14,000 feet, sand dunes at the foot of the mountains and canyons carved deep into dark rock. The air is thin and the views are huge.",
+    "letters": []
+  },
+  "connecticut": {
+    "name": "Connecticut",
+    "blurb": "Rocky shoreline, rolling hills and old stone walls. Connecticut tucks quiet forests, river valleys and Long Island Sound beaches into a small corner of New England. In autumn, the whole state catches fire with color.",
+    "letters": []
+  },
+  "delaware": {
+    "name": "Delaware",
+    "blurb": "Marsh grass, sandy beaches and big Atlantic skies. Delaware's small coastline is full of dunes, tidal wetlands and migrating shorebirds. It's a gentle, salt-air kind of beautiful.",
+    "letters": []
+  },
+  "florida": {
+    "name": "Florida",
+    "blurb": "Sawgrass, mangroves and turquoise water. Florida stretches from the Everglades' river of grass to coral reefs, crystal springs and long white beaches. Wildlife is everywhere, from herons to manatees.",
+    "letters": []
+  },
+  "georgia": {
+    "name": "Georgia",
+    "blurb": "Blue Ridge mountains, live oaks and salt marsh. Georgia climbs from barrier islands and Spanish moss up to waterfalls and misty ridgelines in the north. It's a state of warm evenings and winding back roads.",
+    "letters": []
+  },
+  "hawaii": {
+    "name": "Hawaii",
+    "blurb": "Volcanoes, waterfalls and impossibly blue water. Hawaii's islands rise from the Pacific with black-sand beaches, sea cliffs and rainforest valleys. The land here is still being made.",
+    "letters": []
+  },
+  "idaho": {
+    "name": "Idaho",
+    "blurb": "Jagged peaks, wild rivers and wide open sky. Idaho is a backcountry state of whitewater canyons, alpine lakes and huge stretches of protected wilderness. It's rugged country for anyone who loves to wander.",
+    "letters": []
+  },
+  "illinois": {
+    "name": "Illinois",
+    "blurb": "Prairie, sandstone canyons and the shores of a great lake. Beyond its famous skyline, Illinois hides wooded bluffs, river valleys and tallgrass prairie. Its quiet corners surprise people who only know the flatlands.",
+    "letters": []
+  },
+  "indiana": {
+    "name": "Indiana",
+    "blurb": "Dunes, hardwood forests and rolling limestone hills. Indiana meets Lake Michigan with towering sand dunes, then runs south through forests, creeks and caves. It's an easygoing, green kind of wild.",
+    "letters": []
+  },
+  "iowa": {
+    "name": "Iowa",
+    "blurb": "Rolling hills, prairie and big river bluffs. Iowa sits between the Mississippi and Missouri rivers, with restored tallgrass prairie, wooded bluffs and wide skies. It's quieter than you'd expect, and lovelier too.",
+    "letters": []
+  },
+  "kansas": {
+    "name": "Kansas",
+    "blurb": "Tallgrass prairie and endless horizons. Kansas holds some of the last great tallgrass prairie in North America, along with chalk formations and wide, glowing sunsets. The sky is the main event here.",
+    "letters": []
+  },
+  "kentucky": {
+    "name": "Kentucky",
+    "blurb": "Bluegrass, sandstone arches and deep caves. Kentucky is a state of horse country, rolling hills and the world's longest known cave system. Its forests and gorges glow in the fall.",
+    "letters": []
+  },
+  "louisiana": {
+    "name": "Louisiana",
+    "blurb": "Bayous, cypress swamps and slow water. Louisiana is a watery world of Spanish moss, wetlands and wading birds where the Mississippi meets the Gulf. Its landscapes feel soft, green and alive.",
+    "letters": []
+  },
+  "maine": {
+    "name": "Maine",
+    "blurb": "Rocky coast, lighthouses and deep north woods. Maine is pine forests, granite shorelines and quiet lakes, and its coast is one of the first places in the country to catch the sunrise. It's wild, salty and wonderfully remote.",
+    "letters": []
+  },
+  "maryland": {
+    "name": "Maryland",
+    "blurb": "Chesapeake shoreline, wild ponies and mountain ridges. Maryland spans bay marshes, barrier-island beaches and forested Appalachian hills in a surprisingly small space. It's a state built around water.",
+    "letters": []
+  },
+  "massachusetts": {
+    "name": "Massachusetts",
+    "blurb": "Sandy capes, salt marshes and forested hills. Massachusetts reaches from the dunes of Cape Cod to the rolling Berkshires, with plenty of old New England charm in between. Every season looks good here.",
+    "letters": []
+  },
+  "michigan": {
+    "name": "Michigan",
+    "blurb": "Great Lakes shoreline, sand dunes and northern forests. Michigan is wrapped by fresh water, with colorful sandstone cliffs, waterfalls and thousands of inland lakes. It's a summer-cabin dream, all year long.",
+    "letters": []
+  },
+  "minnesota": {
+    "name": "Minnesota",
+    "blurb": "Ten thousand lakes, north woods and Lake Superior's rocky shore. Minnesota is a land of canoe country, loons and tall pines. Its waters glow at sunset and sparkle under the northern lights.",
+    "letters": []
+  },
+  "mississippi": {
+    "name": "Mississippi",
+    "blurb": "River bluffs, pine forests and barrier islands. Mississippi stretches from the great river it's named for down to the white sands of the Gulf Coast. It's a slow, green, lovely place.",
+    "letters": []
+  },
+  "missouri": {
+    "name": "Missouri",
+    "blurb": "Ozark springs, clear rivers and limestone bluffs. Missouri is home to spring-fed rivers, rolling forests and caves tucked into its hills. It's made for paddling and wandering.",
+    "letters": []
+  },
+  "montana": {
+    "name": "Montana",
+    "blurb": "Big sky, glacier-carved peaks and wild rivers. Montana holds sweeping plains, high mountain lakes and some of the wildest country in the lower 48. Out here the horizon just keeps going.",
+    "letters": []
+  },
+  "nebraska": {
+    "name": "Nebraska",
+    "blurb": "Sandhills, prairie rivers and wide open skies. Nebraska is grass-covered dunes, towering rock landmarks and the spring sandhill crane migration along the Platte. Its beauty is quiet and enormous.",
+    "letters": []
+  },
+  "nevada": {
+    "name": "Nevada",
+    "blurb": "Desert ranges, red rock and alpine lakes. Nevada is a land of mountain range after mountain range, with fiery sandstone valleys, ancient bristlecone pines and Lake Tahoe's clear water. The desert here is bigger and wilder than most people imagine.",
+    "letters": []
+  },
+  "new-hampshire": {
+    "name": "New Hampshire",
+    "blurb": "Granite peaks, covered bridges and blazing autumn color. New Hampshire's White Mountains rise above clear lakes, rushing streams and deep forests. It's classic New England, rugged and bright.",
+    "letters": []
+  },
+  "new-jersey": {
+    "name": "New Jersey",
+    "blurb": "Pine barrens, sandy shores and river gorges. New Jersey is greener than its reputation, with quiet pine forests, the Delaware Water Gap and long stretches of Atlantic beach. It's full of easy escapes.",
+    "letters": []
+  },
+  "new-mexico": {
+    "name": "New Mexico",
+    "blurb": "Red mesas, white sands and endless desert light. New Mexico is high desert, gypsum dunes, deep caverns and mountains glowing pink at sunset. Its skies are some of the clearest anywhere.",
+    "letters": []
+  },
+  "new-york": {
+    "name": "New York",
+    "blurb": "Mountain lakes, waterfalls and old-growth forest. New York reaches far beyond its famous city, into the Adirondacks, the Catskills, deep gorges and the thunder of Niagara Falls. It's a state with a wild heart.",
+    "letters": []
+  },
+  "north-carolina": {
+    "name": "North Carolina",
+    "blurb": "Blue Ridge peaks and Outer Banks dunes. North Carolina runs from misty Appalachian summits to windswept barrier islands, with waterfalls and forests in between. It's mountains and sea in one.",
+    "letters": []
+  },
+  "north-dakota": {
+    "name": "North Dakota",
+    "blurb": "Badlands, prairie and wide-open sky. North Dakota's painted buttes and grasslands are home to bison and wild horses. It's a quiet, sweeping landscape that stays with you.",
+    "letters": []
+  },
+  "ohio": {
+    "name": "Ohio",
+    "blurb": "Forested gorges, sandstone caves and Lake Erie shoreline. Ohio hides hemlock ravines, waterfalls and rolling river valleys beyond its farmland. It's full of shady trails and surprising corners.",
+    "letters": []
+  },
+  "oklahoma": {
+    "name": "Oklahoma",
+    "blurb": "Red dirt, granite mountains and tallgrass prairie. Oklahoma mixes rolling plains, wooded hills and ancient worn-down peaks under huge skies. Its sunsets are something else.",
+    "letters": []
+  },
+  "oregon": {
+    "name": "Oregon",
+    "blurb": "Rugged coast, volcanic peaks and mossy forests. Oregon has the country's deepest lake, waterfalls by the dozen and high desert to the east. Few places feel this green and this wild.",
+    "letters": []
+  },
+  "pennsylvania": {
+    "name": "Pennsylvania",
+    "blurb": "Rolling mountains, deep forests and waterfall glens. Pennsylvania's Appalachian ridges, river valleys and dark night skies hold more wild country than most expect. Fall here is unforgettable.",
+    "letters": []
+  },
+  "rhode-island": {
+    "name": "Rhode Island",
+    "blurb": "Ocean cliffs, salt ponds and sandy beaches. The smallest state has a long, lovely coastline, with rocky points, quiet islands and bay views at every turn. It's a little state with a lot of sea.",
+    "letters": []
+  },
+  "south-carolina": {
+    "name": "South Carolina",
+    "blurb": "Salt marsh, live oaks and Blue Ridge foothills. South Carolina stretches from sea islands and old-growth swamp forest up to mountain waterfalls. Its light is warm and its pace is gentle.",
+    "letters": []
+  }
+}
