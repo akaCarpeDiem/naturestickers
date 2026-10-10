@@ -1264,7 +1264,7 @@
       {
         "letter": "H",
         "place": "Arethusa Falls",
-        "area": "Tall waterfall over layered rock, snow, and conifers"
+        "area": ""
       },
       {
         "letter": "A",
@@ -1274,7 +1274,7 @@
       {
         "letter": "M",
         "place": "Glen Ellis Falls",
-        "area": "Vertical Glen Ellis waterfall, dark cliff, and plunge pool"
+        "area": ""
       },
       {
         "letter": "P",
@@ -1320,12 +1320,12 @@
       {
         "letter": "E",
         "place": "Pinelands National Reserve",
-        "area": "Dark Pine Barrens river water, wooded banks, and green canopy"
+        "area": ""
       },
       {
         "letter": "W",
         "place": "Sandy Hook, Gateway National Recreation Area",
-        "area": "Sandy Hook dune face, coastal vegetation, sand, and blue sky"
+        "area": ""
       },
       {
         "letter": "J",
@@ -1366,12 +1366,12 @@
       {
         "letter": "N",
         "place": "White Sands National Park",
-        "area": "White gypsum dunes, a swept dune crest, and blue sky"
+        "area": ""
       },
       {
         "letter": "E",
         "place": "Carlsbad Caverns National Park",
-        "area": "Well-lit massive cave column and stalagmites in the Big Room"
+        "area": ""
       },
       {
         "letter": "W",
@@ -1406,7 +1406,7 @@
       {
         "letter": "O",
         "place": "Wheeler Peak area, Carson National Forest",
-        "area": "Alpine tundra, rock, and lingering snow in the Wheeler Peak area"
+        "area": ""
       }
     ]
   },
@@ -1432,12 +1432,12 @@
       {
         "letter": "Y",
         "place": "Watkins Glen State Park",
-        "area": "A close cascade between stratified gorge walls and a small pool"
+        "area": ""
       },
       {
         "letter": "O",
         "place": "Fire Island National Seashore",
-        "area": "Atlantic surf, sandy beach, and vegetated barrier-island dunes"
+        "area": ""
       },
       {
         "letter": "R",
@@ -1458,12 +1458,12 @@
       {
         "letter": "N",
         "place": "Great Smoky Mountains National Park",
-        "area": "Forested Smoky Mountain ridges and a cove valley"
+        "area": ""
       },
       {
         "letter": "O",
         "place": "Cape Hatteras National Seashore",
-        "area": "Sea oats, rippled sand, dunes, and the Atlantic at dawn"
+        "area": ""
       },
       {
         "letter": "R",
@@ -1493,7 +1493,7 @@
       {
         "letter": "R",
         "place": "Chimney Rock State Park",
-        "area": "Chimney Rock’s sheer cliff and the wooded valley below"
+        "area": ""
       },
       {
         "letter": "O",
@@ -1503,7 +1503,7 @@
       {
         "letter": "L",
         "place": "Joyce Kilmer Memorial Forest",
-        "area": "Nantahala National Forest"
+        "area": ""
       },
       {
         "letter": "I",
@@ -1513,7 +1513,7 @@
       {
         "letter": "N",
         "place": "Alligator River National Wildlife Refuge",
-        "area": "Still blackwater, wetland vegetation, and the distant tree line"
+        "area": ""
       },
       {
         "letter": "A",
@@ -1529,17 +1529,17 @@
       {
         "letter": "N",
         "place": "Theodore Roosevelt National Park",
-        "area": "South Unit, Painted Canyon"
+        "area": ""
       },
       {
         "letter": "O",
         "place": "Theodore Roosevelt National Park",
-        "area": "South Unit, Little Missouri River at Ekblom Trail"
+        "area": ""
       },
       {
         "letter": "R",
         "place": "Theodore Roosevelt National Park",
-        "area": "North Unit, Little Missouri River and badland cliffs"
+        "area": ""
       },
       {
         "letter": "T",
@@ -1559,17 +1559,17 @@
       {
         "letter": "A",
         "place": "Lostwood National Wildlife Refuge",
-        "area": "Windmill Unit pothole"
+        "area": ""
       },
       {
         "letter": "K",
         "place": "J. Clark Salyer National Wildlife Refuge",
-        "area": "Sunset over refuge water and marsh vegetation"
+        "area": ""
       },
       {
         "letter": "O",
         "place": "Chase Lake National Wildlife Refuge",
-        "area": "Open Chase Lake water with a distant prairie shoreline"
+        "area": ""
       },
       {
         "letter": "T",
@@ -1784,7 +1784,7 @@
       {
         "letter": "E",
         "place": "Ninigret National Wildlife Refuge",
-        "area": "Barrier beach and pond"
+        "area": ""
       },
       {
         "letter": "I",
@@ -1794,27 +1794,27 @@
       {
         "letter": "S",
         "place": "Arcadia",
-        "area": "Snow-covered woods reflected in a watercourse"
+        "area": ""
       },
       {
         "letter": "L",
         "place": "Watchaug Pond, Burlingame State Park",
-        "area": "Lake and forest"
+        "area": ""
       },
       {
         "letter": "A",
         "place": "John H. Chafee National Wildlife Refuge",
-        "area": "Narrow River salt marsh"
+        "area": ""
       },
       {
         "letter": "N",
         "place": "Beavertail State Park",
-        "area": "Distant rocky point and water, lighthouse excluded"
+        "area": ""
       },
       {
         "letter": "D",
         "place": "Block Island National Wildlife Refuge",
-        "area": "North Light dunes, lighthouse and sign excluded"
+        "area": ""
       }
     ]
   },
@@ -1825,12 +1825,12 @@
       {
         "letter": "S",
         "place": "Congaree National Park",
-        "area": "Boardwalk and old-growth forest"
+        "area": ""
       },
       {
         "letter": "O",
         "place": "Table Rock State Park",
-        "area": "Granite face, viewed from SC Highway 11"
+        "area": ""
       },
       {
         "letter": "U",
@@ -1845,32 +1845,32 @@
       {
         "letter": "H",
         "place": "Chattooga Wild and Scenic River",
-        "area": "Rocky river and wooded bank"
+        "area": ""
       },
       {
         "letter": "C",
         "place": "Jocassee Gorges",
-        "area": "Lake Jocassee and surrounding ridges"
+        "area": ""
       },
       {
         "letter": "A",
         "place": "Hunting Island State Park",
-        "area": "Sandy dune and maritime palms"
+        "area": ""
       },
       {
         "letter": "R",
         "place": "Botany Bay Wildlife Management Area",
-        "area": "Boneyard beach"
+        "area": ""
       },
       {
         "letter": "O",
         "place": "Cape Romain National Wildlife Refuge",
-        "area": "Wilderness salt marsh"
+        "area": ""
       },
       {
         "letter": "L",
         "place": "Francis Marion National Forest",
-        "area": "Ephemeral wetland and longleaf pine"
+        "area": ""
       },
       {
         "letter": "I",
@@ -1880,7 +1880,7 @@
       {
         "letter": "N",
         "place": "ACE Basin National Wildlife Refuge",
-        "area": "Combahee Unit impoundment"
+        "area": ""
       },
       {
         "letter": "A",
@@ -1910,12 +1910,12 @@
       {
         "letter": "Y",
         "place": "Watkins Glen State Park",
-        "area": "A close cascade between stratified gorge walls and a small pool"
+        "area": ""
       },
       {
         "letter": "O",
         "place": "Fire Island National Seashore",
-        "area": "Atlantic surf, sandy beach, and vegetated barrier-island dunes"
+        "area": ""
       },
       {
         "letter": "R",
