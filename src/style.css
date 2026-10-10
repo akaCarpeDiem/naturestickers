@@ -494,7 +494,7 @@ h1, h2, h3 {
 }
 
 /* ——————————————————————————————————————————————
-   Header: slogan + Etsy button (same on every page)
+   Header: slogan (same on every page)
    —————————————————————————————————————————————— */
 .brand-wrap { display: flex; align-items: center; gap: 16px; min-width: 0; }
 .brand-tag {
@@ -502,29 +502,7 @@ h1, h2, h3 {
   color: var(--sage); white-space: nowrap;
   padding-left: 16px; border-left: 1px solid rgba(169, 193, 156, .32);
 }
-.nav a.nav-etsy,
-.site-header.over-dark .nav a.nav-etsy {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 10px 17px 10px 13px; border-radius: var(--r-pill);
-  background: #F1641E; color: #fff;
-  font-weight: 600; line-height: 1;
-  box-shadow: 0 8px 20px -12px rgba(241, 100, 30, .9);
-  transition: background-color .25s, transform .3s var(--ease);
-}
-.nav a.nav-etsy:hover { background: #D9531A; transform: translateY(-1px); }
-.nav a.nav-etsy::after { display: none; }
-.nav a.nav-etsy svg { width: 17px; height: 17px; fill: currentColor; flex: none; }
-.nav a.nav-etsy:focus-visible { outline: 3px solid var(--sage); outline-offset: 2px; }
 @media (max-width: 1180px) { .brand-tag { display: none; } }
-@media (max-width: 640px) {
-  .nav a.nav-etsy, .site-header.over-dark .nav a.nav-etsy {
-    display: inline-flex; justify-content: center;
-    width: 40px; height: 40px; min-height: 0; padding: 0;
-  }
-  .nav a.nav-etsy span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-  .nav { gap: 10px; }
-}
-
 /* Footer: same deep-green glow as the top of the homepage hero */
 .site-footer {
   background:
