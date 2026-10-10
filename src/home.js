@@ -1,6 +1,6 @@
 // Nature Stickers — homepage behaviour.
 // 1. Sticker showcase: rotates through popular states; toggle between the two art styles.
-// 2. Header theme swap while the dark hero is on screen.
+// (The whole page is dark now, so the header always uses its over-dark style.)
 // 3. The 50-state atlas tiles.
 //
 // Everything here is progressive enhancement: without JS the hero still
@@ -192,37 +192,6 @@ document.querySelectorAll('.state-card:not(.is-more)').forEach((card) => {
     if (touchOnly.matches) card.classList.toggle('is-flipped');
   });
 });
-
-/* ——————————————————————————————————————————————
-   2. Header theme while the dark hero is on screen
-   —————————————————————————————————————————————— */
-
-const hero = document.querySelector('.hero');
-const siteHeader = document.querySelector('.site-header');
-
-if (hero && siteHeader && 'IntersectionObserver' in window) {
-  let io;
-
-  const watch = () => {
-    io?.disconnect();
-    const h = siteHeader.offsetHeight || 78;
-    io = new IntersectionObserver(
-      ([entry]) => siteHeader.classList.toggle('over-dark', entry.isIntersecting),
-      { rootMargin: `-${h}px 0px 0px 0px`, threshold: 0 },
-    );
-    io.observe(hero);
-  };
-
-  watch();
-
-  let resizeTimer;
-  window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(watch, 180);
-  }, { passive: true });
-} else if (hero && siteHeader) {
-  siteHeader.classList.add('over-dark');
-}
 
 /* ——————————————————————————————————————————————
    3. 50-state atlas

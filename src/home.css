@@ -452,3 +452,51 @@
   .showcase-plate.is-floating { animation: none; }
   .showcase-layer, .showcase-layer.is-out { transform: none; filter: var(--shadow); transition: opacity .4s linear; }
 }
+
+/* ——————————————————————————————————————————————
+   One deep-green family down the whole homepage, with soft hand-offs
+   —————————————————————————————————————————————— */
+body { background: var(--night); }
+
+/* Craft: continues straight on from "Two styles" (night) and drifts a touch lighter */
+.craft.on-night { background: linear-gradient(180deg, var(--night) 0%, var(--night-2) 100%); }
+.on-night .craft-list div { border-top-color: var(--line-night); }
+.on-night .craft-list div:last-child { border-bottom-color: var(--line-night); }
+.on-night .craft-list dt { color: var(--on-night); }
+.on-night .craft-list dd { color: var(--on-night-muted); }
+.on-night .craft-art { box-shadow: inset 0 0 0 1px var(--line-night), 0 50px 80px -46px rgba(0, 0, 0, .95); }
+
+/* Follow: the lighter green band (was cream → sky blue); fades in and out */
+.follow.on-night {
+  background:
+    radial-gradient(70% 60% at 50% 50%, rgba(169, 193, 156, .08), transparent 70%),
+    linear-gradient(180deg, var(--night-2) 0%, var(--night-3) 50%, var(--night-2) 100%);
+}
+.on-night .follow-card {
+  background: linear-gradient(170deg, rgba(238, 244, 235, .08), rgba(238, 244, 235, .03));
+  box-shadow: inset 0 0 0 1px var(--line-night), 0 30px 50px -36px rgba(0, 0, 0, .9);
+}
+.on-night .follow-card:hover {
+  background: linear-gradient(170deg, rgba(238, 244, 235, .12), rgba(238, 244, 235, .05));
+  box-shadow: inset 0 0 0 1px rgba(238, 244, 235, .26), 0 30px 50px -30px rgba(0, 0, 0, .95);
+}
+.on-night .follow-icon { background: var(--sage); color: var(--night); }
+.on-night .follow-text b { color: var(--on-night); }
+.on-night .follow-text span { color: var(--on-night-muted); }
+.on-night .follow-arrow { color: var(--sage); }
+
+/* Contact: settles back to night-2 and ends in a mirror of the footer's top glow,
+   so the footer (hero background) picks up without a seam */
+.contact.on-night {
+  background:
+    radial-gradient(120% 90% at 50% 110%, var(--night-3) 0%, transparent 62%),
+    var(--night-2);
+}
+.on-night .contact-card {
+  background:
+    radial-gradient(90% 120% at 50% 0%, rgba(238, 244, 235, .08), transparent 70%),
+    linear-gradient(170deg, rgba(238, 244, 235, .06), rgba(238, 244, 235, .02));
+  box-shadow: inset 0 0 0 1px var(--line-night), 0 50px 80px -50px rgba(0, 0, 0, .9);
+}
+.on-night .contact-card a:not(.btn) { color: var(--sage); }
+.on-night .contact-card a:not(.btn):hover { color: var(--on-night); }
