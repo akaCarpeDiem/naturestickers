@@ -301,7 +301,9 @@ h1, h2, h3 {
   border-radius: var(--r-xl);
   box-shadow: inset 0 0 0 1px var(--line), var(--sh-md);
 }
-.contact-card h2 { font-size: var(--step-3); margin: 14px 0; }
+.contact-card h2 { font-size: var(--step-3); margin: 14px 0 6px; }
+.contact-card .contact-sub { font-family: var(--serif); font-size: var(--step-2); letter-spacing: -0.012em; line-height: 1.3; color: var(--forest); margin: 0 0 16px; }
+.on-night .contact-card .contact-sub { color: var(--sage); }
 .contact-card .section-lede { margin-inline: auto; }
 .contact-card a:not(.btn) { color: var(--clay-2); text-underline-offset: 3px; }
 
