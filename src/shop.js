@@ -3,6 +3,7 @@ import './main.js';
 import { addToCart } from './cart.js';
 import { announce, escapeHtml, money } from './cart-ui.js';
 import { createModal } from './shop-modal.js';
+import { sizeLabel } from './size-label.js';
 
 const grid = document.getElementById('state-grid');
 const tools = document.getElementById('states-tools');
@@ -80,7 +81,7 @@ function artKey(it) {
 
 function card(it) {
   const title = `${it.state}${it.edition ? ` (${it.edition})` : ''}`;
-  const size = it.v?.size ? escapeHtml(it.v.size) : '';
+  const size = it.v?.size ? escapeHtml(sizeLabel(it.v.size)) : '';
   const alt = escapeHtml(`${title} sticker, ${it.style}`);
   return `
     <article class="sx-card" data-id="${it.v.sync_variant_id}" tabindex="0" aria-haspopup="dialog" aria-label="${escapeHtml(`${title}, ${it.style}, ${money(it.v.retail_price)}. Open details`)}">
@@ -195,7 +196,7 @@ clearBtn?.addEventListener('click', () => {
 function addItem(it, btn) {
   addToCart({
     sync_variant_id: it.v.sync_variant_id,
-    name: `${it.state}${it.edition ? ` (${it.edition})` : ''} — ${it.style} · ${it.v.size || ''}`.replace(/ · $/, ''),
+    name: `${it.state}${it.edition ? ` (${it.edition})` : ''} — ${it.style} · ${sizeLabel(it.v.size)}`.replace(/ · $/, ''),
     thumbnail: it.thumb || null,
     retail_price: it.v.retail_price,
   });

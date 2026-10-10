@@ -1,4 +1,5 @@
 /** Small localStorage cart for Nature Stickers shop. */
+import { cleanSizeText } from './size-label.js';
 const KEY = 'nv_cart';
 
 export function readCart() {
@@ -9,7 +10,7 @@ export function readCart() {
       .map((row) => ({
         sync_variant_id: Number(row.sync_variant_id),
         qty: Number(row.qty),
-        name: String(row.name || ''),
+        name: cleanSizeText(row.name),
         thumbnail: row.thumbnail || null,
         retail_price: row.retail_price != null ? String(row.retail_price) : null,
       }))
