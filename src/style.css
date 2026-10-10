@@ -513,3 +513,10 @@ h1, h2, h3 {
     linear-gradient(176deg, var(--night-2) 0%, var(--night) 72%);
   background-color: var(--night);
 }
+/* Sticker logo (stained-glass NATURE STICKERS die-cut) in header + footer */
+.brand .brand-logo, .footer-logo { display: block; line-height: 0; }
+.brand .brand-logo img { height: 54px; width: auto; display: block; filter: drop-shadow(0 3px 6px rgba(0, 0, 0, .35)); }
+.footer-logo img { height: 70px; width: auto; display: block; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .35)); }
+@media (max-width: 640px) {
+  .brand .brand-logo img { height: 40px; }
+}
