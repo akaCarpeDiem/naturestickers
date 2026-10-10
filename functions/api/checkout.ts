@@ -70,7 +70,11 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     lineItems.push({
       sync_variant_id: item.sync_variant_id,
       qty: item.qty,
-      name: String(v.name || `Variant ${item.sync_variant_id}`),
+      // Display name only (Stripe line item). Printful still gets the variant by id.
+      name: String(v.name || `Variant ${item.sync_variant_id}`).replace(
+        /6\s*(?:″|”|"|in\.?)?\s*[x×X]\s*6\s*(?:″|”|"|in\.?)?/g,
+        "6″ wide",
+      ),
       unit_cents: cents,
     });
   }

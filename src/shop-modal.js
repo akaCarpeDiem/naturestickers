@@ -2,6 +2,7 @@
 // animates from the tile, and is shareable via #<state> / #<state>-stained-glass.
 import { escapeHtml, money } from './cart-ui.js';
 import info from './data/state-info.json';
+import { sizeLabel, SIZE_NOTE } from './size-label.js';
 
 const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const isSheet = () => window.matchMedia('(max-width: 600px)').matches;
@@ -87,7 +88,8 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
     titleEl.textContent = title;
     styleEl.textContent = it.style;
     priceEl.textContent = money(it.v.retail_price);
-    sizeEl.textContent = it.v?.size || '';
+    sizeEl.textContent = sizeLabel(it.v?.size);
+    sizeEl.title = it.v?.size ? SIZE_NOTE : '';
     sizeEl.hidden = !it.v?.size;
     addBtn.dataset.id = it.v.sync_variant_id;
     addBtn.classList.remove('is-added');
