@@ -72,7 +72,7 @@
   /* —— Space —— */
   --gutter: clamp(20px, 4vw, 48px);
   --section-y: clamp(68px, 8vw, 128px);
-  --header-h: 78px;
+  --header-h: 94px;
 
   /* —— Shape —— */
   --r-sm: 10px;
@@ -475,7 +475,7 @@ h1, h2, h3 {
   .follow-row { grid-template-columns: 1fr; max-width: 520px; }
 }
 @media (max-width: 640px) {
-  :root { --header-h: 66px; }
+  :root { --header-h: 74px; }
   .brand img { height: 30px; }
   .nav a:not(.nav-cta) { display: none; }
   .nav .nav-cta-sm { display: inline-flex; }
@@ -515,8 +515,8 @@ h1, h2, h3 {
 }
 /* Sticker logo (stained-glass NATURE STICKERS die-cut) in header + footer */
 .brand .brand-logo, .footer-logo { display: block; line-height: 0; }
-.brand .brand-logo img { height: 54px; width: auto; display: block; filter: drop-shadow(0 3px 6px rgba(0, 0, 0, .35)); }
+.brand .brand-logo img { height: 70px; width: auto; display: block; filter: drop-shadow(0 3px 6px rgba(0, 0, 0, .35)); }
 .footer-logo img { height: 70px; width: auto; display: block; filter: drop-shadow(0 4px 10px rgba(0, 0, 0, .35)); }
 @media (max-width: 640px) {
-  .brand .brand-logo img { height: 40px; }
+  .brand .brand-logo img { height: 52px; }
 }
