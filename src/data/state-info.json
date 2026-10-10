@@ -1889,6 +1889,476 @@
       }
     ]
   },
+  "south-dakota": {
+    "name": "South Dakota",
+    "blurb": "Badlands, granite spires and rolling prairie. South Dakota runs from striped buttes and bison country to the pine-dark Black Hills, with caves, canyons and big rivers in between. It's a place made for long drives and longer views.",
+    "letters": [
+      {
+        "letter": "S",
+        "place": "Badlands National Park",
+        "area": "Wall and pinnacles"
+      },
+      {
+        "letter": "O",
+        "place": "Badlands National Park",
+        "area": "Bison prairie"
+      },
+      {
+        "letter": "U",
+        "place": "Wind Cave National Park",
+        "area": "Ponderosa-dotted prairie"
+      },
+      {
+        "letter": "T",
+        "place": "Custer State Park",
+        "area": "Sylvan Lake and granite"
+      },
+      {
+        "letter": "H",
+        "place": "Black Elk Peak, Black Hills National Forest",
+        "area": ""
+      },
+      {
+        "letter": "D",
+        "place": "The Needles, Custer State Park",
+        "area": "Single granite spire"
+      },
+      {
+        "letter": "A",
+        "place": "Spearfish Canyon",
+        "area": "Spearfish Falls and limestone"
+      },
+      {
+        "letter": "K",
+        "place": "Jewel Cave National Monument",
+        "area": ""
+      },
+      {
+        "letter": "O",
+        "place": "Buffalo Gap National Grassland",
+        "area": "Mixed-grass breaks"
+      },
+      {
+        "letter": "T",
+        "place": "Missouri National Recreational River",
+        "area": ""
+      },
+      {
+        "letter": "A",
+        "place": "Lacreek National Wildlife Refuge",
+        "area": "Prairie marsh"
+      }
+    ]
+  },
+  "tennessee": {
+    "name": "Tennessee",
+    "blurb": "Smoky ridges, roaring falls and quiet cypress lakes. Tennessee climbs from Mississippi River swamps to the high Appalachians, with stone arches and gorges tucked into its plateaus. Every hollow seems to hide another waterfall.",
+    "letters": [
+      {
+        "letter": "T",
+        "place": "Great Smoky Mountains National Park",
+        "area": "High Rocks ridge from Clingmans Dome"
+      },
+      {
+        "letter": "E",
+        "place": "Fall Creek Falls State Park",
+        "area": "Main plunge"
+      },
+      {
+        "letter": "N",
+        "place": "Burgess Falls State Park",
+        "area": "Main falls and gorge"
+      },
+      {
+        "letter": "N",
+        "place": "Rock Island State Park",
+        "area": "Twin Falls"
+      },
+      {
+        "letter": "E",
+        "place": "Big South Fork NRRA",
+        "area": "South Arch of Twin Arches"
+      },
+      {
+        "letter": "S",
+        "place": "Big South Fork NRRA",
+        "area": "Angel Falls Overlook"
+      },
+      {
+        "letter": "S",
+        "place": "Obed Wild and Scenic River",
+        "area": "Clear river and sandstone boulders"
+      },
+      {
+        "letter": "E",
+        "place": "Reelfoot Lake",
+        "area": "Bald cypress at twilight"
+      },
+      {
+        "letter": "E",
+        "place": "Roan Mountain, Cherokee National Forest",
+        "area": "Rhododendron garden in bloom"
+      }
+    ]
+  },
+  "texas": {
+    "name": "Texas",
+    "blurb": "Desert canyons, granite domes and Gulf beaches. Texas holds river-cut gorges at Big Bend, red cliffs in the Panhandle and miles of wild seashore. There's always more of it than you expect.",
+    "letters": [
+      {
+        "letter": "T",
+        "place": "Big Bend National Park",
+        "area": "Santa Elena Canyon"
+      },
+      {
+        "letter": "E",
+        "place": "Guadalupe Mountains National Park",
+        "area": "El Capitan"
+      },
+      {
+        "letter": "X",
+        "place": "Palo Duro Canyon State Park",
+        "area": "Red canyon overlook"
+      },
+      {
+        "letter": "A",
+        "place": "Enchanted Rock State Natural Area",
+        "area": "Granite dome"
+      },
+      {
+        "letter": "S",
+        "place": "Padre Island National Seashore",
+        "area": "Gulf beach and dunes"
+      }
+    ]
+  },
+  "utah": {
+    "name": "Utah",
+    "blurb": "Red rock, slot canyons and arches against blue sky. Utah's parks are carved into hoodoos, cliffs and sandstone spans that glow at sunrise. It looks like another planet, and it's all right here.",
+    "letters": [
+      {
+        "letter": "U",
+        "place": "Zion National Park",
+        "area": "Canyon from Emerald Pools trailhead"
+      },
+      {
+        "letter": "T",
+        "place": "Bryce Canyon National Park",
+        "area": "Hoodoos"
+      },
+      {
+        "letter": "A",
+        "place": "Arches National Park",
+        "area": "Delicate Arch"
+      },
+      {
+        "letter": "H",
+        "place": "Canyonlands National Park",
+        "area": "Grand View Point"
+      }
+    ]
+  },
+  "vermont": {
+    "name": "Vermont",
+    "blurb": "Green mountains, granite gorges and clear lakes. Vermont is ridgeline trails, covered-bridge rivers and quiet marshes along Lake Champlain. It's small, steep and lovely in every season.",
+    "letters": [
+      {
+        "letter": "V",
+        "place": "Mount Mansfield",
+        "area": "Summit ridge"
+      },
+      {
+        "letter": "E",
+        "place": "Camel’s Hump State Park",
+        "area": "Distinct summit"
+      },
+      {
+        "letter": "R",
+        "place": "Quechee State Park",
+        "area": "Quechee Gorge and Ottauquechee River"
+      },
+      {
+        "letter": "M",
+        "place": "Texas Falls",
+        "area": "Green Mountain National Forest"
+      },
+      {
+        "letter": "O",
+        "place": "Lake Willoughby",
+        "area": "Mount Pisgah cliff and lake"
+      },
+      {
+        "letter": "N",
+        "place": "Lake Champlain islands",
+        "area": "View from White’s Beach, South Hero"
+      },
+      {
+        "letter": "T",
+        "place": "Missisquoi National Wildlife Refuge",
+        "area": "Stephen Young Marsh"
+      }
+    ]
+  },
+  "virginia": {
+    "name": "Virginia",
+    "blurb": "Blue Ridge overlooks, rocky summits and tidal marsh. Virginia runs from Appalachian ledges and highland ponies down to river gorges and Atlantic dunes. It's an easy state to fall for at sunrise.",
+    "letters": [
+      {
+        "letter": "V",
+        "place": "Shenandoah National Park",
+        "area": "Buck Hollow Overlook sunrise ridge"
+      },
+      {
+        "letter": "I",
+        "place": "Old Rag",
+        "area": "Summit boulder scramble"
+      },
+      {
+        "letter": "R",
+        "place": "McAfee Knob",
+        "area": "Appalachian Trail ledge"
+      },
+      {
+        "letter": "G",
+        "place": "Grayson Highlands State Park",
+        "area": "Wilburn Ridge open highlands"
+      },
+      {
+        "letter": "I",
+        "place": "Crabtree Falls",
+        "area": "George Washington National Forest"
+      },
+      {
+        "letter": "N",
+        "place": "Great Falls Park",
+        "area": "Mather Gorge from the Virginia River Trail"
+      },
+      {
+        "letter": "I",
+        "place": "Chincoteague National Wildlife Refuge",
+        "area": "Atlantic dunes and beach"
+      },
+      {
+        "letter": "A",
+        "place": "Great Dismal Swamp National Wildlife Refuge",
+        "area": "Cypress and reflective water"
+      }
+    ]
+  },
+  "washington": {
+    "name": "Washington",
+    "blurb": "Volcanoes, rainforest and wild Pacific coast. Washington stacks glaciers, mossy old-growth forest, basalt waterfalls and island shores into one corner of the map. The weather changes fast and the views never quit.",
+    "letters": [
+      {
+        "letter": "W",
+        "place": "Mount Rainier National Park",
+        "area": "Peak and wildflower meadow"
+      },
+      {
+        "letter": "A",
+        "place": "Olympic National Park",
+        "area": "Hoh rainforest Hall of Mosses"
+      },
+      {
+        "letter": "S",
+        "place": "Olympic National Park",
+        "area": "Ruby Beach rocks and waves"
+      },
+      {
+        "letter": "H",
+        "place": "North Cascades National Park",
+        "area": "Trapper Lake and jagged peaks"
+      },
+      {
+        "letter": "I",
+        "place": "Mount St. Helens National Volcanic Monument",
+        "area": "Crater and blast plain"
+      },
+      {
+        "letter": "N",
+        "place": "Palouse Falls State Park",
+        "area": "Basalt plunge"
+      },
+      {
+        "letter": "G",
+        "place": "Sun Lakes–Dry Falls State Park",
+        "area": "Dry Falls scabland cliffs"
+      },
+      {
+        "letter": "T",
+        "place": "San Juan Islands National Monument",
+        "area": "Point Colville rocky coast"
+      },
+      {
+        "letter": "O",
+        "place": "Deception Pass State Park",
+        "area": "Tidal water and rocky shoreline"
+      },
+      {
+        "letter": "N",
+        "place": "Billy Frank Jr. Nisqually National Wildlife Refuge",
+        "area": "Spring marsh"
+      }
+    ]
+  },
+  "west-virginia": {
+    "name": "West Virginia",
+    "blurb": "Deep gorges, high bogs and wild whitewater. West Virginia is all mountains, with sandstone cliffs, misty highlands and rivers that roar through the hollows. Almost heaven, as the song says.",
+    "letters": [
+      {
+        "letter": "W",
+        "place": "New River Gorge National Park and Preserve",
+        "area": ""
+      },
+      {
+        "letter": "E",
+        "place": "Seneca Rocks",
+        "area": "Monongahela National Forest"
+      },
+      {
+        "letter": "S",
+        "place": "Blackwater Falls State Park",
+        "area": "Falls and plunge pool"
+      },
+      {
+        "letter": "T",
+        "place": "Dolly Sods Wilderness",
+        "area": ""
+      },
+      {
+        "letter": "V",
+        "place": "Spruce Knob",
+        "area": "Rocky summit and spruce"
+      },
+      {
+        "letter": "I",
+        "place": "Falls of Hills Creek",
+        "area": ""
+      },
+      {
+        "letter": "R",
+        "place": "South Branch Potomac River near Smoke Hole",
+        "area": ""
+      },
+      {
+        "letter": "G",
+        "place": "Canaan Valley National Wildlife Refuge",
+        "area": ""
+      },
+      {
+        "letter": "I",
+        "place": "Cranberry Glades Botanical Area",
+        "area": ""
+      },
+      {
+        "letter": "N",
+        "place": "Bluestone National Scenic River",
+        "area": ""
+      },
+      {
+        "letter": "I",
+        "place": "Gauley River National Recreation Area",
+        "area": ""
+      },
+      {
+        "letter": "A",
+        "place": "Coopers Rock State Forest",
+        "area": "Cheat River overlook"
+      }
+    ]
+  },
+  "wisconsin": {
+    "name": "Wisconsin",
+    "blurb": "Sandstone shores, north woods and river bluffs. Wisconsin holds sea caves on Lake Superior, quartzite cliffs, waterfalls and golden marshes full of birds. It's a quiet, lake-studded kind of wild.",
+    "letters": [
+      {
+        "letter": "W",
+        "place": "Apostle Islands National Lakeshore",
+        "area": "Sandstone island shoreline"
+      },
+      {
+        "letter": "I",
+        "place": "Devil’s Lake State Park",
+        "area": "Devils Doorway quartzite"
+      },
+      {
+        "letter": "S",
+        "place": "Interstate State Park",
+        "area": "Dalles of the St. Croix from Wisconsin bank"
+      },
+      {
+        "letter": "C",
+        "place": "Pattison State Park",
+        "area": "Big Manitou Falls"
+      },
+      {
+        "letter": "O",
+        "place": "Peninsula State Park",
+        "area": "Eagle Bluff limestone cliffs over Green Bay"
+      },
+      {
+        "letter": "N",
+        "place": "Chequamegon-Nicolet National Forest",
+        "area": "North woods lake"
+      },
+      {
+        "letter": "S",
+        "place": "Horicon National Wildlife Refuge",
+        "area": "Golden marsh"
+      },
+      {
+        "letter": "I",
+        "place": "Wyalusing State Park",
+        "area": "Mississippi and Wisconsin river valley"
+      },
+      {
+        "letter": "N",
+        "place": "Parfrey’s Glen",
+        "area": "Rocky creek and gorge"
+      }
+    ]
+  },
+  "wyoming": {
+    "name": "Wyoming",
+    "blurb": "Geysers, granite peaks and endless high plains. Wyoming is home to Yellowstone's hot springs, the jagged Tetons and towers of stone rising from the prairie. It's the West at its biggest and wildest.",
+    "letters": [
+      {
+        "letter": "W",
+        "place": "Yellowstone National Park",
+        "area": "Grand Prismatic Spring"
+      },
+      {
+        "letter": "Y",
+        "place": "Yellowstone National Park",
+        "area": "Lower Falls and Grand Canyon yellow walls"
+      },
+      {
+        "letter": "O",
+        "place": "Grand Teton National Park",
+        "area": "Peaks above Jenny Lake"
+      },
+      {
+        "letter": "M",
+        "place": "Devils Tower National Monument",
+        "area": "Columnar tower"
+      },
+      {
+        "letter": "I",
+        "place": "Bridger Wilderness",
+        "area": "Cirque of the Towers west-side granite spires above Shadow Lake"
+      },
+      {
+        "letter": "N",
+        "place": "Fossil Butte National Monument",
+        "area": "Layered cliffs"
+      },
+      {
+        "letter": "G",
+        "place": "Cloud Peak Wilderness",
+        "area": "Alpine lakes and cliffs from Cloud Peak summit"
+      }
+    ]
+  },
   "new-york-stacked": {
     "name": "New York (Stacked)",
     "letters": [
