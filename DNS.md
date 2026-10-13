@@ -1,6 +1,6 @@
 # DNS for naturestickers.shop
 
-Pages project: `naturestickers` → https://naturestickers.pages.dev (created 2026-10-07; old project `naturevinyls` still serves naturevinyls.com).
+Pages project: `naturestickers` → https://naturestickers.pages.dev (created 2026-10-07; old project `naturevinyls` deleted 2026-10-13; naturevinyls.com is retired).
 
 The naturestickers.shop zone is on the Cloudflare account (nameservers dan/khloe.ns.cloudflare.com).
 Custom domains `naturestickers.shop` and `www.naturestickers.shop` were added to the `naturestickers`
