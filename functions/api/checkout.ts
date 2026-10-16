@@ -1,5 +1,5 @@
 import { json, methodNotAllowed, type Env } from "../lib/http";
-import { getSyncVariant } from "../lib/printful";
+import { getSyncVariant, isHidden } from "../lib/printful";
 import {
   FLAT_SHIPPING_CENTS,
   FLAT_SHIPPING_LABEL,
@@ -57,7 +57,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       return json({ error: `Unknown sync_variant_id: ${item.sync_variant_id}` }, 400);
     }
     const v = looked.variant;
-    if (v.is_ignored) {
+    if (v.is_ignored || isHidden(v.sync_product_id, item.sync_variant_id)) {
       return json({ error: `Variant ${item.sync_variant_id} is not available.` }, 400);
     }
     const cents = dollarsToCents(v.retail_price);
