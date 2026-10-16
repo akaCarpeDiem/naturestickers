@@ -14,7 +14,7 @@
  * Checkout always re-prices from Printful, so a briefly stale display price is never charged.
  */
 import type { Env } from "./http";
-import { listAllSummaries, printful, storeId, toCatalogProduct, type CatalogProduct } from "./printful";
+import { isHidden, listAllSummaries, printful, storeId, toCatalogProduct, type CatalogProduct } from "./printful";
 
 export const CATALOG_TTL_MS = 10 * 60 * 1000; // refresh at most every 10 min
 const STALE_KEEP_SEC = 7 * 24 * 60 * 60; // keep last good catalog a week for fallback
@@ -82,7 +82,7 @@ function productsOf(c: StoredCatalog): CatalogProduct[] {
   const out: CatalogProduct[] = [];
   for (const id of c.order) {
     const e = c.byId[String(id)];
-    if (e?.p) out.push(e.p);
+    if (e?.p && !isHidden(e.p.id)) out.push(e.p);
   }
   return out;
 }
