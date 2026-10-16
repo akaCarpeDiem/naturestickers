@@ -49,13 +49,21 @@ export type CatalogProduct = {
   variants: CatalogVariant[];
 };
 
+/** Printful products/variants kept off this site (still left untouched in Printful). */
+export const HIDDEN_PRODUCT_IDS = new Set<number>([482042440]); // Custom Name Sticker - Kaylee
+export const HIDDEN_VARIANT_IDS = new Set<number>([5576649079]);
+export function isHidden(productId: unknown, variantId?: unknown): boolean {
+  return HIDDEN_PRODUCT_IDS.has(Number(productId)) || HIDDEN_VARIANT_IDS.has(Number(variantId));
+}
+
 /** Shape one /store/products/{id} detail into the shop's CatalogProduct (null = nothing sellable). */
 export function toCatalogProduct(result: any, summary: any = {}): CatalogProduct | null {
   const sp = result?.sync_product || summary;
+  if (isHidden(sp?.id)) return null;
   const variantsRaw = result?.sync_variants || [];
   const variants: CatalogVariant[] = [];
   for (const v of variantsRaw) {
-    if (v?.is_ignored) continue;
+    if (v?.is_ignored || isHidden(sp?.id, v?.id)) continue;
     const retail = v?.retail_price != null ? String(v.retail_price) : "";
     if (!retail || Number(retail) <= 0) continue; // skip unsellable without retail
     variants.push({
