@@ -105,7 +105,7 @@ if (showcase) {
     const article = /^[aeiou]/i.test(name) ? 'an' : 'a';
     spare.alt = `${name} state-name sticker, ${STYLES[st].toLowerCase()} style: each letter frames ${article} ${name} landscape`;
     spare.removeAttribute('aria-hidden');
-    live.alt = '';
+    live.alt = 'State-name sticker slideshow, next design';
     live.setAttribute('aria-hidden', 'true');
 
     requestAnimationFrame(() => {
