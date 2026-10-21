@@ -12,6 +12,16 @@ const statePages = fs.existsSync(shopDir)
     )
   : {};
 
+// Image-source pages from the same script (sources/<key>.html → /sources/<key>).
+const sourcesDir = resolve(__dirname, 'sources');
+const sourcePages = fs.existsSync(sourcesDir)
+  ? Object.fromEntries(
+      fs.readdirSync(sourcesDir)
+        .filter((f) => f.endsWith('.html'))
+        .map((f) => [`sources-${f.slice(0, -5)}`, resolve(sourcesDir, f)]),
+    )
+  : {};
+
 export default defineConfig({
   root: '.',
   publicDir: 'public',
@@ -29,6 +39,7 @@ export default defineConfig({
         support: resolve(__dirname, 'support.html'),
         returns: resolve(__dirname, 'returns.html'),
         ...statePages,
+        ...sourcePages,
       },
     },
   },
