@@ -27,6 +27,7 @@ export default defineConfig({
         thanks: resolve(__dirname, 'thanks.html'),
         contact: resolve(__dirname, 'contact.html'),
         support: resolve(__dirname, 'support.html'),
+        returns: resolve(__dirname, 'returns.html'),
         ...statePages,
       },
     },

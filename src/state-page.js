@@ -105,5 +105,9 @@ async function load(attempt = 0) {
   update();
 }
 
+// ?style=<key> (the Offer URLs in the structured data) opens with that style selected.
+const wanted = new URLSearchParams(location.search).get('style');
+if (wanted && figs.some((f) => f.dataset.style === wanted)) select(wanted);
+
 update();
 load();

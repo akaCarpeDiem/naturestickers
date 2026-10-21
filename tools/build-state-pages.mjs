@@ -15,7 +15,27 @@ const STYLES = [
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 const info = JSON.parse(read('src/data/state-info.json'));
-const shopHtml = read('shop.html');
+let shopHtml = read('shop.html');
+
+// Shipping for the Product structured data comes from the same constant checkout charges.
+const shipCents = Number((read('functions/lib/stripe.ts').match(/FLAT_SHIPPING_CENTS\s*=\s*(\d+)/) || [])[1]);
+if (!Number.isInteger(shipCents) || shipCents < 0) throw new Error('build-state-pages: FLAT_SHIPPING_CENTS not found in functions/lib/stripe.ts');
+const SHIPPING = (shipCents / 100).toFixed(2);
+// Defects only (matches /returns and Merchant Center): report within 14 days, refund or replace, keep the item.
+const RETURN_POLICY = {
+  '@type': 'MerchantReturnPolicy',
+  applicableCountry: 'US',
+  returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+  merchantReturnDays: 14,
+  returnFees: 'https://schema.org/FreeReturn',
+  returnMethod: 'https://schema.org/KeepProduct',
+  merchantReturnLink: `${ORIGIN}/returns`,
+};
+const SHIPPING_DETAILS = {
+  '@type': 'OfferShippingDetails',
+  shippingRate: { '@type': 'MonetaryAmount', value: SHIPPING, currency: 'USD' },
+  shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US' },
+};
 
 const esc = (s) =>
   String(s ?? '')
@@ -118,20 +138,38 @@ function page(key, entry) {
           { '@type': 'ListItem', position: 3, name, item: url },
         ],
       },
-      ...styles.map((s) => ({
-        '@type': 'Product',
-        name: `${name} State Sticker (${s.label})`,
-        image: `${ORIGIN}${s.src}-1400.webp`,
+      {
+        '@type': 'ProductGroup',
+        '@id': `${url}#product`,
+        name: `${name} State Sticker`,
         description: blurb,
+        url,
+        image: styles.map((s) => `${ORIGIN}${s.src}-1400.webp`),
         brand: { '@type': 'Brand', name: 'Nature Stickers' },
-        offers: {
-          '@type': 'Offer',
-          priceCurrency: 'USD',
-          price: PRICE,
-          availability: 'https://schema.org/InStock',
-          url,
-        },
-      })),
+        productGroupID: key,
+        variesBy: ['https://schema.org/pattern'],
+        hasVariant: styles.map((s) => ({
+          '@type': 'Product',
+          '@id': `${url}#${s.key}`,
+          name: `${name} State Sticker (${s.label})`,
+          sku: `${key}-${s.key}`,
+          image: `${ORIGIN}${s.src}-1400.webp`,
+          description: blurb,
+          brand: { '@type': 'Brand', name: 'Nature Stickers' },
+          pattern: s.label,
+          inProductGroupWithID: key,
+          offers: {
+            '@type': 'Offer',
+            url: `${url}?style=${s.key}`,
+            priceCurrency: 'USD',
+            price: PRICE,
+            availability: 'https://schema.org/InStock',
+            itemCondition: 'https://schema.org/NewCondition',
+            shippingDetails: SHIPPING_DETAILS,
+            hasMerchantReturnPolicy: RETURN_POLICY,
+          },
+        })),
+      },
     ],
   };
 
@@ -220,6 +258,26 @@ ${footer}
 </body>
 </html>
 `;
+}
+
+// —— /shop: plain <a href> links to every state page (shop.js swaps in the live grid) ——
+const START = '<!-- state-links:start -->';
+const END = '<!-- state-links:end -->';
+const at = shopHtml.indexOf(START);
+const to = shopHtml.indexOf(END);
+if (at < 0 || to < at) throw new Error('build-state-pages: state-links markers not found in shop.html');
+const links = Object.keys(info)
+  .map((key) => [key, info[key].name])
+  .sort((a, b) => a[1].localeCompare(b[1]))
+  .map(([key, name]) => `\n            <li><a href="/shop/${key}">${esc(name)}</a></li>`)
+  .join('');
+const nextShop = `${shopHtml.slice(0, at + START.length)}
+          <ul class="sx-index" aria-label="All state stickers">${links}
+          </ul>
+          ${shopHtml.slice(to)}`;
+if (nextShop !== shopHtml) {
+  fs.writeFileSync(path.join(root, 'shop.html'), nextShop);
+  shopHtml = nextShop;
 }
 
 // —— Pages ——

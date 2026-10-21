@@ -28,6 +28,10 @@
 /* Two columns: each row is one state, its two styles side by side (A–Z, styles adjacent). */
 .sx-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(16px, 2vw, 24px); }
 .sx-grid[hidden] { display: none; }
+/* Plain links to every state page until the live grid loads (and for crawlers). */
+.sx-index { grid-column: 1 / -1; columns: 4 170px; column-gap: 24px; margin: 0; padding: 0; list-style: none; }
+.sx-index li { padding: 4px 0; break-inside: avoid; }
+.sx-index a { color: inherit; }
 
 /* Same surface as the homepage's "first five states" cards */
 .sx-card {
