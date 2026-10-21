@@ -385,6 +385,7 @@ ${header}
 ${footer}
 
   <script type="module" src="/src/main.js"></script>
+  <script type="module" src="/src/cart-ui.js"></script>
 </body>
 </html>
 `;
