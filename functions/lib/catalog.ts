@@ -11,6 +11,9 @@
  *     then the oldest; the rest reuse the cached copy. A big store fills in over a few
  *     requests, and the response says `partial: true` until it has every product.
  *   - if Printful errors, the last cached catalog is served (stale fallback).
+ *   - on a Printful 429 the rebuild stops and the cached copy records a short pause; until it
+ *     passes, requests serve the cached list without calling Printful, leaving the shared
+ *     120/min allowance for checkout and order creation.
  * Checkout always re-prices from Printful, so a briefly stale display price is never charged.
  */
 import type { Env } from "./http";
@@ -22,6 +25,7 @@ const SUBREQUEST_BUDGET = 45; // stay under the free plan's 50
 const CACHE_OPS = 2; // one match + one put
 const MAX_LIST_PAGES = 5; // up to 500 products
 const DETAIL_CONCURRENCY = 5; // Workers allow 6 simultaneous connections
+const RATE_LIMIT_PAUSE_MS = 60 * 1000; // Printful's limit is per rolling 60 s window
 
 type Entry = { p: CatalogProduct | null; at: number };
 export type StoredCatalog = {
@@ -30,6 +34,7 @@ export type StoredCatalog = {
   complete: boolean;
   order: number[];
   byId: Record<string, Entry>;
+  pausedUntil?: number; // set after a Printful 429: no Printful calls until then
 };
 
 export type CatalogResult = {
@@ -95,6 +100,15 @@ async function inBatches<T, R>(items: T[], size: number, fn: (t: T) => Promise<R
   return out;
 }
 
+/** Cached list while paused; with nothing cached yet it's an error, like a failed first build. */
+function pausedResult(c: StoredCatalog): CatalogResult {
+  const products = productsOf(c);
+  if (!products.length) {
+    return { ok: false, status: 503, products: [], partial: false, source: "error", error: "Printful is busy, try again in a minute" };
+  }
+  return { ok: true, status: 200, products, partial: !c.complete, source: "stale" };
+}
+
 export async function getCatalog(
   env: Env,
   cache: CatalogCache,
@@ -106,8 +120,18 @@ export async function getCatalog(
   if (stored && stored.complete && t0 - stored.builtAt < CATALOG_TTL_MS) {
     return { ok: true, status: 200, products: productsOf(stored), partial: false, source: "cache" };
   }
+  // Printful rate-limited a recent rebuild: serve the cached list without calling it.
+  if (stored && (stored.pausedUntil || 0) > t0) return pausedResult(stored);
 
   const list = await listAllSummaries(env, MAX_LIST_PAGES);
+  if (!list.ok && list.status === 429) {
+    console.warn("[catalog] Printful 429, pausing rebuild", "(product list)");
+    const paused: StoredCatalog = stored
+      ? { ...stored, pausedUntil: t0 + RATE_LIMIT_PAUSE_MS }
+      : { v: 1, builtAt: 0, complete: false, order: [], byId: {}, pausedUntil: t0 + RATE_LIMIT_PAUSE_MS };
+    waitUntil(cache.write(paused));
+    return pausedResult(paused);
+  }
   if (!list.ok) {
     if (stored) {
       return { ok: true, status: 200, products: productsOf(stored), partial: !stored.complete, source: "stale" };
@@ -131,14 +155,19 @@ export async function getCatalog(
   const byId: Record<string, Entry> = {};
   for (const id of order) if (prev[String(id)]) byId[String(id)] = prev[String(id)];
 
+  let rateLimited = false;
   await inBatches(toFetch, DETAIL_CONCURRENCY, async (id) => {
+    if (rateLimited) return; // stop spending calls once Printful says 429
     const res = await printful(env, `/store/products/${id}`);
     if (res.ok) byId[String(id)] = { p: toCatalogProduct(res.data?.result, summaryById.get(id)), at: now() };
+    else if (res.status === 429) rateLimited = true;
     // on failure keep the previous copy (if any); a missing one is retried next request
   });
+  if (rateLimited) console.warn("[catalog] Printful 429, pausing rebuild", "(product details)");
 
   const complete = order.every((id) => byId[String(id)]);
   const next: StoredCatalog = { v: 1, builtAt: complete ? t0 : 0, complete, order, byId };
+  if (rateLimited) next.pausedUntil = now() + RATE_LIMIT_PAUSE_MS;
   waitUntil(cache.write(next));
   return { ok: true, status: 200, products: productsOf(next), partial: !complete, source: "rebuilt" };
 }

@@ -53,6 +53,10 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const lineItems: { sync_variant_id: number; qty: number; name: string; unit_cents: number }[] = [];
   for (const item of parsed.items) {
     const looked = await getSyncVariant(env, item.sync_variant_id);
+    if (looked.status === 429) {
+      // Printful rate limit (shared with the catalog), not a bad item.
+      return json({ error: "Checkout is busy, please try again in a minute." }, 503, { "retry-after": "60" });
+    }
     if (!looked.ok || !looked.variant) {
       return json({ error: `Unknown sync_variant_id: ${item.sync_variant_id}` }, 400);
     }
