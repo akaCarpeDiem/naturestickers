@@ -33,7 +33,10 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
               <h2 class="sx-d-title" id="sx-d-title"></h2>
               <p class="sx-d-style"></p>
             </div>
-            <span class="sx-d-price"></span>
+            <div class="sx-d-pricebox">
+              <span class="sx-d-price"></span>
+              <a class="sx-d-page" href="/shop" hidden>Open full page ↗</a>
+            </div>
           </div>
           <div class="sx-d-toggle" hidden>
             <span class="sx-label" id="sx-d-toggle-label">Style</span>
@@ -59,6 +62,7 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
   const titleEl = root.querySelector('.sx-d-title');
   const styleEl = root.querySelector('.sx-d-style');
   const priceEl = root.querySelector('.sx-d-price');
+  const pageLink = root.querySelector('.sx-d-page');
   const sizeEl = root.querySelector('.sx-d-size');
   const addBtn = root.querySelector('.sx-d-add');
   const toggle = root.querySelector('.sx-d-toggle');
@@ -88,6 +92,9 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
     titleEl.textContent = title;
     styleEl.textContent = it.style;
     priceEl.textContent = money(it.v.retail_price);
+    // Every key in state-info.json has its own static page at /shop/<key>.
+    pageLink.href = `/shop/${groupKey(it)}`;
+    pageLink.hidden = !info[groupKey(it)];
     sizeEl.textContent = sizeLabel(it.v?.size);
     sizeEl.title = it.v?.size ? SIZE_NOTE : '';
     sizeEl.hidden = !it.v?.size;

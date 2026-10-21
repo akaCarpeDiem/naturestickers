@@ -1,5 +1,16 @@
 import { defineConfig } from 'vite';
+import fs from 'fs';
 import { resolve } from 'path';
+
+// Per-sticker pages written by tools/build-state-pages.mjs (shop/<key>.html → /shop/<key>).
+const shopDir = resolve(__dirname, 'shop');
+const statePages = fs.existsSync(shopDir)
+  ? Object.fromEntries(
+      fs.readdirSync(shopDir)
+        .filter((f) => f.endsWith('.html'))
+        .map((f) => [`shop-${f.slice(0, -5)}`, resolve(shopDir, f)]),
+    )
+  : {};
 
 export default defineConfig({
   root: '.',
@@ -16,6 +27,7 @@ export default defineConfig({
         thanks: resolve(__dirname, 'thanks.html'),
         contact: resolve(__dirname, 'contact.html'),
         support: resolve(__dirname, 'support.html'),
+        ...statePages,
       },
     },
   },
