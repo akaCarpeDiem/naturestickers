@@ -16,7 +16,8 @@ function parseCartMeta(cart: string | undefined): { sync_variant_id: number; qty
 async function createPrintfulOrder(env: Env, session: any): Promise<void> {
   const cart = parseCartMeta(session?.metadata?.cart);
   if (!cart.length) {
-    console.error("[stripe-webhook] missing cart metadata on session", session?.id);
+    // A retry can't fix this, so answer 200 and flag it for a manual order.
+    console.error("[stripe-webhook] NEEDS MANUAL FULFILLMENT: missing cart metadata on session", session?.id);
     return;
   }
 
@@ -26,7 +27,8 @@ async function createPrintfulOrder(env: Env, session: any): Promise<void> {
   const name = ship?.name || session.customer_details?.name || "Customer";
 
   if (!addr.line1 || !addr.city || !addr.country || !addr.postal_code) {
-    console.error("[stripe-webhook] incomplete shipping address on session", session?.id);
+    // A retry can't fix this, so answer 200 and flag it for a manual order.
+    console.error("[stripe-webhook] NEEDS MANUAL FULFILLMENT: incomplete shipping address on session", session?.id);
     return;
   }
 
@@ -91,7 +93,9 @@ async function createPrintfulOrder(env: Env, session: any): Promise<void> {
       res.status,
       JSON.stringify(res.data)?.slice(0, 500),
     );
-    return;
+    // Throw so onRequestPost answers 500 and Stripe retries. Safe: the external_id lookup
+    // above skips creating a second order if one already went through.
+    throw new Error(`Printful order failed (${res.status}) for ${session?.id}`);
   }
   console.log(
     "[stripe-webhook] Printful order ok",

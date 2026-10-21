@@ -5,6 +5,8 @@ const cartEl = document.getElementById('cart-panel');
 const cartCountEl = document.getElementById('cart-count');
 const checkoutBtn = document.getElementById('checkout-btn');
 const cartStatus = document.getElementById('cart-status');
+// Must match FLAT_SHIPPING_CENTS in functions/lib/stripe.ts.
+const FLAT_SHIPPING = 4.99;
 
 export function money(price) {
   const n = Number(price);
@@ -21,23 +23,41 @@ export function renderCart() {
     if (checkoutBtn) checkoutBtn.disabled = true;
     return;
   }
-  cartEl.innerHTML = cart
-    .map(
-      (item) => `
+  // Line totals skip items without a price (never show NaN).
+  const unit = (item) => {
+    const n = Number(item.retail_price);
+    return item.retail_price != null && Number.isFinite(n) ? n : null;
+  };
+  const lineText = (item) => {
+    const u = unit(item);
+    if (u == null) return '';
+    return item.qty > 1 ? `${money(u * item.qty)} (${money(u)} each)` : money(u);
+  };
+  const subtotal = cart.reduce((sum, item) => sum + (unit(item) ?? 0) * item.qty, 0);
+  cartEl.innerHTML =
+    cart
+      .map(
+        (item) => `
     <div class="cart-row" data-id="${item.sync_variant_id}">
       <div class="cart-row-main">
         <strong>${escapeHtml(item.name)}</strong>
-        <span class="cart-price">${item.retail_price ? money(item.retail_price) : ''}</span>
+        <span class="cart-price">${lineText(item)}</span>
       </div>
       <div class="cart-qty">
-        <button type="button" class="qty-btn" data-act="dec" aria-label="Decrease quantity">−</button>
+        <button type="button" class="qty-btn" data-act="dec" aria-label="Decrease quantity of ${escapeHtml(item.name)}">−</button>
         <span>${item.qty}</span>
-        <button type="button" class="qty-btn" data-act="inc" aria-label="Increase quantity">+</button>
-        <button type="button" class="qty-btn qty-remove" data-act="rm" aria-label="Remove">Remove</button>
+        <button type="button" class="qty-btn" data-act="inc" aria-label="Increase quantity of ${escapeHtml(item.name)}">+</button>
+        <button type="button" class="qty-btn qty-remove" data-act="rm" aria-label="Remove ${escapeHtml(item.name)}">Remove</button>
       </div>
     </div>`,
-    )
-    .join('');
+      )
+      .join('') +
+    `
+    <div class="cart-summary">
+      <div class="cart-summary-row"><span>Subtotal</span><span>${money(subtotal)}</span></div>
+      <div class="cart-summary-row"><span>Shipping</span><span>${money(FLAT_SHIPPING)} flat (US)</span></div>
+      <div class="cart-summary-row cart-summary-total"><span>Estimated total</span><span>${money(subtotal + FLAT_SHIPPING)}</span></div>
+    </div>`;
   if (checkoutBtn) checkoutBtn.disabled = false;
 }
 

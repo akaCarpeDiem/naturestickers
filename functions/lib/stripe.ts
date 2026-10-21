@@ -2,7 +2,7 @@ import type { Env } from "./http";
 
 /** PLACEHOLDER flat-rate shipping in USD cents. Replace with Printful shipping-rate lookup later. */
 export const FLAT_SHIPPING_CENTS = 499; // $4.99 — PLACEHOLDER flat rate
-export const FLAT_SHIPPING_LABEL = "Standard US shipping (placeholder flat rate)";
+export const FLAT_SHIPPING_LABEL = "Standard US shipping";
 
 export function shippingCountries(env: Env): string[] {
   const raw = (env.SHIPPING_COUNTRIES || "US").trim();

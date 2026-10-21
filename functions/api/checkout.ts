@@ -85,7 +85,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
   const params = new URLSearchParams();
   params.set("mode", "payment");
   params.set("success_url", `${origin}/thanks?session_id={CHECKOUT_SESSION_ID}`);
-  params.set("cancel_url", `${origin}/shop`);
+  params.set("cancel_url", `${origin}/shop#cart`);
   params.set("payment_method_types[0]", "card");
   params.set("billing_address_collection", "auto");
 

@@ -79,6 +79,8 @@
 .sx-cart .qty-btn { background: transparent; color: var(--on-night); border-color: var(--line-night); }
 .sx-cart .qty-btn:hover { border-color: var(--sage); background: rgba(238, 244, 235, .06); }
 .sx-cart .qty-remove { color: var(--on-night-muted); }
+.sx-cart .cart-summary-row { color: var(--on-night-muted); }
+.sx-cart .cart-summary-total { color: var(--on-night); }
 .sx-cart .cart-aside {
   background: linear-gradient(170deg, rgba(238, 244, 235, .07), rgba(238, 244, 235, .02));
   box-shadow: inset 0 0 0 1px var(--line-night);
@@ -94,6 +96,10 @@
   .sx-seg .seg-btn { flex: 1 1 auto; padding: 0 12px; }
   .sx-art { aspect-ratio: 5 / 2; padding: 10px; }
 }
+
+/* Sticker name links to its own page (a plain click still opens the popup) */
+.sx-name-link { color: inherit; text-decoration: none; }
+.sx-name-link:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
 
 /* ——— Expanded sticker (tile → dialog) ——— */
 .sx-card { cursor: zoom-in; }
@@ -194,3 +200,44 @@ html.sx-locked, html.sx-locked body { overflow: hidden; }
   .sx-card, .sx-card:hover, .sx-card:focus-within { transition: none; transform: none; }
 }
 .sx-d-letters h3.sx-label { font-family: var(--sans); margin: 0; }
+
+/* Popup: link to the sticker's own page, under the price */
+.sx-d-pricebox { display: grid; justify-items: end; gap: 6px; }
+.sx-d-page { font-size: var(--step--1); color: var(--sage); white-space: nowrap; }
+.sx-d-page[hidden] { display: none; }
+
+/* ——— State page: /shop/<key> ——— */
+.sp-crumb { font-size: var(--step--1); color: var(--on-night-muted); margin-bottom: 14px; }
+.sp-crumb a { color: var(--sage); }
+.sp-title { font-size: clamp(2rem, 1.2rem + 3vw, 3.5rem); color: var(--on-night); margin: 0 0 18px; }
+.sp-toggle { display: none; margin-bottom: 18px; }
+.js .sp-toggle { display: grid; }
+/* Both styles are in the HTML; the selected one is large, the other a smaller preview. */
+.sp-art { display: flex; flex-direction: column; align-items: center; gap: 18px; }
+.sp-fig { margin: 0; order: 2; width: min(420px, 60%); text-align: center; cursor: pointer; opacity: .8; transition: opacity .3s var(--ease); }
+.sp-fig:hover { opacity: 1; }
+.sp-fig.is-main { order: 1; width: 100%; max-width: 1000px; cursor: default; opacity: 1; }
+.sp-fig img { width: 100%; height: auto; filter: drop-shadow(0 22px 28px rgba(0, 0, 0, .55)); }
+.sp-fig figcaption { margin-top: 8px; font-size: var(--step--1); color: var(--on-night-muted); }
+.sp-fig.is-main figcaption { display: none; }
+.sp-info { background: var(--night-2); }
+.sp-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
+.sp-buy { display: grid; gap: 12px; justify-items: start; }
+.sp-price { margin: 0; display: flex; align-items: baseline; gap: 10px; color: var(--on-night); }
+.sp-style-name { font-size: var(--step--1); color: var(--on-night-muted); }
+.sp-size { margin: 0; font-size: var(--step--1); color: var(--on-night-muted); }
+.sp-buy .sx-add { min-height: 52px; padding: 0 28px; font-size: var(--step-0); }
+.sp-buy .sx-add:disabled { opacity: .55; cursor: not-allowed; transform: none; }
+.sp-status { min-height: 1.4em; margin: 0; font-size: var(--step--1); color: var(--sage); }
+.sp-status a { color: var(--on-night); }
+.sp-about .sx-d-letters { margin-top: 22px; }
+@media (max-width: 760px) {
+  .sp-grid { grid-template-columns: 1fr; }
+  .sp-buy .sx-add { width: 100%; }
+  .sp-fig:not(.is-main) { width: 70%; }
+}
+@media (max-width: 600px) {
+  .sp-about .sx-d-cols.is-two { grid-template-columns: minmax(0, 1fr); }
+  .sp-about .sx-d-cols.is-two .sx-d-list + .sx-d-list { margin-top: 14px; padding-top: 6px; border-top: 1px solid var(--line-night); }
+  .sp-about .sx-d-line { white-space: normal; }
+}

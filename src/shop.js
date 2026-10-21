@@ -2,6 +2,7 @@
 import './main.js';
 import { addToCart } from './cart.js';
 import { announce, escapeHtml, money } from './cart-ui.js';
+import { artKey, groupKey, parse, slug } from './catalog-parse.js';
 import { createModal } from './shop-modal.js';
 import { sizeLabel } from './size-label.js';
 
@@ -12,25 +13,6 @@ const search = document.getElementById('state-search');
 const countEl = document.getElementById('states-count');
 const emptyEl = document.getElementById('states-empty');
 const clearBtn = document.getElementById('clear-filters');
-
-const slug = (s) => String(s).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-
-/**
- * "New York Protected Lands Sticker (Stacked) — Real Photo"
- *   → { state: "New York", edition: "Stacked", style: "Real Photo" }
- * Styles come from the title suffix after the dash, so a new style in Printful
- * automatically becomes a new filter chip.
- */
-function parse(p) {
-  const name = String(p.name || '');
-  const m = name.match(/^(.*?)\s+[—–-]\s+([^—–]+)$/);
-  const base = (m ? m[1] : name).trim();
-  const style = m ? m[2].trim() : 'Original';
-  const edition = (base.match(/\(([^)]+)\)\s*$/) || [])[1] || '';
-  const state = base.replace(/\([^)]*\)\s*$/, '').replace(/\s+Protected Lands Sticker\s*$/i, '').replace(/\s+Sticker\s*$/i, '').trim();
-  const v = (p.variants || [])[0];
-  return { p, v, state, edition, style, styleKey: slug(style), thumb: p.thumbnail || v?.thumbnail || '' };
-}
 
 let items = [];
 let styles = []; // [{ key, label }]
@@ -73,12 +55,6 @@ function renderChips() {
   ].join('');
 }
 
-/** Transparent site art keyed like the Printful external_id: <state>[-<edition>]-<photo|stained-glass>. */
-function artKey(it) {
-  const style = it.styleKey === 'real-photo' ? 'photo' : it.styleKey;
-  return [slug(it.state), it.edition ? slug(it.edition) : '', style].filter(Boolean).join('-');
-}
-
 function card(it) {
   const title = `${it.state}${it.edition ? ` (${it.edition})` : ''}`;
   const size = it.v?.size ? escapeHtml(sizeLabel(it.v.size)) : '';
@@ -90,7 +66,7 @@ function card(it) {
       </div>
       <div class="sx-body">
         <div class="sx-title">
-          <h3 class="sx-name">${escapeHtml(title)}</h3>
+          <h3 class="sx-name"><a class="sx-name-link" href="/shop/${groupKey(it)}">${escapeHtml(title)}</a></h3>
           <p class="sx-style">${escapeHtml(it.style)}</p>
         </div>
         <span class="sx-price">${money(it.v.retail_price)}</span>
@@ -215,6 +191,12 @@ grid?.addEventListener('click', (e) => {
     const it = byId(btn.dataset.id);
     if (it) addItem(it, btn);
     return;
+  }
+  // The name links to /shop/<key>: a plain left click still opens the popup; modifier clicks follow the link.
+  const link = e.target.closest('.sx-name-link');
+  if (link) {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
   }
   const tile = e.target.closest('.sx-card');
   if (!tile || window.getSelection()?.toString()) return;
