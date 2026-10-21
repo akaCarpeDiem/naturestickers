@@ -1104,6 +1104,104 @@
       "kind": "pd"
     }
   ],
+  "illinois": [
+    {
+      "letter": "I",
+      "place": "Garden of the Gods, Shawnee National Forest",
+      "area": "Sandstone towers",
+      "credit": "user ChiSci",
+      "source": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Garden_of_the_Gods_1.JPG",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/a/a8/Garden_of_the_Gods_1.JPG",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    },
+    {
+      "letter": "L",
+      "place": "Starved Rock State Park",
+      "area": "Canyon waterfall",
+      "credit": "Yinan Chen",
+      "source": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Gfp-illinois-starved-rock-state-park-canyon-waterfall.jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/a/aa/Gfp-illinois-starved-rock-state-park-canyon-waterfall.jpg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    },
+    {
+      "letter": "L",
+      "place": "Cypress Creek National Wildlife Refuge",
+      "area": "Bald cypress and reflective blackwater",
+      "credit": "Jason Goldberg / USFWS",
+      "source": "U.S. Fish & Wildlife Service",
+      "url": "https://www.fws.gov/media/cypress-trees-still-portion-cypress-creek",
+      "original": "https://www.fws.gov/sites/default/files/banner_images/2021-12/CC_banner_JasonGoldbergUSFWS.jpg",
+      "rights": "Public domain (U.S. government work)",
+      "rightsUrl": null,
+      "kind": "pd"
+    },
+    {
+      "letter": "I",
+      "place": "Mississippi Palisades State Park",
+      "area": "Limestone/dolomite rock towers above the Mississippi River",
+      "credit": "Public Lands Institute",
+      "source": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Public_Lands_Institute_-_Mississippi_Palisades_State_Park_-_001.tif",
+      "original": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Public_Lands_Institute_-_Mississippi_Palisades_State_Park_-_001.tif/lossy-page1-3840px-Public_Lands_Institute_-_Mississippi_Palisades_State_Park_-_001.tif.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+      "rights": "Public domain (CC0 1.0 dedication)",
+      "rightsUrl": null,
+      "kind": "pd"
+    },
+    {
+      "letter": "N",
+      "place": "Upper Mississippi River National Wildlife and Fish Refuge, Savanna District",
+      "area": "Spring Lake, Pool 13, Carroll County",
+      "credit": "U.S. Army Corps of Engineers, Rock Island District",
+      "source": "U.S. Army Corps of Engineers",
+      "url": "https://www.mvr.usace.army.mil/Missions/Environmental-Stewardship/Upper-Mississippi-River-Restoration/Habitat-Restoration/Rock-Island-District/Spring-Lake/",
+      "original": "https://www.arcgis.com/sharing/rest/content/items/74064d828f6e46239c700b988264990c/resources/XUg-JNXLlahNzd3FWxq40.jpeg",
+      "rights": "Free to copy and distribute (U.S. Army Corps of Engineers policy); photo credit requested and given here",
+      "rightsUrl": null,
+      "kind": "policy"
+    },
+    {
+      "letter": "O",
+      "place": "Illinois Beach State Park",
+      "area": "Lake Michigan shoreline and dune grasses",
+      "credit": "Yinan Chen",
+      "source": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Gfp-illinois-beach-state-park-shoreline-of-lake-michigan.jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/8/87/Gfp-illinois-beach-state-park-shoreline-of-lake-michigan.jpg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    },
+    {
+      "letter": "I",
+      "place": "Burden Falls, Shawnee National Forest",
+      "area": "Cliff and seasonal waterfall",
+      "credit": "USDA Forest Service / National Archives",
+      "source": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Photograph_of_Burden_Falls_-_NARA_-_2128310.jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/4/40/Photograph_of_Burden_Falls_-_NARA_-_2128310.jpg",
+      "rights": "Public domain (U.S. government work)",
+      "rightsUrl": null,
+      "kind": "pd"
+    },
+    {
+      "letter": "S",
+      "place": "Giant City State Park",
+      "area": "Rock-shelter passage along the nature trail",
+      "credit": "Nyttend",
+      "source": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Nature_trail_rockshelter_at_Giant_City.jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/4/46/Nature_trail_rockshelter_at_Giant_City.jpg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
   "indiana": [
     {
       "letter": "I",

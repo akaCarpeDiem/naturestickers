@@ -281,7 +281,9 @@ function sourcesNote(rows) {
     ? 'Each one is in the public domain or is published under a free license that allows commercial use without credit (noted beside those photos).'
     : gov
       ? 'Each one is the work of a U.S. government agency and is in the public domain, free to use publicly and commercially.'
-      : 'Each one is in the public domain, whether as the work of a U.S. government agency or through a public-domain release by its photographer (such as CC0), and is free to use publicly and commercially.';
+      : rows.some((r) => r.kind === 'policy')
+        ? 'Each one is in the public domain or free to reuse under its publisher’s policy, whether as the work of a U.S. government agency or through a public-domain release by its photographer (such as CC0), and is free to use publicly.'
+        : 'Each one is in the public domain, whether as the work of a U.S. government agency or through a public-domain release by its photographer (such as CC0), and is free to use publicly and commercially.';
   return [
     `None of the photographs in this sticker require attribution. ${status}`,
     `For anyone curious where the originals are located, every source is listed below. ${counts.size === 1 ? `They all come from ${top[0]}, a public collection.` : `They come from public collections and image libraries including ${andList(top)}.`} Photographers and agencies are named as a courtesy; naming them does not imply their endorsement.`,
