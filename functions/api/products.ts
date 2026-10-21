@@ -1,12 +1,12 @@
 import { json, methodNotAllowed, type Env } from "../lib/http";
-import { edgeCache, getCatalog } from "../lib/catalog";
+import { catalogStore, getCatalog } from "../lib/catalog";
 
 const CACHE_TTL_SEC = 60; // brief browser/edge cache of the response itself
 
 export const onRequestGet: PagesFunction<Env> = async (context) => {
   const catalog = await getCatalog(
     context.env,
-    edgeCache(context.env, context.request.url),
+    catalogStore(context.env, context.request.url),
     (p) => context.waitUntil(p),
   );
   if (!catalog.ok) {

@@ -1,3 +1,13 @@
 name = "naturestickers"
 compatibility_date = "2026-09-01"
 pages_build_output_dir = "dist"
+
+# Shared shop catalog (functions/lib/catalog.ts). Bindings here are the project's source of truth.
+[[kv_namespaces]]
+binding = "CATALOG_KV"
+id = "dbe2a9350c7546dc991bceb4fc6373bc" # naturestickers-catalog
+
+[env.preview]
+[[env.preview.kv_namespaces]]
+binding = "CATALOG_KV"
+id = "d423126eb9ba4564898357906e02afac" # naturestickers-catalog-preview
