@@ -15,6 +15,10 @@ const STYLES = [
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (p) => fs.readFileSync(path.join(root, p), 'utf8');
 const info = JSON.parse(read('src/data/state-info.json'));
+// Image sources per sticker (Real Photo edition), transcribed from the saved per-state source records.
+// A sticker gets a /sources/<key> page only when it has an entry here.
+const sources = JSON.parse(read('src/data/state-sources.json'));
+const hasSources = (key) => Array.isArray(sources[key]) && sources[key].length > 0;
 let shopHtml = read('shop.html');
 
 // Shipping for the Product structured data comes from the same constant checkout charges.
@@ -246,7 +250,8 @@ ${header}
           <section class="sx-d-letters" aria-labelledby="sp-letters-h">
             <h3 id="sp-letters-h" class="sx-label">In every letter</h3>
             ${letterColumns(state, letters)}
-          </section>` : ''}
+          </section>` : ''}${hasSources(key) ? `
+          <p class="sp-sources"><a href="/sources/${esc(key)}">Image sources</a></p>` : ''}
         </div>
       </div>
     </section>
@@ -255,6 +260,129 @@ ${header}
 ${footer}
 
   <script type="module" src="/src/state-page.js"></script>
+</body>
+</html>
+`;
+}
+
+/** Short list like "A, B and C". */
+function andList(items) {
+  return items.length < 2 ? items.join('') : `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`;
+}
+
+/** The note at the top of a sources page. Only claims what every entry's saved rights record supports. */
+function sourcesNote(rows) {
+  const licensed = rows.some((r) => r.kind === 'license');
+  const counts = new Map();
+  for (const r of rows) counts.set(r.source, (counts.get(r.source) || 0) + 1);
+  const top = [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(([n]) => n);
+  const gov = rows.every((r) => r.rights === 'Public domain (U.S. government work)');
+  const status = licensed
+    ? 'Each one is in the public domain or is published under a free license that allows commercial use without credit (noted beside those photos).'
+    : gov
+      ? 'Each one is the work of a U.S. government agency and is in the public domain, free to use publicly and commercially.'
+      : 'Each one is in the public domain, whether as the work of a U.S. government agency or through a public-domain release by its photographer (such as CC0), and is free to use publicly and commercially.';
+  return [
+    `None of the photographs in this sticker require attribution. ${status}`,
+    `For anyone curious where the originals are located, every source is listed below. ${counts.size === 1 ? `They all come from ${top[0]}, a public collection.` : `They come from public collections and image libraries including ${andList(top)}.`} Photographers and agencies are named as a courtesy; naming them does not imply their endorsement.`,
+  ];
+}
+
+function sourcesPage(key, entry) {
+  const name = entry.name;
+  const rows = sources[key];
+  const url = `${ORIGIN}/sources/${key}`;
+  const title = `${name} Sticker Image Sources | Nature Stickers`;
+  const description = clip(`Where each photograph in the ${name} sticker comes from: ${rows.length} public-domain and freely licensed photos of protected lands, with links to the originals.`);
+  const file = path.join(root, 'public/stickers/all', `${key}-photo.webp`);
+  if (!fs.existsSync(file)) throw new Error(`build-state-pages: missing ${file}`);
+  const size = webpSize(file);
+  const src = `/stickers/all/${key}-photo`;
+  const note = sourcesNote(rows);
+  const items = rows
+    .map(
+      (r) => `
+          <li class="src-item">
+            <span class="src-letter" aria-hidden="true">${esc(r.letter)}</span>
+            <div class="src-body">
+              <p class="src-place"><span class="sr-only">${esc(r.letter)}: </span>${esc(r.place)}${r.area ? `<span class="src-area"> · ${esc(r.area)}</span>` : ''}</p>
+              <dl class="src-meta">
+                <div><dt>Photo</dt><dd>${esc(r.credit)}</dd></div>
+                <div><dt>Source</dt><dd><a href="${esc(r.url)}" rel="nofollow noopener" target="_blank">${esc(r.source)}<span class="sr-only"> (opens in a new tab)</span></a><span class="src-sep" aria-hidden="true"> · </span><a href="${esc(r.original)}" rel="nofollow noopener" target="_blank">Original image<span class="sr-only"> for ${esc(r.letter)}, ${esc(r.place)} (opens in a new tab)</span></a></dd></div>
+                <div><dt>Rights</dt><dd>${r.rightsUrl ? `<a href="${esc(r.rightsUrl)}" rel="nofollow noopener" target="_blank">${esc(r.rights)}<span class="sr-only"> (opens in a new tab)</span></a>` : esc(r.rights)}</dd></div>
+              </dl>
+            </div>
+          </li>`,
+    )
+    .join('');
+  const ld = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
+      { '@type': 'ListItem', position: 2, name: 'Shop', item: `${ORIGIN}/shop` },
+      { '@type': 'ListItem', position: 3, name, item: `${ORIGIN}/shop/${key}` },
+      { '@type': 'ListItem', position: 4, name: 'Image sources', item: url },
+    ],
+  };
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+${gaTag}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${esc(title)}</title>
+  <meta name="description" content="${esc(description)}" />
+  <meta name="theme-color" content="#0C1510" />
+  <link rel="canonical" href="${esc(url)}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Nature Stickers" />
+  <meta property="og:url" content="${esc(url)}" />
+  <meta property="og:title" content="${esc(`${name} sticker: image sources`)}" />
+  <meta property="og:description" content="${esc(description)}" />
+  <meta property="og:image" content="${esc(`${ORIGIN}${src}-1400.webp`)}" />
+  <meta name="twitter:card" content="summary_large_image" />
+${headLinks}
+  <script type="application/ld+json">
+${ldJson(ld)}
+  </script>
+</head>
+<body class="page-night">
+  <a class="skip" href="#main">Skip to content</a>
+
+${header}
+
+  <main id="main" class="sp src-page">
+    <section class="hero on-night shop-top sp-top">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="wrap">
+        <nav class="sp-crumb" aria-label="Breadcrumb"><a href="/shop">Shop</a> <span aria-hidden="true">›</span> <a href="/shop/${esc(key)}">${esc(name)}</a> <span aria-hidden="true">›</span> <span aria-current="page">Image sources</span></nav>
+        <h1 class="sp-title">${esc(name)} image sources</h1>
+        <div class="sp-art">
+          <figure class="sp-fig is-main">
+            <img src="${src}.webp" srcset="${src}.webp 800w, ${src}-1400.webp 1400w" sizes="(max-width: 1100px) calc(100vw - 40px), 1000px" alt="${esc(`${name} sticker, Real Photo`)}" width="${size.w}" height="${size.h}" decoding="async" fetchpriority="high" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section on-night sp-info src-info" aria-labelledby="src-h">
+      <div class="wrap src-wrap">
+        <div class="src-note">
+          <h2 id="src-h" class="src-h">Where each photo comes from</h2>
+          ${note.map((t) => `<p>${esc(t)}</p>`).join('\n          ')}
+          <p class="src-scope">Listed letter by letter, left to right, for the Real Photo edition.</p>
+        </div>
+        <ol class="src-list">${items}
+        </ol>
+        <p class="src-back"><a class="btn btn-ghost" href="/shop/${esc(key)}">Back to the ${esc(name)} sticker</a></p>
+      </div>
+    </section>
+  </main>
+
+${footer}
+
+  <script type="module" src="/src/main.js"></script>
 </body>
 </html>
 `;
@@ -286,6 +414,11 @@ fs.rmSync(outDir, { recursive: true, force: true });
 fs.mkdirSync(outDir, { recursive: true });
 const keys = Object.keys(info);
 for (const key of keys) fs.writeFileSync(path.join(outDir, `${key}.html`), page(key, info[key]));
+const srcDir = path.join(root, 'sources');
+fs.rmSync(srcDir, { recursive: true, force: true });
+fs.mkdirSync(srcDir, { recursive: true });
+const srcKeys = keys.filter(hasSources);
+for (const key of srcKeys) fs.writeFileSync(path.join(srcDir, `${key}.html`), sourcesPage(key, info[key]));
 
 // —— Sitemap: keep the hand-written URLs, then one per state page ——
 const sitemapFile = path.join(root, 'public/sitemap.xml');
@@ -293,10 +426,15 @@ const d = new Date(); // build date in local time
 const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 const kept = (fs.readFileSync(sitemapFile, 'utf8').match(/^\s*<url>.*<\/url>\s*$/gm) || [])
   .map((l) => l.trim())
-  .filter((l) => !/<loc>https:\/\/naturestickers\.shop\/shop\/[^<]+<\/loc>/.test(l));
-const stateUrls = keys.map(
-  (key) => `<url><loc>${ORIGIN}/shop/${key}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`,
-);
+  .filter((l) => !/<loc>https:\/\/naturestickers\.shop\/(?:shop|sources)\/[^<]+<\/loc>/.test(l));
+const stateUrls = [
+  ...keys.map(
+    (key) => `<url><loc>${ORIGIN}/shop/${key}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`,
+  ),
+  ...srcKeys.map(
+    (key) => `<url><loc>${ORIGIN}/sources/${key}</loc><lastmod>${today}</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>`,
+  ),
+];
 fs.writeFileSync(
   sitemapFile,
   `<?xml version="1.0" encoding="UTF-8"?>
@@ -306,4 +444,4 @@ ${[...kept, ...stateUrls].map((l) => `  ${l}`).join('\n')}
 `,
 );
 
-console.log(`build-state-pages: wrote ${keys.length} pages to shop/ and ${kept.length + stateUrls.length} URLs to public/sitemap.xml`);
+console.log(`build-state-pages: wrote ${keys.length} pages to shop/, ${srcKeys.length} to sources/ and ${kept.length + stateUrls.length} URLs to public/sitemap.xml`);
