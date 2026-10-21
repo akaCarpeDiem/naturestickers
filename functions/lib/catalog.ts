@@ -15,6 +15,10 @@
  *     passes, requests serve the cached list without calling Printful, leaving the shared
  *     120/min allowance for checkout and order creation.
  * Checkout always re-prices from Printful, so a briefly stale display price is never charged.
+ *
+ * Store: when the CATALOG_KV binding exists the catalog lives in Workers KV (one copy shared by
+ * every data center, so one build serves the world); otherwise it falls back to caches.default,
+ * which is per data center. With KV, a short lock key stops two data centers rebuilding at once.
  */
 import type { Env } from "./http";
 import { isHidden, listAllSummaries, printful, storeId, toCatalogProduct, type CatalogProduct } from "./printful";
@@ -26,6 +30,8 @@ const CACHE_OPS = 2; // one match + one put
 const MAX_LIST_PAGES = 5; // up to 500 products
 const DETAIL_CONCURRENCY = 5; // Workers allow 6 simultaneous connections
 const RATE_LIMIT_PAUSE_MS = 60 * 1000; // Printful's limit is per rolling 60 s window
+const LOCK_HOLD_MS = 20 * 1000; // a rebuild chunk takes a few seconds; after this others may rebuild
+const KV_MIN_TTL_SEC = 60; // KV's minimum expirationTtl
 
 type Entry = { p: CatalogProduct | null; at: number };
 export type StoredCatalog = {
@@ -49,6 +55,58 @@ export type CatalogResult = {
 export interface CatalogCache {
   read(): Promise<StoredCatalog | null>;
   write(c: StoredCatalog): Promise<void>;
+  /** Subrequests this store spends per rebuild (reads + writes), taken out of the Printful budget. */
+  ops?: number;
+  /** Claim the rebuild; false when another request (any data center) is already rebuilding. */
+  tryLock?(now: number): Promise<boolean>;
+  /** Release the rebuild claim once the result is stored. */
+  unlock?(): Promise<void>;
+}
+
+/** Workers KV store: one global catalog shared by every data center. */
+export function kvCache(env: Env, kv: KVNamespace): CatalogCache {
+  const key = `catalog/v1/${storeId(env)}`;
+  const lockKey = `catalog-lock/v1/${storeId(env)}`;
+  return {
+    ops: 5, // catalog read, lock read + write + delete, catalog write
+    async read() {
+      try {
+        const data = (await kv.get(key, "json")) as StoredCatalog | null;
+        return data?.v === 1 ? data : null;
+      } catch {
+        return null;
+      }
+    },
+    async write(c) {
+      try {
+        await kv.put(key, JSON.stringify(c), { expirationTtl: STALE_KEEP_SEC });
+      } catch {
+        /* best effort */
+      }
+    },
+    async tryLock(now) {
+      try {
+        const held = (await kv.get(lockKey, "json")) as { until?: number } | null;
+        if (held && Number(held.until) > now) return false;
+        await kv.put(lockKey, JSON.stringify({ until: now + LOCK_HOLD_MS }), { expirationTtl: KV_MIN_TTL_SEC });
+        return true;
+      } catch {
+        return true; // KV hiccup: rebuild rather than stall
+      }
+    },
+    async unlock() {
+      try {
+        await kv.delete(lockKey);
+      } catch {
+        /* expires on its own */
+      }
+    },
+  };
+}
+
+/** KV when bound, else today's per-data-center edge cache. */
+export function catalogStore(env: Env, requestUrl: string): CatalogCache {
+  return env.CATALOG_KV ? kvCache(env, env.CATALOG_KV) : edgeCache(env, requestUrl);
 }
 
 /** caches.default store keyed per Printful store id (falls back to no-op if unavailable). */
@@ -122,6 +180,15 @@ export async function getCatalog(
   }
   // Printful rate-limited a recent rebuild: serve the cached list without calling it.
   if (stored && (stored.pausedUntil || 0) > t0) return pausedResult(stored);
+  // Another request is already rebuilding: serve what's stored (partial makes the shop re-poll).
+  if (cache.tryLock && !(await cache.tryLock(t0))) {
+    const products = stored ? productsOf(stored) : [];
+    const complete = !!stored?.complete;
+    return { ok: true, status: 200, products, partial: !complete, source: "stale" };
+  }
+
+  const save = (c: StoredCatalog | null) =>
+    waitUntil((c ? cache.write(c) : Promise.resolve()).then(() => cache.unlock?.()));
 
   const list = await listAllSummaries(env, MAX_LIST_PAGES);
   if (!list.ok && list.status === 429) {
@@ -129,10 +196,11 @@ export async function getCatalog(
     const paused: StoredCatalog = stored
       ? { ...stored, pausedUntil: t0 + RATE_LIMIT_PAUSE_MS }
       : { v: 1, builtAt: 0, complete: false, order: [], byId: {}, pausedUntil: t0 + RATE_LIMIT_PAUSE_MS };
-    waitUntil(cache.write(paused));
+    save(paused);
     return pausedResult(paused);
   }
   if (!list.ok) {
+    save(null);
     if (stored) {
       return { ok: true, status: 200, products: productsOf(stored), partial: !stored.complete, source: "stale" };
     }
@@ -149,7 +217,7 @@ export async function getCatalog(
   const stale = order
     .filter((id) => prev[String(id)] && t0 - prev[String(id)].at >= CATALOG_TTL_MS)
     .sort((a, b) => prev[String(a)].at - prev[String(b)].at);
-  const budget = Math.max(0, SUBREQUEST_BUDGET - CACHE_OPS - list.pages);
+  const budget = Math.max(0, SUBREQUEST_BUDGET - (cache.ops ?? CACHE_OPS) - list.pages);
   const toFetch = [...missing, ...stale].slice(0, budget);
 
   const byId: Record<string, Entry> = {};
@@ -168,6 +236,6 @@ export async function getCatalog(
   const complete = order.every((id) => byId[String(id)]);
   const next: StoredCatalog = { v: 1, builtAt: complete ? t0 : 0, complete, order, byId };
   if (rateLimited) next.pausedUntil = now() + RATE_LIMIT_PAUSE_MS;
-  waitUntil(cache.write(next));
+  save(next);
   return { ok: true, status: 200, products: productsOf(next), partial: !complete, source: "rebuilt" };
 }

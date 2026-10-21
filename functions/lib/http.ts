@@ -6,6 +6,8 @@ export type Env = {
   /** Comma-separated ISO country codes for Stripe shipping_address_collection. Default: US */
   SHIPPING_COUNTRIES?: string;
   PUBLIC_ORIGIN?: string;
+  /** Workers KV namespace holding the shared shop catalog (falls back to the edge cache if unbound). */
+  CATALOG_KV?: KVNamespace;
 };
 
 export function json(data: unknown, status = 200, headers: Record<string, string> = {}) {
