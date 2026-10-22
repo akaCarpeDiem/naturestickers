@@ -38,6 +38,7 @@ export default defineConfig({
         contact: resolve(__dirname, 'contact.html'),
         support: resolve(__dirname, 'support.html'),
         returns: resolve(__dirname, 'returns.html'),
+        notfound: resolve(__dirname, '404.html'),
         ...statePages,
         ...sourcePages,
       },
