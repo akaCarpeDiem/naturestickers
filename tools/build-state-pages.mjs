@@ -1,20 +1,26 @@
-// Writes one static page per sticker to shop/<key>.html (from src/data/state-info.json)
-// and regenerates public/sitemap.xml. Runs before `vite build`; no dependencies.
+// Writes one static page per sticker to shop/<section>/<key>.html for every section in
+// src/data/sections.json (states → shop/states/<key>, locations → shop/locations/<key>, …),
+// the state image-source pages, the /shop/<state> → /shop/states/<state> redirects and
+// public/sitemap.xml. Runs before `vite build`; no dependencies.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-// Must match the retail price set in Printful (the page shows it until /api/products loads).
-const PRICE = '8.00';
 const ORIGIN = 'https://naturestickers.shop';
-const STYLES = [
-  { key: 'real-photo', label: 'Real Photo', art: 'photo' },
-  { key: 'stained-glass', label: 'Stained Glass', art: 'stained-glass' },
-];
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const read = (p) => fs.readFileSync(path.join(root, p), 'utf8');
-const info = JSON.parse(read('src/data/state-info.json'));
+// Sizes and prices per section must match the retail prices set in Printful
+// (the pages show them until /api/products loads).
+const SECTIONS = Object.entries(JSON.parse(read('src/data/sections.json'))).map(([key, s]) => ({
+  key,
+  ...s,
+  info: JSON.parse(read(`src/data/${s.info}`)),
+}));
+const STATES = SECTIONS.find((s) => s.key === 'states');
+if (!STATES) throw new Error('build-state-pages: sections.json needs a "states" section');
+const info = STATES.info;
+const pagePath = (sec, key) => `/${sec.path}/${key}`;
 // Image sources per sticker (Real Photo edition), transcribed from the saved per-state source records.
 // A sticker gets a /sources/<key> page only when it has an entry here.
 const sources = JSON.parse(read('src/data/state-sources.json'));
@@ -112,20 +118,29 @@ function letterColumns(state, letters) {
           </div>`;
 }
 
-function page(key, entry) {
+function page(sec, key, entry) {
+  const isState = sec.key === 'states';
   // Edition records (e.g. new-york-stacked) fall back to the state's own blurb, like the popup.
   const name = entry.name;
   const state = name.replace(/\s*\([^)]*\)\s*$/, '');
-  const base = info[slug(state)] || {};
+  const base = sec.info[slug(state)] || {};
   const blurb = entry.blurb || base.blurb || '';
   const letters = (Array.isArray(entry.letters) ? entry.letters : []).filter((l) => l && l.letter && l.place);
-  const url = `${ORIGIN}/shop/${key}`;
-  const title = `${name} State Sticker: National Parks & Protected Lands | Nature Stickers`;
-  const ogTitle = `${name} sticker: every letter a wild place`;
+  const where = [entry.park, entry.region].filter(Boolean).join(', ');
+  const url = `${ORIGIN}${pagePath(sec, key)}`;
+  const title = isState
+    ? `${name} State Sticker: National Parks & Protected Lands | Nature Stickers`
+    : `${name} Sticker${entry.park ? `, ${entry.park}` : ''} | Nature Stickers`;
+  const ogTitle = isState ? `${name} sticker: every letter a wild place` : `${name} sticker${entry.park ? `: ${entry.park}` : ''}`;
+  const productName = isState ? `${name} State Sticker` : `${name} Sticker`;
   const description = clip(blurb);
   const ogImage = `${ORIGIN}/stickers/all/${key}-stained-glass-1400.webp`;
+  const altFor = (label) => (isState ? `${name} sticker, ${label}: each letter frames a ${state} landscape` : `${name} sticker, ${label}${entry.spot ? `: ${entry.spot}` : ''}`);
+  const sizes = sec.sizes;
+  const multi = sizes.length > 1;
+  const square = sec.art === 'square';
 
-  const styles = STYLES.map((s) => {
+  const styles = sec.styles.map((s) => {
     const file = path.join(root, 'public/stickers/all', `${key}-${s.art}.webp`);
     if (!fs.existsSync(file)) throw new Error(`build-state-pages: missing ${file}`);
     return { ...s, src: `/stickers/all/${key}-${s.art}`, size: webpSize(file) };
@@ -139,40 +154,42 @@ function page(key, entry) {
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
           { '@type': 'ListItem', position: 2, name: 'Shop', item: `${ORIGIN}/shop` },
-          { '@type': 'ListItem', position: 3, name, item: url },
+          { '@type': 'ListItem', position: 3, name: sec.label, item: `${ORIGIN}/shop?section=${sec.key}` },
+          { '@type': 'ListItem', position: 4, name, item: url },
         ],
       },
       {
         '@type': 'ProductGroup',
         '@id': `${url}#product`,
-        name: `${name} State Sticker`,
+        name: productName,
         description: blurb,
         url,
         image: styles.map((s) => `${ORIGIN}${s.src}-1400.webp`),
         brand: { '@type': 'Brand', name: 'Nature Stickers' },
         productGroupID: key,
-        variesBy: ['https://schema.org/pattern'],
-        hasVariant: styles.map((s) => ({
+        variesBy: multi ? ['https://schema.org/pattern', 'https://schema.org/size'] : ['https://schema.org/pattern'],
+        hasVariant: styles.flatMap((s) => sizes.map((z) => ({
           '@type': 'Product',
-          '@id': `${url}#${s.key}`,
-          name: `${name} State Sticker (${s.label})`,
-          sku: `${key}-${s.key}`,
+          '@id': multi ? `${url}#${s.key}-${z.key}` : `${url}#${s.key}`,
+          name: multi ? `${productName} (${s.label}, ${z.label})` : `${productName} (${s.label})`,
+          sku: multi ? `${key}-${s.key}-${z.key}` : `${key}-${s.key}`,
           image: `${ORIGIN}${s.src}-1400.webp`,
           description: blurb,
           brand: { '@type': 'Brand', name: 'Nature Stickers' },
           pattern: s.label,
+          ...(multi ? { size: z.label } : {}),
           inProductGroupWithID: key,
           offers: {
             '@type': 'Offer',
-            url: `${url}?style=${s.key}`,
+            url: multi ? `${url}?style=${s.key}&size=${z.key}` : `${url}?style=${s.key}`,
             priceCurrency: 'USD',
-            price: PRICE,
+            price: z.price,
             availability: 'https://schema.org/InStock',
             itemCondition: 'https://schema.org/NewCondition',
             shippingDetails: SHIPPING_DETAILS,
             hasMerchantReturnPolicy: RETURN_POLICY,
           },
-        })),
+        }))),
       },
     ],
   };
@@ -181,7 +198,7 @@ function page(key, entry) {
     .map(
       (s, i) => `
           <figure class="sp-fig${i === 0 ? ' is-main' : ''}" data-style="${s.key}">
-            <img src="${s.src}.webp" srcset="${s.src}.webp 800w, ${s.src}-1400.webp 1400w" sizes="(max-width: 1100px) calc(100vw - 40px), 1000px" alt="${esc(`${name} sticker, ${s.label}: each letter frames a ${state} landscape`)}" width="${s.size.w}" height="${s.size.h}" decoding="async"${i === 0 ? ' fetchpriority="high"' : ' loading="lazy"'} />
+            <img src="${s.src}.webp" srcset="${s.src}.webp 800w, ${s.src}-1400.webp 1400w" sizes="${square ? '(max-width: 600px) calc(100vw - 40px), 560px' : '(max-width: 1100px) calc(100vw - 40px), 1000px'}" alt="${esc(altFor(s.label))}" width="${s.size.w}" height="${s.size.h}" decoding="async"${i === 0 ? ' fetchpriority="high"' : ' loading="lazy"'} />
             <figcaption>${s.label}</figcaption>
           </figure>`,
     )
@@ -189,6 +206,21 @@ function page(key, entry) {
   const seg = styles
     .map((s, i) => `<button type="button" class="seg-btn" role="radio" aria-checked="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-style="${s.key}">${s.label}</button>`)
     .join('');
+  const sizePicker = multi
+    ? `
+          <fieldset class="sx-sizes sp-sizes" id="sp-sizes" data-size-picker>
+            <legend class="sx-label">Size</legend>
+            <div class="sx-sizes-opts">${sizes
+              .map(
+                (z, i) => `
+              <label class="sx-size-opt"><input type="radio" name="sp-size" value="${esc(z.key)}" data-price="${esc(z.price)}"${i === 0 ? ' checked' : ''} /><span class="sx-size-label">${esc(z.label)}</span><span class="sx-size-price">$${esc(z.price)}</span></label>`,
+              )
+              .join('')}
+            </div>
+          </fieldset>`
+    : `
+          <p class="sp-size">${esc(sizes[0].note || sizes[0].label)}</p>`;
+  const browse = isState ? 'Browse all 50 states' : `Browse all ${sec.label.toLowerCase()}`;
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -220,17 +252,18 @@ ${ldJson(ld)}
 
 ${header}
 
-  <main id="main" class="sp" data-key="${esc(key)}">
+  <main id="main" class="sp sp--${esc(sec.key)}" data-key="${esc(key)}" data-section="${esc(sec.key)}">
     <section class="hero on-night shop-top sp-top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="wrap">
-        <nav class="sp-crumb" aria-label="Breadcrumb"><a href="/shop">Shop</a> <span aria-hidden="true">›</span> <span aria-current="page">${esc(name)}</span></nav>
-        <h1 class="sp-title">${esc(name)}</h1>
+        <nav class="sp-crumb" aria-label="Breadcrumb"><a href="/shop">Shop</a> <span aria-hidden="true">›</span> <a href="/shop?section=${esc(sec.key)}">${esc(sec.label)}</a> <span aria-hidden="true">›</span> <span aria-current="page">${esc(name)}</span></nav>
+        <h1 class="sp-title">${esc(name)}</h1>${!isState && where ? `
+        <p class="sp-where">${esc(where)}</p>` : ''}
         <div class="sx-d-toggle sp-toggle">
           <span class="sx-label" id="sp-style-label">Style</span>
           <div class="seg sx-d-seg" role="radiogroup" aria-labelledby="sp-style-label">${seg}</div>
         </div>
-        <div class="sp-art">${figures}
+        <div class="sp-art${square ? ' is-square' : ''}">${figures}
         </div>
       </div>
     </section>
@@ -239,18 +272,18 @@ ${header}
       <div class="wrap sp-grid">
         <div class="sp-buy">
           <h2 id="sp-about" class="sr-only">About the ${esc(name)} sticker</h2>
-          <p class="sp-price"><span class="sx-d-price" id="sp-price">$${PRICE}</span> <span class="sp-style-name" id="sp-style-name">${styles[0].label}</span></p>
-          <p class="sp-size">6″ wide; height varies with the state name</p>
+          <p class="sp-price"><span class="sx-d-price" id="sp-price">$${sizes[0].price}</span> <span class="sp-style-name" id="sp-style-name">${styles[0].label}</span></p>${sizePicker}
           <button type="button" class="btn btn-primary sx-add" id="sp-add" disabled>Loading…</button>
           <p class="sp-status" id="sp-status" role="status" aria-live="polite"></p>
-          <a class="btn btn-ghost sp-browse" href="/shop">Browse all 50 states</a>
+          <a class="btn btn-ghost sp-browse" href="${isState ? '/shop' : `/shop?section=${esc(sec.key)}`}">${esc(browse)}</a>
         </div>
         <div class="sp-about">
           <p class="sx-d-blurb">${esc(blurb)}</p>${letters.length ? `
           <section class="sx-d-letters" aria-labelledby="sp-letters-h">
             <h3 id="sp-letters-h" class="sx-label">In every letter</h3>
             ${letterColumns(state, letters)}
-          </section>` : ''}${hasSources(key) ? `
+          </section>` : ''}${entry.spot ? `
+          <p class="sx-d-spot"><span class="sx-label">Where it is</span> ${esc(entry.spot)}</p>` : ''}${isState && hasSources(key) ? `
           <p class="sp-sources"><a href="/sources/${esc(key)}">Image sources</a></p>` : ''}
         </div>
       </div>
@@ -323,8 +356,9 @@ function sourcesPage(key, entry) {
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Home', item: `${ORIGIN}/` },
       { '@type': 'ListItem', position: 2, name: 'Shop', item: `${ORIGIN}/shop` },
-      { '@type': 'ListItem', position: 3, name, item: `${ORIGIN}/shop/${key}` },
-      { '@type': 'ListItem', position: 4, name: 'Image sources', item: url },
+      { '@type': 'ListItem', position: 3, name: STATES.label, item: `${ORIGIN}/shop?section=states` },
+      { '@type': 'ListItem', position: 4, name, item: `${ORIGIN}${pagePath(STATES, key)}` },
+      { '@type': 'ListItem', position: 5, name: 'Image sources', item: url },
     ],
   };
   return `<!DOCTYPE html>
@@ -358,7 +392,7 @@ ${header}
     <section class="hero on-night shop-top sp-top">
       <div class="hero-glow" aria-hidden="true"></div>
       <div class="wrap">
-        <nav class="sp-crumb" aria-label="Breadcrumb"><a href="/shop">Shop</a> <span aria-hidden="true">›</span> <a href="/shop/${esc(key)}">${esc(name)}</a> <span aria-hidden="true">›</span> <span aria-current="page">Image sources</span></nav>
+        <nav class="sp-crumb" aria-label="Breadcrumb"><a href="/shop">Shop</a> <span aria-hidden="true">›</span> <a href="/shop?section=states">${esc(STATES.label)}</a> <span aria-hidden="true">›</span> <a href="${pagePath(STATES, key)}">${esc(name)}</a> <span aria-hidden="true">›</span> <span aria-current="page">Image sources</span></nav>
         <h1 class="sp-title">${esc(name)} image sources</h1>
         <div class="sp-art">
           <figure class="sp-fig is-main">
@@ -377,7 +411,7 @@ ${header}
         </div>
         <ol class="src-list">${items}
         </ol>
-        <p class="src-back"><a class="btn btn-ghost" href="/shop/${esc(key)}">Back to the ${esc(name)} sticker</a></p>
+        <p class="src-back"><a class="btn btn-ghost" href="${pagePath(STATES, key)}">Back to the ${esc(name)} sticker</a></p>
       </div>
     </section>
   </main>
@@ -391,39 +425,71 @@ ${footer}
 `;
 }
 
-// —— /shop: plain <a href> links to every state page (shop.js swaps in the live grid) ——
+// —— /shop: plain <a href> links to every sticker page, per section (shop.js swaps in the live grid) ——
 const START = '<!-- state-links:start -->';
 const END = '<!-- state-links:end -->';
 const at = shopHtml.indexOf(START);
 const to = shopHtml.indexOf(END);
 if (at < 0 || to < at) throw new Error('build-state-pages: state-links markers not found in shop.html');
-const links = Object.keys(info)
-  .map((key) => [key, info[key].name])
-  .sort((a, b) => a[1].localeCompare(b[1]))
-  .map(([key, name]) => `\n            <li><a href="/shop/${key}">${esc(name)}</a></li>`)
-  .join('');
-const nextShop = `${shopHtml.slice(0, at + START.length)}
-          <ul class="sx-index" aria-label="All state stickers">${links}
-          </ul>
+const lists = SECTIONS.map((sec) => {
+  const links = Object.keys(sec.info)
+    .map((key) => [key, sec.info[key].name])
+    .sort((a, b) => a[1].localeCompare(b[1]))
+    .map(([key, name]) => `\n              <li><a href="${pagePath(sec, key)}">${esc(name)}</a></li>`)
+    .join('');
+  return `
+          <section class="sx-sec" aria-label="${esc(sec.heading)}">
+            <h2 class="sx-sec-h">${esc(sec.heading)}</h2>
+            <ul class="sx-index" aria-label="All ${esc(sec.heading.toLowerCase())}">${links}
+            </ul>
+          </section>`;
+}).join('');
+const nextShop = `${shopHtml.slice(0, at + START.length)}${lists}
           ${shopHtml.slice(to)}`;
 if (nextShop !== shopHtml) {
   fs.writeFileSync(path.join(root, 'shop.html'), nextShop);
   shopHtml = nextShop;
 }
 
-// —— Pages ——
+// —— Pages: shop/<section path>/<key>.html ——
 const outDir = path.join(root, 'shop');
 fs.rmSync(outDir, { recursive: true, force: true });
-fs.mkdirSync(outDir, { recursive: true });
+let pageCount = 0;
+for (const sec of SECTIONS) {
+  const dir = path.join(root, sec.path);
+  fs.mkdirSync(dir, { recursive: true });
+  for (const key of Object.keys(sec.info)) {
+    fs.writeFileSync(path.join(dir, `${key}.html`), page(sec, key, sec.info[key]));
+    pageCount += 1;
+  }
+}
 const keys = Object.keys(info);
-for (const key of keys) fs.writeFileSync(path.join(outDir, `${key}.html`), page(key, info[key]));
 const srcDir = path.join(root, 'sources');
 fs.rmSync(srcDir, { recursive: true, force: true });
 fs.mkdirSync(srcDir, { recursive: true });
 const srcKeys = keys.filter(hasSources);
 for (const key of srcKeys) fs.writeFileSync(path.join(srcDir, `${key}.html`), sourcesPage(key, info[key]));
 
-// —— Sitemap: keep the hand-written URLs, then one per state page ——
+// —— Redirects: the old /shop/<state> URLs moved to /shop/states/<state> ——
+const redirectsFile = path.join(root, 'public/_redirects');
+const R_START = '# state-pages:start (generated by tools/build-state-pages.mjs)';
+const R_END = '# state-pages:end';
+const redirects = fs.readFileSync(redirectsFile, 'utf8');
+const block = [
+  R_START,
+  // Section landing URLs open /shop filtered to that section (302: real index pages may come later).
+  ...SECTIONS.flatMap((sec) => [`/${sec.path} /shop?section=${sec.key} 302`, `/${sec.path}/ /shop?section=${sec.key} 302`]),
+  ...keys.flatMap((key) => [`/shop/${key} ${pagePath(STATES, key)} 301`, `/shop/${key}/ ${pagePath(STATES, key)} 301`]),
+  R_END,
+].join('\n');
+const ra = redirects.indexOf(R_START);
+const rb = redirects.indexOf(R_END);
+const nextRedirects = ra >= 0 && rb > ra
+  ? `${redirects.slice(0, ra)}${block}${redirects.slice(rb + R_END.length)}`
+  : `${redirects.replace(/\s*$/, '\n')}${block}\n`;
+if (nextRedirects !== redirects) fs.writeFileSync(redirectsFile, nextRedirects);
+
+// —— Sitemap: keep the hand-written URLs, then one per sticker page ——
 const sitemapFile = path.join(root, 'public/sitemap.xml');
 const d = new Date(); // build date in local time
 const today = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -431,8 +497,10 @@ const kept = (fs.readFileSync(sitemapFile, 'utf8').match(/^\s*<url>.*<\/url>\s*$
   .map((l) => l.trim())
   .filter((l) => !/<loc>https:\/\/naturestickers\.shop\/(?:shop|sources)\/[^<]+<\/loc>/.test(l));
 const stateUrls = [
-  ...keys.map(
-    (key) => `<url><loc>${ORIGIN}/shop/${key}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`,
+  ...SECTIONS.flatMap((sec) =>
+    Object.keys(sec.info).map(
+      (key) => `<url><loc>${ORIGIN}${pagePath(sec, key)}</loc><lastmod>${today}</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>`,
+    ),
   ),
   ...srcKeys.map(
     (key) => `<url><loc>${ORIGIN}/sources/${key}</loc><lastmod>${today}</lastmod><changefreq>yearly</changefreq><priority>0.4</priority></url>`,
@@ -447,4 +515,4 @@ ${[...kept, ...stateUrls].map((l) => `  ${l}`).join('\n')}
 `,
 );
 
-console.log(`build-state-pages: wrote ${keys.length} pages to shop/, ${srcKeys.length} to sources/ and ${kept.length + stateUrls.length} URLs to public/sitemap.xml`);
+console.log(`build-state-pages: wrote ${pageCount} pages to shop/ (${SECTIONS.map((s) => `${Object.keys(s.info).length} ${s.key}`).join(', ')}), ${srcKeys.length} to sources/, ${keys.length * 2} redirects and ${kept.length + stateUrls.length} URLs to public/sitemap.xml`);

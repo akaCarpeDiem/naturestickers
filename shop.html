@@ -66,16 +66,20 @@
         <div class="hero-copy reveal">
           <p class="eyebrow"><span class="dot" aria-hidden="true"></span>The Landmark Series</p>
           <h1>Every state, <span class="accent">filled with its wild places.</span></h1>
-          <p class="lede">Each letter frames a real view from that state’s <strong class="lede-highlight">national parks, monuments &amp; protected lands</strong>. Pick a style — 6″ wide die-cut vinyl (height varies with the state name), printed to order, $8 each.</p>
+          <p class="lede">Each letter frames a real view from that state’s <strong class="lede-highlight">national parks, monuments &amp; protected lands</strong>. Pick a style — 6″ wide die-cut vinyl (height varies with the state name), printed to order, $8 each. Single-landmark location stickers come in 3″ or 4″, from $5.75.</p>
         </div>
         <div class="sx-controls" id="states-tools" hidden>
+          <div class="sx-filter">
+            <span class="sx-label" id="section-filter-label">Show</span>
+            <div class="seg sx-seg" id="section-tabs" role="group" aria-labelledby="section-filter-label"></div>
+          </div>
           <div class="sx-filter">
             <span class="sx-label" id="style-filter-label">Style</span>
             <div class="seg sx-seg" id="style-chips" role="group" aria-labelledby="style-filter-label"></div>
           </div>
           <div class="sx-filter sx-search">
-            <label class="sx-label" for="state-search">Find a state</label>
-            <input type="search" id="state-search" class="sx-input" placeholder="Type a state name" autocomplete="off" spellcheck="false" />
+            <label class="sx-label" for="state-search">Find a sticker</label>
+            <input type="search" id="state-search" class="sx-input" placeholder="Type a state, park or place" autocomplete="off" spellcheck="false" />
           </div>
         </div>
       </div>
@@ -83,66 +87,82 @@
 
     <section class="section on-night sx-catalog" aria-labelledby="states-heading">
       <div class="wrap">
-        <h2 id="states-heading" class="sr-only">State stickers</h2>
+        <h2 id="states-heading" class="sr-only">All stickers</h2>
         <p class="sx-count" id="states-count" role="status" aria-live="polite">Loading stickers…</p>
-        <div id="state-grid" class="sx-grid"><!-- state-links:start -->
-          <ul class="sx-index" aria-label="All state stickers">
-            <li><a href="/shop/alabama">Alabama</a></li>
-            <li><a href="/shop/alaska">Alaska</a></li>
-            <li><a href="/shop/arizona">Arizona</a></li>
-            <li><a href="/shop/arkansas">Arkansas</a></li>
-            <li><a href="/shop/california">California</a></li>
-            <li><a href="/shop/colorado">Colorado</a></li>
-            <li><a href="/shop/connecticut">Connecticut</a></li>
-            <li><a href="/shop/delaware">Delaware</a></li>
-            <li><a href="/shop/florida">Florida</a></li>
-            <li><a href="/shop/georgia">Georgia</a></li>
-            <li><a href="/shop/hawaii">Hawaii</a></li>
-            <li><a href="/shop/idaho">Idaho</a></li>
-            <li><a href="/shop/illinois">Illinois</a></li>
-            <li><a href="/shop/indiana">Indiana</a></li>
-            <li><a href="/shop/iowa">Iowa</a></li>
-            <li><a href="/shop/kansas">Kansas</a></li>
-            <li><a href="/shop/kentucky">Kentucky</a></li>
-            <li><a href="/shop/louisiana">Louisiana</a></li>
-            <li><a href="/shop/maine">Maine</a></li>
-            <li><a href="/shop/maryland">Maryland</a></li>
-            <li><a href="/shop/massachusetts">Massachusetts</a></li>
-            <li><a href="/shop/michigan">Michigan</a></li>
-            <li><a href="/shop/minnesota">Minnesota</a></li>
-            <li><a href="/shop/mississippi">Mississippi</a></li>
-            <li><a href="/shop/missouri">Missouri</a></li>
-            <li><a href="/shop/montana">Montana</a></li>
-            <li><a href="/shop/nebraska">Nebraska</a></li>
-            <li><a href="/shop/nevada">Nevada</a></li>
-            <li><a href="/shop/new-hampshire">New Hampshire</a></li>
-            <li><a href="/shop/new-jersey">New Jersey</a></li>
-            <li><a href="/shop/new-mexico">New Mexico</a></li>
-            <li><a href="/shop/new-york">New York</a></li>
-            <li><a href="/shop/new-york-stacked">New York (Stacked)</a></li>
-            <li><a href="/shop/north-carolina">North Carolina</a></li>
-            <li><a href="/shop/north-dakota">North Dakota</a></li>
-            <li><a href="/shop/ohio">Ohio</a></li>
-            <li><a href="/shop/oklahoma">Oklahoma</a></li>
-            <li><a href="/shop/oregon">Oregon</a></li>
-            <li><a href="/shop/pennsylvania">Pennsylvania</a></li>
-            <li><a href="/shop/rhode-island">Rhode Island</a></li>
-            <li><a href="/shop/south-carolina">South Carolina</a></li>
-            <li><a href="/shop/south-dakota">South Dakota</a></li>
-            <li><a href="/shop/tennessee">Tennessee</a></li>
-            <li><a href="/shop/texas">Texas</a></li>
-            <li><a href="/shop/utah">Utah</a></li>
-            <li><a href="/shop/vermont">Vermont</a></li>
-            <li><a href="/shop/virginia">Virginia</a></li>
-            <li><a href="/shop/washington">Washington</a></li>
-            <li><a href="/shop/west-virginia">West Virginia</a></li>
-            <li><a href="/shop/wisconsin">Wisconsin</a></li>
-            <li><a href="/shop/wyoming">Wyoming</a></li>
-          </ul>
+        <div id="state-grid" class="sx-sections"><!-- state-links:start -->
+          <section class="sx-sec" aria-label="State stickers">
+            <h2 class="sx-sec-h">State stickers</h2>
+            <ul class="sx-index" aria-label="All state stickers">
+              <li><a href="/shop/states/alabama">Alabama</a></li>
+              <li><a href="/shop/states/alaska">Alaska</a></li>
+              <li><a href="/shop/states/arizona">Arizona</a></li>
+              <li><a href="/shop/states/arkansas">Arkansas</a></li>
+              <li><a href="/shop/states/california">California</a></li>
+              <li><a href="/shop/states/colorado">Colorado</a></li>
+              <li><a href="/shop/states/connecticut">Connecticut</a></li>
+              <li><a href="/shop/states/delaware">Delaware</a></li>
+              <li><a href="/shop/states/florida">Florida</a></li>
+              <li><a href="/shop/states/georgia">Georgia</a></li>
+              <li><a href="/shop/states/hawaii">Hawaii</a></li>
+              <li><a href="/shop/states/idaho">Idaho</a></li>
+              <li><a href="/shop/states/illinois">Illinois</a></li>
+              <li><a href="/shop/states/indiana">Indiana</a></li>
+              <li><a href="/shop/states/iowa">Iowa</a></li>
+              <li><a href="/shop/states/kansas">Kansas</a></li>
+              <li><a href="/shop/states/kentucky">Kentucky</a></li>
+              <li><a href="/shop/states/louisiana">Louisiana</a></li>
+              <li><a href="/shop/states/maine">Maine</a></li>
+              <li><a href="/shop/states/maryland">Maryland</a></li>
+              <li><a href="/shop/states/massachusetts">Massachusetts</a></li>
+              <li><a href="/shop/states/michigan">Michigan</a></li>
+              <li><a href="/shop/states/minnesota">Minnesota</a></li>
+              <li><a href="/shop/states/mississippi">Mississippi</a></li>
+              <li><a href="/shop/states/missouri">Missouri</a></li>
+              <li><a href="/shop/states/montana">Montana</a></li>
+              <li><a href="/shop/states/nebraska">Nebraska</a></li>
+              <li><a href="/shop/states/nevada">Nevada</a></li>
+              <li><a href="/shop/states/new-hampshire">New Hampshire</a></li>
+              <li><a href="/shop/states/new-jersey">New Jersey</a></li>
+              <li><a href="/shop/states/new-mexico">New Mexico</a></li>
+              <li><a href="/shop/states/new-york">New York</a></li>
+              <li><a href="/shop/states/new-york-stacked">New York (Stacked)</a></li>
+              <li><a href="/shop/states/north-carolina">North Carolina</a></li>
+              <li><a href="/shop/states/north-dakota">North Dakota</a></li>
+              <li><a href="/shop/states/ohio">Ohio</a></li>
+              <li><a href="/shop/states/oklahoma">Oklahoma</a></li>
+              <li><a href="/shop/states/oregon">Oregon</a></li>
+              <li><a href="/shop/states/pennsylvania">Pennsylvania</a></li>
+              <li><a href="/shop/states/rhode-island">Rhode Island</a></li>
+              <li><a href="/shop/states/south-carolina">South Carolina</a></li>
+              <li><a href="/shop/states/south-dakota">South Dakota</a></li>
+              <li><a href="/shop/states/tennessee">Tennessee</a></li>
+              <li><a href="/shop/states/texas">Texas</a></li>
+              <li><a href="/shop/states/utah">Utah</a></li>
+              <li><a href="/shop/states/vermont">Vermont</a></li>
+              <li><a href="/shop/states/virginia">Virginia</a></li>
+              <li><a href="/shop/states/washington">Washington</a></li>
+              <li><a href="/shop/states/west-virginia">West Virginia</a></li>
+              <li><a href="/shop/states/wisconsin">Wisconsin</a></li>
+              <li><a href="/shop/states/wyoming">Wyoming</a></li>
+            </ul>
+          </section>
+          <section class="sx-sec" aria-label="Location stickers">
+            <h2 class="sx-sec-h">Location stickers</h2>
+            <ul class="sx-index" aria-label="All location stickers">
+              <li><a href="/shop/locations/zion-angels-landing">Angels Landing</a></li>
+              <li><a href="/shop/locations/arches-delicate-arch">Delicate Arch</a></li>
+              <li><a href="/shop/locations/lake-tahoe-emerald-bay">Emerald Bay</a></li>
+              <li><a href="/shop/locations/yellowstone-grand-prismatic-spring">Grand Prismatic Spring</a></li>
+              <li><a href="/shop/locations/yosemite-half-dome">Half Dome</a></li>
+              <li><a href="/shop/locations/grand-teton-schwabacher-landing">Schwabacher Landing</a></li>
+              <li><a href="/shop/locations/crater-lake-wizard-island">Wizard Island</a></li>
+              <li><a href="/shop/locations/grand-canyon-yaki-point">Yaki Point</a></li>
+            </ul>
+          </section>
           <!-- state-links:end --></div>
         <div id="states-empty" class="sx-empty" hidden>
           <h3>No stickers match</h3>
-          <p>Try another state name or style.</p>
+          <p>Try another name or style.</p>
           <button type="button" class="btn btn-ghost" id="clear-filters">Clear filters</button>
         </div>
       </div>

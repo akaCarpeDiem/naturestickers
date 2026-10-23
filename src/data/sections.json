@@ -1,0 +1,34 @@
+{
+  "states": {
+    "label": "States",
+    "heading": "State stickers",
+    "noun": ["state", "states"],
+    "path": "shop/states",
+    "info": "state-info.json",
+    "art": "wide",
+    "styles": [
+      { "key": "real-photo", "label": "Real Photo", "art": "photo" },
+      { "key": "stained-glass", "label": "Stained Glass", "art": "stained-glass" }
+    ],
+    "sizes": [
+      { "key": "6x6", "label": "6″ wide", "note": "6″ wide; height varies with the state name", "variant": 24968, "price": "8.00" }
+    ]
+  },
+  "locations": {
+    "label": "Locations",
+    "heading": "Location stickers",
+    "noun": ["location", "locations"],
+    "path": "shop/locations",
+    "info": "location-info.json",
+    "art": "square",
+    "comingSoon": true,
+    "styles": [
+      { "key": "real-photo", "label": "Real Photo", "art": "photo" },
+      { "key": "stained-glass", "label": "Stained Glass", "art": "stained-glass" }
+    ],
+    "sizes": [
+      { "key": "3x3", "label": "3″ × 3″", "variant": 24965, "price": "5.75" },
+      { "key": "4x4", "label": "4″ × 4″", "variant": 24966, "price": "6.50" }
+    ]
+  }
+}

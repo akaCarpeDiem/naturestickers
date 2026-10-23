@@ -2,15 +2,18 @@ import { defineConfig } from 'vite';
 import fs from 'fs';
 import { resolve } from 'path';
 
-// Per-sticker pages written by tools/build-state-pages.mjs (shop/<key>.html → /shop/<key>).
+// Per-sticker pages written by tools/build-state-pages.mjs, one folder per shop section
+// (shop/states/<key>.html → /shop/states/<key>, shop/locations/<key>.html → /shop/locations/<key>).
 const shopDir = resolve(__dirname, 'shop');
-const statePages = fs.existsSync(shopDir)
-  ? Object.fromEntries(
-      fs.readdirSync(shopDir)
-        .filter((f) => f.endsWith('.html'))
-        .map((f) => [`shop-${f.slice(0, -5)}`, resolve(shopDir, f)]),
-    )
-  : {};
+const htmlUnder = (dir, prefix) =>
+  fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) =>
+    d.isDirectory()
+      ? htmlUnder(resolve(dir, d.name), `${prefix}-${d.name}`)
+      : d.name.endsWith('.html')
+        ? [[`${prefix}-${d.name.slice(0, -5)}`, resolve(dir, d.name)]]
+        : [],
+  );
+const statePages = fs.existsSync(shopDir) ? Object.fromEntries(htmlUnder(shopDir, 'shop')) : {};
 
 // Image-source pages from the same script (sources/<key>.html → /sources/<key>).
 const sourcesDir = resolve(__dirname, 'sources');

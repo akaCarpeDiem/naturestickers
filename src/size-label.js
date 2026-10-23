@@ -11,7 +11,9 @@ export const SIZE_NOTE = 'Always 6″ wide; height varies with the state name.';
 export function sizeLabel(size) {
   const s = String(size || '').trim();
   if (!s) return '';
-  return s.replace(SIX_BY_SIX, '') !== s ? '6″ wide' : s;
+  if (s.replace(SIX_BY_SIX, '') !== s) return '6″ wide';
+  // Square location stickers keep their real size, spaced like the size picker ("3″ × 3″").
+  return s.replace(/\s*[x×X]\s*/, ' × ');
 }
 
 /** Rewrite any "6″×6″" inside free text (e.g. a stored cart line name). */

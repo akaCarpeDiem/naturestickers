@@ -1,7 +1,8 @@
 // /shop — expanded sticker view. Opens in place over the grid (no navigation),
-// animates from the tile, and is shareable via #<state> / #<state>-stained-glass.
+// animates from the tile, and is shareable via #<key> / #<key>-stained-glass.
 import { escapeHtml, money } from './cart-ui.js';
-import info from './data/state-info.json';
+import { variantFor } from './catalog-parse.js';
+import { pageUrl } from './sections.js';
 import { sizeLabel, SIZE_NOTE } from './size-label.js';
 
 const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -13,7 +14,7 @@ const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), [tabi
  * @param {() => any[]} opts.getItems   current catalog items (parsed products)
  * @param {(it: any) => string} opts.artKey
  * @param {(s: string) => string} opts.slug
- * @param {(it: any, btn: HTMLButtonElement) => void} opts.onAdd
+ * @param {(it: any, btn: HTMLButtonElement, variant?: any) => void} opts.onAdd
  */
 export function createModal({ getItems, artKey, slug, onAdd }) {
   const root = document.createElement('div');
@@ -43,10 +44,17 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
             <div class="seg sx-d-seg" role="radiogroup" aria-labelledby="sx-d-toggle-label"></div>
           </div>
           <div class="sx-d-buy">
+            <fieldset class="sx-sizes sx-d-sizes" data-size-picker hidden>
+              <legend class="sx-label">Size</legend>
+              <div class="sx-sizes-opts"></div>
+            </fieldset>
             <span class="state-badge sx-d-size"></span>
             <button type="button" class="btn btn-primary sx-add sx-d-add">Add to cart</button>
           </div>
-          <p class="sx-d-blurb" id="sx-d-blurb"></p>
+          <div class="sx-d-about">
+            <p class="sx-d-blurb" id="sx-d-blurb"></p>
+            <p class="sx-d-spot" hidden><span class="sx-label">Where it is</span> <span class="sx-d-spot-text"></span></p>
+          </div>
           <section class="sx-d-letters" aria-labelledby="sx-d-letters-h" hidden>
             <h3 id="sx-d-letters-h" class="sx-label">In every letter</h3>
             <div class="sx-d-cols"></div>
@@ -70,6 +78,11 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
   const blurbEl = root.querySelector('.sx-d-blurb');
   const lettersSec = root.querySelector('.sx-d-letters');
   const lettersCols = root.querySelector('.sx-d-cols');
+  const sizesEl = root.querySelector('.sx-d-sizes');
+  const sizeOpts = root.querySelector('.sx-sizes-opts');
+  const spotEl = root.querySelector('.sx-d-spot');
+  const spotText = root.querySelector('.sx-d-spot-text');
+  let sizeSel = ''; // chosen size key ("3x3"), kept across style switches
 
   let current = null; // item shown
   let opener = null; // element to return focus to
@@ -77,8 +90,8 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
   let scrollY = 0;
   let closing = false;
 
-  const groupKey = (it) => [slug(it.state), it.edition ? slug(it.edition) : ''].filter(Boolean).join('-');
-  const same = (a, b) => !!a && !!b && String(a.v.sync_variant_id) === String(b.v.sync_variant_id);
+  const groupKey = (it) => it.key;
+  const same = (a, b) => !!a && !!b && a.id === b.id;
   const siblings = (it) => getItems().filter((x) => groupKey(x) === groupKey(it));
   const hashFor = (it) => {
     const sib = siblings(it);
@@ -86,39 +99,69 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
     return same(sib[0], it) || it.styleKey === 'real-photo' ? groupKey(it) : `${groupKey(it)}-${it.styleKey}`;
   };
 
+  /** Price + Add button for the chosen size (multi-size sections) or the only size. */
+  function updateBuy() {
+    const it = current;
+    if (!it) return;
+    const multi = it.section.sizes.length > 1;
+    const size = multi ? it.section.sizes.find((z) => z.key === sizeSel) || it.section.sizes[0] : null;
+    const variant = multi ? (it.vs.length ? variantFor(it, size.key) : null) : it.v;
+    priceEl.textContent = variant ? money(variant.retail_price) : money(size ? size.price : it.section.minPrice);
+    addBtn.classList.remove('is-added');
+    addBtn.disabled = !variant;
+    addBtn.innerHTML = variant
+      ? `Add to cart<span class="sr-only"> — ${escapeHtml(`${it.title}, ${it.style}${size ? `, ${size.label}` : ''}`)}</span>`
+      : 'Coming soon';
+  }
+
   function show(it) {
     current = it;
-    const title = `${it.state}${it.edition ? ` (${it.edition})` : ''}`;
+    const title = it.title;
     titleEl.textContent = title;
-    styleEl.textContent = it.style;
-    priceEl.textContent = money(it.v.retail_price);
-    // Every key in state-info.json has its own static page at /shop/<key>.
-    pageLink.href = `/shop/${groupKey(it)}`;
-    pageLink.hidden = !info[groupKey(it)];
+    styleEl.textContent = it.sub ? `${it.sub} · ${it.style}` : it.style;
+    // Every key in a section's data file has its own static page at /shop/<section>/<key>.
+    pageLink.href = pageUrl(it.section, it.key);
+    pageLink.hidden = false;
+    const multi = it.section.sizes.length > 1;
     sizeEl.textContent = sizeLabel(it.v?.size);
-    sizeEl.title = it.v?.size ? SIZE_NOTE : '';
-    sizeEl.hidden = !it.v?.size;
-    addBtn.dataset.id = it.v.sync_variant_id;
-    addBtn.classList.remove('is-added');
-    addBtn.innerHTML = `Add to cart<span class="sr-only"> — ${escapeHtml(`${title}, ${it.style}`)}</span>`;
+    sizeEl.title = it.v?.size && it.section.key === 'states' ? SIZE_NOTE : '';
+    sizeEl.hidden = multi || !it.v?.size;
+    sizesEl.hidden = !multi;
+    if (multi) {
+      if (!it.section.sizes.some((z) => z.key === sizeSel)) sizeSel = it.section.sizes[0].key;
+      sizeOpts.innerHTML = it.section.sizes
+        .map((z) => {
+          const v = it.vs.length ? variantFor(it, z.key) : null;
+          const price = v ? money(v.retail_price) : money(z.price);
+          return `<label class="sx-size-opt"><input type="radio" name="sx-d-size" value="${escapeHtml(z.key)}"${z.key === sizeSel ? ' checked' : ''} /><span class="sx-size-label">${escapeHtml(z.label)}</span><span class="sx-size-price">${price}</span></label>`;
+        })
+        .join('');
+    }
+    updateBuy();
 
     const key = artKey(it);
     figure.classList.remove('is-mockup');
+    figure.classList.toggle('is-square', it.section.art === 'square');
     delete img.dataset.fellBack;
     img.dataset.fallback = it.thumb || '';
     img.src = `/stickers/all/${key}-1400.webp`;
-    img.alt = `${title} sticker, ${it.style}: each letter frames a ${it.state} landscape`;
+    img.alt = it.section.key === 'states'
+      ? `${title} sticker, ${it.style}: each letter frames a ${it.state} landscape`
+      : `${title} sticker, ${it.style}${it.data.spot ? `: ${it.data.spot}` : ''}`;
 
     const sib = siblings(it);
     toggle.hidden = sib.length < 2;
     seg.innerHTML = sib
-      .map((s) => `<button type="button" class="seg-btn" role="radio" aria-checked="${same(s, it)}" tabindex="${same(s, it) ? 0 : -1}" data-id="${s.v.sync_variant_id}">${escapeHtml(s.style)}</button>`)
+      .map((s) => `<button type="button" class="seg-btn" role="radio" aria-checked="${same(s, it)}" tabindex="${same(s, it) ? 0 : -1}" data-id="${escapeHtml(s.id)}">${escapeHtml(s.style)}</button>`)
       .join('');
     // Warm the other style's art so toggling is instant.
     sib.filter((s) => !same(s, it)).forEach((s) => { const i = new Image(); i.src = `/stickers/all/${artKey(s)}-1400.webp`; });
 
+    spotText.textContent = it.data.spot || '';
+    spotEl.hidden = !it.data.spot;
+
     // Edition-specific records (e.g. new-york-stacked) override the state's own entry; the blurb falls back to the state.
-    const data = { ...(info[slug(it.state)] || {}), ...(info[groupKey(it)] || {}) };
+    const data = it.data || {};
     blurbEl.textContent = data.blurb || '';
     blurbEl.hidden = !data.blurb;
     const letters = Array.isArray(data.letters) ? data.letters.filter((l) => l && l.letter && l.place) : [];
@@ -249,7 +292,7 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
     if (root.hidden || closing) return;
     closing = true;
     // Re-target the tile for the current style in case the toggle changed it.
-    const tile = document.querySelector(`.sx-card[data-id="${CSS.escape(String(current?.v.sync_variant_id))}"]`) ;
+    const tile = current ? document.querySelector(`.sx-card[data-id="${CSS.escape(current.id)}"]`) : null;
     if (tile) sourceEl = tile.querySelector('.sx-art');
     try { await animateOut(); } catch { /* animation cancelled */ }
     root.getAnimations({ subtree: true }).forEach((a) => a.cancel());
@@ -266,7 +309,7 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
     if (e.target.closest('[data-close]')) { close(); return; }
     const r = e.target.closest('.sx-d-seg .seg-btn');
     if (r) {
-      const it = getItems().find((x) => String(x.v.sync_variant_id) === r.dataset.id);
+      const it = getItems().find((x) => x.id === r.dataset.id);
       if (it && !same(it, current)) {
         open(it);
         seg.querySelector(`[data-id="${CSS.escape(r.dataset.id)}"]`)?.focus();
@@ -274,7 +317,17 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
       }
       return;
     }
-    if (e.target.closest('.sx-d-add') && current) onAdd(current, addBtn);
+    if (e.target.closest('.sx-d-add') && current && !addBtn.disabled) {
+      const multi = current.section.sizes.length > 1;
+      const variant = multi ? variantFor(current, sizeSel) : current.v;
+      if (variant) onAdd(current, addBtn, variant);
+    }
+  });
+
+  sizesEl.addEventListener('change', (e) => {
+    if (e.target.name !== 'sx-d-size') return;
+    sizeSel = e.target.value;
+    updateBuy();
   });
 
   root.addEventListener('keydown', (e) => {
