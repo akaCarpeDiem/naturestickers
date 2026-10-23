@@ -11,6 +11,7 @@
 .sx-filter { display: grid; gap: 10px; }
 .sx-label { font-size: var(--step--1); font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--sage); }
 .seg-btn[aria-pressed="true"] { background: var(--paper); color: var(--forest); box-shadow: 0 6px 16px -8px rgba(0, 0, 0, .8); }
+.seg-btn[aria-pressed="true"]:hover { color: var(--forest); }
 .seg-btn:focus-visible, .sx-input:focus-visible, .sx-add:focus-visible { outline: 3px solid var(--sage); outline-offset: 2px; }
 .sx-search { min-width: min(320px, 100%); }
 .sx-input {
@@ -325,3 +326,4 @@ html.sx-locked, html.sx-locked body { overflow: hidden; }
 .sx-d-art.is-square img { max-width: min(520px, 100%); }
 .sp-art.is-square .sp-fig { width: min(220px, 40%); }
 .sp-art.is-square .sp-fig.is-main { width: 100%; max-width: 560px; }
+.sx-d-buy .sx-add:disabled { opacity: .55; cursor: not-allowed; }
