@@ -100,8 +100,9 @@ if (showcase) {
     const [live, spare] = layers;
     const { slug, name } = STATES[i];
 
-    // Park the spare layer at the "enter" position without animating there.
-    spare.classList.add('no-t');
+    // Park the spare off-screen and invisible before touching src. A newly
+    // assigned img paints an empty white box on mobile if it is showing.
+    spare.classList.add('no-t', 'is-pending');
     spare.classList.remove('is-out', 'is-on');
     plate.classList.toggle('is-xfade', mode === 'fade');
     setSrc(spare, slug, st);
@@ -110,7 +111,11 @@ if (showcase) {
     try {
       if (spare.decode) await spare.decode();
       else await new Promise((res, rej) => { spare.onload = res; spare.onerror = rej; });
-    } catch { /* show it anyway rather than freezing */ }
+    } catch {
+      // Keep the sticker that is already up.
+      plate.classList.remove('is-busy');
+      return;
+    }
     if (mine !== token) return; // a newer change won
     plate.classList.remove('is-busy');
 
@@ -124,6 +129,9 @@ if (showcase) {
     live.setAttribute('aria-hidden', 'true');
 
     requestAnimationFrame(() => {
+      if (mine !== token) return;
+      // Drop the hold only once the bitmap can paint, then fade it in.
+      spare.classList.remove('is-pending');
       live.classList.remove('is-on');
       live.classList.add('is-out');
       spare.classList.add('is-on');
@@ -193,13 +201,17 @@ if (showcase) {
   };
   reduceMotion.addEventListener?.('change', applyMotion);
 
+  // Warm this season's lead and the one after it before the first swap.
+  preload(STATES[0].slug, style);
+  preload(STATES[next()].slug, style);
   const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 900));
-  idle(() => { preload(STATES[next()].slug, style); preload(STATES[index].slug, 'photo'); });
+  idle(() => { preload(STATES[index].slug, 'photo'); preload(STATES[next()].slug, style); });
 
   syncControls();
   applyMotion();
-  // The HTML ships California so the hero paints instantly; swap to this season's lead state.
-  if (STATES[0].slug !== 'california') show(0, style, 'fade');
+  // index.html already paints the season lead. Swap only if that img is someone else.
+  const shown = (layers[0].getAttribute('src') || '').match(/\/([a-z0-9-]+)-(stained-glass|photo)\.webp$/);
+  if (!shown || shown[1] !== STATES[0].slug) show(0, style, 'fade');
 }
 
 /* —— Touch: tap a state card to flip to the photo version —— */

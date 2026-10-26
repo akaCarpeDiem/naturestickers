@@ -64,10 +64,12 @@
 .showcase-plate {
   position: relative; width: 100%;
   aspect-ratio: 1400 / 466;
+  background: transparent;
 }
 .showcase-layer {
   position: absolute; inset: 0; margin: 0;
   width: 100%; height: 100%; object-fit: contain;
+  background: transparent;
   opacity: 0; transition: opacity .62s var(--ease);
   filter: drop-shadow(0 26px 30px rgba(0, 0, 0, .55)) drop-shadow(0 4px 8px rgba(0, 0, 0, .4));
 }
@@ -411,6 +413,14 @@
 }
 .showcase-plate.is-xfade .showcase-layer.is-on { transition-delay: 0s; }
 .showcase-layer.no-t { transition: none !important; }
+/* An empty or still-decoding img paints a solid white box on mobile. Hold it out. */
+.showcase-layer.is-pending,
+.showcase-layer:not([src]) {
+  visibility: hidden !important;
+  opacity: 0 !important;
+  filter: none !important;
+  background: transparent !important;
+}
 /* Style toggle = a quiet crossfade in place */
 .showcase-plate.is-xfade .showcase-layer,
 .showcase-plate.is-xfade .showcase-layer.is-out { transform: none; filter: blur(0) var(--shadow); }
@@ -436,6 +446,9 @@
 
 @media (max-width: 720px) {
   .hero-split .showcase-controls { flex-direction: row; align-items: center; }
+  /* Room for the season tag above the sticker. Tall wordmarks fill the plate,
+     so the stage padding — not the letterbox — is what keeps them clear. */
+  .hero-split .showcase-stage { padding: 56px 12px 16px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -537,8 +550,11 @@ body { background: var(--night); }
 /* "In season this fall" tag on the showcase while an in-season state is showing */
 .showcase-season {
   position: absolute; top: 14px; left: 16px; z-index: 2;
-  font-size: var(--step--1); font-weight: 600; letter-spacing: .02em;
+  font-size: var(--step--1); font-weight: 600; letter-spacing: .02em; line-height: 1.2;
   padding: 5px 12px; border-radius: var(--r-pill);
   color: var(--sun); background: rgba(233, 184, 114, .12);
   box-shadow: inset 0 0 0 1px rgba(233, 184, 114, .28);
+}
+@media (max-width: 720px) {
+  .showcase-season { top: 10px; left: 12px; }
 }
