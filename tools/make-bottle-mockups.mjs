@@ -1,6 +1,6 @@
 // Water-bottle mockups: puts each real sticker (public/stickers/all/<name>-1400.webp) on a clean
 // bottle photo with StickerBottle (tools/bottle/sticker-bottle.js, the same code medicalstickers.shop
-// uses), crops a square around the bottle and writes public/stickers/bottle/<name>.webp (800×800).
+// uses), crops a square around the bottle and writes public/stickers/bottle/<name>.webp (1600×1600).
 // Wide state-name art is turned to run down the bottle, top to bottom, like a real 6″ sticker would.
 //
 // Needs Playwright with Chromium (not a site dependency):
@@ -16,16 +16,17 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const ART = path.join(root, 'public/stickers/all');
 const OUT = path.join(root, 'public/stickers/bottle');
 
-// Geometry of tools/bottle/base.jpg (handled olive bottle, 1519×1036). Same numbers as
-// the defaults in tools/bottle/sticker-bottle.js. Re-measure if the photo changes:
-// cx/cy = where the sticker's centre sits on the front face, radius = half the body width there, tilt = lean.
-const BOTTLE = { imageW: 1519, imageH: 1036, cx: 700, cy: 560, radius: 150, tilt: 0, curve: 8 };
-// Sticker size on the bottle: tall art (rotated wordmarks) vs square/round art.
-// The body is narrower than the old photo, so these stay on the front face, off the lid, base, and handle.
-const TALL = { area: 100000, maxW: 240, maxH: 520 };
-const SQUARE = { area: 54000, maxW: 250, maxH: 280 };
+// Geometry of tools/bottle/base.jpg. Same numbers as tools/bottle/sticker-bottle.js.
+// Front face at mid-body runs x=553 to x=885; radius is half of that. pixelScale renders
+// the composite at 2x before the square crop so the art is not softened on the way out.
+const BOTTLE = { imageW: 1519, imageH: 1036, cx: 719, cy: 555, radius: 168, tilt: 0, wobble: 0, curve: 22, pixelScale: 2 };
+// Tall wordmarks run down the front face. Square art is wide enough that its edges
+// turn with the cylinder, still clear of the lid, the base, and the handle.
+const TALL = { area: 130000, maxW: 210, maxH: 540 };
+const SQUARE = { area: 86000, maxW: 310, maxH: 320 };
 // Square crop around the bottle, including the handle: [x, y, size] in image pixels.
 const CROP = [342, 0, 1036];
+const OUT_SIZE = 1600;
 
 const only = process.argv.slice(2);
 const names = fs.readdirSync(ART)
@@ -47,11 +48,22 @@ const server = http.createServer((req, res) => {
 const base = `http://127.0.0.1:${server.address().port}`;
 
 const browser = await chromium.launch();
-const page = await (await browser.newContext({ viewport: { width: 1600, height: 1100 }, reducedMotion: 'reduce' })).newPage();
+let context = await browser.newContext({ viewport: { width: 1600, height: 1100 }, reducedMotion: 'reduce' });
+let page = await context.newPage();
 await page.setContent(`<!doctype html><body style="margin:0"><div id="b" style="width:${BOTTLE.imageW}px"></div>`);
 await page.addScriptTag({ url: `${base}/tools/bottle/sticker-bottle.js` });
 
+let n = 0;
 for (const name of names) {
+  // A long run holds onto decoded sticker bitmaps. A fresh page keeps memory flat.
+  if (n && n % 24 === 0) {
+    await context.close();
+    context = await browser.newContext({ viewport: { width: 1600, height: 1100 }, reducedMotion: 'reduce' });
+    page = await context.newPage();
+    await page.setContent(`<!doctype html><body style="margin:0"><div id="b" style="width:${BOTTLE.imageW}px"></div>`);
+    await page.addScriptTag({ url: `${base}/tools/bottle/sticker-bottle.js` });
+  }
+  n++;
   const dataUrl = await page.evaluate(async ({ src, photo, bottle, tall, square, crop }) => {
     const im = new Image(); im.crossOrigin = 'anonymous'; im.src = src; await im.decode();
     // Trim the transparent margin so every design sits at the same size.
@@ -66,6 +78,7 @@ for (const name of names) {
     // Wide wordmarks turn 90° clockwise so they read top to bottom down the bottle.
     const s = document.createElement('canvas'); s.width = wide ? h : w; s.height = wide ? w : h;
     const sg = s.getContext('2d');
+    sg.imageSmoothingEnabled = true; sg.imageSmoothingQuality = 'high';
     if (wide) { sg.translate(h, 0); sg.rotate(Math.PI / 2); }
     sg.drawImage(t, x0, y0, w, h, 0, 0, w, h);
 
@@ -73,13 +86,17 @@ for (const name of names) {
     const run = StickerBottle.mount(el, { ...bottle, ...(wide ? tall : square), base: photo, startAt: 1200, stickers: [s.toDataURL()], label: '' });
     await new Promise((r) => setTimeout(r, 1600));
     run.stop();
-    const out = document.createElement('canvas'); out.width = out.height = 800;
-    out.getContext('2d').drawImage(run.canvas, crop[0], crop[1], crop[2], crop[2], 0, 0, 800, 800);
-    return out.toDataURL('image/webp', 0.8);
+    const scale = run.canvas.width / bottle.imageW;
+    const out = document.createElement('canvas'); out.width = out.height = 1600;
+    const ox = out.getContext('2d');
+    ox.imageSmoothingEnabled = true; ox.imageSmoothingQuality = 'high';
+    ox.drawImage(run.canvas, crop[0] * scale, crop[1] * scale, crop[2] * scale, crop[2] * scale, 0, 0, 1600, 1600);
+    return out.toDataURL('image/webp', 0.94);
   }, { src: `${base}/public/stickers/all/${name}-1400.webp`, photo: `${base}/tools/bottle/base.jpg`, bottle: BOTTLE, tall: TALL, square: SQUARE, crop: CROP });
   fs.writeFileSync(path.join(OUT, `${name}.webp`), Buffer.from(dataUrl.split(',')[1], 'base64'));
   console.log(name);
 }
 
+await context.close();
 await browser.close();
 server.close();
