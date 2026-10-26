@@ -5,6 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { locationPhotoSrc } from '../src/sticker-url.js';
 
 const ORIGIN = 'https://naturestickers.shop';
 
@@ -72,6 +73,8 @@ const esc = (s) =>
     .replace(/'/g, '&#39;');
 // Same as slug() in src/catalog-parse.js.
 const slug = (s) => String(s).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+/** Site URL for a generated sticker file. Location Real Photo gets the edge cache bust. */
+const artFile = (sec, base, variant = '') => locationPhotoSrc(sec.key, `${base}${variant}.webp`);
 // JSON inside <script>: escape the characters that could close the tag.
 const ldJson = (obj) => JSON.stringify(obj, null, 2).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026');
 
@@ -180,7 +183,7 @@ function page(sec, key, entry) {
         name: productName,
         description: blurb,
         url,
-        image: styles.map((s) => `${ORIGIN}${s.src}-1400.webp`),
+        image: styles.map((s) => `${ORIGIN}${artFile(sec, s.src, '-1400')}`),
         brand: { '@type': 'Brand', name: 'Nature Stickers' },
         productGroupID: key,
         variesBy: multi ? ['https://schema.org/pattern', 'https://schema.org/size'] : ['https://schema.org/pattern'],
@@ -189,7 +192,7 @@ function page(sec, key, entry) {
           '@id': multi ? `${url}#${s.key}-${z.key}` : `${url}#${s.key}`,
           name: multi ? `${productName} (${s.label}, ${z.label})` : `${productName} (${s.label})`,
           sku: multi ? `${key}-${s.key}-${z.key}` : `${key}-${s.key}`,
-          image: `${ORIGIN}${s.src}-1400.webp`,
+          image: `${ORIGIN}${artFile(sec, s.src, '-1400')}`,
           description: blurb,
           brand: { '@type': 'Brand', name: 'Nature Stickers' },
           pattern: s.label,
@@ -214,7 +217,7 @@ function page(sec, key, entry) {
     .map(
       (s, i) => `
           <figure class="sp-fig${i === 0 ? ' is-main' : ''}" data-style="${s.key}">
-            <img src="${s.src}.webp" srcset="${s.src}.webp 800w, ${s.src}-1400.webp 1400w" sizes="${square ? '(max-width: 600px) calc(100vw - 40px), 560px' : '(max-width: 1100px) calc(100vw - 40px), 1000px'}" alt="${esc(altFor(s.label))}" width="${s.size.w}" height="${s.size.h}" decoding="async"${i === 0 ? ' fetchpriority="high"' : ' loading="lazy"'} />
+            <img src="${artFile(sec, s.src)}" srcset="${artFile(sec, s.src)} 800w, ${artFile(sec, s.src, '-1400')} 1400w" sizes="${square ? '(max-width: 600px) calc(100vw - 40px), 560px' : '(max-width: 1100px) calc(100vw - 40px), 1000px'}" alt="${esc(altFor(s.label))}" width="${s.size.w}" height="${s.size.h}" decoding="async"${i === 0 ? ' fetchpriority="high"' : ' loading="lazy"'} />
             <figcaption>${s.label}</figcaption>
           </figure>`,
     )
@@ -473,6 +476,7 @@ function sectionSourcesPage(sec, key, entry) {
   if (!fs.existsSync(file)) throw new Error(`build-state-pages: missing ${file}`);
   const size = webpSize(file);
   const src = `/stickers/all/${key}-photo`;
+  const photo = (variant = '') => locationPhotoSrc(sec.key, `${src}${variant}.webp`);
   const square = sec.art === 'square';
   const note = single ? locationSourceNote(rows[0]) : sourcesNote(rows);
   const label = single ? 'Image source' : 'Image sources';
@@ -518,7 +522,7 @@ ${gaTag}
   <meta property="og:url" content="${esc(url)}" />
   <meta property="og:title" content="${esc(`${name} sticker: image ${single ? 'source' : 'sources'}`)}" />
   <meta property="og:description" content="${esc(description)}" />
-  <meta property="og:image" content="${esc(`${ORIGIN}${src}-1400.webp`)}" />
+  <meta property="og:image" content="${esc(`${ORIGIN}${photo('-1400')}`)}" />
   <meta name="twitter:card" content="summary_large_image" />
 ${headLinks}
   <script type="application/ld+json">
@@ -539,7 +543,7 @@ ${header}
         <p class="sp-where">${esc([entry.park, entry.region].filter(Boolean).join(', '))}</p>` : ''}
         <div class="sp-art${square ? ' is-square' : ''}">
           <figure class="sp-fig is-main">
-            <img src="${src}.webp" srcset="${src}.webp 800w, ${src}-1400.webp 1400w" sizes="${square ? '(max-width: 600px) calc(100vw - 40px), 560px' : '(max-width: 1100px) calc(100vw - 40px), 1000px'}" alt="${esc(`${name} sticker, Real Photo`)}" width="${size.w}" height="${size.h}" decoding="async" fetchpriority="high" />
+            <img src="${photo()}" srcset="${photo()} 800w, ${photo('-1400')} 1400w" sizes="${square ? '(max-width: 600px) calc(100vw - 40px), 560px' : '(max-width: 1100px) calc(100vw - 40px), 1000px'}" alt="${esc(`${name} sticker, Real Photo`)}" width="${size.w}" height="${size.h}" decoding="async" fetchpriority="high" />
           </figure>
         </div>
       </div>
