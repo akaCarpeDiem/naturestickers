@@ -95,39 +95,37 @@
         <div class="showcase" data-showcase>
           <div class="showcase-stage">
             <span class="showcase-season" data-season-tag hidden></span>
-            <a class="showcase-link" href="/shop#california-stained-glass" data-link aria-label="Shop the California sticker, stained glass">
+            <a class="showcase-link" href="/shop#vermont-stained-glass" data-link aria-label="Shop the Vermont sticker, stained glass">
               <span class="showcase-plate is-floating" data-plate>
-                <!-- First paint is this season's lead state, same months as src/seasons.js.
-                     Inserting the img here avoids a California → Vermont swap (and its white flash).
-                     Spare starts on a 1×1 transparent GIF so it never paints a white empty box. -->
+                <!-- Fall lead in the HTML so mobile Safari paints a real bitmap on first load.
+                     Other seasons rewrite src below before home.js runs. -->
+                <img
+                  class="showcase-layer is-on"
+                  data-hero-lead
+                  src="/stickers/all/vermont-stained-glass.webp"
+                  srcset="/stickers/all/vermont-stained-glass.webp 800w, /stickers/all/vermont-stained-glass-1400.webp 1400w"
+                  sizes="(max-width: 900px) 88vw, min(680px, 48vw)"
+                  width="800" height="172"
+                  alt="Vermont state-name sticker, stained-glass style: each letter frames a Vermont landscape"
+                  fetchpriority="high" decoding="async"
+                />
                 <script>
                   (function () {
                     var m = new Date().getMonth();
                     var season = (m === 11 || m < 2) ? 'winter' : m < 5 ? 'spring' : m < 8 ? 'summer' : 'fall';
-                    var lead = { winter: ['colorado', 'Colorado'], spring: ['texas', 'Texas'], summer: ['montana', 'Montana'], fall: ['vermont', 'Vermont'] }[season];
-                    var file = lead[0] + '-stained-glass';
-                    var plate = document.currentScript.parentNode;
-                    var link = plate.parentNode;
-                    link.href = '/shop#' + file;
-                    link.setAttribute('aria-label', 'Shop the ' + lead[1] + ' sticker, stained glass');
+                    var leads = { winter: ['colorado', 'Colorado'], spring: ['texas', 'Texas'], summer: ['montana', 'Montana'], fall: ['vermont', 'Vermont'] };
+                    var lead = leads[season];
+                    var img = document.currentScript.previousElementSibling;
+                    var link = img.parentNode.parentNode;
                     var tag = link.parentNode.querySelector('[data-season-tag]');
                     if (tag) { tag.hidden = false; tag.textContent = 'In season this ' + season; }
-                    var pre = document.createElement('link');
-                    pre.rel = 'preload'; pre.as = 'image';
-                    pre.href = '/stickers/all/' + file + '.webp';
-                    pre.setAttribute('imagesrcset', '/stickers/all/' + file + '.webp 800w, /stickers/all/' + file + '-1400.webp 1400w');
-                    pre.setAttribute('imagesizes', '(max-width: 900px) 88vw, min(680px, 48vw)');
-                    document.head.appendChild(pre);
-                    var img = document.createElement('img');
-                    img.className = 'showcase-layer is-on';
+                    if (season === 'fall') return; // HTML already has Vermont
+                    var file = lead[0] + '-stained-glass';
                     img.src = '/stickers/all/' + file + '.webp';
                     img.srcset = '/stickers/all/' + file + '.webp 800w, /stickers/all/' + file + '-1400.webp 1400w';
-                    img.sizes = '(max-width: 900px) 88vw, min(680px, 48vw)';
-                    img.width = 800; img.height = 172;
                     img.alt = lead[1] + ' state-name sticker, stained-glass style: each letter frames a ' + lead[1] + ' landscape';
-                    img.fetchPriority = 'high';
-                    img.decoding = 'async';
-                    plate.insertBefore(img, document.currentScript.nextSibling);
+                    link.href = '/shop#' + file;
+                    link.setAttribute('aria-label', 'Shop the ' + lead[1] + ' sticker, stained glass');
                   })();
                 </script>
                 <img class="showcase-layer" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="State-name sticker slideshow, next design" aria-hidden="true" width="800" height="172" decoding="async" />

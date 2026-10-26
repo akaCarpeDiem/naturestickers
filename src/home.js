@@ -100,9 +100,8 @@ if (showcase) {
     const [live, spare] = layers;
     const { slug, name } = STATES[i];
 
-    // Park the spare off-screen and invisible before touching src. A newly
-    // assigned img paints an empty white box on mobile if it is showing.
-    spare.classList.add('no-t', 'is-pending');
+    // Park the spare layer at the "enter" position without animating there.
+    spare.classList.add('no-t');
     spare.classList.remove('is-out', 'is-on');
     plate.classList.toggle('is-xfade', mode === 'fade');
     setSrc(spare, slug, st);
@@ -111,16 +110,8 @@ if (showcase) {
     try {
       if (spare.decode) await spare.decode();
       else await new Promise((res, rej) => { spare.onload = res; spare.onerror = rej; });
-    } catch {
-      // Keep the sticker that is already up; don't leave spare stuck pending.
-      spare.classList.remove('is-pending', 'no-t');
-      plate.classList.remove('is-busy');
-      return;
-    }
-    if (mine !== token) {
-      spare.classList.remove('is-pending', 'no-t');
-      return; // a newer change won
-    }
+    } catch { /* show it anyway rather than freezing */ }
+    if (mine !== token) return; // a newer change won
     plate.classList.remove('is-busy');
 
     void spare.offsetWidth; // commit the parked position
@@ -133,9 +124,6 @@ if (showcase) {
     live.setAttribute('aria-hidden', 'true');
 
     requestAnimationFrame(() => {
-      if (mine !== token) return;
-      // Drop the hold only once the bitmap can paint, then fade it in.
-      spare.classList.remove('is-pending');
       live.classList.remove('is-on');
       live.classList.add('is-out');
       spare.classList.add('is-on');
@@ -205,7 +193,7 @@ if (showcase) {
   };
   reduceMotion.addEventListener?.('change', applyMotion);
 
-  // Warm this season's lead and the one after it before the first swap.
+  // Warm this season's lead and the next state before the first swap.
   preload(STATES[0].slug, style);
   preload(STATES[next()].slug, style);
   const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 900));
@@ -213,7 +201,7 @@ if (showcase) {
 
   syncControls();
   applyMotion();
-  // index.html already paints the season lead. Swap only if that img is someone else.
+  // index.html ships this season's lead as a real <img>. Only swap if it doesn't match.
   const shown = (layers[0].getAttribute('src') || '').match(/\/([a-z0-9-]+)-(stained-glass|photo)\.webp$/);
   if (!shown || shown[1] !== STATES[0].slug) show(0, style, 'fade');
 }
