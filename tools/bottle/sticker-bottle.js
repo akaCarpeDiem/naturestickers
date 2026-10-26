@@ -18,14 +18,16 @@
   'use strict';
 
   var DEFAULTS = {
-    // Geometry of base.jpg (image pixels). Only change if you swap the photo.
+    // Geometry of tools/bottle/base.jpg (1519×1036), the handled olive bottle.
+    // The sticker sits on the front face, clear of the lid, base, and handle.
+    // Square crop around that bottle, used by tools/make-bottle-mockups.mjs: [342, 0, 1036].
     imageW: 1519, imageH: 1036,
-    cx: 602, cy: 450,          // where the sticker's center sits on the bottle
-    radius: 292,               // bottle radius at that height
-    tilt: -2.5,                // bottle lean, degrees
-    curve: 9,                  // how much the sticker's edges rise with the camera angle
-    area: 192000,              // target sticker area so every design looks a similar size
-    maxW: 546, maxH: 546,
+    cx: 700, cy: 560,          // where the sticker's center sits on the bottle
+    radius: 150,               // bottle radius at that height
+    tilt: 0,                   // bottle lean, degrees
+    curve: 8,                  // how much the sticker's edges rise with the camera angle
+    area: 54000,               // target sticker area so every design looks a similar size
+    maxW: 250, maxH: 280,
     // Timing (ms). One sticker = `each` ms including its entrance and exit.
     each: 5000, enter: 700, exit: 500,
     shuffle: false,

@@ -16,14 +16,16 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const ART = path.join(root, 'public/stickers/all');
 const OUT = path.join(root, 'public/stickers/bottle');
 
-// Geometry of tools/bottle/base.jpg in image pixels. Re-measure these if the photo changes:
-// cx/cy = where the sticker's centre sits, radius = the bottle's radius there, tilt = its lean.
-const BOTTLE = { imageW: 1519, imageH: 1036, cx: 602, cy: 450, radius: 292, tilt: -2.5, curve: 9 };
+// Geometry of tools/bottle/base.jpg (handled olive bottle, 1519×1036). Same numbers as
+// the defaults in tools/bottle/sticker-bottle.js. Re-measure if the photo changes:
+// cx/cy = where the sticker's centre sits on the front face, radius = half the body width there, tilt = lean.
+const BOTTLE = { imageW: 1519, imageH: 1036, cx: 700, cy: 560, radius: 150, tilt: 0, curve: 8 };
 // Sticker size on the bottle: tall art (rotated wordmarks) vs square/round art.
-const TALL = { area: 110000, maxW: 400, maxH: 800 };
-const SQUARE = { area: 192000, maxW: 546, maxH: 546 };
-// Square crop around the bottle: [x, y, size] in image pixels.
-const CROP = [84, 0, 1036];
+// The body is narrower than the old photo, so these stay on the front face, off the lid, base, and handle.
+const TALL = { area: 100000, maxW: 240, maxH: 520 };
+const SQUARE = { area: 54000, maxW: 250, maxH: 280 };
+// Square crop around the bottle, including the handle: [x, y, size] in image pixels.
+const CROP = [342, 0, 1036];
 
 const only = process.argv.slice(2);
 const names = fs.readdirSync(ART)
