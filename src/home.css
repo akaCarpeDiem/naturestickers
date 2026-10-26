@@ -393,31 +393,38 @@
 
 .showcase-layer {
   --shadow: drop-shadow(0 26px 30px rgba(0, 0, 0, .55)) drop-shadow(0 4px 8px rgba(0, 0, 0, .4));
+  z-index: 0;
   opacity: 0;
   transform: translate3d(7%, 0, 0) scale(.94);
   filter: blur(8px) var(--shadow);
   transition:
     opacity .72s var(--ease),
     transform .78s var(--ease-out),
-    filter .72s var(--ease);
+    filter .72s var(--ease),
+    visibility 0s linear;
   will-change: opacity, transform, filter;
 }
 .showcase-layer.is-on {
+  z-index: 1;
+  visibility: visible;
   opacity: 1; transform: none; filter: blur(0) var(--shadow);
-  /* Let the outgoing sticker clear first so the two never smear together. */
-  transition-delay: .16s;
+  /* Let the outgoing sticker clear first so the two never smear together.
+     visibility has no delay so a recycled layer can paint immediately. */
+  transition-delay: .16s, .16s, .16s, 0s;
 }
 .showcase-layer.is-out {
+  z-index: 0;
   opacity: 0; transform: translate3d(-7%, 0, 0) scale(.94); filter: blur(8px) var(--shadow);
-  transition-duration: .46s, .6s, .46s;
+  /* After the fade, drop out of compositing. On mobile Safari an opacity:0
+     filtered img later in the DOM still paints a solid white plate over the
+     new sticker — which matches “see it, then white box.” */
+  visibility: hidden;
+  transition-duration: .46s, .6s, .46s, 0s;
+  transition-delay: 0s, 0s, 0s, .46s;
 }
-.showcase-plate.is-xfade .showcase-layer.is-on { transition-delay: 0s; }
+.showcase-plate.is-xfade .showcase-layer.is-on { transition-delay: 0s, 0s, 0s, 0s; }
 .showcase-layer.no-t { transition: none !important; }
-/* Empty imgs paint an opaque white box on mobile — hide only those.
-   Do NOT toggle visibility on a layer that already has (or just got) a
-   decoded bitmap: WebKit often then paints a solid white plate forever
-   while opacity transitions still run. Pending layers stay opacity:0 via
-   the base .showcase-layer rule until .is-on is added. */
+/* Empty imgs paint an opaque white box on mobile — hide only those. */
 .showcase-layer:not([src]),
 .showcase-layer[src=""] {
   visibility: hidden !important;
@@ -425,8 +432,13 @@
   filter: none !important;
   background: transparent !important;
 }
+/* Incoming spare: stay under the live sticker with no filter while decoding.
+   Avoid visibility:hidden here — toggling it onto the layer that then becomes
+   .is-on left a permanent white plate on mobile WebKit. */
 .showcase-layer.is-pending {
+  z-index: 0;
   opacity: 0 !important;
+  filter: none !important;
 }
 /* Style toggle = a quiet crossfade in place */
 .showcase-plate.is-xfade .showcase-layer,
