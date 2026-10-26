@@ -3,7 +3,7 @@
 import { escapeHtml, money } from './cart-ui.js';
 import { variantFor } from './catalog-parse.js';
 import { pageUrl } from './sections.js';
-import { locationPhotoSrc } from './sticker-url.js';
+import { locationArtSrc } from './sticker-url.js';
 import { sizeLabel, SIZE_NOTE } from './size-label.js';
 
 const reduceMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -145,7 +145,7 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
     figure.classList.toggle('is-square', it.section.art === 'square');
     delete img.dataset.fellBack;
     img.dataset.fallback = it.thumb || '';
-    img.src = locationPhotoSrc(it.section?.key, `/stickers/all/${key}-1400.webp`);
+    img.src = locationArtSrc(it.section?.key, `/stickers/all/${key}-1400.webp`);
     img.alt = it.section.key === 'states'
       ? `${title} sticker, ${it.style}: each letter frames a ${it.state} landscape`
       : `${title} sticker, ${it.style}${it.data.spot ? `: ${it.data.spot}` : ''}`;
@@ -156,7 +156,7 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
       .map((s) => `<button type="button" class="seg-btn" role="radio" aria-checked="${same(s, it)}" tabindex="${same(s, it) ? 0 : -1}" data-id="${escapeHtml(s.id)}">${escapeHtml(s.style)}</button>`)
       .join('');
     // Warm the other style's art so toggling is instant.
-    sib.filter((s) => !same(s, it)).forEach((s) => { const i = new Image(); i.src = locationPhotoSrc(s.section?.key, `/stickers/all/${artKey(s)}-1400.webp`); });
+    sib.filter((s) => !same(s, it)).forEach((s) => { const i = new Image(); i.src = locationArtSrc(s.section?.key, `/stickers/all/${artKey(s)}-1400.webp`); });
 
     spotText.textContent = it.data.spot || '';
     spotEl.hidden = !it.data.spot;

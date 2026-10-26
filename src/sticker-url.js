@@ -1,16 +1,19 @@
-/** One-time edge cache bust for location Real Photo files that kept their path
- *  across the Oct 2026 art redeploy. The custom domain was still serving the
- *  previous file (cf-cache-status HIT, max-age 7d). `?v=20261026` is a new
- *  cache key; the same query already returns the new bytes on naturestickers.shop.
- *  Stained glass and state art are left alone. */
-export const LOCATION_PHOTO_BUST = '20261026';
+/** One-time edge cache bust for location sticker art replaced in place.
+ *  Real Photo shipped first. Stained Glass on the eight returning locations
+ *  reused `-stained-glass.webp`, and the custom-domain edge kept the previous
+ *  file under the old 7-day object. The same `?v=20261026` query is applied to
+ *  every location Real Photo and Stained Glass URL. State art is left alone. */
+export const LOCATION_ART_BUST = '20261026';
+
+const LOCATION_ART_FILE = /-(?:photo|stained-glass)(?:-1400)?\.webp$/;
 
 /**
  * @param {string} sectionKey shop section (`locations`, `states`, …)
- * @param {string} url site path or absolute URL ending in `<key>-photo.webp` or `<key>-photo-1400.webp`
+ * @param {string} url site path or absolute URL for a location sticker webp
+ *   (`<key>-photo.webp`, `<key>-stained-glass.webp`, or the `-1400` variant)
  */
-export function locationPhotoSrc(sectionKey, url) {
+export function locationArtSrc(sectionKey, url) {
   if (sectionKey !== 'locations' || !url || /[?#]/.test(url)) return url;
-  if (!/-photo(?:-1400)?\.webp$/.test(url)) return url;
-  return `${url}?v=${LOCATION_PHOTO_BUST}`;
+  if (!LOCATION_ART_FILE.test(url)) return url;
+  return `${url}?v=${LOCATION_ART_BUST}`;
 }
