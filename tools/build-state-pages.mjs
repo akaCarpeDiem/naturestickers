@@ -5,7 +5,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { locationPhotoSrc } from '../src/sticker-url.js';
+import { locationArtSrc } from '../src/sticker-url.js';
 
 const ORIGIN = 'https://naturestickers.shop';
 
@@ -73,8 +73,8 @@ const esc = (s) =>
     .replace(/'/g, '&#39;');
 // Same as slug() in src/catalog-parse.js.
 const slug = (s) => String(s).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-/** Site URL for a generated sticker file. Location Real Photo gets the edge cache bust. */
-const artFile = (sec, base, variant = '') => locationPhotoSrc(sec.key, `${base}${variant}.webp`);
+/** Site URL for a generated sticker file. Location Real Photo and Stained Glass get the edge cache bust. */
+const artFile = (sec, base, variant = '') => locationArtSrc(sec.key, `${base}${variant}.webp`);
 // JSON inside <script>: escape the characters that could close the tag.
 const ldJson = (obj) => JSON.stringify(obj, null, 2).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026');
 
@@ -153,7 +153,7 @@ function page(sec, key, entry) {
   const ogTitle = isState ? `${name} sticker: every letter a wild place` : `${name} sticker${entry.park ? `: ${entry.park}` : ''}`;
   const productName = isState ? `${name} State Sticker` : `${name} Sticker`;
   const description = clip(blurb);
-  const ogImage = `${ORIGIN}/stickers/all/${key}-stained-glass-1400.webp`;
+  const ogImage = `${ORIGIN}${artFile(sec, `/stickers/all/${key}-stained-glass`, '-1400')}`;
   const altFor = (label) => (isState ? `${name} sticker, ${label}: each letter frames a ${state} landscape` : `${name} sticker, ${label}${entry.spot ? `: ${entry.spot}` : ''}`);
   const sizes = sec.sizes;
   const multi = sizes.length > 1;
@@ -476,7 +476,7 @@ function sectionSourcesPage(sec, key, entry) {
   if (!fs.existsSync(file)) throw new Error(`build-state-pages: missing ${file}`);
   const size = webpSize(file);
   const src = `/stickers/all/${key}-photo`;
-  const photo = (variant = '') => locationPhotoSrc(sec.key, `${src}${variant}.webp`);
+  const photo = (variant = '') => locationArtSrc(sec.key, `${src}${variant}.webp`);
   const square = sec.art === 'square';
   const note = single ? locationSourceNote(rows[0]) : sourcesNote(rows);
   const label = single ? 'Image source' : 'Image sources';

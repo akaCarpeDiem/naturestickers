@@ -4,7 +4,7 @@ import './main.js';
 import { addToCart } from './cart.js';
 import { announce, escapeHtml, money } from './cart-ui.js';
 import { artKey, parse, placeholder, slug } from './catalog-parse.js';
-import { locationPhotoSrc } from './sticker-url.js';
+import { locationArtSrc } from './sticker-url.js';
 import { pageUrl, SECTIONS, sectionByKey, sizesBlurb } from './sections.js';
 import { createModal } from './shop-modal.js';
 import { sizeLabel } from './size-label.js';
@@ -87,7 +87,7 @@ function card(it) {
   const alt = escapeHtml(`${it.title} sticker, ${it.style}`);
   const price = priceText(it);
   const art = `/stickers/all/${artKey(it)}`;
-  const artFile = (variant = '') => locationPhotoSrc(it.section?.key, `${art}${variant}.webp`);
+  const artFile = (variant = '') => locationArtSrc(it.section?.key, `${art}${variant}.webp`);
   const sizes = square
     ? '(max-width: 600px) calc(50vw - 40px), (max-width: 1280px) calc(25vw - 50px), 280px'
     : '(max-width: 600px) calc(100vw - 60px), (max-width: 1280px) calc(50vw - 60px), 580px';
