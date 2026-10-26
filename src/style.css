@@ -520,3 +520,15 @@ h1, h2, h3 {
 @media (max-width: 640px) {
   .brand .brand-logo img { height: 52px; }
 }
+
+/* —— Peel-and-stick add to cart (peel.js) —— */
+.peel-fly { position: fixed; z-index: 1000; pointer-events: none; transform-origin: 50% 50%; will-change: transform; }
+.peel-art { display: block; width: 100%; height: 100%; object-fit: fill; filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .45)); }
+/* The corner folds back along the cut, showing the sticker's white backing. */
+.peel-curl {
+  position: absolute; right: 0; bottom: 0; width: var(--c); height: var(--c);
+  transform-origin: 100% 100%;
+  background: linear-gradient(135deg, #DCD3C1 0%, #F2ECE0 55%, #FDFBF6 100%);
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  filter: drop-shadow(-2px -2px 3px rgba(0, 0, 0, .25));
+}

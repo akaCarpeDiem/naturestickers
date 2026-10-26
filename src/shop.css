@@ -327,3 +327,11 @@ html.sx-locked, html.sx-locked body { overflow: hidden; }
 .sp-art.is-square .sp-fig { width: min(220px, 40%); }
 .sp-art.is-square .sp-fig.is-main { width: 100%; max-width: 560px; }
 .sx-d-buy .sx-add:disabled { opacity: .55; cursor: not-allowed; }
+
+/* Water-bottle mockup (tools/make-bottle-mockups.mjs) in the popup and on sticker pages */
+.sx-d-bottle, .sp-bottle { margin: 0; text-align: center; }
+.sx-d-bottle { padding: 0 clamp(20px, 4vw, 56px) clamp(24px, 3vw, 40px); }
+.sx-d-bottle[hidden], .sp-bottle[hidden] { display: none; }
+.sx-d-bottle img, .sp-bottle img { display: block; width: 100%; max-width: 440px; height: auto; margin: 0 auto; border-radius: var(--r-lg); box-shadow: 0 30px 50px -36px rgba(0, 0, 0, .9); }
+.sx-d-bottle figcaption, .sp-bottle figcaption { margin-top: 10px; font-size: var(--step--1); color: var(--on-night-muted); }
+.sp-bottle { order: 3; width: min(440px, 100%); }

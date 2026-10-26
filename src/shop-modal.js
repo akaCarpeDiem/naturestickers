@@ -61,6 +61,7 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
             <div class="sx-d-cols"></div>
           </section>
         </div>
+        <figure class="sx-d-bottle" hidden><img alt="" width="800" height="800" loading="lazy" decoding="async" /><figcaption>Mockup on a water bottle</figcaption></figure>
       </div>
     </div>`;
   document.body.appendChild(root);
@@ -68,6 +69,11 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
   const dialog = root.querySelector('.sx-dialog');
   const img = root.querySelector('.sx-d-art img');
   const figure = root.querySelector('.sx-d-art');
+  const bottle = root.querySelector('.sx-d-bottle');
+  const bottleImg = bottle.querySelector('img');
+  // No mockup made for this sticker yet: keep the figure hidden.
+  bottleImg.addEventListener('load', () => { bottle.hidden = false; });
+  bottleImg.addEventListener('error', () => { bottle.hidden = true; });
   const titleEl = root.querySelector('.sx-d-title');
   const styleEl = root.querySelector('.sx-d-style');
   const priceEl = root.querySelector('.sx-d-price');
@@ -146,6 +152,9 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
     delete img.dataset.fellBack;
     img.dataset.fallback = it.thumb || '';
     img.src = locationArtSrc(it.section?.key, `/stickers/all/${key}-1400.webp`);
+    bottle.hidden = true;
+    bottleImg.src = `/stickers/bottle/${key}.webp`;
+    bottleImg.alt = `${title} sticker, ${it.style}, on a water bottle (mockup)`;
     img.alt = it.section.key === 'states'
       ? `${title} sticker, ${it.style}: each letter frames a ${it.state} landscape`
       : `${title} sticker, ${it.style}${it.data.spot ? `: ${it.data.spot}` : ''}`;

@@ -7,6 +7,7 @@
 // renders the California stained-glass sticker and every section reads fine.
 
 import './main.js';
+import { season } from './seasons.js';
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -16,7 +17,7 @@ const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
 // Twenty well-known, much-visited states (no sales data yet, so picked by
 // travel popularity and name recognition). California leads.
-const STATES = [
+const POPULAR = [
   ['california', 'California'], ['florida', 'Florida'], ['new-york', 'New York'],
   ['hawaii', 'Hawaii'], ['colorado', 'Colorado'], ['alaska', 'Alaska'],
   ['arizona', 'Arizona'], ['nevada', 'Nevada'], ['montana', 'Montana'],
@@ -24,7 +25,19 @@ const STATES = [
   ['georgia', 'Georgia'], ['michigan', 'Michigan'], ['massachusetts', 'Massachusetts'],
   ['louisiana', 'Louisiana'], ['new-mexico', 'New Mexico'], ['idaho', 'Idaho'],
   ['minnesota', 'Minnesota'], ['south-carolina', 'South Carolina'],
-].map(([slug, name]) => ({ slug, name }));
+];
+
+// States at their best right now lead the slideshow, then the popular ones follow.
+const IN_SEASON = {
+  fall: [['vermont', 'Vermont'], ['maine', 'Maine'], ['new-hampshire', 'New Hampshire'], ['tennessee', 'Tennessee'], ['colorado', 'Colorado']],
+  winter: [['colorado', 'Colorado'], ['alaska', 'Alaska'], ['utah', 'Utah'], ['hawaii', 'Hawaii'], ['florida', 'Florida']],
+  spring: [['texas', 'Texas'], ['arizona', 'Arizona'], ['georgia', 'Georgia'], ['california', 'California'], ['utah', 'Utah']],
+  summer: [['montana', 'Montana'], ['wyoming', 'Wyoming'], ['alaska', 'Alaska'], ['maine', 'Maine'], ['michigan', 'Michigan']],
+};
+const now = season();
+const inSeason = new Set(IN_SEASON[now].map(([slug]) => slug));
+const STATES = [...IN_SEASON[now], ...POPULAR.filter(([slug]) => !inSeason.has(slug))]
+  .map(([slug, name]) => ({ slug, name, inSeason: inSeason.has(slug) }));
 
 const STYLES = {
   'stained-glass': 'Stained glass',
@@ -63,8 +76,10 @@ if (showcase) {
   };
   const next = () => (index + 1) % STATES.length;
 
+  const seasonTag = showcase.querySelector('[data-season-tag]');
   const syncControls = () => {
-    const { slug, name } = STATES[index];
+    const { slug, name, inSeason: fresh } = STATES[index];
+    if (seasonTag) { seasonTag.hidden = !fresh; seasonTag.textContent = `In season this ${now}`; }
     styleBtns.forEach((b) => b.setAttribute('aria-checked', String(b.dataset.style === style)));
     if (link) {
       link.href = `/shop#${style === 'photo' ? slug : `${slug}-stained-glass`}`;
@@ -183,6 +198,8 @@ if (showcase) {
 
   syncControls();
   applyMotion();
+  // The HTML ships California so the hero paints instantly; swap to this season's lead state.
+  if (STATES[0].slug !== 'california') show(0, style, 'fade');
 }
 
 /* —— Touch: tap a state card to flip to the photo version —— */
