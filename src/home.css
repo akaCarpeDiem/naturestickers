@@ -413,13 +413,20 @@
 }
 .showcase-plate.is-xfade .showcase-layer.is-on { transition-delay: 0s; }
 .showcase-layer.no-t { transition: none !important; }
-/* An empty or still-decoding img paints a solid white box on mobile. Hold it out. */
-.showcase-layer.is-pending,
-.showcase-layer:not([src]) {
+/* Empty imgs paint an opaque white box on mobile — hide only those.
+   Do NOT toggle visibility on a layer that already has (or just got) a
+   decoded bitmap: WebKit often then paints a solid white plate forever
+   while opacity transitions still run. Pending layers stay opacity:0 via
+   the base .showcase-layer rule until .is-on is added. */
+.showcase-layer:not([src]),
+.showcase-layer[src=""] {
   visibility: hidden !important;
   opacity: 0 !important;
   filter: none !important;
   background: transparent !important;
+}
+.showcase-layer.is-pending {
+  opacity: 0 !important;
 }
 /* Style toggle = a quiet crossfade in place */
 .showcase-plate.is-xfade .showcase-layer,

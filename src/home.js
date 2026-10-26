@@ -112,11 +112,15 @@ if (showcase) {
       if (spare.decode) await spare.decode();
       else await new Promise((res, rej) => { spare.onload = res; spare.onerror = rej; });
     } catch {
-      // Keep the sticker that is already up.
+      // Keep the sticker that is already up; don't leave spare stuck pending.
+      spare.classList.remove('is-pending', 'no-t');
       plate.classList.remove('is-busy');
       return;
     }
-    if (mine !== token) return; // a newer change won
+    if (mine !== token) {
+      spare.classList.remove('is-pending', 'no-t');
+      return; // a newer change won
+    }
     plate.classList.remove('is-busy');
 
     void spare.offsetWidth; // commit the parked position
