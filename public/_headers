@@ -10,5 +10,8 @@
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
+# Art is replaced in place under stable filenames. A 7-day max-age left the
+# custom-domain edge serving old location Real Photo files after a redeploy.
+# Revalidate daily so the next in-place swap cannot sit for a week.
 /stickers/*
-  Cache-Control: public, max-age=604800
+  Cache-Control: public, max-age=86400, must-revalidate
