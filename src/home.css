@@ -413,17 +413,25 @@
 }
 .showcase-plate.is-xfade .showcase-layer.is-on { transition-delay: 0s; }
 .showcase-layer.no-t { transition: none !important; }
-/* An empty or still-decoding img paints a solid white box on mobile. Hold it out. */
-.showcase-layer.is-pending,
-.showcase-layer:not([src]) {
-  visibility: hidden !important;
-  opacity: 0 !important;
-  filter: none !important;
-  background: transparent !important;
-}
 /* Style toggle = a quiet crossfade in place */
 .showcase-plate.is-xfade .showcase-layer,
 .showcase-plate.is-xfade .showcase-layer.is-out { transform: none; filter: blur(0) var(--shadow); }
+
+/* Mobile Safari: blur+transform+filter compositing was painting a solid white
+   plate over the sticker. Opacity-only crossfade keeps the art visible. */
+@media (max-width: 720px) {
+  .showcase-layer,
+  .showcase-layer.is-on,
+  .showcase-layer.is-out,
+  .showcase-plate.is-xfade .showcase-layer,
+  .showcase-plate.is-xfade .showcase-layer.is-out {
+    transform: none !important;
+    filter: var(--shadow) !important;
+    transition: opacity .45s var(--ease) !important;
+    transition-delay: 0s !important;
+    will-change: opacity;
+  }
+}
 
 .hero-split .showcase-controls { position: relative; justify-content: center; align-items: center; margin-top: 18px; }
 /* Pause sits at the right edge so the style toggle stays truly centred under the box */
@@ -446,8 +454,7 @@
 
 @media (max-width: 720px) {
   .hero-split .showcase-controls { flex-direction: row; align-items: center; }
-  /* Room for the season tag above the sticker. Tall wordmarks fill the plate,
-     so the stage padding — not the letterbox — is what keeps them clear. */
+  /* Room for the season tag above the sticker on small screens. */
   .hero-split .showcase-stage { padding: 56px 12px 16px; }
 }
 
