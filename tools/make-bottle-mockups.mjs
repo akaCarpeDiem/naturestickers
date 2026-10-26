@@ -19,11 +19,12 @@ const OUT = path.join(root, 'public/stickers/bottle');
 // Geometry of tools/bottle/base.jpg. Same numbers as tools/bottle/sticker-bottle.js.
 // Front face at mid-body runs x=553 to x=885; radius is half of that. pixelScale renders
 // the composite at 2x before the square crop so the art is not softened on the way out.
-const BOTTLE = { imageW: 1519, imageH: 1036, cx: 719, cy: 555, radius: 168, tilt: 0, wobble: 0, curve: 22, pixelScale: 2 };
-// Tall wordmarks run down the front face. Square art is wide enough that its edges
-// turn with the cylinder, still clear of the lid, the base, and the handle.
-const TALL = { area: 130000, maxW: 210, maxH: 540 };
-const SQUARE = { area: 86000, maxW: 310, maxH: 320 };
+const BOTTLE = { imageW: 1519, imageH: 1036, cx: 719, cy: 555, radius: 168, tilt: 0, wobble: 0, curve: 62, pixelScale: 2 };
+// Tall wordmarks use a larger radius and a small curve so the letters stay nearly
+// straight, with only a little foreshortening at the edges. Square art keeps the
+// real cylinder so the edges still turn with the jug.
+const TALL = { area: 130000, maxW: 210, maxH: 540, radius: 380, curve: 12 };
+const SQUARE = { area: 86000, maxW: 310, maxH: 320, curve: 62 };
 // Square crop around the bottle, including the handle: [x, y, size] in image pixels.
 const CROP = [342, 0, 1036];
 const OUT_SIZE = 1600;
@@ -56,7 +57,7 @@ await page.addScriptTag({ url: `${base}/tools/bottle/sticker-bottle.js` });
 let n = 0;
 for (const name of names) {
   // A long run holds onto decoded sticker bitmaps. A fresh page keeps memory flat.
-  if (n && n % 24 === 0) {
+  if (n && n % 12 === 0) {
     await context.close();
     context = await browser.newContext({ viewport: { width: 1600, height: 1100 }, reducedMotion: 'reduce' });
     page = await context.newPage();

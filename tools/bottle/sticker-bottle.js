@@ -26,7 +26,9 @@
     cx: 719, cy: 555,          // sticker centre on the front face, left of the handle
     radius: 168,               // half the body width at that height
     tilt: 0,                   // bottle lean, degrees
-    curve: 22,                 // how far the side edges rise with the camera angle
+    // Rise at the silhouette, in image pixels. A narrow sticker only spans a
+    // small angle, so it stays nearly straight. Wide art picks up a gentle arc.
+    curve: 62,
     area: 86000,               // target sticker area so every design looks a similar size
     maxW: 310, maxH: 320,
     // Timing (ms). One sticker = `each` ms including its entrance and exit.
@@ -147,8 +149,12 @@
       var w = Math.sqrt(o.area * ar), h = w / ar;
       var f = Math.min(1, o.maxW / w, o.maxH / h); w *= f; h *= f;
       var R = o.radius, cs = 4;                       // 4x cache so the remap does not soften the art
-      var W2 = 2 * R * Math.sin(w / (2 * R));        // on-screen width after wrapping
-      var H2 = h + o.curve;
+      // Do not stretch the bow to the sticker's own width. That made a narrow
+      // wordmark arc as hard as a sticker that reaches the silhouette.
+      var half = Math.min(Math.abs(w / (2 * R)), 1.15);
+      var W2 = 2 * R * Math.sin(half);               // on-screen width after wrapping
+      var bow = o.curve * (1 - Math.cos(half));
+      var H2 = h + bow;
       var c = canvas(W2 * cs, H2 * cs), x = c.getContext('2d');
       x.imageSmoothingEnabled = true; x.imageSmoothingQuality = 'high';
       var cols = Math.ceil(W2 * cs), sw = im.naturalWidth;
@@ -159,10 +165,10 @@
         var s = R * Math.asin(clamp(px / R, -1, 1));  // arc length on the bottle
         var u = (s / w + .5) * sw;
         var du = sw / w * (R / Math.sqrt(Math.max(1, R * R - px * px))) / cs;
-        var lift = o.curve * (1 - Math.cos(s / R)) / (1 - Math.cos(w / 2 / R) || 1);
+        var lift = o.curve * (1 - Math.cos(s / R));
         // One output pixel wide. Overlapping 1.6px stamps were what softened the print.
         x.drawImage(im, clamp(u - du / 2, 0, Math.max(0, sw - du)), 0, Math.max(du, .01), im.naturalHeight,
-          i, (o.curve - lift) * cs, 1, h * cs);
+          i, (bow - lift) * cs, 1, h * cs);
       }
       // Cylinder shading in the sticker's own pixels: the right side of this jug is in
       // shade, and the rims turn away from the camera. No blur — a per-column multiply.
@@ -249,15 +255,15 @@
       place(lctx);
       lctx.globalCompositeOperation = 'source-over';
 
-      // Shadow grows as the sticker lifts away from the bottle.
+      // Pressed vinyl does not cast a shadow. One only grows while the sticker lifts.
       ctx.save();
       ctx.globalAlpha = alpha;
-      // Contact shadow sits under the vinyl. It does not blur the sticker pixels themselves.
-      // Pressed: a short dark contact line. It grows only while the sticker is lifting.
-      ctx.shadowColor = 'rgba(0,0,0,' + (0.62 - 0.2 * L).toFixed(3) + ')';
-      ctx.shadowBlur = (4 + 26 * L) * scale;
-      ctx.shadowOffsetX = (2 + 10 * L) * scale;
-      ctx.shadowOffsetY = (3.5 + 20 * L) * scale;
+      if (L > 0.04) {
+        ctx.shadowColor = 'rgba(0,0,0,' + (0.4 * L).toFixed(3) + ')';
+        ctx.shadowBlur = 22 * L * scale;
+        ctx.shadowOffsetX = 8 * L * scale;
+        ctx.shadowOffsetY = 16 * L * scale;
+      }
       ctx.drawImage(layer, RX * scale, RY * scale);
       ctx.restore();
     }
