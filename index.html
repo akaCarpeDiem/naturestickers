@@ -97,15 +97,28 @@
             <span class="showcase-season" data-season-tag hidden></span>
             <a class="showcase-link" href="/shop#california-stained-glass" data-link aria-label="Shop the California sticker, stained glass">
               <span class="showcase-plate is-floating" data-plate>
-                <img
-                  class="showcase-layer is-on"
-                  src="/stickers/all/california-stained-glass.webp"
-                  srcset="/stickers/all/california-stained-glass.webp 800w, /stickers/all/california-stained-glass-1400.webp 1400w"
-                  sizes="(max-width: 900px) 88vw, min(680px, 48vw)"
-                  width="800" height="172"
-                  alt="California state-name sticker, stained-glass style: each letter frames a California landscape"
-                  fetchpriority="high" decoding="async"
-                />
+                <!-- First paint is this season's lead state, same months as src/seasons.js.
+                     Writing the img here avoids a California → Vermont swap (and its white flash). -->
+                <script>
+                  (function () {
+                    var m = new Date().getMonth();
+                    var season = (m === 11 || m < 2) ? 'winter' : m < 5 ? 'spring' : m < 8 ? 'summer' : 'fall';
+                    var lead = { winter: ['colorado', 'Colorado'], spring: ['texas', 'Texas'], summer: ['montana', 'Montana'], fall: ['vermont', 'Vermont'] }[season];
+                    var file = lead[0] + '-stained-glass';
+                    var link = document.currentScript.parentNode.parentNode;
+                    link.href = '/shop#' + file;
+                    link.setAttribute('aria-label', 'Shop the ' + lead[1] + ' sticker, stained glass');
+                    var tag = link.parentNode.querySelector('[data-season-tag]');
+                    if (tag) { tag.hidden = false; tag.textContent = 'In season this ' + season; }
+                    var pre = document.createElement('link');
+                    pre.rel = 'preload'; pre.as = 'image';
+                    pre.href = '/stickers/all/' + file + '.webp';
+                    pre.setAttribute('imagesrcset', '/stickers/all/' + file + '.webp 800w, /stickers/all/' + file + '-1400.webp 1400w');
+                    pre.setAttribute('imagesizes', '(max-width: 900px) 88vw, min(680px, 48vw)');
+                    document.head.appendChild(pre);
+                    document.write('<img class="showcase-layer is-on" src="/stickers/all/' + file + '.webp" srcset="/stickers/all/' + file + '.webp 800w, /stickers/all/' + file + '-1400.webp 1400w" sizes="(max-width: 900px) 88vw, min(680px, 48vw)" width="800" height="172" alt="' + lead[1] + ' state-name sticker, stained-glass style: each letter frames a ' + lead[1] + ' landscape" fetchpriority="high" decoding="async">');
+                  })();
+                </script>
                 <img class="showcase-layer" alt="State-name sticker slideshow, next design" aria-hidden="true" width="800" height="172" decoding="async" />
               </span>
             </a>
