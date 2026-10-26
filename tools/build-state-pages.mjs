@@ -574,7 +574,8 @@ const END = '<!-- state-links:end -->';
 const at = shopHtml.indexOf(START);
 const to = shopHtml.indexOf(END);
 if (at < 0 || to < at) throw new Error('build-state-pages: state-links markers not found in shop.html');
-const lists = SECTIONS.map((sec) => {
+// Sections with no stickers yet (e.g. locations between design rounds) get no index list.
+const lists = SECTIONS.filter((sec) => Object.keys(sec.info).length).map((sec) => {
   const links = Object.keys(sec.info)
     .map((key) => [key, sec.info[key].name])
     .sort((a, b) => a[1].localeCompare(b[1]))

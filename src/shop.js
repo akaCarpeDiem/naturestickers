@@ -144,11 +144,15 @@ function render() {
     .join('');
   grid.hidden = shown.length === 0;
   emptyEl.hidden = shown.length !== 0;
+  // A section with no stickers at all yet (e.g. new locations on the way): say so instead of "no match".
+  const soon = section && !items.some((it) => it.section.key === section) ? sectionByKey(section) : null;
+  emptyEl.querySelector('h3').textContent = soon ? `New ${soon.noun[1]} coming soon` : 'No stickers match';
+  emptyEl.querySelector('p').textContent = soon ? `We’re finishing a fresh set of ${soon.heading.toLowerCase()}. Check back soon.` : 'Try another name or style.';
   // "Showing 110 stickers: 50 states and 8 locations" (states count by name, so New York's two editions are one state).
   const parts = groups.map(({ s, list }) => plural(new Set(list.map((it) => (s.key === 'states' ? it.state : it.key))).size, s.noun));
   countEl.textContent = shown.length
     ? `Showing ${plural(shown.length, ['sticker', 'stickers'])}: ${parts.length > 1 ? `${parts.slice(0, -1).join(', ')} and ${parts[parts.length - 1]}` : parts[0]}`
-    : 'No stickers match these filters.';
+    : soon ? '' : 'No stickers match these filters.';
 }
 
 function setData(products) {
