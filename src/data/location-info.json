@@ -1,1 +1,149 @@
-{}
+{
+  "acadia-otter-cliff": {
+    "name": "Otter Cliff",
+    "park": "Acadia National Park",
+    "region": "Maine",
+    "blurb": "Pink granite dropping straight into the Atlantic. Otter Cliff rises about 110 feet above the ocean along the Park Loop Road on Mount Desert Island, one of the highest headlands on the Atlantic coast. Waves break white on the rocks below, and climbers rope up on its seaward face.",
+    "spot": "Otter Cliff, Park Loop Road, Acadia National Park, Maine"
+  },
+  "arches-delicate-arch": {
+    "name": "Delicate Arch",
+    "park": "Arches National Park",
+    "region": "Utah",
+    "blurb": "Red sandstone, open slickrock and one famous span. Delicate Arch stands on its own at the rim of a stone bowl in Arches National Park, near Moab, reached by a roughly three-mile round-trip hike across bare rock. At sunset the whole arch glows orange.",
+    "spot": "Delicate Arch, Arches National Park, near Moab, Utah"
+  },
+  "big-sur-mcway-falls": {
+    "name": "McWay Falls",
+    "park": "Big Sur",
+    "region": "California",
+    "blurb": "A waterfall that lands on the beach. McWay Falls drops about 80 feet off a granite cliff into a sandy cove in Julia Pfeiffer Burns State Park, on California's Big Sur coast. A short trail off Highway 1 leads to the overlook; the cove itself stays off-limits, so the sand stays untouched.",
+    "spot": "McWay Falls, Julia Pfeiffer Burns State Park, Big Sur, California"
+  },
+  "bryce-canyon-bryce-amphitheater": {
+    "name": "Bryce Amphitheater",
+    "park": "Bryce Canyon National Park",
+    "region": "Utah",
+    "blurb": "Thousands of orange and white stone spires. The Bryce Amphitheater is the largest of the natural bowls carved into the edge of the Paunsaugunt Plateau in southern Utah, crowded with hoodoos shaped by frost and rain. Sunrise, Sunset, Inspiration and Bryce Points all look down into it.",
+    "spot": "Bryce Amphitheater, Bryce Canyon National Park, Utah"
+  },
+  "columbia-river-gorge-multnomah-falls": {
+    "name": "Multnomah Falls",
+    "park": "Columbia River Gorge",
+    "region": "Oregon",
+    "blurb": "Two tiers of falling water and a stone footbridge. Multnomah Falls drops about 620 feet in two steps down a basalt cliff in the Columbia River Gorge, east of Portland, making it the tallest waterfall in Oregon. The Benson Bridge crosses between the upper and lower falls.",
+    "spot": "Multnomah Falls, Columbia River Gorge, Oregon"
+  },
+  "crater-lake-wizard-island": {
+    "name": "Wizard Island",
+    "park": "Crater Lake National Park",
+    "region": "Oregon",
+    "blurb": "Deep blue water inside a sleeping volcano. Crater Lake fills the caldera of Mount Mazama in southern Oregon, and at 1,943 feet it's the deepest lake in the United States. Wizard Island, a cinder cone, rises from the water near its western shore.",
+    "spot": "Wizard Island, Crater Lake National Park, Oregon"
+  },
+  "glacier-wild-goose-island": {
+    "name": "Wild Goose Island",
+    "park": "Glacier National Park",
+    "region": "Montana",
+    "blurb": "A tiny island in a long mountain lake. Wild Goose Island sits in St. Mary Lake on the east side of Glacier National Park, with steep peaks rising from both shores. The pullout along Going-to-the-Sun Road is one of the most photographed views in the park.",
+    "spot": "Wild Goose Island, St. Mary Lake, Glacier National Park, Montana"
+  },
+  "glen-canyon-horseshoe-bend": {
+    "name": "Horseshoe Bend",
+    "park": "Glen Canyon National Recreation Area",
+    "region": "Arizona",
+    "blurb": "Red rock and a river that bends back on itself. Horseshoe Bend is a tight, horseshoe-shaped meander of the Colorado River near Page, Arizona, in Glen Canyon National Recreation Area. The overlook sits roughly 1,000 feet above the green water at the end of a short walk from the parking lot.",
+    "spot": "Horseshoe Bend, Colorado River, Glen Canyon National Recreation Area, near Page, Arizona"
+  },
+  "grand-canyon-yaki-point": {
+    "name": "Yaki Point",
+    "park": "Grand Canyon National Park",
+    "region": "Arizona",
+    "blurb": "Layered cliffs, red rock and a mile of open air. Yaki Point juts out from the South Rim of Grand Canyon National Park, just east of Grand Canyon Village, near the start of the South Kaibab Trail. The canyon opens wide in almost every direction.",
+    "spot": "Yaki Point, South Rim, Grand Canyon National Park, Arizona"
+  },
+  "grand-teton-schwabacher-landing": {
+    "name": "Schwabacher Landing",
+    "park": "Grand Teton National Park",
+    "region": "Wyoming",
+    "blurb": "Still water, beaver ponds and jagged peaks. Schwabacher Landing sits beside the Snake River in Grand Teton National Park, where quiet side channels hold a mirror image of the Teton Range at sunrise. It's one of the park's best-loved views.",
+    "spot": "Schwabacher Landing, Snake River, Grand Teton National Park, Wyoming"
+  },
+  "great-smoky-mountains-newfound-gap": {
+    "name": "Newfound Gap",
+    "park": "Great Smoky Mountains National Park",
+    "region": "North Carolina",
+    "blurb": "Ridge after ridge of blue mountains. Newfound Gap is the lowest drivable pass through Great Smoky Mountains National Park, sitting at 5,046 feet on the line between Tennessee and North Carolina. The overlook looks out over layered ridges fading into haze, and the Appalachian Trail crosses right here.",
+    "spot": "Newfound Gap, Newfound Gap Road, Great Smoky Mountains National Park, North Carolina"
+  },
+  "kauai-na-pali-coast": {
+    "name": "Nā Pali Coast",
+    "park": "Kauaʻi",
+    "region": "Hawaii",
+    "blurb": "Green ridges plunging into the Pacific. The Nā Pali Coast runs about 17 miles along the northwest shore of Kauaʻi, where knife-edge ridges and hanging valleys drop straight to the sea. No road crosses it, so people see it by trail, by boat or from the air.",
+    "spot": "Nā Pali Coast, Kauaʻi, Hawaii"
+  },
+  "lake-tahoe-emerald-bay": {
+    "name": "Emerald Bay",
+    "park": "Lake Tahoe",
+    "region": "California",
+    "blurb": "Clear water, granite shores and one small island. Emerald Bay tucks into the southwest corner of Lake Tahoe, home to Fannette Island, the only island in the lake, and Vikingsholm, a 1920s Scandinavian-style mansion on the shore. The water shifts from green to deep blue.",
+    "spot": "Emerald Bay State Park, Lake Tahoe, California"
+  },
+  "mount-rainier-paradise": {
+    "name": "Paradise",
+    "park": "Mount Rainier National Park",
+    "region": "Washington",
+    "blurb": "Wildflower meadows below a glacier-covered volcano. Paradise sits at about 5,400 feet on the south slope of Mount Rainier, where trails wind through subalpine meadows that burst into bloom in mid to late summer. In winter it's one of the snowiest places in the country.",
+    "spot": "Paradise, Mount Rainier National Park, Washington"
+  },
+  "niagara-falls-american-falls": {
+    "name": "American Falls",
+    "park": "Niagara Falls",
+    "region": "New York",
+    "blurb": "Whitewater pouring over a wall of broken rock. The American Falls is the U.S. side of Niagara Falls, in New York, where the river crashes onto a slope of fallen boulders beside the smaller Bridal Veil Falls. Boats and the Cave of the Winds walkways bring visitors right into the spray.",
+    "spot": "American Falls, Niagara Falls, New York"
+  },
+  "olympic-hoh-rain-forest": {
+    "name": "Hoh Rain Forest",
+    "park": "Olympic National Park",
+    "region": "Washington",
+    "blurb": "Moss, ferns and towering trees in steady rain. The Hoh Rain Forest on the west side of Olympic National Park gets around 12 feet of rain a year, enough to drape bigleaf maples in thick hanging moss. The short Hall of Mosses trail wanders right through it.",
+    "spot": "Hoh Rain Forest, Olympic National Park, Washington"
+  },
+  "rocky-mountain-dream-lake": {
+    "name": "Dream Lake",
+    "park": "Rocky Mountain National Park",
+    "region": "Colorado",
+    "blurb": "Still water under a jagged granite peak. Dream Lake sits at about 9,900 feet in Rocky Mountain National Park, a little over a mile up the trail from Bear Lake, with Hallett Peak rising above its far end. On calm mornings the whole peak reflects in the water.",
+    "spot": "Dream Lake, Bear Lake area, Rocky Mountain National Park, Colorado"
+  },
+  "sequoia-giant-forest": {
+    "name": "Giant Forest",
+    "park": "Sequoia National Park",
+    "region": "California",
+    "blurb": "The biggest trees on Earth in early morning light. Giant Forest in Sequoia National Park holds thousands of giant sequoias, including the General Sherman Tree, the largest single tree in the world by volume. Easy trails loop between trunks wider than a car is long.",
+    "spot": "Giant Forest, Sequoia National Park, California"
+  },
+  "yellowstone-grand-prismatic-spring": {
+    "name": "Grand Prismatic Spring",
+    "park": "Yellowstone National Park",
+    "region": "Wyoming",
+    "blurb": "Rings of blue, gold and orange under drifting steam. Grand Prismatic Spring in Yellowstone's Midway Geyser Basin is the largest hot spring in the United States, about 370 feet across, its colors made by heat-loving microbes. It's best seen from the hillside above.",
+    "spot": "Grand Prismatic Spring, Midway Geyser Basin, Yellowstone National Park, Wyoming"
+  },
+  "yosemite-half-dome": {
+    "name": "Half Dome",
+    "park": "Yosemite National Park",
+    "region": "California",
+    "blurb": "Sheer granite above a valley of pines. Half Dome rises more than 4,700 feet above Yosemite Valley in California's Sierra Nevada, its flat northwest face catching the last light of the day. Hikers reach the top by a pair of cables up its rounded back.",
+    "spot": "Half Dome, Yosemite Valley, Yosemite National Park, California"
+  },
+  "zion-angels-landing": {
+    "name": "Angels Landing",
+    "park": "Zion National Park",
+    "region": "Utah",
+    "blurb": "Red cliffs, a narrow fin of rock and the Virgin River far below. Angels Landing rises about 1,500 feet above Zion Canyon, and the last stretch to the top follows a chain-lined spine with sheer drops on both sides. A permit is required for the chains.",
+    "spot": "Angels Landing, Zion Canyon, Zion National Park, Utah"
+  }
+}

@@ -1,3 +1,276 @@
 {
-  "_comment": "Image source for the Real Photo edition of each location sticker, transcribed from the saved per-location source, license and production notes (exact photograph and rights check). Do not add entries without a saved record."
+  "_comment": "Image source for the Real Photo edition of each location sticker, transcribed from the saved per-location source, license and production notes (exact photograph and rights check). Do not add entries without a saved record.",
+  "acadia-otter-cliff": [
+    {
+      "place": "Otter Cliff",
+      "area": "Acadia National Park",
+      "credit": "NPS / Matthew Lambert",
+      "source": "NPGallery (National Park Service)",
+      "url": "https://npgallery.nps.gov/AssetDetail/8fc76911-1dd8-b71b-0b0c-44001ad49d55",
+      "original": "https://npgallery.nps.gov/GetAsset/8fc76911-1dd8-b71b-0b0c-44001ad49d55/original.jpg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "arches-delicate-arch": [
+    {
+      "place": "Delicate Arch",
+      "area": "Arches National Park",
+      "credit": "NPS Photo / Neal Herbert",
+      "source": "NPGallery (National Park Service)",
+      "url": "https://npgallery.nps.gov/AssetDetail/26804909-155d-451f-671d-047b2f70d54b",
+      "original": "https://npgallery.nps.gov/GetAsset/26804909-155d-451f-671d-047b2f70d54b/original.jpg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "big-sur-mcway-falls": [
+    {
+      "place": "McWay Falls",
+      "area": "Big Sur",
+      "credit": "Joe Caione",
+      "source": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:McWay_Falls_(Unsplash).jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/4/45/McWay_Falls_%28Unsplash%29.jpg",
+      "rights": "Public domain (CC0 1.0 dedication)",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "bryce-canyon-bryce-amphitheater": [
+    {
+      "place": "Bryce Amphitheater",
+      "area": "Bryce Canyon National Park",
+      "credit": "NPS Photo",
+      "source": "National Park Service (nps.gov)",
+      "url": "https://www.nps.gov/thingstodo/see-the-bryce-amphitheater.htm",
+      "original": null,
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "columbia-river-gorge-multnomah-falls": [
+    {
+      "place": "Multnomah Falls",
+      "area": "Columbia River Gorge",
+      "credit": "Bigul Malayi",
+      "source": "WordPress Photo Directory",
+      "url": "https://wordpress.org/photos/photo/64268ca6f2/",
+      "original": "https://pd.w.org/2025/09/64268ca6f2c52ee64.19696620.jpg",
+      "rights": "Public domain (CC0 1.0 dedication)",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "crater-lake-wizard-island": [
+    {
+      "place": "Wizard Island",
+      "area": "Crater Lake National Park",
+      "credit": "National Park Service",
+      "source": "NPGallery (National Park Service)",
+      "url": "https://npgallery.nps.gov/AssetDetail/bf56c235-1dd8-b71b-0b9d-029652502e9e",
+      "original": "https://npgallery.nps.gov/GetAsset/bf56c235-1dd8-b71b-0b9d-029652502e9e/original.jpg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "glacier-wild-goose-island": [
+    {
+      "place": "Wild Goose Island",
+      "area": "Glacier National Park",
+      "credit": "NPS / Jacob W. Frank",
+      "source": "Glacier National Park on Flickr",
+      "url": "https://www.flickr.com/photos/glaciernps/23355789779/",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/d/d9/Wild_Goose_Island_%2823355789779%29.jpg",
+      "rights": "Public domain (Public Domain Mark 1.0)",
+      "rightsUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+      "kind": "pd"
+    }
+  ],
+  "glen-canyon-horseshoe-bend": [
+    {
+      "place": "Horseshoe Bend",
+      "area": "Glen Canyon National Recreation Area",
+      "credit": "Kimon Maritz",
+      "source": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Horseshoebend_(Unsplash).jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/8/85/Horseshoebend_%28Unsplash%29.jpg",
+      "rights": "Public domain (CC0 1.0 dedication)",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "grand-canyon-yaki-point": [
+    {
+      "place": "Yaki Point",
+      "area": "Grand Canyon National Park",
+      "credit": "Michael Quinn / National Park Service",
+      "source": "NPGallery (National Park Service)",
+      "url": "https://npgallery.nps.gov/AssetDetail/945ad3b2-155d-451f-67b9-6001e8f3c945",
+      "original": "https://npgallery.nps.gov/GetAsset/945ad3b2-155d-451f-67b9-6001e8f3c945/original.jpg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "grand-teton-schwabacher-landing": [
+    {
+      "place": "Schwabacher Landing",
+      "area": "Grand Teton National Park",
+      "credit": "D. Lehle",
+      "source": "NPGallery (National Park Service)",
+      "url": "https://npgallery.nps.gov/AssetDetail/4fbb7971-155d-451f-6785-7d3d6eb638b7",
+      "original": "https://npgallery.nps.gov/GetAsset/4fbb7971-155d-451f-6785-7d3d6eb638b7/original.jpg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "great-smoky-mountains-newfound-gap": [
+    {
+      "place": "Newfound Gap",
+      "area": "Great Smoky Mountains National Park",
+      "credit": "Photographer unknown / America's Byways (FHWA)",
+      "source": "America's Byways photo library (Federal Highway Administration)",
+      "url": "https://fhwaapps.fhwa.dot.gov/bywaysp/photos/83044",
+      "original": "https://fhwaapps.fhwa.dot.gov/bywaysp/uploads/asset_files/81515/83044_1-4Newfound%20Gap%20Overlook.jpg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "kauai-na-pali-coast": [
+    {
+      "place": "Nā Pali Coast",
+      "area": "Kauaʻi",
+      "credit": "Brian Heimann",
+      "source": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Napali_Coast_1_(Unsplash).jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/f/f2/Napali_Coast_1_%28Unsplash%29.jpg",
+      "rights": "Public domain (CC0 1.0 dedication)",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "lake-tahoe-emerald-bay": [
+    {
+      "place": "Emerald Bay",
+      "area": "Lake Tahoe",
+      "credit": "Eric Philbin",
+      "source": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Emerald_Bay,_Lake_Tahoe,_California._2015.jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Emerald_Bay%2C_Lake_Tahoe%2C_California._2015.jpg",
+      "rights": "Public domain (CC0 1.0 dedication)",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "mount-rainier-paradise": [
+    {
+      "place": "Paradise",
+      "area": "Mount Rainier National Park",
+      "credit": "NPS Photo",
+      "source": "NPGallery (National Park Service)",
+      "url": "https://npgallery.nps.gov/AssetDetail/b8f3beb2-2ecf-4e8d-b82c-91f22a774983",
+      "original": "https://npgallery.nps.gov/GetAsset/b8f3beb2-2ecf-4e8d-b82c-91f22a774983/original.jpg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "niagara-falls-american-falls": [
+    {
+      "place": "American Falls",
+      "area": "Niagara Falls",
+      "credit": "Good Free Photos",
+      "source": "Good Free Photos",
+      "url": "https://www.goodfreephotos.com/canada/ontario/niagara-falls/side-view-of-american-falls-from-river-niagara-falls-ontario-canada.jpg.php",
+      "original": "https://www.goodfreephotos.com/albums/canada/ontario/niagara-falls/side-view-of-american-falls-from-river-niagara-falls-ontario-canada.jpg",
+      "rights": "Public domain (CC0 1.0 dedication)",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "olympic-hoh-rain-forest": [
+    {
+      "place": "Hoh Rain Forest",
+      "area": "Olympic National Park",
+      "credit": "NPS / C. Bubar",
+      "source": "NPGallery (National Park Service)",
+      "url": "https://npgallery.nps.gov/AssetDetail/42a056f8-1dd8-b71b-0bd9-1ec7eb496266",
+      "original": "https://npgallery.nps.gov/GetAsset/42a056f8-1dd8-b71b-0bd9-1ec7eb496266/original.jpg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "rocky-mountain-dream-lake": [
+    {
+      "place": "Dream Lake",
+      "area": "Rocky Mountain National Park",
+      "credit": "NPS Photo",
+      "source": "NPGallery (National Park Service)",
+      "url": "https://npgallery.nps.gov/AssetDetail/035b3918-1dd8-b71b-0b25-1c76a4dc59e2",
+      "original": "https://npgallery.nps.gov/GetAsset/035b3918-1dd8-b71b-0b25-1c76a4dc59e2/original.jpg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "sequoia-giant-forest": [
+    {
+      "place": "Giant Forest",
+      "area": "Sequoia National Park",
+      "credit": "J. McFarland, USGS",
+      "source": "U.S. Geological Survey",
+      "url": "https://www.usgs.gov/media/images/sequoia-grove-sunrise",
+      "original": "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/s3fs-public/media/images/Photo_6b_Sequoia_grove_at_sunrise_McFarland.jpeg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "yellowstone-grand-prismatic-spring": [
+    {
+      "place": "Grand Prismatic Spring",
+      "area": "Yellowstone National Park",
+      "credit": "NPS Photo",
+      "source": "NPGallery (National Park Service)",
+      "url": "https://npgallery.nps.gov/AssetDetail/9951906d-3887-48a1-a230-096a47152b23",
+      "original": "https://npgallery.nps.gov/GetAsset/9951906d-3887-48a1-a230-096a47152b23/original.jpg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "yosemite-half-dome": [
+    {
+      "place": "Half Dome",
+      "area": "Yosemite National Park",
+      "credit": "Dory Shreve",
+      "source": "NPGallery (National Park Service)",
+      "url": "https://npgallery.nps.gov/AssetDetail/e173d961-09dc-4120-8398-f7896c5f96a4",
+      "original": "https://npgallery.nps.gov/GetAsset/e173d961-09dc-4120-8398-f7896c5f96a4/original.jpg",
+      "rights": "Public domain",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ],
+  "zion-angels-landing": [
+    {
+      "place": "Angels Landing",
+      "area": "Zion National Park",
+      "credit": "Fineas Anton",
+      "source": "Wikimedia Commons",
+      "url": "https://commons.wikimedia.org/wiki/File:Angels_Landing,_United_States_(Unsplash_D6odQjxbAjA).jpg",
+      "original": "https://upload.wikimedia.org/wikipedia/commons/6/61/Angels_Landing%2C_United_States_%28Unsplash_D6odQjxbAjA%29.jpg",
+      "rights": "Public domain (CC0 1.0 dedication)",
+      "rightsUrl": null,
+      "kind": "pd"
+    }
+  ]
 }

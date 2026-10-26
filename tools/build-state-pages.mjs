@@ -359,7 +359,7 @@ function sourcesPage(key, entry) {
               <p class="src-place"><span class="sr-only">${esc(r.letter)}: </span>${esc(r.place)}${r.area ? `<span class="src-area"> · ${esc(r.area)}</span>` : ''}</p>
               <dl class="src-meta">
                 <div><dt>Photo</dt><dd>${esc(r.credit)}</dd></div>
-                <div><dt>Source</dt><dd><a href="${esc(r.url)}" rel="nofollow noopener" target="_blank">${esc(r.source)}<span class="sr-only"> (opens in a new tab)</span></a><span class="src-sep" aria-hidden="true"> · </span><a href="${esc(r.original)}" rel="nofollow noopener" target="_blank">Original image<span class="sr-only"> for ${esc(r.letter)}, ${esc(r.place)} (opens in a new tab)</span></a></dd></div>
+                <div><dt>Source</dt><dd><a href="${esc(r.url)}" rel="nofollow noopener" target="_blank">${esc(r.source)}<span class="sr-only"> (opens in a new tab)</span></a>${r.original ? `<span class="src-sep" aria-hidden="true"> · </span><a href="${esc(r.original)}" rel="nofollow noopener" target="_blank">Original image<span class="sr-only"> for ${esc(r.letter)}, ${esc(r.place)} (opens in a new tab)</span></a>` : ''}</dd></div>
                 <div><dt>Rights</dt><dd>${r.rightsUrl ? `<a href="${esc(r.rightsUrl)}" rel="nofollow noopener" target="_blank">${esc(r.rights)}<span class="sr-only"> (opens in a new tab)</span></a>` : esc(r.rights)}</dd></div>
               </dl>
             </div>
@@ -485,7 +485,7 @@ function sectionSourcesPage(sec, key, entry) {
               <p class="src-place">${esc(r.place)}${r.area ? `<span class="src-area"> · ${esc(r.area)}</span>` : ''}</p>
               <dl class="src-meta">
                 <div><dt>Photo</dt><dd>${esc(r.credit)}</dd></div>
-                <div><dt>Source</dt><dd><a href="${esc(r.url)}" rel="nofollow noopener" target="_blank">${esc(r.source)}<span class="sr-only"> (opens in a new tab)</span></a><span class="src-sep" aria-hidden="true"> · </span><a href="${esc(r.original)}" rel="nofollow noopener" target="_blank">Original image<span class="sr-only"> for ${esc(r.place)} (opens in a new tab)</span></a></dd></div>
+                <div><dt>Source</dt><dd><a href="${esc(r.url)}" rel="nofollow noopener" target="_blank">${esc(r.source)}<span class="sr-only"> (opens in a new tab)</span></a>${r.original ? `<span class="src-sep" aria-hidden="true"> · </span><a href="${esc(r.original)}" rel="nofollow noopener" target="_blank">Original image<span class="sr-only"> for ${esc(r.place)} (opens in a new tab)</span></a>` : ''}</dd></div>
                 <div><dt>Rights</dt><dd>${r.rightsUrl ? `<a href="${esc(r.rightsUrl)}" rel="nofollow noopener" target="_blank">${esc(r.rights)}<span class="sr-only"> (opens in a new tab)</span></a>` : esc(r.rights)}</dd></div>
               </dl>
             </div>

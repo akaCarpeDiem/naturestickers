@@ -21,7 +21,6 @@
     "path": "shop/locations",
     "info": "location-info.json",
     "art": "square",
-    "comingSoon": true,
     "styles": [
       { "key": "real-photo", "label": "Real Photo", "art": "photo" },
       { "key": "stained-glass", "label": "Stained Glass", "art": "stained-glass" }
