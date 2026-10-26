@@ -492,3 +492,53 @@ body { background: var(--night); }
 }
 .on-night .contact-card a:not(.btn) { color: var(--sage); }
 .on-night .contact-card a:not(.btn):hover { color: var(--on-night); }
+
+/* ——————————————————————————————————————————————
+   Seasonal sky (seasons.js): time-of-day tint + effect canvas
+   —————————————————————————————————————————————— */
+/* The tint sits under the topo texture; night is the hero's own look, so it has no layer. */
+.hero-sky, .hero-sky > i { position: absolute; inset: 0; pointer-events: none; }
+.hero-sky { z-index: -2; }
+.hero-sky > i { opacity: 0; transition: opacity 2.4s ease; }
+.hero-sky > i.on { opacity: 1; }
+.hero-sky .t-dawn { background: radial-gradient(90% 70% at 20% -5%, rgba(196, 128, 120, .26) 0%, transparent 62%), radial-gradient(120% 90% at 50% -10%, rgba(52, 46, 58, .7) 0%, transparent 62%); }
+.hero-sky .t-day  { background: radial-gradient(110% 80% at 70% -10%, rgba(127, 169, 184, .26) 0%, transparent 60%), radial-gradient(120% 90% at 50% -10%, rgba(30, 59, 51, .8) 0%, transparent 66%); }
+.hero-sky .t-dusk { background: radial-gradient(90% 70% at 85% -5%, rgba(233, 184, 114, .2) 0%, transparent 60%), radial-gradient(80% 60% at 15% 0%, rgba(184, 103, 63, .18) 0%, transparent 60%), radial-gradient(120% 90% at 50% -10%, rgba(42, 42, 31, .7) 0%, transparent 62%); }
+.hero-fx { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+
+/* Showcase sticker tilt + gloss */
+.showcase-stage { perspective: 900px; }
+.showcase-link { transition: transform .5s var(--ease-out); }
+.showcase-stage.is-tilting .showcase-link { transition: transform .12s linear; }
+.showcase-sheen {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  mix-blend-mode: soft-light; transition: opacity .4s var(--ease);
+  -webkit-mask-size: contain; mask-size: contain;
+  -webkit-mask-position: center; mask-position: center;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  background:
+    radial-gradient(38% 120% at var(--sx, 50%) var(--sy, 30%), rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 70%),
+    linear-gradient(115deg, transparent calc(var(--sx, 50%) - 18%), rgba(255, 250, 235, .55) var(--sx, 50%), transparent calc(var(--sx, 50%) + 18%));
+}
+.is-tilting .showcase-sheen, .is-sweeping .showcase-sheen { opacity: 1; }
+
+/* Footer switch for the ambient effects */
+.ambient-toggle {
+  appearance: none; border: 0; background: none; padding: 0; cursor: pointer;
+  font: inherit; color: inherit; text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-color: rgba(247, 243, 234, .3);
+}
+.ambient-toggle:hover { color: var(--paper); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-sky > i, .showcase-link, .showcase-sheen { transition: none; }
+}
+
+/* "In season this fall" tag on the showcase while an in-season state is showing */
+.showcase-season {
+  position: absolute; top: 14px; left: 16px; z-index: 2;
+  font-size: var(--step--1); font-weight: 600; letter-spacing: .02em;
+  padding: 5px 12px; border-radius: var(--r-pill);
+  color: var(--sun); background: rgba(233, 184, 114, .12);
+  box-shadow: inset 0 0 0 1px rgba(233, 184, 114, .28);
+}

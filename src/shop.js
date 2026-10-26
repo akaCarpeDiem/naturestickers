@@ -6,6 +6,7 @@ import { announce, escapeHtml, money } from './cart-ui.js';
 import { artKey, parse, placeholder, slug } from './catalog-parse.js';
 import { locationArtSrc } from './sticker-url.js';
 import { pageUrl, SECTIONS, sectionByKey, sizesBlurb } from './sections.js';
+import { peelToCart } from './peel.js';
 import { createModal } from './shop-modal.js';
 import { sizeLabel } from './size-label.js';
 
@@ -254,6 +255,8 @@ function addItem(it, btn, variant = it.v) {
     thumbnail: it.thumb || null,
     retail_price: variant.retail_price,
   });
+  // The art the shopper is looking at: the card's, or the popup's.
+  peelToCart(btn.closest('.sx-card')?.querySelector('.sx-art img') || btn.closest('.sx-dialog')?.querySelector('.sx-d-art img'));
   announce(`Added ${it.title} ${it.style}${multiSize(it) && size ? `, ${size},` : ''} to cart.`);
   btn.classList.add('is-added');
   btn.firstChild.textContent = 'Added ✓';

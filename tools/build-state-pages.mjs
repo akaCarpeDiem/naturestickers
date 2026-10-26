@@ -222,6 +222,18 @@ function page(sec, key, entry) {
           </figure>`,
     )
     .join('');
+  // Water-bottle mockups from tools/make-bottle-mockups.mjs, one per style, when the file exists.
+  const bottles = styles
+    .map((s, i) => {
+      const src = s.src.replace('/stickers/all/', '/stickers/bottle/');
+      if (!fs.existsSync(path.join(root, 'public', `${src}.webp`))) return '';
+      return `
+          <figure class="sp-bottle" data-style="${s.key}"${i === 0 ? '' : ' hidden'}>
+            <img src="${src}.webp" alt="${esc(`${altFor(s.label)}, on a water bottle (mockup)`)}" width="800" height="800" loading="lazy" decoding="async" />
+            <figcaption>Mockup on a water bottle</figcaption>
+          </figure>`;
+    })
+    .join('');
   const seg = styles
     .map((s, i) => `<button type="button" class="seg-btn" role="radio" aria-checked="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-style="${s.key}">${s.label}</button>`)
     .join('');
@@ -282,7 +294,7 @@ ${header}
           <span class="sx-label" id="sp-style-label">Style</span>
           <div class="seg sx-d-seg" role="radiogroup" aria-labelledby="sp-style-label">${seg}</div>
         </div>
-        <div class="sp-art${square ? ' is-square' : ''}">${figures}
+        <div class="sp-art${square ? ' is-square' : ''}">${figures}${bottles}
         </div>
       </div>
     </section>

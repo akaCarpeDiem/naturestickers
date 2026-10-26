@@ -2,6 +2,7 @@
 // The HTML already has the art, blurb, letters and sizes; this only adds the style/size switch and live price/cart.
 import './main.js';
 import { addToCart } from './cart.js';
+import { peelToCart } from './peel.js';
 import { escapeHtml, money } from './cart-ui.js';
 import { parse, variantFor } from './catalog-parse.js';
 import { sectionByKey } from './sections.js';
@@ -64,6 +65,7 @@ function select(style) {
     b.tabIndex = on ? 0 : -1;
   });
   figs.forEach((f) => f.classList.toggle('is-main', f.dataset.style === style));
+  document.querySelectorAll('.sp-bottle').forEach((f) => { f.hidden = f.dataset.style !== style; });
   const btn = seg.querySelector(`[data-style="${CSS.escape(style)}"]`);
   if (styleNameEl && btn) styleNameEl.textContent = btn.textContent;
   statusEl.textContent = '';
@@ -99,6 +101,7 @@ addBtn?.addEventListener('click', () => {
     thumbnail: it.thumb || null,
     retail_price: variant.retail_price,
   });
+  peelToCart((figs.find((f) => f.classList.contains('is-main')) || figs[0])?.querySelector('img'));
   addBtn.classList.add('is-added');
   addBtn.firstChild.textContent = 'Added ✓';
   statusEl.innerHTML = `Added ${escapeHtml(`${it.title} ${it.style}${checkedSize() ? `, ${size}` : ''}`)} to cart. <a href="/shop#cart">View cart</a>`;
