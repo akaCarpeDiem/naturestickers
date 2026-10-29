@@ -258,13 +258,28 @@ html.sx-locked, html.sx-locked body { overflow: hidden; }
 }
 .sp-slide[hidden] { display: none; }
 .sp-slide img {
-  --feather: clamp(10px, 2.2%, 18px);
   display: block;
   width: 100%;
   height: auto;
   margin-inline: auto;
   -webkit-user-drag: none;
   user-select: none;
+}
+/* Sticker art stays sharp. The bottle photo is the only slide with a soft edge. */
+.sp-slide[data-kind="art"] img {
+  filter: drop-shadow(0 22px 28px rgba(0, 0, 0, .45));
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+/* Wide wordmarks run to the frame edge, so leave a gutter for the arrows. */
+.sp-art:not(.is-square) .sp-slide[data-kind="art"] img { width: calc(100% - 104px); }
+@media (max-width: 700px) {
+  .sp-art:not(.is-square) .sp-slide[data-kind="art"] img { width: 100%; }
+}
+.sp-slide[data-kind="bottle"] img {
+  --feather: clamp(52px, 10%, 88px);
+  width: min(100%, 520px);
+  filter: drop-shadow(0 26px 32px rgba(0, 0, 0, .28));
   -webkit-mask-image:
     linear-gradient(to right, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent),
     linear-gradient(to bottom, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent);
@@ -277,17 +292,6 @@ html.sx-locked, html.sx-locked body { overflow: hidden; }
   mask-composite: intersect;
   mask-repeat: no-repeat;
   mask-size: 100% 100%;
-}
-.sp-slide[data-kind="art"] img { filter: drop-shadow(0 22px 28px rgba(0, 0, 0, .45)); }
-/* Wide wordmarks run to the frame edge, so leave a gutter for the arrows. */
-.sp-art:not(.is-square) .sp-slide[data-kind="art"] img { width: calc(100% - 104px); }
-@media (max-width: 700px) {
-  .sp-art:not(.is-square) .sp-slide[data-kind="art"] img { width: 100%; }
-}
-.sp-slide[data-kind="bottle"] img {
-  width: min(100%, 520px);
-  --feather: clamp(52px, 10%, 88px);
-  filter: drop-shadow(0 26px 32px rgba(0, 0, 0, .28));
 }
 .sp-slide figcaption {
   margin: 8px 0 0;
@@ -424,8 +428,7 @@ html.sx-locked, html.sx-locked body { overflow: hidden; }
 .sp-art.is-square .sp-fig { width: min(220px, 40%); }
 .sp-art.is-square .sp-fig.is-main { width: 100%; max-width: 560px; }
 .sp-art.is-square .sp-gallery { max-width: 560px; }
-.sp-art.is-square .sp-slide[data-kind="art"] img { --feather: clamp(28px, 7%, 52px); }
-.sp-art.is-square .sp-slide[data-kind="bottle"] img { width: 100%; --feather: clamp(52px, 10%, 88px); }
+.sp-art.is-square .sp-slide[data-kind="bottle"] img { width: 100%; }
 .sx-d-buy .sx-add:disabled { opacity: .55; cursor: not-allowed; }
 
 /* Water-bottle mockup in the shop popup. Product pages show it inside .sp-gallery instead. */
