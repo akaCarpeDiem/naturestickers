@@ -213,27 +213,52 @@ function page(sec, key, entry) {
     ],
   };
 
-  const figures = styles
+  const artSizes = square ? '(max-width: 600px) calc(100vw - 40px), 560px' : '(max-width: 1100px) calc(100vw - 40px), 1000px';
+  const artImg = (s, { priority = false } = {}) =>
+    `<img src="${artFile(sec, s.src)}" srcset="${artFile(sec, s.src)} 800w, ${artFile(sec, s.src, '-1400')} 1400w" sizes="${artSizes}" alt="${esc(altFor(s.label))}" width="${s.size.w}" height="${s.size.h}" decoding="async"${priority ? ' fetchpriority="high"' : ' loading="lazy"'} />`;
+  // Water-bottle mockups from tools/make-bottle-mockups.mjs, one per style, when the file exists.
+  // They sit in the main gallery after that style's art, not in a second block underneath.
+  const bottleFor = (s) => {
+    const src = s.src.replace('/stickers/all/', '/stickers/bottle/');
+    const file = path.join(root, 'public', `${src}.webp`);
+    if (!fs.existsSync(file)) return null;
+    return { src, size: webpSize(file) };
+  };
+  const slides = styles
+    .map((s, i) => {
+      const hide = i === 0 ? '' : ' hidden';
+      const bottle = bottleFor(s);
+      return `
+          <figure class="sp-slide" data-style="${s.key}" data-kind="art" aria-roledescription="slide"${hide}>
+            ${artImg(s, { priority: i === 0 })}
+          </figure>${bottle ? `
+          <figure class="sp-slide" data-style="${s.key}" data-kind="bottle" aria-roledescription="slide"${hide}>
+            <img src="${bottle.src}.webp" alt="${esc(`${altFor(s.label)}, on a water bottle (mockup)`)}" width="${bottle.size.w}" height="${bottle.size.h}" loading="lazy" decoding="async" />
+            <figcaption>Mockup on a water bottle</figcaption>
+          </figure>` : ''}`;
+    })
+    .join('');
+  // The other style stays a smaller preview under the gallery; clicking it selects that style.
+  const thumbs = styles
     .map(
       (s, i) => `
-          <figure class="sp-fig${i === 0 ? ' is-main' : ''}" data-style="${s.key}">
-            <img src="${artFile(sec, s.src)}" srcset="${artFile(sec, s.src)} 800w, ${artFile(sec, s.src, '-1400')} 1400w" sizes="${square ? '(max-width: 600px) calc(100vw - 40px), 560px' : '(max-width: 1100px) calc(100vw - 40px), 1000px'}" alt="${esc(altFor(s.label))}" width="${s.size.w}" height="${s.size.h}" decoding="async"${i === 0 ? ' fetchpriority="high"' : ' loading="lazy"'} />
-            <figcaption>${s.label}</figcaption>
+          <figure class="sp-fig${i === 0 ? ' is-selected' : ''}" data-style="${s.key}">
+            ${artImg(s)}
+            <figcaption>${esc(s.label)}</figcaption>
           </figure>`,
     )
     .join('');
-  // Water-bottle mockups from tools/make-bottle-mockups.mjs, one per style, when the file exists.
-  const bottles = styles
-    .map((s, i) => {
-      const src = s.src.replace('/stickers/all/', '/stickers/bottle/');
-      if (!fs.existsSync(path.join(root, 'public', `${src}.webp`))) return '';
-      return `
-          <figure class="sp-bottle" data-style="${s.key}"${i === 0 ? '' : ' hidden'}>
-            <img src="${src}.webp" alt="${esc(`${altFor(s.label)}, on a water bottle (mockup)`)}" width="1600" height="1600" loading="lazy" decoding="async" />
-            <figcaption>Mockup on a water bottle</figcaption>
-          </figure>`;
-    })
-    .join('');
+  const chevron = (d) => `<svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="${d}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+  const gallery = `
+        <div class="sp-gallery" role="region" aria-roledescription="carousel" aria-label="${esc(`${name} sticker images`)}">
+          <div class="sp-gallery-viewport">
+            <div class="sp-gallery-track">${slides}
+            </div>
+          </div>
+          <button type="button" class="sp-gallery-arrow sp-gallery-prev" aria-label="Previous image" disabled>${chevron('M14.5 5.5 8 12l6.5 6.5')}</button>
+          <button type="button" class="sp-gallery-arrow sp-gallery-next" aria-label="Next image">${chevron('M9.5 5.5 16 12l-6.5 6.5')}</button>
+          <p class="sp-gallery-status sr-only" aria-live="polite"></p>
+        </div>`;
   const seg = styles
     .map((s, i) => `<button type="button" class="seg-btn" role="radio" aria-checked="${i === 0}" tabindex="${i === 0 ? 0 : -1}" data-style="${s.key}">${s.label}</button>`)
     .join('');
@@ -294,7 +319,8 @@ ${header}
           <span class="sx-label" id="sp-style-label">Style</span>
           <div class="seg sx-d-seg" role="radiogroup" aria-labelledby="sp-style-label">${seg}</div>
         </div>
-        <div class="sp-art${square ? ' is-square' : ''}">${figures}${bottles}
+        <div class="sp-art${square ? ' is-square' : ''}">
+${gallery}${thumbs}
         </div>
       </div>
     </section>

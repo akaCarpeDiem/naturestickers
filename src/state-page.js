@@ -14,6 +14,7 @@ const section = sectionByKey(main?.dataset.section || 'states');
 const sizesEl = document.getElementById('sp-sizes'); // radios, multi-size sections only
 const seg = document.querySelector('.sp-toggle .seg');
 const figs = [...document.querySelectorAll('.sp-fig')];
+const gallery = bindGallery(document.querySelector('.sp-gallery'));
 const priceEl = document.getElementById('sp-price');
 const styleNameEl = document.getElementById('sp-style-name');
 const addBtn = document.getElementById('sp-add');
@@ -64,8 +65,8 @@ function select(style) {
     b.setAttribute('aria-checked', String(on));
     b.tabIndex = on ? 0 : -1;
   });
-  figs.forEach((f) => f.classList.toggle('is-main', f.dataset.style === style));
-  document.querySelectorAll('.sp-bottle').forEach((f) => { f.hidden = f.dataset.style !== style; });
+  figs.forEach((f) => f.classList.toggle('is-selected', f.dataset.style === style));
+  gallery?.show(style);
   const btn = seg.querySelector(`[data-style="${CSS.escape(style)}"]`);
   if (styleNameEl && btn) styleNameEl.textContent = btn.textContent;
   statusEl.textContent = '';
@@ -101,7 +102,7 @@ addBtn?.addEventListener('click', () => {
     thumbnail: it.thumb || null,
     retail_price: variant.retail_price,
   });
-  peelToCart((figs.find((f) => f.classList.contains('is-main')) || figs[0])?.querySelector('img'));
+  peelToCart(gallery?.activeImage() || figs.find((f) => f.classList.contains('is-selected'))?.querySelector('img') || figs[0]?.querySelector('img'));
   addBtn.classList.add('is-added');
   addBtn.firstChild.textContent = 'Added ✓';
   statusEl.innerHTML = `Added ${escapeHtml(`${it.title} ${it.style}${checkedSize() ? `, ${size}` : ''}`)} to cart. <a href="/shop#cart">View cart</a>`;
@@ -137,8 +138,197 @@ async function load(attempt = 0) {
 const q = new URLSearchParams(location.search);
 const wanted = q.get('style');
 if (wanted && figs.some((f) => f.dataset.style === wanted)) select(wanted);
+gallery?.show(selected);
 const wantedSize = sizesEl?.querySelector(`input[value="${CSS.escape(q.get('size') || '')}"]`);
 if (wantedSize) wantedSize.checked = true;
 
 update();
 load();
+
+/**
+ * Main product image: one carousel per sticker.
+ * Slide 1 is the selected style's art; the next slide is that style's bottle mockup.
+ * Scroll-snap covers swipe. Arrows and keyboard move slides. A vertical wheel
+ * or trackpad gesture over the gallery does too, and only then is page
+ * scrolling held back. Touch swipes are left to the scroller.
+ */
+function bindGallery(root) {
+  if (!root) return null;
+  const viewport = root.querySelector('.sp-gallery-viewport');
+  const track = root.querySelector('.sp-gallery-track');
+  const prev = root.querySelector('.sp-gallery-prev');
+  const next = root.querySelector('.sp-gallery-next');
+  const status = root.querySelector('.sp-gallery-status');
+  if (!viewport || !track || !prev || !next) return null;
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const visible = () => [...track.querySelectorAll('.sp-slide')].filter((s) => !s.hidden);
+
+  let current = 0;
+  let talk = false;
+  let said = '';
+  let acc = 0;
+  let lockUntil = 0;
+  let accTimer = 0;
+  let programmatic = false;
+  let progTimer = 0;
+  let observed = null;
+  const ro = new ResizeObserver(() => {
+    const slide = visible()[current];
+    if (slide) viewport.style.height = `${slide.offsetHeight}px`;
+  });
+
+  const watch = (slide) => {
+    if (observed === slide) return;
+    ro.disconnect();
+    observed = slide || null;
+    if (slide) ro.observe(slide);
+  };
+
+  const apply = (i) => {
+    const slides = visible();
+    if (!slides.length) return;
+    current = Math.max(0, Math.min(slides.length - 1, i));
+    const slide = slides[current];
+    watch(slide);
+    viewport.style.height = `${slide.offsetHeight}px`;
+    const multi = slides.length > 1;
+    prev.hidden = next.hidden = !multi;
+    prev.disabled = false;
+    next.disabled = false;
+    prev.setAttribute('aria-disabled', String(!multi || current <= 0));
+    next.setAttribute('aria-disabled', String(!multi || current >= slides.length - 1));
+    slides.forEach((s, n) => s.setAttribute('aria-hidden', String(n !== current)));
+    track.querySelectorAll('.sp-slide[hidden]').forEach((s) => s.setAttribute('aria-hidden', 'true'));
+    const img = slide.querySelector('img');
+    const msg = multi ? `Image ${current + 1} of ${slides.length}: ${img?.alt || ''}` : '';
+    if (talk && status && msg !== said) {
+      said = msg;
+      status.textContent = msg;
+    }
+  };
+
+  // Layout position inside the scroller. offsetLeft moves as the viewport scrolls
+  // when the offset parent is outside the scroller, so measure from the viewport.
+  const slideLeft = (slide) => viewport.scrollLeft + (slide.getBoundingClientRect().left - viewport.getBoundingClientRect().left);
+
+  // 'auto' follows the CSS scroll-behavior, which is smooth. A style change should cut.
+  const jump = (left) => {
+    viewport.style.scrollBehavior = 'auto';
+    viewport.scrollTo({ left });
+    viewport.style.scrollBehavior = '';
+  };
+
+  const go = (i) => {
+    const slides = visible();
+    if (!slides.length) return;
+    const nextI = Math.max(0, Math.min(slides.length - 1, i));
+    const left = slideLeft(slides[nextI]);
+    if (nextI === current && Math.abs(viewport.scrollLeft - left) < 2) return;
+    programmatic = true;
+    window.clearTimeout(progTimer);
+    progTimer = window.setTimeout(() => { programmatic = false; }, reduce.matches ? 50 : 700);
+    apply(nextI);
+    viewport.scrollTo({ left, behavior: reduce.matches ? 'auto' : 'smooth' });
+  };
+
+  /** Show this style's art, then its bottle. Other styles leave the track. */
+  const show = (style) => {
+    if (!style) return;
+    track.querySelectorAll('.sp-slide').forEach((s) => { s.hidden = s.dataset.style !== style; });
+    programmatic = true;
+    window.clearTimeout(progTimer);
+    progTimer = window.setTimeout(() => { programmatic = false; }, 50);
+    jump(0);
+    apply(0);
+  };
+
+  const syncFromScroll = () => {
+    const slides = visible();
+    if (!slides.length) return;
+    const w = viewport.clientWidth || 1;
+    const i = Math.max(0, Math.min(slides.length - 1, Math.round(viewport.scrollLeft / w)));
+    if (i !== current) apply(i);
+    else viewport.style.height = `${slides[i].offsetHeight}px`;
+  };
+
+  prev.addEventListener('click', () => { if (prev.getAttribute('aria-disabled') !== 'true') go(current - 1); });
+  next.addEventListener('click', () => { if (next.getAttribute('aria-disabled') !== 'true') go(current + 1); });
+  root.addEventListener('keydown', (e) => {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return;
+    if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    e.preventDefault();
+    go(current + (e.key === 'ArrowRight' ? 1 : -1));
+  });
+
+  viewport.addEventListener('scroll', () => {
+    if (programmatic) return;
+    syncFromScroll();
+  }, { passive: true });
+  viewport.addEventListener('scrollend', () => {
+    programmatic = false;
+    syncFromScroll();
+  });
+
+  const wheelPx = (e, axis) => {
+    const d = axis === 'x' ? e.deltaX : e.deltaY;
+    if (e.deltaMode === 1) return d * 16;
+    if (e.deltaMode === 2) return d * (axis === 'x' ? viewport.clientWidth : viewport.clientHeight);
+    return d;
+  };
+
+  root.addEventListener('wheel', (e) => {
+    if (e.ctrlKey || e.metaKey || e.shiftKey) return;
+    const dy = wheelPx(e, 'y');
+    const dx = wheelPx(e, 'x');
+    if (Math.abs(dx) > Math.abs(dy)) return;
+    if (visible().length < 2) return;
+    const now = performance.now();
+    if (now < lockUntil) {
+      e.preventDefault();
+      return;
+    }
+    window.clearTimeout(accTimer);
+    accTimer = window.setTimeout(() => { acc = 0; }, 180);
+    if (acc && Math.sign(dy) !== Math.sign(acc)) acc = 0;
+    acc += dy;
+    const dir = acc > 0 ? 1 : -1;
+    const dest = current + dir;
+    const slides = visible();
+    if (Math.abs(acc) < 36) {
+      if (dest >= 0 && dest < slides.length) e.preventDefault();
+      return;
+    }
+    if (dest < 0 || dest >= slides.length) {
+      acc = 0;
+      return;
+    }
+    e.preventDefault();
+    acc = 0;
+    lockUntil = now + 520;
+    go(dest);
+  }, { passive: false });
+
+  root.addEventListener('pointerleave', () => { acc = 0; });
+  window.addEventListener('resize', () => {
+    const slide = visible()[current];
+    if (!slide) return;
+    programmatic = true;
+    jump(slideLeft(slide));
+    viewport.style.height = `${slide.offsetHeight}px`;
+    window.clearTimeout(progTimer);
+    progTimer = window.setTimeout(() => { programmatic = false; }, 50);
+  });
+
+  track.querySelectorAll('img').forEach((img) => {
+    if (!img.complete) img.addEventListener('load', () => apply(current), { once: true });
+  });
+
+  apply(0);
+  talk = true;
+
+  return {
+    show,
+    activeImage: () => visible()[current]?.querySelector('img') || null,
+  };
+}
