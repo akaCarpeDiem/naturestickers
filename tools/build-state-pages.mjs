@@ -239,6 +239,7 @@ function page(sec, key, entry) {
     })
     .join('');
   // The other style stays a smaller preview under the gallery; clicking it selects that style.
+  // The bottle slide hides that preview (see state-page.js) so the mockup is the only picture.
   const thumbs = styles
     .map(
       (s, i) => `
