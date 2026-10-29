@@ -227,14 +227,24 @@ html.sx-locked, html.sx-locked body { overflow: hidden; }
 .sp-fig figcaption { margin-top: 8px; font-size: var(--step--1); color: var(--on-night-muted); }
 .sp-fig.is-main figcaption { display: none; }
 
-/* Sticker art and its bottle mockup, one frame. Scroll-snap so a swipe moves slides without JS. */
+/* Sticker art and its bottle mockup, one frame. Scroll-snap so a swipe moves slides without JS.
+   Arrows are their own columns so they sit beside the image, not on it. */
 .sp-gallery {
+  --arrow: 44px;
+  --arrow-gap: 20px;
   position: relative;
   order: 1;
+  display: grid;
+  grid-template-columns: var(--arrow) minmax(0, 1fr) var(--arrow);
+  column-gap: var(--arrow-gap);
+  align-items: center;
   width: 100%;
-  max-width: 1000px;
+  max-width: calc(1000px + 2 * var(--arrow) + 2 * var(--arrow-gap));
 }
 .sp-gallery-viewport {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
@@ -271,11 +281,6 @@ html.sx-locked, html.sx-locked body { overflow: hidden; }
   -webkit-mask-image: none;
   mask-image: none;
 }
-/* Wide wordmarks run to the frame edge, so leave a gutter for the arrows. */
-.sp-art:not(.is-square) .sp-slide[data-kind="art"] img { width: calc(100% - 104px); }
-@media (max-width: 700px) {
-  .sp-art:not(.is-square) .sp-slide[data-kind="art"] img { width: 100%; }
-}
 .sp-slide[data-kind="bottle"] img {
   --feather: clamp(52px, 10%, 88px);
   width: min(100%, 520px);
@@ -302,12 +307,9 @@ html.sx-locked, html.sx-locked body { overflow: hidden; }
 .sp-gallery-arrow {
   display: none;
   place-items: center;
-  position: absolute;
-  top: 50%;
-  z-index: 2;
-  transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
+  grid-row: 1;
+  width: var(--arrow);
+  height: var(--arrow);
   padding: 0;
   border: 0;
   border-radius: 50%;
@@ -318,8 +320,8 @@ html.sx-locked, html.sx-locked body { overflow: hidden; }
 }
 .js .sp-gallery-arrow { display: grid; }
 .js .sp-gallery-arrow[hidden] { display: none; }
-.sp-gallery-prev { left: 8px; }
-.sp-gallery-next { right: 8px; }
+.sp-gallery-prev { grid-column: 1; }
+.sp-gallery-next { grid-column: 3; }
 .sp-gallery-arrow:hover { background: var(--paper); }
 .sp-gallery-arrow[aria-disabled="true"] { opacity: .38; cursor: default; }
 .sp-gallery-arrow:focus-visible { outline: 3px solid var(--sage); outline-offset: 2px; }
@@ -427,7 +429,7 @@ html.sx-locked, html.sx-locked body { overflow: hidden; }
 .sx-d-art.is-square img { max-width: min(520px, 100%); }
 .sp-art.is-square .sp-fig { width: min(220px, 40%); }
 .sp-art.is-square .sp-fig.is-main { width: 100%; max-width: 560px; }
-.sp-art.is-square .sp-gallery { max-width: 560px; }
+.sp-art.is-square .sp-gallery { max-width: calc(560px + 2 * var(--arrow) + 2 * var(--arrow-gap)); }
 .sp-art.is-square .sp-slide[data-kind="bottle"] img { width: 100%; }
 .sx-d-buy .sx-add:disabled { opacity: .55; cursor: not-allowed; }
 
