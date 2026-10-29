@@ -217,14 +217,111 @@ html.sx-locked, html.sx-locked body { overflow: hidden; }
 .sp-title { font-size: clamp(2rem, 1.2rem + 3vw, 3.5rem); color: var(--on-night); margin: 0 0 18px; }
 .sp-toggle { display: none; margin-bottom: 18px; }
 .js .sp-toggle { display: grid; }
-/* Both styles are in the HTML; the selected one is large, the other a smaller preview. */
+/* Both styles are in the HTML. The selected one fills the gallery; the other is a smaller preview. */
 .sp-art { display: flex; flex-direction: column; align-items: center; gap: 18px; }
 .sp-fig { margin: 0; order: 2; width: min(420px, 60%); text-align: center; cursor: pointer; opacity: .8; transition: opacity .3s var(--ease); }
 .sp-fig:hover { opacity: 1; }
 .sp-fig.is-main { order: 1; width: 100%; max-width: 1000px; cursor: default; opacity: 1; }
+.sp-fig.is-selected { display: none; }
 .sp-fig img { width: 100%; height: auto; filter: drop-shadow(0 22px 28px rgba(0, 0, 0, .55)); }
 .sp-fig figcaption { margin-top: 8px; font-size: var(--step--1); color: var(--on-night-muted); }
 .sp-fig.is-main figcaption { display: none; }
+
+/* Sticker art and its bottle mockup, one frame. Scroll-snap so a swipe moves slides without JS. */
+.sp-gallery {
+  position: relative;
+  order: 1;
+  width: 100%;
+  max-width: 1000px;
+}
+.sp-gallery-viewport {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(169, 193, 156, .5) transparent;
+  border-radius: 4px;
+}
+.sp-gallery-viewport::-webkit-scrollbar { height: 8px; }
+.sp-gallery-viewport::-webkit-scrollbar-thumb { background: rgba(169, 193, 156, .45); border-radius: 99px; }
+.js .sp-gallery-viewport { scrollbar-width: none; transition: height .4s var(--ease); }
+.js .sp-gallery-viewport::-webkit-scrollbar { display: none; }
+.sp-gallery-track { display: flex; align-items: flex-start; width: 100%; }
+.sp-slide {
+  position: relative;
+  flex: 0 0 100%;
+  margin: 0;
+  min-width: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+.sp-slide[hidden] { display: none; }
+.sp-slide img {
+  --feather: clamp(10px, 2.2%, 18px);
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-inline: auto;
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-mask-image:
+    linear-gradient(to right, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent),
+    linear-gradient(to bottom, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent);
+  -webkit-mask-composite: source-in;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-image:
+    linear-gradient(to right, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent),
+    linear-gradient(to bottom, transparent, #000 var(--feather), #000 calc(100% - var(--feather)), transparent);
+  mask-composite: intersect;
+  mask-repeat: no-repeat;
+  mask-size: 100% 100%;
+}
+.sp-slide[data-kind="art"] img { filter: drop-shadow(0 22px 28px rgba(0, 0, 0, .45)); }
+/* Wide wordmarks run to the frame edge, so leave a gutter for the arrows. */
+.sp-art:not(.is-square) .sp-slide[data-kind="art"] img { width: calc(100% - 104px); }
+@media (max-width: 700px) {
+  .sp-art:not(.is-square) .sp-slide[data-kind="art"] img { width: 100%; }
+}
+.sp-slide[data-kind="bottle"] img {
+  width: min(100%, 520px);
+  --feather: clamp(52px, 10%, 88px);
+  filter: drop-shadow(0 26px 32px rgba(0, 0, 0, .28));
+}
+.sp-slide figcaption {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: var(--step--1);
+  color: var(--on-night-muted);
+}
+.sp-gallery-arrow {
+  display: none;
+  place-items: center;
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  color: var(--forest);
+  background: rgba(247, 243, 234, .92);
+  box-shadow: 0 10px 24px -14px rgba(0, 0, 0, .9);
+}
+.js .sp-gallery-arrow { display: grid; }
+.js .sp-gallery-arrow[hidden] { display: none; }
+.sp-gallery-prev { left: 8px; }
+.sp-gallery-next { right: 8px; }
+.sp-gallery-arrow:hover { background: var(--paper); }
+.sp-gallery-arrow[aria-disabled="true"] { opacity: .38; cursor: default; }
+.sp-gallery-arrow:focus-visible { outline: 3px solid var(--sage); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) {
+  .sp-gallery-viewport { scroll-behavior: auto; transition: none; }
+}
 .sp-info { background: var(--night-2); }
 .sp-grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr); gap: clamp(28px, 4vw, 56px); align-items: start; }
 .sp-buy { display: grid; gap: 12px; justify-items: start; }
@@ -326,12 +423,13 @@ html.sx-locked, html.sx-locked body { overflow: hidden; }
 .sx-d-art.is-square img { max-width: min(520px, 100%); }
 .sp-art.is-square .sp-fig { width: min(220px, 40%); }
 .sp-art.is-square .sp-fig.is-main { width: 100%; max-width: 560px; }
+.sp-art.is-square .sp-gallery { max-width: 560px; }
+.sp-art.is-square .sp-slide[data-kind="art"] img { --feather: clamp(28px, 7%, 52px); }
+.sp-art.is-square .sp-slide[data-kind="bottle"] img { width: 100%; --feather: clamp(52px, 10%, 88px); }
 .sx-d-buy .sx-add:disabled { opacity: .55; cursor: not-allowed; }
 
-/* Water-bottle mockup (tools/make-bottle-mockups.mjs) in the popup and on sticker pages */
-.sx-d-bottle, .sp-bottle { margin: 0; text-align: center; }
-.sx-d-bottle { padding: 0 clamp(20px, 4vw, 56px) clamp(24px, 3vw, 40px); }
-.sx-d-bottle[hidden], .sp-bottle[hidden] { display: none; }
-.sx-d-bottle img, .sp-bottle img { display: block; width: 100%; max-width: 440px; height: auto; margin: 0 auto; border-radius: var(--r-lg); box-shadow: 0 30px 50px -36px rgba(0, 0, 0, .9); }
-.sx-d-bottle figcaption, .sp-bottle figcaption { margin-top: 10px; font-size: var(--step--1); color: var(--on-night-muted); }
-.sp-bottle { order: 3; width: min(440px, 100%); }
+/* Water-bottle mockup in the shop popup. Product pages show it inside .sp-gallery instead. */
+.sx-d-bottle { margin: 0; text-align: center; padding: 0 clamp(20px, 4vw, 56px) clamp(24px, 3vw, 40px); }
+.sx-d-bottle[hidden] { display: none; }
+.sx-d-bottle img { display: block; width: 100%; max-width: 440px; height: auto; margin: 0 auto; border-radius: var(--r-lg); box-shadow: 0 30px 50px -36px rgba(0, 0, 0, .9); }
+.sx-d-bottle figcaption { margin-top: 10px; font-size: var(--step--1); color: var(--on-night-muted); }
