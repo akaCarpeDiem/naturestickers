@@ -223,6 +223,8 @@ html.sx-locked, html.sx-locked body { overflow: hidden; }
 .sp-fig:hover { opacity: 1; }
 .sp-fig.is-main { order: 1; width: 100%; max-width: 1000px; cursor: default; opacity: 1; }
 .sp-fig.is-selected { display: none; }
+/* Bottle slide is the only picture. The other style's preview returns with the art. */
+.sp-art.is-bottle > .sp-fig { display: none; }
 .sp-fig img { width: 100%; height: auto; filter: drop-shadow(0 22px 28px rgba(0, 0, 0, .55)); }
 .sp-fig figcaption { margin-top: 8px; font-size: var(--step--1); color: var(--on-night-muted); }
 .sp-fig.is-main figcaption { display: none; }

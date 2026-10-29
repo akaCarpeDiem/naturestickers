@@ -147,7 +147,10 @@ load();
 
 /**
  * Main product image: one carousel per sticker.
- * Slide 1 is the selected style's art; the next slide is that style's bottle mockup.
+ * Slide 1 is the selected style's art, with the other style as a preview under it.
+ * The next slide is that style's bottle mockup, and it is the only picture:
+ * the style preview hides as soon as the bottle is chosen and returns once the
+ * art slide is back on screen.
  * Scroll-snap covers swipe. Arrows and keyboard move slides. A vertical wheel
  * or trackpad gesture over the gallery does too, and only then is page
  * scrolling held back. Touch swipes are left to the scroller.
@@ -185,6 +188,23 @@ function bindGallery(root) {
     if (slide) ro.observe(slide);
   };
 
+  const stage = root.closest('.sp-art');
+  // Layout position inside the scroller. offsetLeft moves as the viewport scrolls
+  // when the offset parent is outside the scroller, so measure from the viewport.
+  const slideLeft = (slide) => viewport.scrollLeft + (slide.getBoundingClientRect().left - viewport.getBoundingClientRect().left);
+
+  // The other style's art sits under the gallery. Hide it for the bottle slide,
+  // and keep it hidden until the art slide has actually landed.
+  const syncPreviews = (slide, force) => {
+    if (!stage || !slide) return;
+    if (slide.dataset.kind === 'bottle') {
+      stage.classList.add('is-bottle');
+      return;
+    }
+    const settled = force || reduce.matches || Math.abs(viewport.scrollLeft - slideLeft(slide)) < 4;
+    if (settled) stage.classList.remove('is-bottle');
+  };
+
   const apply = (i) => {
     const slides = visible();
     if (!slides.length) return;
@@ -200,6 +220,7 @@ function bindGallery(root) {
     next.setAttribute('aria-disabled', String(!multi || current >= slides.length - 1));
     slides.forEach((s, n) => s.setAttribute('aria-hidden', String(n !== current)));
     track.querySelectorAll('.sp-slide[hidden]').forEach((s) => s.setAttribute('aria-hidden', 'true'));
+    syncPreviews(slide);
     const img = slide.querySelector('img');
     const msg = multi ? `Image ${current + 1} of ${slides.length}: ${img?.alt || ''}` : '';
     if (talk && status && msg !== said) {
@@ -207,10 +228,6 @@ function bindGallery(root) {
       status.textContent = msg;
     }
   };
-
-  // Layout position inside the scroller. offsetLeft moves as the viewport scrolls
-  // when the offset parent is outside the scroller, so measure from the viewport.
-  const slideLeft = (slide) => viewport.scrollLeft + (slide.getBoundingClientRect().left - viewport.getBoundingClientRect().left);
 
   // 'auto' follows the CSS scroll-behavior, which is smooth. A style change should cut.
   const jump = (left) => {
@@ -227,7 +244,10 @@ function bindGallery(root) {
     if (nextI === current && Math.abs(viewport.scrollLeft - left) < 2) return;
     programmatic = true;
     window.clearTimeout(progTimer);
-    progTimer = window.setTimeout(() => { programmatic = false; }, reduce.matches ? 50 : 700);
+    progTimer = window.setTimeout(() => {
+      programmatic = false;
+      syncPreviews(visible()[current]);
+    }, reduce.matches ? 50 : 700);
     apply(nextI);
     viewport.scrollTo({ left, behavior: reduce.matches ? 'auto' : 'smooth' });
   };
@@ -238,7 +258,10 @@ function bindGallery(root) {
     track.querySelectorAll('.sp-slide').forEach((s) => { s.hidden = s.dataset.style !== style; });
     programmatic = true;
     window.clearTimeout(progTimer);
-    progTimer = window.setTimeout(() => { programmatic = false; }, 50);
+    progTimer = window.setTimeout(() => {
+      programmatic = false;
+      syncPreviews(visible()[current], true);
+    }, 50);
     jump(0);
     apply(0);
   };
@@ -264,10 +287,12 @@ function bindGallery(root) {
   viewport.addEventListener('scroll', () => {
     if (programmatic) return;
     syncFromScroll();
+    syncPreviews(visible()[current]);
   }, { passive: true });
   viewport.addEventListener('scrollend', () => {
     programmatic = false;
     syncFromScroll();
+    syncPreviews(visible()[current], true);
   });
 
   const wheelPx = (e, axis) => {
