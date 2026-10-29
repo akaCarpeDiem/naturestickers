@@ -229,7 +229,7 @@ function page(sec, key, entry) {
       if (!fs.existsSync(path.join(root, 'public', `${src}.webp`))) return '';
       return `
           <figure class="sp-bottle" data-style="${s.key}"${i === 0 ? '' : ' hidden'}>
-            <img src="${src}.webp" alt="${esc(`${altFor(s.label)}, on a water bottle (mockup)`)}" width="800" height="800" loading="lazy" decoding="async" />
+            <img src="${src}.webp" alt="${esc(`${altFor(s.label)}, on a water bottle (mockup)`)}" width="1600" height="1600" loading="lazy" decoding="async" />
             <figcaption>Mockup on a water bottle</figcaption>
           </figure>`;
     })

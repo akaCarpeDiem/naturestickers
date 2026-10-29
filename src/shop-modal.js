@@ -61,7 +61,7 @@ export function createModal({ getItems, artKey, slug, onAdd }) {
             <div class="sx-d-cols"></div>
           </section>
         </div>
-        <figure class="sx-d-bottle" hidden><img alt="" width="800" height="800" loading="lazy" decoding="async" /><figcaption>Mockup on a water bottle</figcaption></figure>
+        <figure class="sx-d-bottle" hidden><img alt="" width="1600" height="1600" loading="lazy" decoding="async" /><figcaption>Mockup on a water bottle</figcaption></figure>
       </div>
     </div>`;
   document.body.appendChild(root);

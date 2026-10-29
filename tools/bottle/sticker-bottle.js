@@ -18,16 +18,22 @@
   'use strict';
 
   var DEFAULTS = {
-    // Geometry of base.jpg (image pixels). Only change if you swap the photo.
+    // Geometry of tools/bottle/base.jpg (1519×1036), the handled olive jug.
+    // Front face at mid-body: left edge x=553, right edge x=885 (just before the handle).
+    // radius is half that width, so the wrap meets the real silhouette.
+    // Square crop used by tools/make-bottle-mockups.mjs: [342, 0, 1036].
     imageW: 1519, imageH: 1036,
-    cx: 602, cy: 450,          // where the sticker's center sits on the bottle
-    radius: 292,               // bottle radius at that height
-    tilt: -2.5,                // bottle lean, degrees
-    curve: 9,                  // how much the sticker's edges rise with the camera angle
-    area: 192000,              // target sticker area so every design looks a similar size
-    maxW: 546, maxH: 546,
+    cx: 719, cy: 555,          // sticker centre on the front face, left of the handle
+    radius: 168,               // half the body width at that height
+    tilt: 0,                   // bottle lean, degrees
+    // Rise at the silhouette, in image pixels. A narrow sticker only spans a
+    // small angle, so it stays nearly straight. Wide art picks up a gentle arc.
+    curve: 62,
+    area: 86000,               // target sticker area so every design looks a similar size
+    maxW: 310, maxH: 320,
     // Timing (ms). One sticker = `each` ms including its entrance and exit.
     each: 5000, enter: 700, exit: 500,
+    wobble: 1,                 // 0 keeps each sticker upright (mockups). Otherwise a small per-sticker lean
     shuffle: false,
     startAt: 0,                // ms into the cycle to begin (e.g. `enter` = first sticker already pressed on)
     onChange: null             // function(index, src) called when a new sticker starts
@@ -74,17 +80,24 @@
     var layer = null, lctx = null;
 
     function resize() {
-      var dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // pixelScale (mockups) renders the composite above CSS pixels so the crop stays sharp.
+      var dpr = o.pixelScale || Math.min(window.devicePixelRatio || 1, 2);
       var w = Math.round(el.clientWidth * dpr) || o.imageW;
       scale = w / o.imageW;
       main.width = w; main.height = Math.round(o.imageH * scale);
+      ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = 'high';
       layer = canvas(RW * scale, RH * scale); lctx = layer.getContext('2d');
+      lctx.imageSmoothingEnabled = true; lctx.imageSmoothingQuality = 'high';
     }
 
     // High-pass of the bottle surface (grey 128 = flat) to press into each sticker.
     function buildTexture() {
       var c = canvas(RW, RH), x = c.getContext('2d');
       x.drawImage(base, -RX, -RY);
+      // Keep the photo. The canvas below is overwritten with the high-pass texture,
+      // and glare has to come from the photo or the whole sticker screens toward white.
+      var photo = canvas(RW, RH), ph = photo.getContext('2d');
+      ph.drawImage(c, 0, 0);
       var small = canvas(RW / 5, RH / 5), sx = small.getContext('2d');
       sx.imageSmoothingQuality = 'high';
       sx.drawImage(c, 0, 0, small.width, small.height);
@@ -99,16 +112,29 @@
         d[i] = d[i + 1] = d[i + 2] = v; d[i + 3] = 255;
       }
       x.putImageData(a, 0, 0);
-      // Lighting and glare maps sampled from the photo itself, so each sticker is lit
-      // exactly like the bottle around it: brighter where the bottle catches light,
-      // dimmer in the shadowed middle, with a soft rim on the far side.
+      // Light follows the jug: about 46 in the right-hand shade, about 110 on the
+      // left highlight. A moderate blur keeps the cylinder gradient and leaves the
+      // fine grain to the texture overlay, so multiply does not mush the print.
+      // Glare is a tighter blur and only the specular peak, so the art stays saturated.
+      var mid = canvas(RW / 3, RH / 3), mx = mid.getContext('2d');
+      mx.imageSmoothingQuality = 'high'; mx.drawImage(photo, 0, 0, mid.width, mid.height);
+      var midBig = canvas(RW, RH), mbx = midBig.getContext('2d');
+      mbx.imageSmoothingQuality = 'high'; mbx.drawImage(mid, 0, 0, RW, RH);
+      var me = mbx.getImageData(0, 0, RW, RH).data;
+      var glareSrc = canvas(RW / 2, RH / 2), gx = glareSrc.getContext('2d');
+      gx.imageSmoothingQuality = 'high'; gx.drawImage(photo, 0, 0, glareSrc.width, glareSrc.height);
+      var glareBig = canvas(RW, RH), gbx = glareBig.getContext('2d');
+      gbx.imageSmoothingQuality = 'high'; gbx.drawImage(glareSrc, 0, 0, RW, RH);
+      var ge = gbx.getImageData(0, 0, RW, RH).data;
       var lm = canvas(RW, RH), gm = canvas(RW, RH);
       var li = bx.createImageData(RW, RH), gi = bx.createImageData(RW, RH), l = li.data, gl = gi.data;
-      for (var j = 0; j < e.length; j += 4) {
-        var lum = e[j] * .3 + e[j + 1] * .59 + e[j + 2] * .11;
-        var m = 255 * (.82 + .2 * clamp((lum - 22) / 42, 0, 1));
-        l[j] = m; l[j + 1] = m * .995; l[j + 2] = m * .985; l[j + 3] = 255;   // a touch of room warmth
-        var gv = 255 * .55 * clamp((lum - 42) / 60, 0, 1);
+      for (var j = 0; j < me.length; j += 4) {
+        var lum = me[j] * .3 + me[j + 1] * .59 + me[j + 2] * .11;
+        var t = clamp((lum - 46) / 64, 0, 1);
+        var m = 255 * (0.60 + 0.46 * t);                 // 0.60 in shade, 1.06 on the highlight
+        l[j] = m; l[j + 1] = m * .995; l[j + 2] = m * .985; l[j + 3] = 255;
+        var lum2 = ge[j] * .3 + ge[j + 1] * .59 + ge[j + 2] * .11;
+        var gv = 255 * 0.40 * clamp((lum2 - 99) / 12, 0, 1);
         gl[j] = gl[j + 1] = gl[j + 2] = gv; gl[j + 3] = 255;
       }
       lm.getContext('2d').putImageData(li, 0, 0);
@@ -122,40 +148,53 @@
       var ar = im.naturalWidth / im.naturalHeight;
       var w = Math.sqrt(o.area * ar), h = w / ar;
       var f = Math.min(1, o.maxW / w, o.maxH / h); w *= f; h *= f;
-      var R = o.radius, cs = 2;                       // cache at 2x for sharpness
-      var W2 = 2 * R * Math.sin(w / (2 * R));        // on-screen width after wrapping
-      var H2 = h + o.curve;
+      var R = o.radius, cs = 4;                       // 4x cache so the remap does not soften the art
+      // Do not stretch the bow to the sticker's own width. That made a narrow
+      // wordmark arc as hard as a sticker that reaches the silhouette.
+      var half = Math.min(Math.abs(w / (2 * R)), 1.15);
+      var W2 = 2 * R * Math.sin(half);               // on-screen width after wrapping
+      var bow = o.curve * (1 - Math.cos(half));
+      var H2 = h + bow;
       var c = canvas(W2 * cs, H2 * cs), x = c.getContext('2d');
-      x.imageSmoothingQuality = 'high';
+      x.imageSmoothingEnabled = true; x.imageSmoothingQuality = 'high';
       var cols = Math.ceil(W2 * cs), sw = im.naturalWidth;
+      var colsPx = new Array(cols);
       for (var i = 0; i < cols; i++) {
         var px = (i + .5) / cs - W2 / 2;              // screen x from sticker center
+        colsPx[i] = px;
         var s = R * Math.asin(clamp(px / R, -1, 1));  // arc length on the bottle
         var u = (s / w + .5) * sw;
         var du = sw / w * (R / Math.sqrt(Math.max(1, R * R - px * px))) / cs;
-        var lift = o.curve * (1 - Math.cos(s / R)) / (1 - Math.cos(w / 2 / R) || 1);
-        x.drawImage(im, clamp(u - du / 2, 0, sw - du), 0, Math.max(du, .01), im.naturalHeight,
-          i, (o.curve - lift) * cs, 1.6, h * cs);
+        var lift = o.curve * (1 - Math.cos(s / R));
+        // One output pixel wide. Overlapping 1.6px stamps were what softened the print.
+        x.drawImage(im, clamp(u - du / 2, 0, Math.max(0, sw - du)), 0, Math.max(du, .01), im.naturalHeight,
+          i, (bow - lift) * cs, 1, h * cs);
       }
-      // Curvature falloff: vinyl turning away from the camera reflects a little less light,
-      // and the laminate catches a faint broad gloss across its face.
+      // Cylinder shading in the sticker's own pixels: the right side of this jug is in
+      // shade, and the rims turn away from the camera. No blur — a per-column multiply.
       x.globalCompositeOperation = 'source-atop';
-      var g = x.createLinearGradient(0, 0, c.width, 0);
-      g.addColorStop(0, 'rgba(0,0,0,.16)');
-      g.addColorStop(.18, 'rgba(0,0,0,.04)');
-      g.addColorStop(.5, 'rgba(0,0,0,0)');
-      g.addColorStop(.82, 'rgba(0,0,0,.05)');
-      g.addColorStop(1, 'rgba(0,0,0,.2)');
-      x.fillStyle = g; x.fillRect(0, 0, c.width, c.height);
-      var gl = x.createLinearGradient(0, 0, c.width * .6, c.height);
-      gl.addColorStop(0, 'rgba(255,255,255,.07)');
-      gl.addColorStop(.5, 'rgba(255,255,255,0)');
-      x.fillStyle = gl; x.fillRect(0, 0, c.width, c.height);
+      for (var k = 0; k < cols; k++) {
+        var pxx = colsPx[k];
+        var nz = Math.sqrt(Math.max(0, 1 - (pxx / R) * (pxx / R)));
+        var edge = (1 - nz) * (1 - nz);
+        var facing = clamp(pxx / R, -1, 1);          // -1 left rim, +1 right rim
+        // Rim only. The broad shade comes from the bottle light map; this darkens
+        // the columns that have turned away from the camera.
+        var shade = edge * 1.05 + (facing > 0.4 ? (facing - 0.4) * 0.5 : 0);
+        if (shade <= 0.004) continue;
+        x.fillStyle = 'rgba(8,12,6,' + Math.min(0.48, shade).toFixed(3) + ')';
+        x.fillRect(k, 0, 1, c.height);
+      }
+      // Faint laminate sheen on the lit side only, kept light so it does not wash the art.
+      var sheen = x.createLinearGradient(0, 0, c.width * 0.55, c.height * 0.35);
+      sheen.addColorStop(0, 'rgba(255,255,255,.05)');
+      sheen.addColorStop(1, 'rgba(255,255,255,0)');
+      x.fillStyle = sheen; x.fillRect(0, 0, c.width, c.height);
       x.globalCompositeOperation = 'source-over';
       return { img: c, w: W2, h: H2 };
     }
 
-    function tiltFor(i) { return Math.sin(i * 12.9898 + 4.1) * 3.5; }
+    function tiltFor(i) { return o.wobble === 0 ? 0 : Math.sin(i * 12.9898 + 4.1) * 3.5; }
 
     function drawSticker(st, i, t) {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -194,7 +233,7 @@
       // Surface texture shows through the vinyl once it is pressed down.
       lctx.setTransform(1, 0, 0, 1, 0, 0);
       lctx.globalCompositeOperation = 'overlay';
-      lctx.globalAlpha = .38 * (1 - clamp(L, 0, 1));
+      lctx.globalAlpha = .12 * (1 - clamp(L, 0, 1));  // grain only; a heavier overlay muddies the print
       lctx.drawImage(texture, 0, 0, layer.width, layer.height);
       lctx.globalAlpha = 1;
       // The photo's own light falloff and glare, fixed to the bottle.
@@ -216,13 +255,15 @@
       place(lctx);
       lctx.globalCompositeOperation = 'source-over';
 
-      // Shadow grows as the sticker lifts away from the bottle.
+      // Pressed vinyl does not cast a shadow. One only grows while the sticker lifts.
       ctx.save();
       ctx.globalAlpha = alpha;
-      ctx.shadowColor = 'rgba(0,0,0,' + (.5 - .18 * L).toFixed(3) + ')';
-      ctx.shadowBlur = (5 + 34 * L) * scale;
-      ctx.shadowOffsetX = (2 + 16 * L) * scale;
-      ctx.shadowOffsetY = (3 + 30 * L) * scale;
+      if (L > 0.04) {
+        ctx.shadowColor = 'rgba(0,0,0,' + (0.4 * L).toFixed(3) + ')';
+        ctx.shadowBlur = 22 * L * scale;
+        ctx.shadowOffsetX = 8 * L * scale;
+        ctx.shadowOffsetY = 16 * L * scale;
+      }
       ctx.drawImage(layer, RX * scale, RY * scale);
       ctx.restore();
     }
