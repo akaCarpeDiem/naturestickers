@@ -74,7 +74,9 @@ async function createPrintfulOrder(env: Env, session: any): Promise<void> {
       email: "support@naturestickers.shop",
       message: "Thank you for supporting Nature Stickers.",
       store_name: "Nature Stickers",
-      custom_order_id: String(session.id).slice(0, 64),
+      // Printful rejects the whole order (400) if this is longer than 20 characters,
+      // so use the tail of the Stripe session id (still searchable in the Stripe dashboard).
+      custom_order_id: String(session.id).slice(-20),
     },
   };
 
