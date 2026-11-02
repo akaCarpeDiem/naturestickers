@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0LZX15XZCC"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0LZX15XZCC');
+</script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order lookup — Nature Stickers</title>
+  <meta name="description" content="Request another copy of your Nature Stickers receipt. We email it to the address on the order and don’t show personal details on this page." />
+  <meta name="theme-color" content="#0C1510" />
+  <link rel="canonical" href="https://naturestickers.shop/order" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Nature Stickers" />
+  <meta property="og:url" content="https://naturestickers.shop/order" />
+  <meta property="og:title" content="Order lookup — Nature Stickers" />
+  <meta property="og:description" content="Request another copy of your Nature Stickers receipt. We email it to the address on the order." />
+  <meta property="og:image" content="https://naturestickers.shop/og-2026-10c.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Nature Stickers: Every letter a window into the wild, with a Colorado stained-glass sticker" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://naturestickers.shop/og-2026-10c.png" />
+  <meta name="twitter:title" content="Order lookup — Nature Stickers" />
+  <link rel="icon" href="/favicon.ico" sizes="32x32" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <link rel="preload" href="/fonts/young-serif-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/instrument-sans-var.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="/src/style.css" />
+  <link rel="stylesheet" href="/src/night.css" />
+</head>
+<body class="page-night">
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header over-dark">
+    <div class="wrap header-inner">
+      <div class="brand-wrap">
+        <a class="brand" href="/" aria-label="Nature Stickers home">
+          <picture class="brand-logo"><source type="image/webp" srcset="/brand/logo-sticker-160.webp 160w, /brand/logo-sticker-320.webp 320w, /brand/logo-sticker-480.webp 480w, /brand/logo-sticker-640.webp 640w" sizes="(max-width: 640px) 145px, 195px" /><img src="/brand/logo-sticker-320.png" alt="Nature Stickers" width="320" height="115" decoding="async" fetchpriority="high" /></picture>
+        </a>
+        <span class="brand-tag">Windows to the wild</span>
+      </div>
+      <nav class="nav" aria-label="Primary">
+        <a href="/#styles">Two styles</a>
+        <a href="/#craft">The craft</a>
+        <a class="nav-cta" href="/shop">Shop</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="legal">
+    <div class="wrap">
+      <p class="eyebrow">Orders</p>
+      <h1>Order lookup</h1>
+      <p class="updated">We’ll email the details to the address on the order.</p>
+      <p>Misplaced the Stripe receipt? Enter the order id from your packing slip, the number on that receipt, or the email you used at checkout. We’ll ask Stripe to send a fresh copy to the address already on the order.</p>
+      <p>This page never shows your name, address, or order details. You’ll see the same confirmation whether or not something matches, so give it a few minutes and check spam.</p>
+
+      <form class="lookup-form" id="order-lookup-form" action="/api/order-lookup" method="post" novalidate>
+        <label for="lookup">Order number or email</label>
+        <input
+          id="lookup"
+          name="query"
+          type="text"
+          inputmode="text"
+          autocomplete="off"
+          autocapitalize="off"
+          autocorrect="off"
+          spellcheck="false"
+          maxlength="200"
+          required
+          aria-describedby="lookup-hint"
+          placeholder="you@example.com or your order id"
+        />
+        <p class="lookup-hint" id="lookup-hint">Packing slip order id, Stripe receipt number (such as 1234-5678), or the email from checkout. Etsy orders aren’t in this lookup.</p>
+        <button class="btn btn-primary" type="submit">Email my order details</button>
+      </form>
+      <p class="lookup-status" id="lookup-status" role="status" aria-live="polite"></p>
+      <noscript>
+        <p>This form works without JavaScript, too. If you’d rather write to us, email <a href="mailto:support@naturestickers.shop">support@naturestickers.shop</a> with your order id or the email you used at checkout.</p>
+      </noscript>
+
+      <p class="support-cta">Still need a person? <a href="mailto:support@naturestickers.shop">support@naturestickers.shop</a></p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <picture class="footer-logo"><source type="image/webp" srcset="/brand/logo-sticker-160.webp 160w, /brand/logo-sticker-320.webp 320w, /brand/logo-sticker-480.webp 480w, /brand/logo-sticker-640.webp 640w" sizes="195px" /><img src="/brand/logo-sticker-320.png" alt="Nature Stickers" width="320" height="115" loading="lazy" decoding="async" /></picture>
+        <p>Every letter a window into the wild</p>
+      </div>
+      <nav class="footer-col" aria-label="Explore">
+        <h2>Explore</h2>
+        <a href="/shop">Shop</a>
+        <a href="/#styles">Two styles</a>
+        <a href="/#craft">The craft</a>
+        <a href="/#follow">Follow along</a>
+      </nav>
+      <nav class="footer-col" aria-label="Company">
+        <h2>Company</h2>
+        <a href="/contact">Contact</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/returns">Returns</a>
+        <a href="/order">Order lookup</a>
+        <a href="/support">Support</a>
+      </nav>
+    </div>
+    <div class="wrap footer-fine">
+      <p>© <span data-year>2026</span> Nature Stickers · naturestickers.shop</p>
+      <p>Made with care for wild places.</p>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/order-lookup.js"></script>
+</body>
+</html>

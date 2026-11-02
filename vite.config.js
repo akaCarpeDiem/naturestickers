@@ -40,6 +40,7 @@ export default defineConfig({
         thanks: resolve(__dirname, 'thanks.html'),
         contact: resolve(__dirname, 'contact.html'),
         support: resolve(__dirname, 'support.html'),
+        order: resolve(__dirname, 'order.html'),
         returns: resolve(__dirname, 'returns.html'),
         notfound: resolve(__dirname, '404.html'),
         ...statePages,
