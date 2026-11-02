@@ -1,4 +1,5 @@
 import { json, methodNotAllowed, type Env } from "../lib/http";
+import { PACKING_SLIP_TAIL } from "../lib/order-lookup";
 import { externalIdFromSession, printful } from "../lib/printful";
 import { verifyStripeSignature } from "../lib/stripe";
 
@@ -74,9 +75,9 @@ async function createPrintfulOrder(env: Env, session: any): Promise<void> {
       email: "support@naturestickers.shop",
       message: "Thank you for supporting Nature Stickers.",
       store_name: "Nature Stickers",
-      // Printful rejects the whole order (400) if this is longer than 20 characters,
-      // so use the tail of the Stripe session id (still searchable in the Stripe dashboard).
-      custom_order_id: String(session.id).slice(-20),
+      // Printful returns 400 for the whole order when custom_order_id is over 20 characters.
+      // The packing slip shows this tail of the Checkout Session id; order lookup matches it.
+      custom_order_id: String(session.id).slice(-PACKING_SLIP_TAIL),
     },
   };
 

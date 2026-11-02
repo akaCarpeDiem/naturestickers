@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "node tools/build-state-pages.mjs && vite build",
+    "test": "node --test functions/lib/order-lookup.test.ts",
     "preview": "vite preview",
     "deploy": "npm run build && wrangler pages deploy dist --project-name=naturestickers --branch=main"
   },
