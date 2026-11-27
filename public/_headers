@@ -15,3 +15,10 @@
 # Revalidate daily so the next in-place swap cannot sit for a week.
 /stickers/*
   Cache-Control: public, max-age=86400, must-revalidate
+
+# pages.dev copies (the production alias and preview deploys) stay out of search;
+# naturestickers.shop itself is not matched here and stays indexable.
+https://naturestickers.pages.dev/*
+  X-Robots-Tag: noindex
+https://:alias.naturestickers.pages.dev/*
+  X-Robots-Tag: noindex
